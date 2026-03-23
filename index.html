@@ -77,6 +77,9 @@
   }
   .card-header.layer1 { background: var(--blue); }
   .card-header.layer2 { background: var(--accent); }
+  .card-header.bcorp { background: var(--green); }
+
+  .result-value.green { color: var(--green); }
 
   .layer-badge {
     font-family: 'JetBrains Mono', monospace;
@@ -305,6 +308,7 @@
   }
   .formula-bar .hl { color: var(--blue); font-weight: 700; }
   .formula-bar .hl2 { color: var(--accent); font-weight: 700; }
+  .formula-bar .hl3 { color: var(--green); font-weight: 700; }
 
   .verdict {
     display: inline-block;
@@ -366,6 +370,8 @@
   .blue-dl:hover { background: var(--blue); color: #fff; }
   .accent-dl { background: var(--accent-light); color: var(--accent); }
   .accent-dl:hover { background: var(--accent); color: #fff; }
+  .green-dl { background: var(--green-light); color: var(--green); }
+  .green-dl:hover { background: var(--green); color: #fff; }
 
   @media print {
     body { background: #fff; padding: 0; }
@@ -673,10 +679,216 @@
   </div>
 </div>
 
+<!-- B-CORP CARD -->
+<div class="card" id="bcorp-card">
+  <div class="card-header bcorp">
+    <span class="layer-badge">B-Corp</span>
+    <h2>Impact-Adjusted CAPM</h2>
+    <span class="cadence">Stakeholder governance overlay</span>
+  </div>
+  <div class="card-body">
+    <p class="card-intro">
+      <strong>For B-Corp and mission-driven agencies.</strong> This card extends Layers 1 and 2 with impact dimensions — stakeholder alignment, externality exposure, and mission risk — then computes an impact-adjusted minimum margin. Scores from the standard cards flow in automatically.
+    </p>
+
+    <span class="section-label">B-Corp Systematic Risk (extends Layer 1)</span>
+    <table class="score-table" id="bcorp-l1-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Factor</th>
+          <th class="score-col">1</th>
+          <th class="score-col">2</th>
+          <th class="score-col">3</th>
+          <th class="score-col">4</th>
+          <th class="score-col">5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-factor="stakeholder_align">
+          <td>
+            <div class="factor-name">Stakeholder Alignment</div>
+            <div class="factor-desc">Client values vs. agency mission</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l1')">1</button><div class="score-label">Strong</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l1')">3</button><div class="score-label">Mixed</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l1')">5</button><div class="score-label">Misaligned</div></td>
+        </tr>
+        <tr data-factor="impact_measurement">
+          <td>
+            <div class="factor-name">Impact Measurement Risk</div>
+            <div class="factor-desc">Stability of certification standards</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l1')">1</button><div class="score-label">Stable</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l1')">3</button><div class="score-label">Shifting</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l1')">5</button><div class="score-label">Overhaul</div></td>
+        </tr>
+        <tr data-factor="supply_chain">
+          <td>
+            <div class="factor-name">Supply Chain Ethics</div>
+            <div class="factor-desc">Vendor and partner standards</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l1')">1</button><div class="score-label">Verified</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l1')">3</button><div class="score-label">Gaps</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l1')">5</button><div class="score-label">Violations</div></td>
+        </tr>
+        <tr data-factor="greenwashing">
+          <td>
+            <div class="factor-name">Greenwashing Exposure</div>
+            <div class="factor-desc">Market erosion of sustainability credibility</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l1')">1</button><div class="score-label">Strong</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l1')">3</button><div class="score-label">Skeptical</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l1')">5</button><div class="score-label">Eroded</div></td>
+        </tr>
+        <tr data-factor="externality_reg">
+          <td>
+            <div class="factor-name">Externality Regulation</div>
+            <div class="factor-desc">Mandates penalizing digital externalities</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l1')">1</button><div class="score-label">None</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l1')">3</button><div class="score-label">Emerging</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l1')">5</button><div class="score-label">Major</div></td>
+        </tr>
+        <tr data-factor="mission_drift">
+          <td>
+            <div class="factor-name">Mission Drift Pressure</div>
+            <div class="factor-desc">Financial pressure vs. stated purpose</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l1')">1</button><div class="score-label">Aligned</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l1')">3</button><div class="score-label">Strained</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l1')">5</button><div class="score-label">Survival</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <span class="section-label">B-Corp Engagement Factors (extends Layer 2)</span>
+    <table class="score-table" id="bcorp-l2-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Factor</th>
+          <th class="score-col">1</th>
+          <th class="score-col">2</th>
+          <th class="score-col">3</th>
+          <th class="score-col">4</th>
+          <th class="score-col">5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-factor="mission_align">
+          <td>
+            <div class="factor-name">Mission Alignment</div>
+            <div class="factor-desc">Does this engagement advance your purpose?</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l2')">1</button><div class="score-label">Core</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l2')">2</button><div class="score-label">Aligned</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l2')">3</button><div class="score-label">Neutral</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l2')">4</button><div class="score-label">Tension</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l2')">5</button><div class="score-label">Contradicts</div></td>
+        </tr>
+        <tr data-factor="externality">
+          <td>
+            <div class="factor-name">Externality Profile</div>
+            <div class="factor-desc">Net social/environmental impact of deliverable</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l2')">1</button><div class="score-label">Positive</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l2')">2</button><div class="score-label">Some +</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l2')">3</button><div class="score-label">Neutral</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l2')">4</button><div class="score-label">Some −</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l2')">5</button><div class="score-label">Harmful</div></td>
+        </tr>
+        <tr data-factor="stakeholder_impact">
+          <td>
+            <div class="factor-name">Stakeholder Impact</div>
+            <div class="factor-desc">Effect on workers, communities, end users</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l2')">1</button><div class="score-label">Broad +</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l2')">2</button><div class="score-label">Some +</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l2')">3</button><div class="score-label">Neutral</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l2')">4</button><div class="score-label">Some −</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l2')">5</button><div class="score-label">Extractive</div></td>
+        </tr>
+        <tr data-factor="cert_risk">
+          <td>
+            <div class="factor-name">Certification Risk</div>
+            <div class="factor-desc">Effect on B-Corp standing</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l2')">1</button><div class="score-label">Strengthens</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l2')">2</button><div class="score-label">No effect</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'bcorp_l2')">3</button><div class="score-label">Minor</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'bcorp_l2')">4</button><div class="score-label">Audit risk</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'bcorp_l2')">5</button><div class="score-label">Jeopardizes</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <span class="section-label">Impact-Adjusted CAPM Calculator</span>
+    <div class="calc-panel">
+      <div class="calc-row">
+        <div class="calc-field">
+          <label>Standard E(R)</label>
+          <div><input type="text" id="bc-std-er" value="—" readonly style="background:var(--gray100);color:var(--gray400);width:80px;"></div>
+        </div>
+        <div class="calc-field">
+          <label>Impact Adj. (±%)</label>
+          <div><input type="text" id="bc-impact-adj" value="—" readonly style="background:var(--gray100);color:var(--gray400);width:80px;"></div>
+        </div>
+        <div class="calc-field">
+          <label>Manual Override</label>
+          <div><input type="number" id="bc-manual-adj" value="" step="0.5" placeholder="±%" style="width:80px;" oninput="calcBcorp()"><span class="unit">%</span></div>
+        </div>
+      </div>
+
+      <div class="formula-bar" id="bc-formula">
+        <strong>B-Corp:</strong> E(R*) = E(R) + Impact Adjustment — score all factors to calculate
+      </div>
+
+      <div class="result-box">
+        <div class="result-item">
+          <span class="result-label">B-Corp L1 Score</span>
+          <span class="result-value green" id="bc-l1-score">—</span>
+          <span class="result-sub">of 30</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">B-Corp L2 Score</span>
+          <span class="result-value green" id="bc-l2-score">—</span>
+          <span class="result-sub">of 20</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Impact Adjustment</span>
+          <span class="result-value green" id="bc-adj-display">—</span>
+          <span class="result-sub" id="bc-adj-sub">% points</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">E(R*) Min. Margin</span>
+          <span class="result-value green" id="bc-er-star">—</span>
+          <span class="result-sub" id="bc-er-sub">impact-adjusted</span>
+        </div>
+      </div>
+      <div id="bc-verdict"></div>
+
+      <div class="approach-note">
+        <strong>How the impact adjustment works:</strong> B-Corp engagement scores below the midpoint (mission-aligned, positive externalities) produce a negative adjustment — a "mission discount" that lowers the financial margin threshold. Scores above the midpoint (mission tension, negative externalities) produce a positive adjustment — a "harm premium" that raises the hurdle rate. The B-Corp systematic score shifts the baseline: high portfolio-level impact risk widens both discounts and premiums. Use the manual override to set a conscious, documented impact adjustment for board-level decisions.
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="downloads">
   <span class="section-label" style="text-align:center; display:block;">Download Printable Cards</span>
   <div class="dl-row">
-    <a href="pdf/capm-playbook-cards.pdf" class="dl-btn blue-dl">Both Cards (PDF)</a>
+    <a href="pdf/capm-playbook-cards.pdf" class="dl-btn blue-dl">Standard Cards (PDF)</a>
     <a href="pdf/capm-layer1-systematic-risk.pdf" class="dl-btn blue-dl">Layer 1 Only</a>
     <a href="pdf/capm-layer2-engagement-risk.pdf" class="dl-btn accent-dl">Layer 2 Only</a>
   </div>
@@ -686,7 +898,9 @@
 <script>
   const state = {
     layer1: {},
-    layer2: {}
+    layer2: {},
+    bcorp_l1: {},
+    bcorp_l2: {}
   };
 
   function score(btn, layer) {
@@ -704,7 +918,8 @@
     state[layer][factor] = val;
 
     if (layer === 'layer1') calcLayer1();
-    else calcLayer2();
+    else if (layer === 'layer2') calcLayer2();
+    else calcBcorp();
   }
 
   function calcLayer1() {
@@ -798,6 +1013,91 @@
         document.getElementById('l2-verdict').innerHTML = '';
       }
     }
+    calcBcorp();
+  }
+
+  function calcBcorp() {
+    const bl1Vals = Object.values(state.bcorp_l1);
+    const bl2Vals = Object.values(state.bcorp_l2);
+    const bl1Sum = bl1Vals.reduce((a,b) => a+b, 0);
+    const bl2Sum = bl2Vals.reduce((a,b) => a+b, 0);
+    const bl1Count = bl1Vals.length;
+    const bl2Count = bl2Vals.length;
+
+    if (bl1Count > 0) document.getElementById('bc-l1-score').textContent = bl1Sum;
+    if (bl2Count > 0) document.getElementById('bc-l2-score').textContent = bl2Sum;
+
+    // Get standard E(R) from Layer 2
+    const stdErText = document.getElementById('l2-er').textContent;
+    const stdEr = parseFloat(stdErText);
+
+    if (!isNaN(stdEr)) {
+      document.getElementById('bc-std-er').value = stdEr.toFixed(1) + '%';
+    }
+
+    // Check for manual override first
+    const manualAdj = parseFloat(document.getElementById('bc-manual-adj').value);
+
+    if (!isNaN(manualAdj) && document.getElementById('bc-manual-adj').value !== '') {
+      // Manual override mode
+      if (!isNaN(stdEr)) {
+        const erStar = Math.round((stdEr + manualAdj) * 10) / 10;
+        document.getElementById('bc-impact-adj').value = (manualAdj >= 0 ? '+' : '') + manualAdj.toFixed(1) + '%';
+        document.getElementById('bc-adj-display').textContent = (manualAdj >= 0 ? '+' : '') + manualAdj.toFixed(1) + '%';
+        document.getElementById('bc-adj-sub').textContent = 'manual override';
+        document.getElementById('bc-er-star').textContent = erStar.toFixed(1) + '%';
+        document.getElementById('bc-er-sub').textContent = stdEr.toFixed(1) + '% + (' + manualAdj.toFixed(1) + '%)';
+
+        document.getElementById('bc-formula').innerHTML =
+          '<strong>B-Corp:</strong> E(R*) = <span class="hl">' + stdEr.toFixed(1) + '%</span> + <span class="hl3">' + manualAdj.toFixed(1) + '%</span> = <strong>' + erStar.toFixed(1) + '%</strong> (manual)';
+
+        setBcorpVerdict(erStar, manualAdj);
+      }
+      return;
+    }
+
+    // Auto-calculate from B-Corp scores
+    if (bl1Count === 6 && bl2Count === 4 && !isNaN(stdEr)) {
+      // B-Corp L1: 6-30 range. Midpoint=18. Adds systematic impact risk modifier.
+      // Shifts the adjustment scale: high L1 = wider premiums/discounts
+      const l1Modifier = 0.8 + (bl1Sum - 6) * (0.8 / 24); // 0.8 to 1.6
+
+      // B-Corp L2: 4-20 range. Midpoint=12.
+      // Below midpoint = mission discount (negative adj), above = harm premium (positive adj)
+      const l2Deviation = bl2Sum - 12;
+      // Each point of deviation = ~1.5% adjusted by L1 modifier
+      const impactAdj = Math.round(l2Deviation * 1.5 * l1Modifier * 10) / 10;
+
+      document.getElementById('bc-impact-adj').value = (impactAdj >= 0 ? '+' : '') + impactAdj.toFixed(1) + '%';
+      document.getElementById('bc-adj-display').textContent = (impactAdj >= 0 ? '+' : '') + impactAdj.toFixed(1) + '%';
+      document.getElementById('bc-adj-sub').textContent = (impactAdj < 0 ? 'mission discount' : impactAdj > 0 ? 'harm premium' : 'neutral');
+
+      const erStar = Math.round((stdEr + impactAdj) * 10) / 10;
+      document.getElementById('bc-er-star').textContent = erStar.toFixed(1) + '%';
+      document.getElementById('bc-er-sub').textContent = stdEr.toFixed(1) + '% + (' + impactAdj.toFixed(1) + '%)';
+
+      document.getElementById('bc-formula').innerHTML =
+        '<strong>B-Corp:</strong> E(R*) = <span class="hl">' + stdEr.toFixed(1) + '%</span> + <span class="hl3">' + impactAdj.toFixed(1) + '%</span> = <strong>' + erStar.toFixed(1) + '%</strong>';
+
+      setBcorpVerdict(erStar, impactAdj);
+    }
+  }
+
+  function setBcorpVerdict(erStar, impactAdj) {
+    const rm = parseFloat(document.getElementById('rm').value) || 0;
+    let verdict = '';
+    if (impactAdj < -3) {
+      verdict = '<span class="verdict go">Mission-aligned — conscious discount justified</span>';
+    } else if (impactAdj > 5) {
+      verdict = '<span class="verdict stop">Impact risk — decline or fundamentally restructure</span>';
+    } else if (erStar <= rm) {
+      verdict = '<span class="verdict go">Go — within margins, impact acceptable</span>';
+    } else if (erStar <= rm * 1.35) {
+      verdict = '<span class="verdict caution">Caution — review impact trade-offs and renegotiate</span>';
+    } else {
+      verdict = '<span class="verdict stop">Stop — financial and impact risk both elevated</span>';
+    }
+    document.getElementById('bc-verdict').innerHTML = verdict;
   }
 </script>
 </body>
