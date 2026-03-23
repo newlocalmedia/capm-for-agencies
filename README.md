@@ -24,6 +24,8 @@ Download reference cards from the `/pdf` directory:
 - `capm-playbook-cards.pdf` — Both cards
 - `capm-layer1-systematic-risk.pdf` — Systematic risk card only
 - `capm-layer2-engagement-risk.pdf` — Engagement risk card only
+- `capm-b-corp-engagement-risk.pdf` — B-Corp impact / risk card only
+
 
 ## The Formula
 
