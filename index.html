@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CAPM for Agencies — Playbook Cards</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@500;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --ink: #1a1a2e;
+    --paper: #f7f5f0;
+    --accent: #c45d3e;
+    --accent-light: #f0d4cb;
+    --blue: #2b4c7e;
+    --blue-light: #d4dfe9;
+    --blue-dark: #1a3050;
+    --green: #3a7d5c;
+    --green-light: #d0e8da;
+    --amber: #c48b2c;
+    --amber-light: #f5e6c4;
+    --red: #b53a3a;
+    --red-light: #f0d0d0;
+    --gray100: #f0ede8;
+    --gray200: #e0ddd6;
+    --gray300: #b8b4ab;
+    --gray400: #8a8680;
+    --gray500: #5c5955;
+    --radius: 6px;
+    --shadow: 0 2px 12px rgba(26,26,46,0.08);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gray100);
+    color: var(--ink);
+    line-height: 1.5;
+    padding: 32px 20px 80px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .header {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    color: var(--blue-dark);
+    margin-bottom: 6px;
+  }
+  .header p {
+    font-size: 14px;
+    color: var(--gray400);
+    font-weight: 300;
+  }
+
+  .card {
+    max-width: 900px;
+    margin: 0 auto 48px;
+    background: var(--paper);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    border: 1px solid var(--gray200);
+  }
+
+  .card-header {
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .card-header.layer1 { background: var(--blue); }
+  .card-header.layer2 { background: var(--accent); }
+
+  .layer-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.12);
+    padding: 4px 10px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .card-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    flex: 1;
+  }
+  .card-header .cadence {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .card-body { padding: 28px 32px; }
+
+  .card-intro {
+    font-size: 14px;
+    color: var(--gray500);
+    margin-bottom: 24px;
+    max-width: 680px;
+    font-weight: 300;
+  }
+  .card-intro strong { font-weight: 700; color: var(--ink); }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray400);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  /* Scoring Tables */
+  .score-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    font-size: 13px;
+  }
+  .score-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--gray400);
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--gray200);
+  }
+  .score-table th.score-col {
+    text-align: center;
+    width: 52px;
+  }
+  .score-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--gray200);
+    vertical-align: top;
+  }
+  .score-table tr:last-child td { border-bottom: none; }
+
+  .factor-name {
+    font-weight: 700;
+    color: var(--ink);
+    font-size: 13px;
+  }
+  .factor-desc {
+    font-size: 11.5px;
+    color: var(--gray400);
+    margin-top: 2px;
+    font-weight: 300;
+  }
+
+  .score-cell {
+    text-align: center;
+    vertical-align: middle;
+    position: relative;
+  }
+  .score-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--gray200);
+    background: transparent;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gray400);
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .score-btn:hover {
+    border-color: var(--gray300);
+    background: var(--gray100);
+  }
+  .score-btn.selected-1 { border-color: var(--green); background: var(--green-light); color: var(--green); }
+  .score-btn.selected-2 { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
+  .score-btn.selected-3 { border-color: var(--amber); background: var(--amber-light); color: var(--amber); }
+  .score-btn.selected-4 { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+  .score-btn.selected-5 { border-color: var(--red); background: var(--red-light); color: var(--red); }
+
+  .score-label {
+    font-size: 9px;
+    color: var(--gray300);
+    margin-top: 2px;
+    text-align: center;
+  }
+
+  /* Calculator Panels */
+  .calc-panel {
+    background: var(--gray100);
+    border: 1px solid var(--gray200);
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 8px;
+  }
+
+  .calc-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .calc-row:last-child { margin-bottom: 0; }
+
+  .calc-field label {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--gray400);
+    margin-bottom: 4px;
+  }
+  .calc-field input {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border: 1px solid var(--gray200);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    width: 100px;
+    text-align: right;
+  }
+  .calc-field input:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(43,76,126,0.1);
+  }
+  .calc-field .unit {
+    font-size: 11px;
+    color: var(--gray400);
+    margin-left: 4px;
+  }
+
+  .calc-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--gray200);
+    margin: 16px 0;
+  }
+
+  .result-box {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .result-item {
+    display: flex;
+    flex-direction: column;
+  }
+  .result-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--gray400);
+  }
+  .result-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -1px;
+  }
+  .result-value.blue { color: var(--blue); }
+  .result-value.accent { color: var(--accent); }
+  .result-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gray400);
+    margin-top: 2px;
+  }
+
+  .formula-bar {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--gray500);
+    background: var(--paper);
+    border: 1px solid var(--gray200);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    word-break: break-all;
+  }
+  .formula-bar .hl { color: var(--blue); font-weight: 700; }
+  .formula-bar .hl2 { color: var(--accent); font-weight: 700; }
+
+  .verdict {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-top: 8px;
+  }
+  .verdict.go { background: var(--green-light); color: var(--green); }
+  .verdict.caution { background: var(--amber-light); color: var(--amber); }
+  .verdict.stop { background: var(--red-light); color: var(--red); }
+
+  .approach-note {
+    font-size: 12px;
+    color: var(--gray400);
+    font-style: italic;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray200);
+    line-height: 1.6;
+  }
+  .approach-note strong { color: var(--gray500); font-style: normal; }
+
+  .print-note {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 11px;
+    color: var(--gray300);
+  }
+
+  .downloads {
+    max-width: 900px;
+    margin: 0 auto 40px;
+    text-align: center;
+  }
+  .dl-row {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 12px 0 8px;
+  }
+  .dl-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+  .blue-dl { background: var(--blue-light); color: var(--blue); }
+  .blue-dl:hover { background: var(--blue); color: #fff; }
+  .accent-dl { background: var(--accent-light); color: var(--accent); }
+  .accent-dl:hover { background: var(--accent); color: #fff; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+    .score-btn { border-width: 1px; }
+    .print-note { display: none; }
+    .downloads { display: none; }
+  }
+
+  @media (max-width: 640px) {
+    .card-body { padding: 20px 16px; }
+    .card-header { padding: 16px 20px; flex-wrap: wrap; }
+    .calc-field input { width: 80px; }
+    .result-value { font-size: 22px; }
+    .score-table { font-size: 12px; }
+    .score-btn { width: 30px; height: 30px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>CAPM for Agencies — Playbook Cards</h1>
+  <p>Two-layer risk assessment with scoring and calculators</p>
+</div>
+
+<!-- LAYER ONE CARD -->
+<div class="card" id="layer1-card">
+  <div class="card-header layer1">
+    <span class="layer-badge">Layer 1</span>
+    <h2>Systematic Risk Calibration</h2>
+    <span class="cadence">Quarterly / on market shift</span>
+  </div>
+  <div class="card-body">
+    <p class="card-intro">
+      <strong>Who:</strong> Leadership, finance, and senior technical staff.<br>
+      <strong>When:</strong> Periodically — quarterly, or when market conditions shift materially.<br>
+      <strong>Output:</strong> Current risk premium and systematic adjustment factor that sets the environment for all engagement-level scoring.
+    </p>
+
+    <span class="section-label">Systematic Risk Scoring</span>
+    <table class="score-table" id="layer1-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Factor</th>
+          <th class="score-col">1</th>
+          <th class="score-col">2</th>
+          <th class="score-col">3</th>
+          <th class="score-col">4</th>
+          <th class="score-col">5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-factor="platform">
+          <td>
+            <div class="factor-name">Platform Stability</div>
+            <div class="factor-desc">Licensing, governance, ecosystem health</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer1')">1</button><div class="score-label">Stable</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer1')">3</button><div class="score-label">Mixed</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer1')">5</button><div class="score-label">Crisis</div></td>
+        </tr>
+        <tr data-factor="talent">
+          <td>
+            <div class="factor-name">Talent Market</div>
+            <div class="factor-desc">Availability and cost of delivery skills</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer1')">1</button><div class="score-label">Ample</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer1')">3</button><div class="score-label">Tight</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer1')">5</button><div class="score-label">Acute</div></td>
+        </tr>
+        <tr data-factor="economic">
+          <td>
+            <div class="factor-name">Economic Conditions</div>
+            <div class="factor-desc">Client budget health across your market</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer1')">1</button><div class="score-label">Growing</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer1')">3</button><div class="score-label">Flat</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer1')">5</button><div class="score-label">Contracting</div></td>
+        </tr>
+        <tr data-factor="regulatory">
+          <td>
+            <div class="factor-name">Regulatory Exposure</div>
+            <div class="factor-desc">Compliance mandates affecting deliverables</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer1')">1</button><div class="score-label">Calm</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer1')">3</button><div class="score-label">Adapting</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer1')">5</button><div class="score-label">Major</div></td>
+        </tr>
+        <tr data-factor="concentration">
+          <td>
+            <div class="factor-name">Revenue Concentration</div>
+            <div class="factor-desc">Client, channel, or vertical dependency</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer1')">1</button><div class="score-label">Diverse</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer1')">3</button><div class="score-label">Moderate</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer1')">5</button><div class="score-label">&gt;30%</div></td>
+        </tr>
+        <tr data-factor="rate">
+          <td>
+            <div class="factor-name">Rate Pressure</div>
+            <div class="factor-desc">Market-wide compression on rate card</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer1')">1</button><div class="score-label">Rising</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer1')">2</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer1')">3</button><div class="score-label">Flat</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer1')">4</button></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer1')">5</button><div class="score-label">Compressing</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <span class="section-label">Systematic Adjustment Factor</span>
+    <div class="calc-panel">
+      <div class="formula-bar">
+        Composite Score: <span class="hl" id="l1-composite">—</span> / 30 → Adjustment Factor: <span class="hl" id="l1-factor-display">—</span>
+      </div>
+      <div class="result-box">
+        <div class="result-item">
+          <span class="result-label">Composite</span>
+          <span class="result-value blue" id="l1-score">—</span>
+          <span class="result-sub">of 30</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Adjustment Factor</span>
+          <span class="result-value blue" id="l1-factor">—</span>
+          <span class="result-sub" id="l1-env">score all factors</span>
+        </div>
+      </div>
+      <div class="approach-note">
+        <strong>Pure approach:</strong> Use this factor as your portfolio-wide β in the CAPM formula.<br>
+        <strong>Hybrid approach:</strong> Use this factor to weight each engagement's beta in Layer Two.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYER TWO CARD -->
+<div class="card" id="layer2-card">
+  <div class="card-header layer2">
+    <span class="layer-badge">Layer 2</span>
+    <h2>Engagement Risk Scoring</h2>
+    <span class="cadence">Per engagement / presales</span>
+  </div>
+  <div class="card-body">
+    <p class="card-intro">
+      <strong>Who:</strong> Solutions team, project managers, senior developers, account managers.<br>
+      <strong>When:</strong> During presales or discovery for each engagement.<br>
+      <strong>Output:</strong> Engagement risk index (pure) or blended β (hybrid), feeding the CAPM minimum margin.
+    </p>
+
+    <span class="section-label">Engagement Risk Scoring</span>
+    <table class="score-table" id="layer2-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Factor</th>
+          <th class="score-col">1</th>
+          <th class="score-col">2</th>
+          <th class="score-col">3</th>
+          <th class="score-col">4</th>
+          <th class="score-col">5</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-factor="client">
+          <td>
+            <div class="factor-name">Client Track Record</div>
+            <div class="factor-desc">Relationship history and reliability</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer2')">1</button><div class="score-label">Long-term</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer2')">2</button><div class="score-label">Repeat</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer2')">3</button><div class="score-label">New, vetted</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer2')">4</button><div class="score-label">Unvetted</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer2')">5</button><div class="score-label">Red flags</div></td>
+        </tr>
+        <tr data-factor="scope">
+          <td>
+            <div class="factor-name">Scope Clarity</div>
+            <div class="factor-desc">How well-defined are requirements</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer2')">1</button><div class="score-label">Detailed</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer2')">2</button><div class="score-label">Outlined</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer2')">3</button><div class="score-label">Partial</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer2')">4</button><div class="score-label">Vague</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer2')">5</button><div class="score-label">Undefined</div></td>
+        </tr>
+        <tr data-factor="tech">
+          <td>
+            <div class="factor-name">Technical Complexity</div>
+            <div class="factor-desc">Stack familiarity and unknowns</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer2')">1</button><div class="score-label">Standard</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer2')">2</button><div class="score-label">Minor</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer2')">3</button><div class="score-label">Some new</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer2')">4</button><div class="score-label">R&amp;D</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer2')">5</button><div class="score-label">Experimental</div></td>
+        </tr>
+        <tr data-factor="capacity">
+          <td>
+            <div class="factor-name">Internal Capacity</div>
+            <div class="factor-desc">Team bandwidth and availability</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer2')">1</button><div class="score-label">Dedicated</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer2')">2</button><div class="score-label">Comfortable</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer2')">3</button><div class="score-label">Tight</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer2')">4</button><div class="score-label">Stretched</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer2')">5</button><div class="score-label">Over</div></td>
+        </tr>
+        <tr data-factor="contract">
+          <td>
+            <div class="factor-name">Contract Type</div>
+            <div class="factor-desc">Risk allocation in contract structure</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer2')">1</button><div class="score-label">T&amp;M</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer2')">2</button><div class="score-label">Capped</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer2')">3</button><div class="score-label">Hybrid</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer2')">4</button><div class="score-label">Fixed+pad</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer2')">5</button><div class="score-label">Fixed tight</div></td>
+        </tr>
+        <tr data-factor="political">
+          <td>
+            <div class="factor-name">Political Complexity</div>
+            <div class="factor-desc">Stakeholder alignment and authority</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer2')">1</button><div class="score-label">Single</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer2')">2</button><div class="score-label">Small</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer2')">3</button><div class="score-label">Committee</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer2')">4</button><div class="score-label">Multi-org</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer2')">5</button><div class="score-label">Adversarial</div></td>
+        </tr>
+        <tr data-factor="timeline">
+          <td>
+            <div class="factor-name">Timeline Pressure</div>
+            <div class="factor-desc">Deadline flexibility and driver</div>
+          </td>
+          <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'layer2')">1</button><div class="score-label">Flexible</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'layer2')">2</button><div class="score-label">Reasonable</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="3" onclick="score(this,'layer2')">3</button><div class="score-label">Firm</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="4" onclick="score(this,'layer2')">4</button><div class="score-label">Aggressive</div></td>
+          <td class="score-cell"><button class="score-btn" data-val="5" onclick="score(this,'layer2')">5</button><div class="score-label">Immovable</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <span class="section-label">CAPM Calculator</span>
+    <div class="calc-panel">
+      <div class="calc-row">
+        <div class="calc-field">
+          <label>Risk-Free Rate (Rf)</label>
+          <div><input type="number" id="rf" value="10" step="1" oninput="calcLayer2()"><span class="unit">%</span></div>
+        </div>
+        <div class="calc-field">
+          <label>Market Return (Rm)</label>
+          <div><input type="number" id="rm" value="22" step="1" oninput="calcLayer2()"><span class="unit">%</span></div>
+        </div>
+        <div class="calc-field">
+          <label>L1 Adj. Factor</label>
+          <div><input type="number" id="l1-input" value="" step="0.01" placeholder="—" oninput="calcLayer2()"></div>
+        </div>
+      </div>
+
+      <div class="formula-bar" id="l2-formula">
+        <strong>Hybrid:</strong> E(R) = <span class="hl">Rf</span> + (<span class="hl2">Engagement β</span> × <span class="hl">L1 Factor</span>) × (<span class="hl">Rm</span> − <span class="hl">Rf</span>) — score all factors to calculate
+      </div>
+
+      <div class="result-box">
+        <div class="result-item">
+          <span class="result-label">Engagement Score</span>
+          <span class="result-value accent" id="l2-raw">—</span>
+          <span class="result-sub">of 35</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Engagement β</span>
+          <span class="result-value accent" id="l2-beta">—</span>
+          <span class="result-sub">score / 21</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Blended β</span>
+          <span class="result-value accent" id="l2-blended">—</span>
+          <span class="result-sub" id="l2-blended-sub">× L1 factor</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Min. Margin E(R)</span>
+          <span class="result-value accent" id="l2-er">—</span>
+          <span class="result-sub" id="l2-er-sub">required return</span>
+        </div>
+      </div>
+      <div id="l2-verdict"></div>
+
+      <div class="approach-note">
+        <strong>Pure approach:</strong> Use the engagement score (of 35) as a risk index to size per-project contingency. The CAPM minimum margin comes from Layer One alone: E(R) = Rf + L1 Factor × (Rm − Rf).<br>
+        <strong>Hybrid approach:</strong> Blended β = (Engagement Score / 21) × L1 Factor. This feeds directly into the CAPM formula for a per-engagement minimum margin.
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="downloads">
+  <span class="section-label" style="text-align:center; display:block;">Download Printable Cards</span>
+  <div class="dl-row">
+    <a href="pdf/capm-playbook-cards.pdf" class="dl-btn blue-dl">Both Cards (PDF)</a>
+    <a href="pdf/capm-layer1-systematic-risk.pdf" class="dl-btn blue-dl">Layer 1 Only</a>
+    <a href="pdf/capm-layer2-engagement-risk.pdf" class="dl-btn accent-dl">Layer 2 Only</a>
+  </div>
+  <p class="print-note">Scores are interactive in the browser. PDFs are printable reference cards.</p>
+</div>
+
+<script>
+  const state = {
+    layer1: {},
+    layer2: {}
+  };
+
+  function score(btn, layer) {
+    const row = btn.closest('tr');
+    const factor = row.dataset.factor;
+    const val = parseInt(btn.dataset.val);
+
+    // Deselect siblings
+    row.querySelectorAll('.score-btn').forEach(b => {
+      b.className = 'score-btn';
+    });
+    // Select this one
+    btn.className = 'score-btn selected-' + val;
+
+    state[layer][factor] = val;
+
+    if (layer === 'layer1') calcLayer1();
+    else calcLayer2();
+  }
+
+  function calcLayer1() {
+    const vals = Object.values(state.layer1);
+    if (vals.length === 0) return;
+
+    const sum = vals.reduce((a,b) => a+b, 0);
+    const count = vals.length;
+    const total = 6; // total factors
+
+    document.getElementById('l1-composite').textContent = sum;
+    document.getElementById('l1-score').textContent = sum;
+
+    if (count === total) {
+      // Map 6-30 to factor range: 6=0.85, 18=1.0, 30=1.25
+      const factor = 0.85 + (sum - 6) * (0.40 / 24);
+      const factorRounded = Math.round(factor * 100) / 100;
+
+      document.getElementById('l1-factor-display').textContent = factorRounded.toFixed(2);
+      document.getElementById('l1-factor').textContent = factorRounded.toFixed(2);
+
+      // Set environment label
+      let env = '';
+      if (factorRounded <= 0.95) env = 'Favorable environment';
+      else if (factorRounded <= 1.05) env = 'Normal environment';
+      else if (factorRounded <= 1.15) env = 'Elevated risk';
+      else env = 'High systematic risk';
+      document.getElementById('l1-env').textContent = env;
+
+      // Auto-populate Layer 2 input
+      document.getElementById('l1-input').value = factorRounded.toFixed(2);
+      calcLayer2();
+    } else {
+      document.getElementById('l1-factor-display').textContent = sum + ' (' + count + '/6 scored)';
+      document.getElementById('l1-factor').textContent = '...';
+      document.getElementById('l1-env').textContent = count + ' of 6 scored';
+    }
+  }
+
+  function calcLayer2() {
+    const vals = Object.values(state.layer2);
+    const sum = vals.reduce((a,b) => a+b, 0);
+    const count = vals.length;
+    const total = 7;
+
+    const rf = parseFloat(document.getElementById('rf').value) || 0;
+    const rm = parseFloat(document.getElementById('rm').value) || 0;
+    const l1f = parseFloat(document.getElementById('l1-input').value);
+    const premium = rm - rf;
+
+    if (count > 0) {
+      document.getElementById('l2-raw').textContent = sum;
+
+      if (count === total) {
+        const engBeta = Math.round((sum / 21) * 100) / 100;
+        document.getElementById('l2-beta').textContent = engBeta.toFixed(2);
+
+        if (!isNaN(l1f) && l1f > 0) {
+          const blended = Math.round(engBeta * l1f * 100) / 100;
+          document.getElementById('l2-blended').textContent = blended.toFixed(2);
+          document.getElementById('l2-blended-sub').textContent = engBeta.toFixed(2) + ' × ' + l1f.toFixed(2);
+
+          const er = Math.round((rf + blended * premium) * 10) / 10;
+          document.getElementById('l2-er').textContent = er.toFixed(1) + '%';
+          document.getElementById('l2-er-sub').textContent = rf + '% + ' + blended.toFixed(2) + ' × ' + premium + '%';
+
+          document.getElementById('l2-formula').innerHTML =
+            '<strong>Hybrid:</strong> E(R) = <span class="hl">' + rf + '%</span> + (<span class="hl2">' + engBeta.toFixed(2) + '</span> × <span class="hl">' + l1f.toFixed(2) + '</span>) × <span class="hl">' + premium + '%</span> = <strong>' + er.toFixed(1) + '%</strong>';
+
+          // Verdict
+          let verdict = '';
+          if (er <= rm) {
+            verdict = '<span class="verdict go">Go — within normal margins</span>';
+          } else if (er <= rm * 1.35) {
+            verdict = '<span class="verdict caution">Caution — renegotiate terms or reduce scope</span>';
+          } else {
+            verdict = '<span class="verdict stop">Stop — walk away or fundamentally restructure</span>';
+          }
+          document.getElementById('l2-verdict').innerHTML = verdict;
+        } else {
+          document.getElementById('l2-blended').textContent = '—';
+          document.getElementById('l2-blended-sub').textContent = 'enter L1 factor';
+          document.getElementById('l2-er').textContent = '—';
+          document.getElementById('l2-er-sub').textContent = 'needs L1 factor';
+          document.getElementById('l2-verdict').innerHTML = '';
+        }
+      } else {
+        document.getElementById('l2-beta').textContent = '...';
+        document.getElementById('l2-blended').textContent = '—';
+        document.getElementById('l2-er').textContent = '—';
+        document.getElementById('l2-verdict').innerHTML = '';
+      }
+    }
+  }
+</script>
+</body>
+</html>
