@@ -57,7 +57,7 @@ This repo is configured for GitHub Pages. Enable Pages in your repo settings wit
 
 ## License
 
-MIT
+This repository is licensed under the [Creative Commons Attribution-ShareAlike 4.0 International License (CC-BY-SA-4.0)](https://creativecommons.org/licenses/by-sa/4.0/).
 
 ## Credits
 
