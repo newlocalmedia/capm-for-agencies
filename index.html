@@ -230,6 +230,87 @@
     text-align: center;
   }
 
+  .mobile-score-list {
+    display: none;
+    margin-bottom: 24px;
+    gap: 14px;
+  }
+  .mobile-score-card {
+    border: 1px solid var(--gray200);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.55);
+    padding: 14px 14px 12px;
+  }
+  .mobile-score-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .mobile-score-meta {
+    flex: 1;
+    min-width: 0;
+  }
+  .mobile-score-value {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gray400);
+    white-space: nowrap;
+  }
+  .mobile-score-value.selected-1 { color: var(--green); }
+  .mobile-score-value.selected-2 { color: var(--blue); }
+  .mobile-score-value.selected-3 { color: var(--amber); }
+  .mobile-score-value.selected-4 { color: var(--accent); }
+  .mobile-score-value.selected-5 { color: var(--red); }
+  .mobile-score-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--gray100);
+    border: 1px solid var(--gray200);
+    touch-action: pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .mobile-score-option {
+    min-height: 44px;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--gray400);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+  .mobile-score-option.selected-1 { border-color: var(--green); background: var(--green-light); color: var(--green); }
+  .mobile-score-option.selected-2 { border-color: var(--blue); background: var(--blue-light); color: var(--blue); }
+  .mobile-score-option.selected-3 { border-color: var(--amber); background: var(--amber-light); color: var(--amber); }
+  .mobile-score-option.selected-4 { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+  .mobile-score-option.selected-5 { border-color: var(--red); background: var(--red-light); color: var(--red); }
+  .mobile-score-option:focus-visible {
+    outline: 2px solid rgba(43,76,126,0.35);
+    outline-offset: 2px;
+  }
+  .mobile-score-anchors {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--gray400);
+  }
+  .mobile-score-anchors span:last-child {
+    text-align: right;
+  }
+
   /* Calculator Panels */
   .calc-panel {
     background: var(--gray100);
@@ -430,6 +511,40 @@
   }
   .approach-note strong { color: var(--gray500); font-style: normal; }
 
+  .chart-panel {
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid var(--gray200);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, rgba(245,239,229,0.85) 0%, rgba(248,244,237,0.95) 100%);
+  }
+  .chart-header {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: var(--gray400);
+    margin-bottom: 8px;
+  }
+  .capm-chart {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.55);
+  }
+  .chart-note {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--gray500);
+  }
+  .chart-note em,
+  .chart-note sub {
+    font-style: italic;
+    text-transform: none;
+  }
+
   .print-note {
     max-width: 900px;
     margin: 0 auto;
@@ -486,13 +601,46 @@
     .downloads { display: none; }
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 980px) {
+    .card-body { padding: 22px 18px; }
+    .card-header { padding: 18px 22px; flex-wrap: wrap; }
+    .score-table {
+      display: block;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      font-size: 12px;
+    }
+    .score-table th,
+    .score-table td {
+      padding: 8px 10px;
+    }
+    .score-table th:first-child,
+    .score-table td:first-child {
+      min-width: 220px;
+    }
+    .score-table th.score-col {
+      width: 46px;
+      min-width: 46px;
+    }
+    .score-btn {
+      width: 32px;
+      height: 32px;
+      font-size: 11px;
+    }
+    .factor-desc {
+      font-size: 11px;
+    }
+  }
+
+  @media (max-width: 760px) {
     .card-body { padding: 20px 16px; }
     .card-header { padding: 16px 20px; flex-wrap: wrap; }
     .calc-field input { width: 80px; }
     .result-value { font-size: 22px; }
-    .score-table { font-size: 12px; }
-    .score-btn { width: 30px; height: 30px; font-size: 11px; }
+    .score-table { display: none; }
+    .mobile-score-list {
+      display: grid;
+    }
   }
 </style>
 </head>
@@ -504,7 +652,7 @@
     <a class="header-link" href="manuscript/index.html">Full Manuscript</a>
   </div>
   <h1>CAPM for Agencies — Decision Cards</h1>
-  <p>Two-layer risk assessment with scoring and calculators</p>
+  <p>Two-layer risk assessment with scoring and calculators, plus a B-Corp impact overlay.</p>
 </div>
 
 <!-- LAYER ONE CARD -->
@@ -522,7 +670,7 @@
     </p>
 
     <span class="section-label">Systematic Risk Scoring</span>
-    <table class="score-table" id="layer1-table">
+    <table class="score-table" id="layer1-table" data-layer="layer1">
       <thead>
         <tr>
           <th style="width:30%">Factor</th>
@@ -602,6 +750,7 @@
         </tr>
       </tbody>
     </table>
+    <div class="mobile-score-list" id="layer1-mobile-scores" aria-label="Layer 1 mobile scoring"></div>
 
     <span class="section-label">Systematic Adjustment Factor</span>
     <div class="calc-panel">
@@ -644,7 +793,7 @@
     </p>
 
     <span class="section-label">Engagement Risk Scoring</span>
-    <table class="score-table" id="layer2-table">
+    <table class="score-table" id="layer2-table" data-layer="layer2">
       <thead>
         <tr>
           <th style="width:30%">Factor</th>
@@ -735,6 +884,7 @@
         </tr>
       </tbody>
     </table>
+    <div class="mobile-score-list" id="layer2-mobile-scores" aria-label="Layer 2 mobile scoring"></div>
 
     <span class="section-label">CAPM Decision Calculator</span>
     <div class="calc-panel">
@@ -816,6 +966,15 @@
       </div>
       <div id="l2-verdict"></div>
 
+      <div class="chart-panel">
+        <div class="chart-header">The Line</div>
+        <svg id="l2-chart" class="capm-chart" viewBox="0 0 640 360" role="img" aria-labelledby="l2-chart-title l2-chart-desc">
+          <title id="l2-chart-title">CAPM line chart</title>
+          <desc id="l2-chart-desc">Shows the minimum acceptable margin line and the current engagement's position against it.</desc>
+        </svg>
+        <div class="chart-note" id="l2-chart-note">Score all Layer 2 factors and enter the Layer 1 factor to plot the engagement against the hurdle.</div>
+      </div>
+
       <div class="approach-note">
         <strong>Pure approach:</strong> Use the engagement score (<span id="l2-pure-score">—</span> of 35) as a risk index to size per-project contingency. The implied portfolio-wide minimum margin is <span id="l2-pure-er">—</span>: <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + L1 Factor × (<em>R<sub>m</sub></em> − <em>R<sub>f</sub></em>), and the proposed deal margin should still be checked against that hurdle.<br>
         <strong>Hybrid approach:</strong> Blended <em>β</em> = (Engagement Score / 21) × L1 Factor. This feeds directly into the CAPM formula for a per-engagement minimum margin.<br>
@@ -838,7 +997,7 @@
     </p>
 
     <span class="section-label">B-Corp Systematic Risk (extends Layer 1)</span>
-    <table class="score-table" id="bcorp-l1-table">
+    <table class="score-table" id="bcorp-l1-table" data-layer="bcorp_l1">
       <thead>
         <tr>
           <th style="width:30%">Factor</th>
@@ -918,9 +1077,10 @@
         </tr>
       </tbody>
     </table>
+    <div class="mobile-score-list" id="bcorp-l1-mobile-scores" aria-label="B-Corp Layer 1 mobile scoring"></div>
 
     <span class="section-label">B-Corp Engagement Factors (extends Layer 2)</span>
-    <table class="score-table" id="bcorp-l2-table">
+    <table class="score-table" id="bcorp-l2-table" data-layer="bcorp_l2">
       <thead>
         <tr>
           <th style="width:30%">Factor</th>
@@ -978,6 +1138,7 @@
         </tr>
       </tbody>
     </table>
+    <div class="mobile-score-list" id="bcorp-l2-mobile-scores" aria-label="B-Corp Layer 2 mobile scoring"></div>
 
     <span class="section-label">Impact-Adjusted CAPM Calculator</span>
     <div class="calc-panel">
@@ -1056,23 +1217,159 @@
     bcorp_l2: {}
   };
 
-  function score(btn, layer) {
-    const row = btn.closest('tr');
-    const factor = row.dataset.factor;
-    const val = parseInt(btn.dataset.val);
+  function updateTableRowSelection(layer, factor, val) {
+    const row = document.querySelector('.score-table[data-layer="' + layer + '"] tr[data-factor="' + factor + '"]');
+    if (!row) return;
 
-    // Deselect siblings
-    row.querySelectorAll('.score-btn').forEach(b => {
-      b.className = 'score-btn';
+    row.querySelectorAll('.score-btn').forEach((button) => {
+      button.className = 'score-btn';
+      if (parseInt(button.dataset.val) === val) {
+        button.className = 'score-btn selected-' + val;
+      }
     });
-    // Select this one
-    btn.className = 'score-btn selected-' + val;
+  }
 
+  function updateMobileCardSelection(layer, factor, val) {
+    const card = document.querySelector('.mobile-score-card[data-layer="' + layer + '"][data-factor="' + factor + '"]');
+    if (!card) return;
+
+    const activeLabel = card.dataset['label' + val] || 'Score ' + val;
+    const valueNode = card.querySelector('.mobile-score-value');
+    valueNode.textContent = val + ' · ' + activeLabel;
+    valueNode.className = 'mobile-score-value selected-' + val;
+
+    card.querySelectorAll('.mobile-score-option').forEach((option) => {
+      option.className = 'mobile-score-option';
+      option.setAttribute('aria-pressed', 'false');
+      if (parseInt(option.dataset.val) === val) {
+        option.className = 'mobile-score-option selected-' + val;
+        option.setAttribute('aria-pressed', 'true');
+      }
+    });
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function applyScore(layer, factor, val) {
     state[layer][factor] = val;
+    updateTableRowSelection(layer, factor, val);
+    updateMobileCardSelection(layer, factor, val);
 
     if (layer === 'layer1') calcLayer1();
     else if (layer === 'layer2') calcLayer2();
     else calcBcorp();
+  }
+
+  function score(btn, layer) {
+    const row = btn.closest('tr');
+    applyScore(layer, row.dataset.factor, parseInt(btn.dataset.val));
+  }
+
+  function createMobileScorecards() {
+    document.querySelectorAll('.score-table[data-layer]').forEach((table) => {
+      const layer = table.dataset.layer;
+      const mobileList = document.getElementById(table.id.replace('-table', '') + '-mobile-scores');
+      if (!mobileList) return;
+
+      mobileList.innerHTML = '';
+
+      table.querySelectorAll('tbody tr[data-factor]').forEach((row) => {
+        const factor = row.dataset.factor;
+        const name = row.querySelector('.factor-name')?.textContent || factor;
+        const desc = row.querySelector('.factor-desc')?.textContent || '';
+        const scoreCells = [...row.querySelectorAll('.score-cell')];
+        const labels = scoreCells.map((cell) => {
+          const label = cell.querySelector('.score-label');
+          return label ? label.textContent.trim() : '';
+        });
+
+        const card = document.createElement('div');
+        card.className = 'mobile-score-card';
+        card.dataset.layer = layer;
+        card.dataset.factor = factor;
+        labels.forEach((label, index) => {
+          if (label) card.dataset['label' + (index + 1)] = label;
+        });
+
+        const leftAnchor = labels.find((label) => label) || '1';
+        const rightAnchor = [...labels].reverse().find((label) => label) || '5';
+        const activeValue = state[layer][factor];
+        const activeLabel = activeValue ? (card.dataset['label' + activeValue] || ('Score ' + activeValue)) : 'Tap or slide';
+        const safeName = escapeHtml(name);
+        const safeDesc = escapeHtml(desc);
+        const safeLeft = escapeHtml(leftAnchor);
+        const safeRight = escapeHtml(rightAnchor);
+
+        card.innerHTML =
+          '<div class="mobile-score-head">' +
+            '<div class="mobile-score-meta">' +
+              '<div class="factor-name">' + safeName + '</div>' +
+              '<div class="factor-desc">' + safeDesc + '</div>' +
+            '</div>' +
+            '<div class="mobile-score-value' + (activeValue ? ' selected-' + activeValue : '') + '">' +
+              escapeHtml(activeValue ? (activeValue + ' · ' + activeLabel) : activeLabel) +
+            '</div>' +
+          '</div>' +
+          '<div class="mobile-score-strip" role="group" aria-label="' + safeName + ' score">' +
+            [1, 2, 3, 4, 5].map((val) => {
+              const selectedClass = activeValue === val ? ' selected-' + val : '';
+              const pressed = activeValue === val ? 'true' : 'false';
+              return '<button type="button" class="mobile-score-option' + selectedClass + '" data-val="' + val + '" aria-pressed="' + pressed + '">' + val + '</button>';
+            }).join('') +
+          '</div>' +
+          '<div class="mobile-score-anchors"><span>' + safeLeft + '</span><span>' + safeRight + '</span></div>';
+
+        mobileList.appendChild(card);
+
+        const strip = card.querySelector('.mobile-score-strip');
+        let dragging = false;
+        let pointerId = null;
+
+        const setFromPointer = (clientX) => {
+          const rect = strip.getBoundingClientRect();
+          const relativeX = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+          const nextVal = Math.min(5, Math.max(1, Math.floor((relativeX / rect.width) * 5) + 1));
+          applyScore(layer, factor, nextVal);
+        };
+
+        strip.addEventListener('pointerdown', (event) => {
+          dragging = true;
+          pointerId = event.pointerId;
+          strip.setPointerCapture(pointerId);
+          setFromPointer(event.clientX);
+        });
+
+        strip.addEventListener('pointermove', (event) => {
+          if (!dragging) return;
+          setFromPointer(event.clientX);
+        });
+
+        const endDrag = () => {
+          dragging = false;
+          pointerId = null;
+        };
+
+        strip.addEventListener('pointerup', endDrag);
+        strip.addEventListener('pointercancel', endDrag);
+        strip.addEventListener('pointerleave', (event) => {
+          if (!dragging || event.pointerId !== pointerId) return;
+          endDrag();
+        });
+
+        card.querySelectorAll('.mobile-score-option').forEach((option) => {
+          option.addEventListener('click', () => {
+            applyScore(layer, factor, parseInt(option.dataset.val));
+          });
+        });
+      });
+    });
   }
 
   function calcLayer1() {
@@ -1120,6 +1417,39 @@
     return '$' + Math.round(amount).toLocaleString('en-US');
   }
 
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function estimatePillWidth(text, fontSize = 12, paddingX = 10) {
+    return Math.ceil(text.length * (fontSize * 0.62) + paddingX * 2);
+  }
+
+  function buildChartPill(opts) {
+    const width = opts.chartWidth || 640;
+    const height = opts.chartHeight || 360;
+    const padX = opts.padX || 10;
+    const pillWidth = opts.width || estimatePillWidth(opts.text, opts.fontSize || 12, padX);
+    const pillHeight = opts.height || 24;
+
+    let left = opts.x;
+    if (opts.anchor === 'center') left -= pillWidth / 2;
+    if (opts.anchor === 'end') left -= pillWidth;
+
+    left = clamp(left, 8, width - pillWidth - 8);
+    const top = clamp(opts.y, 8, height - pillHeight - 8);
+
+    return {
+      left,
+      top,
+      width: pillWidth,
+      height: pillHeight,
+      markup:
+        '<rect x="' + left + '" y="' + top + '" width="' + pillWidth + '" height="' + pillHeight + '" rx="12" fill="' + (opts.fill || 'rgba(247,245,240,0.96)') + '" stroke="' + (opts.stroke || 'rgba(26,26,46,0.10)') + '" stroke-width="1.2"></rect>' +
+        '<text x="' + (left + pillWidth / 2) + '" y="' + (top + 16) + '" text-anchor="middle" fill="' + (opts.color || '#1a1a2e') + '" font-size="' + (opts.fontSize || 12) + '" font-weight="' + (opts.weight || 700) + '">' + (opts.textMarkup || escapeHtml(opts.text)) + '</text>'
+    };
+  }
+
   function getDealMetrics() {
     const price = parseFloat(document.getElementById('deal-price').value);
     const cost = parseFloat(document.getElementById('deal-cost').value);
@@ -1133,6 +1463,172 @@
     };
   }
 
+  function renderLayer2Chart(data) {
+    const svg = document.getElementById('l2-chart');
+    const note = document.getElementById('l2-chart-note');
+    if (!svg || !note) return;
+
+    const width = 640;
+    const height = 360;
+    const margin = { top: 24, right: 28, bottom: 50, left: 64 };
+    const plotWidth = width - margin.left - margin.right;
+    const plotHeight = height - margin.top - margin.bottom;
+    const placeholderRf = 10;
+    const placeholderPremium = 12;
+    const placeholderXMax = 2.2;
+    const placeholderYMax = 35;
+    const placeholderXScale = (value) => margin.left + (value / placeholderXMax) * plotWidth;
+    const placeholderYScale = (value) => margin.top + plotHeight - (value / placeholderYMax) * plotHeight;
+
+    const buildAxesMarkup = (xMax, yMax, xScaleFn, yScaleFn) => {
+      const yTicks = [];
+      for (let tick = 0; tick <= yMax; tick += 5) yTicks.push(tick);
+      const xTicks = [];
+      for (let tick = 0; tick <= xMax + 0.001; tick += 0.5) xTicks.push(Math.round(tick * 10) / 10);
+      let axesMarkup = '';
+
+      yTicks.forEach((tick) => {
+        const y = yScaleFn(tick);
+        axesMarkup += '<line x1="' + margin.left + '" y1="' + y + '" x2="' + (width - margin.right) + '" y2="' + y + '" stroke="rgba(61,56,49,0.10)" stroke-width="1"></line>';
+        if (tick < yMax) {
+          axesMarkup += '<text x="' + (margin.left - 12) + '" y="' + (y + 4) + '" text-anchor="end" fill="#7a756c" font-size="12">' + tick + '%</text>';
+        }
+      });
+
+      xTicks.forEach((tick) => {
+        const x = xScaleFn(tick);
+        axesMarkup += '<line x1="' + x + '" y1="' + margin.top + '" x2="' + x + '" y2="' + (height - margin.bottom) + '" stroke="rgba(61,56,49,0.08)" stroke-width="1"></line>';
+        axesMarkup += '<text x="' + x + '" y="' + (height - margin.bottom + 22) + '" text-anchor="middle" fill="#7a756c" font-size="12">' + tick.toFixed(1) + '</text>';
+      });
+
+      axesMarkup += '<line x1="' + margin.left + '" y1="' + margin.top + '" x2="' + margin.left + '" y2="' + (height - margin.bottom) + '" stroke="#7a756c" stroke-width="2"></line>';
+      axesMarkup += '<line x1="' + margin.left + '" y1="' + (height - margin.bottom) + '" x2="' + (width - margin.right) + '" y2="' + (height - margin.bottom) + '" stroke="#7a756c" stroke-width="2"></line>';
+      axesMarkup += '<text x="' + margin.left + '" y="' + (margin.top - 8) + '" fill="#6b6963" font-size="13" font-weight="700">Required margin</text>';
+      axesMarkup += '<text x="' + ((margin.left + width - margin.right) / 2) + '" y="' + (height - 14) + '" text-anchor="middle" fill="#6b6963" font-size="13" font-weight="700">Blended β</text>';
+
+      return axesMarkup;
+    };
+
+    if (!data || !data.ready) {
+      const placeholderLineY = (x) => placeholderRf + (placeholderPremium * x);
+      const ghostX = placeholderXScale(1.1);
+      const ghostY = placeholderYScale(placeholderLineY(1.1));
+
+      svg.innerHTML =
+        '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="10" fill="rgba(255,255,255,0.6)"></rect>' +
+        buildAxesMarkup(placeholderXMax, placeholderYMax, placeholderXScale, placeholderYScale) +
+        '<line x1="' + placeholderXScale(0) + '" y1="' + placeholderYScale(placeholderRf) + '" x2="' + placeholderXScale(placeholderXMax) + '" y2="' + placeholderYScale(placeholderLineY(placeholderXMax)) + '" stroke="rgba(43,76,126,0.55)" stroke-width="4"></line>' +
+        '<circle cx="' + placeholderXScale(0) + '" cy="' + placeholderYScale(placeholderRf) + '" r="6" fill="#2b4c7e" stroke="#ffffff" stroke-width="2"></circle>' +
+        buildChartPill({
+          x: placeholderXScale(0) + 18,
+          y: placeholderYScale(placeholderRf) - 30,
+          text: 'Rf',
+          textMarkup: '<tspan font-style="italic">R</tspan><tspan baseline-shift="sub" font-size="10">f</tspan>',
+          color: '#2b4c7e',
+          stroke: 'rgba(43,76,126,0.18)',
+          chartWidth: width,
+          chartHeight: height
+        }).markup +
+        '<line x1="' + ghostX + '" y1="' + margin.top + '" x2="' + ghostX + '" y2="' + (height - margin.bottom) + '" stroke="rgba(203,137,34,0.22)" stroke-width="2" stroke-dasharray="6 5"></line>' +
+        '<circle cx="' + ghostX + '" cy="' + ghostY + '" r="7" fill="rgba(203,137,34,0.28)" stroke="#ffffff" stroke-width="2"></circle>' +
+        buildChartPill({
+          x: ghostX + 16,
+          y: ghostY - 28,
+          text: 'Engagement plots here',
+          color: '#8a5f1b',
+          stroke: 'rgba(203,137,34,0.20)',
+          chartWidth: width,
+          chartHeight: height
+        }).markup;
+      note.innerHTML = 'The chart always shows the CAPM frame. Score all Layer 2 factors and enter the Layer 1 factor to plot the engagement against <em>E</em>(<em>R</em>).';
+      return;
+    }
+
+    const xMax = Math.max(2.1, Math.ceil((data.blended * 1.35) * 10) / 10, 2.2);
+    const yMaxRaw = Math.max(data.rf, data.rm, data.er, data.proposedMargin || 0) + 6;
+    const yMax = Math.max(15, Math.ceil(yMaxRaw / 5) * 5);
+    const xScale = (value) => margin.left + (value / xMax) * plotWidth;
+    const yScale = (value) => margin.top + plotHeight - (value / yMax) * plotHeight;
+
+    const lineY = (x) => data.rf + (data.premium * x);
+    const requiredX = xScale(data.blended);
+    const requiredY = yScale(data.er);
+    const proposedY = data.hasDeal ? yScale(data.proposedMargin) : null;
+    const gapLabel = data.hasDeal ? (data.gap >= 0 ? '+' : '') + data.gap.toFixed(1) + ' pts' : 'Enter price and cost to plot the deal';
+
+    let markup = '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="10" fill="rgba(255,255,255,0.6)"></rect>' +
+      buildAxesMarkup(xMax, yMax, xScale, yScale);
+
+    markup += '<line x1="' + xScale(0) + '" y1="' + yScale(data.rf) + '" x2="' + xScale(xMax) + '" y2="' + yScale(lineY(xMax)) + '" stroke="#2b4c7e" stroke-width="4"></line>';
+    markup += '<circle cx="' + xScale(0) + '" cy="' + yScale(data.rf) + '" r="6" fill="#2b4c7e" stroke="#ffffff" stroke-width="2"></circle>';
+    markup += buildChartPill({
+      x: xScale(0) + 18,
+      y: yScale(data.rf) - 30,
+      text: 'Rf',
+      textMarkup: '<tspan font-style="italic">R</tspan><tspan baseline-shift="sub" font-size="10">f</tspan>',
+      color: '#2b4c7e',
+      stroke: 'rgba(43,76,126,0.18)',
+      chartWidth: width,
+      chartHeight: height
+    }).markup;
+
+    markup += '<line x1="' + requiredX + '" y1="' + margin.top + '" x2="' + requiredX + '" y2="' + (height - margin.bottom) + '" stroke="rgba(203,137,34,0.35)" stroke-width="2"></line>';
+    markup += '<circle cx="' + requiredX + '" cy="' + requiredY + '" r="7" fill="#cb8922" stroke="#ffffff" stroke-width="2"></circle>';
+
+    const labelAnchor = requiredX > (width - margin.right - 170) ? 'end' : 'start';
+    const labelX = labelAnchor === 'end' ? requiredX - 16 : requiredX + 16;
+    let requiredLabelTop = requiredY - 12;
+    let proposedLabelTop = proposedY !== null ? proposedY - 38 : null;
+
+    if (data.hasDeal && proposedY !== null) {
+      if (Math.abs((proposedLabelTop || 0) - requiredLabelTop) < 28) {
+        if (proposedY <= requiredY) {
+          proposedLabelTop = proposedY - 42;
+          requiredLabelTop = requiredY + 10;
+        } else {
+          requiredLabelTop = requiredY - 42;
+          proposedLabelTop = proposedY + 10;
+        }
+      }
+    } else {
+      requiredLabelTop = requiredY - 30;
+    }
+
+    markup += buildChartPill({
+      x: labelX,
+      y: requiredLabelTop,
+      text: 'Required E(R) ' + data.er.toFixed(1) + '%',
+      color: '#cb8922',
+      stroke: 'rgba(203,137,34,0.22)',
+      anchor: labelAnchor,
+      chartWidth: width,
+      chartHeight: height
+    }).markup;
+
+    if (data.hasDeal) {
+      markup += '<line x1="' + requiredX + '" y1="' + requiredY + '" x2="' + requiredX + '" y2="' + proposedY + '" stroke="#a04a3a" stroke-width="2" stroke-dasharray="6 5"></line>';
+      markup += '<circle cx="' + requiredX + '" cy="' + proposedY + '" r="7" fill="#426347" stroke="#ffffff" stroke-width="2"></circle>';
+      markup += buildChartPill({
+        x: labelX,
+        y: proposedLabelTop,
+        text: 'Proposed ' + data.proposedMargin.toFixed(1) + '%',
+        color: '#426347',
+        stroke: 'rgba(58,125,92,0.20)',
+        anchor: labelAnchor,
+        chartWidth: width,
+        chartHeight: height
+      }).markup;
+    }
+
+    svg.innerHTML = markup;
+
+    note.innerHTML = 'The blue line shows the minimum acceptable margin across blended <em>β</em> values. ' +
+      'This engagement sits at <strong>' + data.blended.toFixed(2) + '</strong> blended <em>β</em>. ' +
+      (data.hasDeal
+        ? 'The current deal is <strong>' + gapLabel + '</strong> relative to the hurdle.'
+        : 'Enter deal price and estimated delivery cost to plot the proposed margin against the line.');
+  }
+
   function calcLayer2() {
     const vals = Object.values(state.layer2);
     const sum = vals.reduce((a,b) => a+b, 0);
@@ -1144,6 +1640,7 @@
     const l1f = parseFloat(document.getElementById('l1-input').value);
     const premium = rm - rf;
     const deal = getDealMetrics();
+    let chartData = { ready: false };
 
     if (deal) {
       const proposedMargin = Math.round(deal.proposedMargin * 10) / 10;
@@ -1180,6 +1677,18 @@
           const er = Math.round((rf + blended * premium) * 10) / 10;
           document.getElementById('l2-er').textContent = er.toFixed(1) + '%';
           document.getElementById('l2-er-sub').textContent = rf + '% + ' + blended.toFixed(2) + ' × ' + premium + '%';
+          chartData = {
+            ready: true,
+            rf,
+            rm,
+            premium,
+            engBeta,
+            blended,
+            er,
+            hasDeal: !!deal,
+            proposedMargin: deal ? Math.round(deal.proposedMargin * 10) / 10 : null,
+            gap: deal ? Math.round(((Math.round(deal.proposedMargin * 10) / 10) - er) * 10) / 10 : null
+          };
 
           document.getElementById('l2-formula').innerHTML =
             '<strong>Hybrid:</strong> <em>E</em>(<em>R</em>) = <span class="hl"><em>R<sub>f</sub></em></span> ' +
@@ -1223,14 +1732,16 @@
           document.getElementById('l2-er').textContent = '—';
           document.getElementById('l2-er-sub').textContent = 'needs L1 factor';
           document.getElementById('l2-verdict').innerHTML = '';
+          chartData = { ready: false };
         }
       } else {
       document.getElementById('l2-beta').textContent = '...';
       document.getElementById('l2-pure-er').innerHTML = '—';
       document.getElementById('l2-blended').textContent = '—';
-      document.getElementById('l2-er').textContent = '—';
+        document.getElementById('l2-er').textContent = '—';
         document.getElementById('l2-er-sub').textContent = 'complete scoring first';
         document.getElementById('l2-verdict').innerHTML = '';
+        chartData = { ready: false };
       }
     } else {
       document.getElementById('l2-raw').textContent = '—';
@@ -1241,7 +1752,9 @@
       document.getElementById('l2-er').textContent = '—';
       document.getElementById('l2-er-sub').textContent = 'required return';
       document.getElementById('l2-verdict').innerHTML = '';
+      chartData = { ready: false };
     }
+    renderLayer2Chart(chartData);
     calcBcorp();
   }
 
@@ -1338,6 +1851,8 @@
     }
     document.getElementById('bc-verdict').innerHTML = verdict;
   }
+
+  createMobileScorecards();
 </script>
 </body>
 </html>

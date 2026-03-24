@@ -497,7 +497,7 @@ PAGES = [
         "title": "CAPM for Agencies — Manuscript",
         "eyebrow": "Long-Form Theory",
         "heading": "CAPM for Agencies",
-        "deck": "This is the theory layer behind the decision cards: the deeper argument, its assumptions, the math, some cool line charts, and a little economics history. There's also a section explaining how CAPM is adapted to \u24b7 Lab Standards and the \u24b7 Impact Assessment (BIA). A proper reading edition for a work-in-progress, with proper typography and a live table of contents.",
+        "deck": "This is the theory behind the decision cards: the deeper argument, its assumptions, the math, some cool line charts, and a little economics history. There's also a section explaining how CAPM is adapted to \u24b7 Lab Standards and the \u24b7 Impact Assessment (BIA). A proper reading edition for a work-in-progress, with proper typography and a live table of contents.",
         "deck_link_text": "the decision cards",
         "deck_link_href": "../index.html",
         "meta": "Use this version when you want the full argument, not just the calculator. The hybrid layer is presented here as pricing governance rather than a literal asset-pricing engine.",
