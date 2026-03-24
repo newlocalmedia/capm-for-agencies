@@ -379,6 +379,40 @@ PAGE_STYLE = """
     color: #1f3650;
   }
 
+  .prose h2#contents + ol {
+    margin: 1.15rem 0 2.2rem;
+    padding: 1.25rem 1.35rem 1.35rem 2.2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(255, 255, 255, 0.74);
+    box-shadow: 0 12px 30px rgba(32, 29, 26, 0.07);
+  }
+
+  .prose h2#contents + ol > li {
+    padding-left: 0.15rem;
+  }
+
+  .prose h2#contents + ol > li + li {
+    margin-top: 0.55rem;
+  }
+
+  .prose h2#contents + ol ol {
+    margin-top: 0.45rem;
+    padding-left: 1.45rem;
+  }
+
+  .prose h2#contents + ol ol li + li {
+    margin-top: 0.25rem;
+  }
+
+  .prose h2#contents + ol a {
+    text-decoration: none;
+  }
+
+  .prose h2#contents + ol a:hover {
+    text-decoration: underline;
+  }
+
   .prose table {
     width: 100%;
     border-collapse: collapse;
@@ -559,12 +593,12 @@ PAGE_STYLE = """
 
 PAGES = [
     {
-        "source": ROOT / "manuscript" / "capm-for-agencies.md",
-        "output": ROOT / "manuscript" / "index.html",
-        "title": "CAPM for Agencies — Manuscript",
-        "eyebrow": "Long-Form Theory",
+        "source": ROOT / "theory" / "capm-for-agencies.md",
+        "output": ROOT / "theory" / "index.html",
+        "title": "CAPM for Agencies — Theory and Background",
+        "eyebrow": "Theory and Background",
         "heading": "CAPM for Agencies",
-        "deck": "This is the theory behind the decision cards: the deeper argument, its assumptions, the math, some cool line charts, and a little economics history. There's also a section explaining how CAPM is adapted to \u24b7 Lab Standards and the \u24b7 Impact Assessment (BIA). A proper reading edition for a work-in-progress, with proper typography and a live table of contents.",
+        "deck": "This is the theory behind the decision cards: the deeper argument, its assumptions, the math, some cool line charts, and a little economics history. There's also a section explaining how CAPM is adapted to \u24b7 Lab Standards and the \u24b7 Impact Assessment (BIA).",
         "deck_link_text": "the decision cards",
         "deck_link_href": "../index.html",
         "meta": "Use this version when you want the full argument, not just the calculator. The hybrid layer is presented here as pricing governance rather than a literal asset-pricing engine.",
@@ -586,13 +620,14 @@ PAGES = [
         "heading": "Price the Work Before You Plan It",
         "article_kicker": "CAPM for Agencies",
         "toc_skip_first_heading": True,
-        "deck": "The shortest useful explanation of the model: what it is for, why the hybrid layer is governance rather than prediction, and how deal economics actually clear or fail the hurdle.",
-        "meta": "Start here if you want the thesis without the full manuscript. This is the best first read for most people.",
+        "deck": "A short introduction to the CAPM model and the problem we're trying to solve with it: <strong>most agencies price work only after they have started imagining delivery</strong>. Learn what we're borrowing from finance, why the hybrid approach is best understood as pricing governance rather than prediction, and how proposed deal economics either clear the hurdle or fail it. We also explain why enterprise agencies may lean toward the pure approach while small and mid-sized agencies often begin with the hybrid one.",
+        "deck_html": True,
+        "meta": "Start here if you want the thesis without the theory. This is the best first read for most people.",
         "actions": [
             ("Open the App", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
             ("Decision Guide", "./decision-guide.html", "secondary"),
-            ("Full Manuscript", "../manuscript/index.html", "secondary"),
+            ("Understand the Theory", "../theory/index.html", "secondary"),
         ],
         "toc_min": 2,
         "toc_max": 3,
@@ -611,7 +646,7 @@ PAGES = [
             ("Open the App", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
             ("TL;DR", "./price-the-work-before-you-plan-it.html", "secondary"),
-            ("Full Manuscript", "../manuscript/index.html", "secondary"),
+            ("Understand the Theory", "../theory/index.html", "secondary"),
         ],
         "toc_min": 2,
         "toc_max": 3,
@@ -710,13 +745,14 @@ def build_actions(actions) -> str:
 
 
 def build_deck(page: dict) -> str:
-    deck = html.escape(page["deck"])
+    deck = page["deck"] if page.get("deck_html") else html.escape(page["deck"])
     link_text = page.get("deck_link_text")
     if not link_text:
         return deck
 
     link = f'<a href="{html.escape(page["deck_link_href"])}">{html.escape(link_text)}</a>'
-    return deck.replace(html.escape(link_text), link, 1)
+    target = link_text if page.get("deck_html") else html.escape(link_text)
+    return deck.replace(target, link, 1)
 
 
 def build_footer() -> str:

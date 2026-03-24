@@ -1,6 +1,5 @@
 # CAPM for Agencies
 *The Capital Asset Pricing Model Applied to Agency Project Pricing and Risk Assessment*
-Dan Knauss • March 2026
 
 ## Executive Summary
 
@@ -27,6 +26,8 @@ By adapting the **Capital Asset Pricing Model (CAPM)** from financial economics,
 ## Overview
 Most small to mid-sized agencies (and even more large ones than want to admit it) price risk through gut-feel contingency percentages, hourly padding, or by shifting uncertainty onto clients via retainer models — none of which distinguish between the kinds of risk that matter most when they’re realized in events. These are the systematic risks that can’t be controlled. 
 
+This agency-side diagnosis is not coming out of nowhere. Promethean Research's digital-agency pricing studies report that shops typically use multiple pricing methods at once, and that value-based pricing remains a minority practice rather than the norm. That helps explain why risk so often gets handled through padding, contingency, or deal-by-deal improvisation instead of through an explicit pricing model. See [Pricing Digital Services – Rates and Methods](https://prometheanresearch.com/pricing-digital-services-rates-and-methods/) and [Repeatable Revenue Generation for Digital Agencies](https://prometheanresearch.com/repeatable-revenue-generation-for-digital-agencies/).
+
 For readers coming from outside finance, CAPM begins with a simple question: what return should be demanded for taking on a given level of risk? In investing, it is used to estimate required return, cost of equity, and hurdle rates. In agency work, the same logic helps separate market-wide risk from deal-specific risk, set a minimum acceptable margin, and decide whether a project is worth taking on at all.
 
 Borrowing from CAPM, a foundational risk-based pricing model from financial economics, people in technical and non-technical roles at agencies of all sizes can bring a more principled framework to engagement pricing by separating *systematic* risk (factors correlated with agency-wide vulnerabilities like capacity crunches, platform/licensing shifts, or talent market contraction) from *idiosyncratic* risk (project-specific variables — including individual client dysfunction — that wash out across a healthy portfolio of engagements). For agencies, especially small and mid-sized shops, this is best understood as a governance model for pricing decisions rather than as a literal asset-pricing engine. 
@@ -34,38 +35,59 @@ Borrowing from CAPM, a foundational risk-based pricing model from financial econ
 Systematic risk deserves a pricing premium because it's the risk you can't diversify away by running a varied book of work. This gives agencies a structured language for what they usually handle by instinct — a principled basis for saying "this engagement's beta is high, so the required return needs to clear a higher bar," or even "we should walk away at this price" — replacing vibes with a defensible, portfolio-aware logic for go/no-go decisions and margin requirements. The hook is still right: price before you plan. But the practical meaning is price before *delivery* planning, not before presales solutioning. The practical win is not that the math is magically precise. It is that sales, solutions, delivery, and leadership are forced to name risk in a shared way before committing.
 
 ### Who Is This For?
-Because of its roots in high finance, the CAPM formula translates most directly to agencies that are serving large enterprise clients. Any agency running a large payroll that may be distributed across multiple political jurisdictions, operating in multiple currencies, and so on, will find CAPM directly relevant because of the macroeconomic risks they face. But today, even small agencies are likely to have some of these attributes and share in the same risks. Every category of macro/global risk has some micro/local impact and analog. 
+Because of its roots in high finance, the CAPM formula translates most directly to agencies that are serving large enterprise clients. Any agency running a large payroll that may be distributed across multiple political jurisdictions, operating in multiple currencies, and so on, will find CAPM directly relevant because of the macroeconomic risks they face. But today, even small agencies are likely to have some of these attributes and share in the same risks. Every category of macro/global risk has some micro/local impact and analog.
+
+The clearest audience split is this: **enterprise and international agencies** will usually find the pure approach easier to justify because their risk exposure genuinely tracks macro-level forces across a diversified portfolio. **Small and mid-sized agencies** will usually get more practical value from the hybrid approach, because a single engagement can still act like a portfolio-level event when the active book is small.
 
 CAPM is classically capitalistic: hyper-risk-averse, relentlessly focused on a single bottom line, and blind to externalities. If an extended or triple-bottom-line is your jam, or you’re one of the growing number of agencies organized as a cooperative or B-Corps, you’re still in the same ballpark where impact joins risk and profit. There’s a whole section at the end of this book for you that adapts CAPM for agencies that account for stakeholder governance, externalities, and multi-capital returns.
 
 ## Contents
 
-- [Executive Summary](#executive-summary)
-- [Overview](#overview)
-- [Who Is This For?](#who-is-this-for)
-- [Introduction: Two CAPMs](#introduction-two-capms)
-- [The Origin and Applicability of CAPM for Agencies](#the-origin-and-applicability-of-capm-for-agencies)
-- [The Formula](#the-formula)
-- [Mapping CAPM to Agency Work](#mapping-capm-to-agency-work)
-- [Risk-Free Rate (Rf): Your Baseline Revenue](#risk-free-rate-rf-your-baseline-revenue)
-- [Market Return (Rm): Average Agency Profitability](#market-return-rm-average-agency-profitability)
-- [Market Risk Premium (Rm - Rf): The Reward for Taking Risk](#market-risk-premium-rm---rf-the-reward-for-taking-risk)
-- [Beta: The Project Risk Coefficient](#beta-the-project-risk-coefficient)
-- [Expected Return E(R): What You Should Charge](#expected-return-er-what-you-should-charge)
-- [What Is Systematic Risk?](#what-is-systematic-risk)
-- [How This Applies to Small Agencies](#how-this-applies-to-small-agencies)
-- [PESTLE](#pestle)
-- [Systematic Risk for Small Agencies and Freelancers](#systematic-risk-for-small-agencies-and-freelancers)
-- [What Is Risk-Free?](#what-is-risk-free)
-- [The Solutions Team as Risk Translator](#the-solutions-team-as-risk-translator)
-- [Worked Examples: Risk-Margin Comparison Table](#worked-examples-risk-margin-comparison-table)
-- [Worked Example (Hybrid Approach)](#worked-example-hybrid-approach)
-- [Worked Example (Pure Approach)](#worked-example-pure-approach)
-- [Relationship to PMI Earned Value Metrics](#relationship-to-pmi-earned-value-metrics)
-- [Limitations and Caveats](#limitations-and-caveats)
-- [Conclusion: Pricing the Work Before You Plan It](#conclusion-pricing-the-work-before-you-plan-it)
-- [CAPM for B-Corp Agencies](#capm-for-b-corp-agencies)
-- [Glossary](#glossary)
+1. [Executive Summary](#executive-summary)
+   1. [The Problem: "Gut-Feel" Pricing](#the-problem-gut-feel-pricing)
+   2. [The Solution: A Principled Risk Framework](#the-solution-a-principled-risk-framework)
+   3. [Key Components of the Model](#key-components-of-the-model)
+   4. [Strategic Benefits](#strategic-benefits)
+2. [Overview](#overview)
+   1. [Who Is This For?](#who-is-this-for)
+3. [Introduction: Two CAPMs](#introduction-two-capms)
+   1. [The Origin and Applicability of CAPM for Agencies](#the-origin-and-applicability-of-capm-for-agencies)
+4. [The Formula](#the-formula)
+5. [Mapping CAPM to Agency Work](#mapping-capm-to-agency-work)
+   1. [Risk-Free Rate (Rf): Your Baseline Revenue](#risk-free-rate-rf-your-baseline-revenue)
+   2. [Market Return (Rm): Average Agency Profitability](#market-return-rm-average-agency-profitability)
+   3. [Market Risk Premium (Rm - Rf): The Reward for Taking Risk](#market-risk-premium-rm---rf-the-reward-for-taking-risk)
+   4. [Beta: The Project Risk Coefficient](#beta-the-project-risk-coefficient)
+   5. [Expected Return E(R): What You Should Charge](#expected-return-er-what-you-should-charge)
+6. [Two Approaches to Risk Assessment](#two-approaches-to-risk-assessment)
+   1. [Enterprise Agencies and the Pure Approach](#enterprise-agencies-and-the-pure-approach)
+   2. [Small-to-Mid Agencies and the Hybrid Approach](#small-to-mid-agencies-and-the-hybrid-approach)
+7. [A Two-Layer Risk Assessment](#a-two-layer-risk-assessment)
+   1. [Layer One: Systematic Risk Calibration](#layer-one-systematic-risk-calibration)
+   2. [Layer Two: Engagement Risk Scoring](#layer-two-engagement-risk-scoring)
+8. [What Is Systematic Risk?](#what-is-systematic-risk)
+   1. [How This Applies to Small Agencies](#how-this-applies-to-small-agencies)
+   2. [PESTLE](#pestle)
+   3. [Systematic Risk for Small Agencies and Freelancers](#systematic-risk-for-small-agencies-and-freelancers)
+9. [What Is Risk-Free?](#what-is-risk-free)
+10. [The Solutions Team as Risk Translator](#the-solutions-team-as-risk-translator)
+11. [Worked Examples: Risk-Margin Comparison Table](#worked-examples-risk-margin-comparison-table)
+   1. [Worked Example (Hybrid Approach)](#worked-example-hybrid-approach)
+   2. [Worked Example (Pure Approach)](#worked-example-pure-approach)
+12. [Relationship to PMI Earned Value Metrics](#relationship-to-pmi-earned-value-metrics)
+13. [Limitations and Caveats](#limitations-and-caveats)
+   1. [Addressing the Economists](#addressing-the-economists)
+14. [Conclusion: Pricing the Work Before You Plan It](#conclusion-pricing-the-work-before-you-plan-it)
+15. [CAPM for B-Corp Agencies](#capm-for-b-corp-agencies)
+   1. [The Core Tension](#the-core-tension)
+   2. [What the Academic Literature Says](#what-the-academic-literature-says)
+   3. [How This Maps to Agency CAPM](#how-this-maps-to-agency-capm)
+   4. [The B-Corp CAPM Formula](#the-b-corp-capm-formula)
+   5. [Addressing the B Impact Assessment Gap](#addressing-the-b-impact-assessment-gap)
+   6. [The Triple Bottom Line as Triple Risk](#the-triple-bottom-line-as-triple-risk)
+   7. [Practical Implications for B-Corp Agencies](#practical-implications-for-b-corp-agencies)
+16. [Glossary](#glossary)
+   1. [Suggested Reading](#suggested-reading)
 
 ## Introduction: Two CAPMs
 If you have absorbed some of the key project management concepts from the *Project Management Body of Knowledge* (PMBOK) or studied for the Certified Associate in Project Management (CAPM) exam, you know about value formulas, critical path calculations, and process group mechanics. Those tools answer *operational* questions: Are we on schedule? Are we on budget? How efficiently is work getting done?
@@ -163,6 +185,16 @@ The CAPM framework can be applied at two levels of rigor depending on agency siz
 
 **Both approaches use the same formula.** *The difference is in how beta gets calculated and who is responsible for what.* In the hybrid approach, that beta is a scored managerial coefficient, not a statistically estimated market covariance.
 
+### Enterprise Agencies and the Pure Approach
+For enterprise agencies, the pure approach is not just tidier in theory; it often fits the organizational reality better. When an agency is managing a large book of clients across multiple accounts, countries, currencies, and compliance environments, the portfolio is usually diversified enough that market-wide forces and engagement-specific forces can be separated more cleanly.
+
+This is especially true when the agency has formal leadership, finance, solutions, PMO, and delivery functions. Leadership and finance can own the systematic calibration. Solutions, account, and delivery teams can handle engagement-level risk and contract structure. In that setting, the pure approach gives enterprise agencies a more defensible language for portfolio-level hurdle rates, while still leaving room for contingency, escalation, and commercial judgment at the deal level.
+
+### Small-to-Mid Agencies and the Hybrid Approach
+Smaller agencies often do not get the luxury of clean diversification. If the agency has five active projects and one of them goes badly wrong, that is not a local anomaly. It can damage capacity, morale, utilization, and margin across the whole shop.
+
+That is why the hybrid approach is usually the better operating model for small and mid-sized agencies. It is less theoretically pure, but more operationally honest. It turns the scoring model into heuristic pricing governance: a way to surface the fact that one risky engagement can still behave like a portfolio event when the firm is small.
+
 ## A Two-Layer Risk Assessment
 Whether you adopt the pure or hybrid approach, the risk assessment works best as two distinct layers rather than a single scoring exercise. Each layer answers a different question, operates on a different cadence, and draws on different expertise.
 
@@ -242,7 +274,7 @@ PEST stands for “political, economic, social, and technological.”
 
 PESTLE adds LE — legal and environmental.
 
-### How This Applies to Small Agencies
+### How This Applies to Small Agencies Too
 These categories might seem far too macro-level in concern for a small agency rather than a big global corporation. That’s somewhat true — PEST/LE will be more immediately relevant to large agencies with Fortune 500 \- Fortune 5000 clients. They are still broadly relevant to any entrepreneurial risk calculation. We’ll consider smaller agencies in the next sub-section, but keep in mind that the macro affects the micro level, and it does that hard and fast in a crisis. In a changing global marketplace, solopreneurs and small to mid-sized enterprises — especially ones whose teams and clients are distributed across borders — are equally impacted by changing national and international policies. 
 
 Additionally, you might sense there is a traditional, anti-regulatory, single-bottom-line bias behind PEST/LE. How does risk vs. return look from a triple-bottom-line (TBL) perspective, in the context of Environmental, Social, and Governance (ESG) frameworks, or B-Corps? If that’s you, read on or skip ahead — there’s a whole separate section at the end for you.
@@ -371,6 +403,10 @@ This is the minimum margin the agency should target across its project portfolio
 * **Scenario C (engagement risk index: 32):** Even with aggressive contingency, the engagement risk is high enough to warrant a serious go/no-go discussion. The pure approach flags this through the engagement risk index rather than through the CAPM formula itself, but the conclusion is the same: walk away or fundamentally restructure the terms.
 
 The pure approach produces cleaner CAPM math at the cost of requiring a separate contingency framework for engagement-level risk. The hybrid approach folds everything into one number. Both arrive at similar pricing conclusions — the difference is in the intellectual architecture, not the practical outcome. The hybrid version is therefore best used as governance: a way to make deals legible, challenge assumptions early, and compare actual outcomes later in retrospectives.
+
+That separation is also closer to how adjacent project-estimating disciplines talk about risk. PMI's guidance on [contingency reserve analysis](https://www.pmi.org/learning/library/contingency-are-covered-6099), the U.S. GAO's [Cost Estimating and Assessment Guide](https://www.gao.gov/products/gao-20-195g), and AACE's [quantitative risk analysis guidance](https://web.aacei.org/resources/professional-guidance-documents) all treat uncertainty, reserve logic, work breakdown, assumptions, and risk analysis as things to make explicit rather than bury inside a single padded number.
+
+**Enterprise note:** In a larger agency, this pure-approach workflow is often easiest to defend when a multinational client opportunity brings cross-border staffing, currency exposure, vendor concentration, and multi-jurisdiction compliance into the same pursuit. In that case, the portfolio-wide hurdle can be set by leadership and finance, while the solutions and delivery functions focus separately on whether the specific deal structure, scope, and contingency plan are good enough to clear it.
 
 ## Relationship to PMI Earned Value Metrics
 The financial CAPM and PMI’s earned value management (EVM) formulas address different phases of the project lifecycle.
@@ -584,7 +620,7 @@ Rather than treating the three bottom lines as separate accounts that cannot be 
 
 **Beta (β)**: The CAPM measure of risk relative to the market. In the pure approach it stays closer to the finance concept; in the hybrid approach it becomes a scored managerial coefficient used for pricing governance.
 
-**B Impact Assessment (BIA)**: B Lab’s assessment framework for measuring company impact across stakeholder-related dimensions. In this manuscript it matters mainly as a measurement context, not as a pricing model.
+**B Impact Assessment (BIA)**: B Lab’s assessment framework for measuring company impact across stakeholder-related dimensions. In this theory text it matters mainly as a measurement context, not as a pricing model.
 
 **Capital Asset Pricing Model (CAPM)**: A finance model that sets expected return as a function of the risk-free rate, beta, and the market risk premium. This project adapts its structure for agency pricing decisions.
 
@@ -604,7 +640,7 @@ Rather than treating the three bottom lines as separate accounts that cannot be 
 
 **Greenium**: A financial-return discount investors may accept for sustainability-related benefits or non-pecuniary utility. In the agency adaptation, it maps to a conscious mission discount on mission-aligned work.
 
-**Heuristic Pricing Governance**: The manuscript’s preferred description of the hybrid model. It means a disciplined internal decision framework, not a statistically correct asset-pricing engine.
+**Heuristic Pricing Governance**: This project’s preferred description of the hybrid model. It means a disciplined internal decision framework, not a statistically correct asset-pricing engine.
 
 **Idiosyncratic Risk**: Project-specific risk that does not affect the whole portfolio at once and, in theory, can wash out across enough engagements.
 
@@ -626,7 +662,7 @@ Rather than treating the three bottom lines as separate accounts that cannot be 
 
 **Schedule Variance (SV)**: An earned value management metric showing the gap between earned value and planned value.
 
-**Securities Market Line (SML)**: The line in CAPM showing the return required for each level of beta. The manuscript refers to it informally as “The Line.”
+**Securities Market Line (SML)**: The line in CAPM showing the return required for each level of beta. This text refers to it informally as “The Line.”
 
 **Systematic Risk**: Risk that affects multiple engagements or the whole portfolio at once and cannot be diversified away by client mix alone.
 
@@ -637,7 +673,12 @@ Rather than treating the three bottom lines as separate accounts that cannot be 
 **Work Breakdown Structure (WBS)**: A structured decomposition of project scope into smaller deliverables and work packages used during planning and execution.
 
 ### Suggested Reading
+* Promethean Research. *Pricing Digital Services – Rates and Methods*. Useful agency-side research on pricing methods, rate changes, and how shops actually structure pricing. [Promethean Research](https://prometheanresearch.com/pricing-digital-services-rates-and-methods/)  
+* Promethean Research. *Repeatable Revenue Generation for Digital Agencies*. Helpful survey-based context on common pricing-method mixes and why value-based pricing remains a minority practice. [Promethean Research](https://prometheanresearch.com/repeatable-revenue-generation-for-digital-agencies/)  
 * McCracken Alliance. *CAPM Formula Explained: What It Is, How It Works, and When to Use It*. Beginner-friendly overview of CAPM in finance, including required return, hurdle rates, and valuation use cases. [McCracken Alliance](https://www.mccrackenalliance.com/blog/capm-formula-explained-what-it-is-how-it-works-and-when-to-use-it)  
+* Project Management Institute. *Contingency - Are You Covered?* A useful project-management-side explanation of contingency reserve analysis and estimate uncertainty. [PMI](https://www.pmi.org/learning/library/contingency-are-covered-6099)  
+* U.S. Government Accountability Office. *Cost Estimating and Assessment Guide*. Detailed best-practices guide covering technical baselines, work breakdown structures, ground rules, assumptions, and risk analysis. [GAO](https://www.gao.gov/products/gao-20-195g)  
+* AACE International. *Professional Guidance Documents*. Start with PGD 02, *Guide to Quantitative Risk Analysis*, and the linked recommended-practice framework for contingency and cost-risk analysis. [AACE](https://web.aacei.org/resources/professional-guidance-documents)  
 * Pástor, Ľ., Stambaugh, R. F., & Taylor, L. A. (2021). Sustainable investing in equilibrium. *Journal of Financial Economics*, 142(2), 550–571. [NBER Working Paper](https://www.nber.org/papers/w26549)  
 * Johnstone, D. (2025). Zero-beta risks and required returns: ESG and CAPM. *Financial Management*. [Wiley](https://onlinelibrary.wiley.com/doi/full/10.1111/fima.12475)  
 * Annals of Operations Research (2024). Modelling sustainable investing in the CAPM. [Springer](https://link.springer.com/article/10.1007/s10479-024-06110-5)  

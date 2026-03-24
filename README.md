@@ -8,6 +8,10 @@ Most agencies price risk through gut-feel contingency percentages or hourly padd
 
 These decision cards implement a two-layer risk assessment. In the pure portfolio-level use, the framework stays closer to CAPM as a hurdle-rate model. In the hybrid engagement-level use, it should be treated as heuristic pricing governance rather than a literal asset-pricing engine.
 
+As a rough fit:
+- enterprise and international agencies will usually find the pure approach easier to justify
+- small and mid-sized agencies will usually get more immediate value from the hybrid approach
+
 ### Layer 1: Systematic Risk Calibration
 A periodic strategic review (quarterly or on market shift) that scores portfolio-level risk factors: platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure. Produces a systematic adjustment factor that sets the environment for all engagement pricing. Use the [Layer 1 card](./index.html#layer1-card).
 
@@ -32,8 +36,8 @@ Download reference cards from the `pdf/` directory:
 ### Text Overview
 A text-first landing page lives in `overview/index.html`.
 
-### Manuscript
-The long-form theory and commentary live in `manuscript/capm-for-agencies.md`.
+### Theory and Background
+The long-form theory text and commentary live in `theory/capm-for-agencies.md`.
 
 
 ## The Formula
