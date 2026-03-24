@@ -436,6 +436,18 @@ Think of CAPM as the pre-flight checklist and EVM as the cockpit instruments. Yo
 ## Limitations and Caveats
 The financial CAPM has well-known limitations in its native domain. Some carry over to the agency analogy; others lose their force entirely when CAPM is used as a decision framework rather than a predictive model of market returns. This section addresses both the inherent limitations and the major academic criticisms.
 
+Before getting into the academic objections, it is worth naming the most practical vulnerabilities of this adaptation directly:
+
+* The pure approach is closer to financial CAPM than the hybrid approach. In the hybrid model, beta is a scored managerial coefficient, not an observed covariance with a market portfolio.
+
+* The calibration choices are normative. Dividing by `21`, mapping Layer One into a bounded factor range, and using a `3`-point caution band are governance decisions about risk tolerance, not values derived from first principles.
+
+* The additive scoring model is a usability compromise. Real engagement risk often compounds non-linearly: a vague scope plus an immovable deadline is usually worse than the simple sum of those two factors suggests.
+
+* The agency analog of the risk-free rate is only approximate. Retainer and maintenance revenue are lower-risk baselines, not truly risk-free instruments in the finance sense.
+
+* The displayed precision can outrun the input quality. A result like `28.2%` required margin is still built on subjective 1–5 scores. It should be read as decision guidance, not as a claim to measurement-grade accuracy.
+
 * Beta is backward-looking. Historical data may not predict future risk, especially with new clients or emerging technology.
 
 * The model assumes rational markets. Agencies sometimes take on low-margin or high-risk projects for strategic reasons (portfolio diversification, relationship building, learning a new technology) that CAPM does not capture.
@@ -464,6 +476,8 @@ CAPM has been heavily criticized by economists for over five decades. These crit
 **Behavioral finance criticisms**: Investors are not rational, markets are not efficient, and people have biases and herd behavior. All true for financial markets. But our framework explicitly accounts for this. The entire point of the structured scoring tables is to replace gut-feel bias with a disciplined process. The framework does not assume agencies are rational — it provides a tool precisely because they are not.
 
 **Beta instability**: Beta changes over time, so historical beta does not predict future beta. Valid in finance. But the two-layer structure addresses this directly. The Layer One systematic review is designed to be re-run quarterly, recalibrating what β \= 1.0 means in the current environment. The framework does not assume beta is static — it builds recalibration into the workflow.
+
+**False precision and interaction effects**: The app can display results to one decimal place, but that should not be mistaken for empirical exactness. The underlying inputs are ordinal scores and judgment calls. Likewise, the additive scoring model is intentionally simple and may understate compounding tail risk when several red-flag factors cluster together. Those are practical trade-offs in favor of usability, not claims about the true shape of risk.
 
 **The single-period assumption** — CAPM assumes a one-period investment horizon, which does not match multi-year realities. For an agency evaluating a three-to-six-month engagement, this is actually a better fit than it is for stock markets. The “investment period” really is roughly one period — the engagement lifecycle. The assumption is less wrong here than in its native domain.
 
