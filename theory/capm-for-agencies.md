@@ -61,7 +61,7 @@ CAPM is classically capitalistic: hyper-risk-averse, relentlessly focused on a s
    5. [Expected Return E(R): What You Should Charge](#expected-return-er-what-you-should-charge)
 6. [Two Approaches to Risk Assessment](#two-approaches-to-risk-assessment)
    1. [Enterprise Agencies and the Pure Approach](#enterprise-agencies-and-the-pure-approach)
-   2. [Small-to-Mid Agencies and the Hybrid Approach](#small-to-mid-agencies-and-the-hybrid-approach)
+   2. [Small-to-Mid-Sized Agencies and the Hybrid Approach](#small-to-mid-sized-agencies-and-the-hybrid-approach)
 7. [A Two-Layer Risk Assessment](#a-two-layer-risk-assessment)
    1. [Layer One: Systematic Risk Calibration](#layer-one-systematic-risk-calibration)
    2. [Layer Two: Engagement Risk Scoring](#layer-two-engagement-risk-scoring)
@@ -192,7 +192,7 @@ For enterprise agencies, the pure approach is not just tidier in theory; it ofte
 
 This is especially true when the agency has formal leadership, finance, solutions, PMO, and delivery functions. Leadership and finance can own the systematic calibration. Solutions, account, and delivery teams can handle engagement-level risk and contract structure. In that setting, the pure approach gives enterprise agencies a more defensible language for portfolio-level hurdle rates, while still leaving room for contingency, escalation, and commercial judgment at the deal level.
 
-### Small-to-Mid Agencies and the Hybrid Approach
+### Small-to-Mid-Sized Agencies and the Hybrid Approach
 Smaller agencies often do not get the luxury of clean diversification. If the agency has five active projects and one of them goes badly wrong, that is not a local anomaly. It can damage capacity, morale, utilization, and margin across the whole shop.
 
 That is why the hybrid approach is usually the better operating model for small and mid-sized agencies. It is less theoretically pure, but more operationally honest. It turns the scoring model into heuristic pricing governance: a way to surface the fact that one risky engagement can still behave like a portfolio event when the firm is small.
