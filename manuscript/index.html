@@ -354,6 +354,12 @@
   .prose img {
     max-width: 100%;
     height: auto;
+    display: block;
+    margin: 1.9rem auto 0.7rem;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.52);
+    box-shadow: 0 18px 36px rgba(32, 29, 26, 0.08);
   }
 
   .prose .lead {
@@ -364,6 +370,19 @@
   .empty-toc {
     color: var(--muted);
     font-size: 0.95rem;
+  }
+
+  .site-footer {
+    max-width: 860px;
+    margin: 28px auto 0;
+    text-align: center;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .site-footer a {
+    color: var(--blue);
   }
 
   @media (max-width: 980px) {
@@ -405,7 +424,7 @@
       <div class="masthead-grid">
         <div>
           <h1>CAPM for Agencies</h1>
-          <p class="deck">A proper reading edition of the manuscript, with editorial typography and a live table of contents. This is the theory layer behind <a href="../index.html">the decision cards</a>.</p>
+          <p class="deck">This is the theory layer behind <a href="../index.html">the decision cards</a>: the deeper argument, its assumptions, the math, some cool line charts, and a little economics history. There&#x27;s also a section explaining how CAPM is adapted to Ⓑ Lab Standards and the Ⓑ Impact Assessment (BIA). A proper reading edition for a work-in-progress, with proper typography and a live table of contents.</p>
         </div>
         <div class="meta">
           <div class="meta-copy">Use this version when you want the full argument, not just the calculator. The hybrid layer is presented here as pricing governance rather than a literal asset-pricing engine.</div>
@@ -492,7 +511,7 @@
 <p><em>The Capital Asset Pricing Model Applied to Agency Project Pricing and Risk Assessment</em>
 Dan Knauss • March 2026</p>
 <h2 id="executive-summary">Executive Summary</h2>
-<p>The goal of CAPM for Agencies is to <strong>price the work before you plan it</strong>. It ensures that the agency is always compensated fairly for the uncertainty it accepts, protecting long-term profitability and sustainability.</p>
+<p>The goal of CAPM for Agencies is to <strong>price the work before you plan it</strong>. More precisely: price the work before <em>delivery planning</em> is committed, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether the thing being sold should be implementation or discovery. It ensures that the agency is always compensated fairly for the uncertainty it accepts, protecting long-term profitability and sustainability.</p>
 <h3 id="the-problem-gut-feel-pricing">The Problem: "Gut-Feel" Pricing</h3>
 <p>Most agencies price project risk using arbitrary contingency percentages or hourly padding. These methods fail to distinguish between <strong>systematic risks</strong> (market-wide forces you cannot control) and <strong>idiosyncratic risks</strong> (project-specific variables that should wash out across a healthy portfolio).</p>
 <h3 id="the-solution-a-principled-risk-framework">The Solution: A Principled Risk Framework</h3>
@@ -525,7 +544,7 @@ Dan Knauss • March 2026</p>
 <h2 id="overview">Overview</h2>
 <p>Most small to mid-sized agencies (and even more large ones than want to admit it) price risk through gut-feel contingency percentages, hourly padding, or by shifting uncertainty onto clients via retainer models — none of which distinguish between the kinds of risk that matter most when they’re realized in events. These are the systematic risks that can’t be controlled.</p>
 <p>Borrowing from CAPM, a foundational risk-based pricing model from financial economics, people in technical and non-technical roles at agencies of all sizes can bring a more principled framework to engagement pricing by separating <em>systematic</em> risk (factors correlated with agency-wide vulnerabilities like capacity crunches, platform/licensing shifts, or talent market contraction) from <em>idiosyncratic</em> risk (project-specific variables — including individual client dysfunction — that wash out across a healthy portfolio of engagements). For agencies, especially small and mid-sized shops, this is best understood as a governance model for pricing decisions rather than as a literal asset-pricing engine.</p>
-<p>Systematic risk deserves a pricing premium because it's the risk you can't diversify away by running a varied book of work. This gives agencies a structured language for what they usually handle by instinct — a principled basis for saying "this engagement's beta is high, so the required return needs to clear a higher bar," or even "we should walk away at this price" — replacing vibes with a defensible, portfolio-aware logic for go/no-go decisions and margin requirements. The practical win is not that the math is magically precise. It is that sales, solutions, delivery, and leadership are forced to name risk in a shared way before committing.</p>
+<p>Systematic risk deserves a pricing premium because it's the risk you can't diversify away by running a varied book of work. This gives agencies a structured language for what they usually handle by instinct — a principled basis for saying "this engagement's beta is high, so the required return needs to clear a higher bar," or even "we should walk away at this price" — replacing vibes with a defensible, portfolio-aware logic for go/no-go decisions and margin requirements. The hook is still right: price before you plan. But the practical meaning is price before <em>delivery</em> planning, not before presales solutioning. The practical win is not that the math is magically precise. It is that sales, solutions, delivery, and leadership are forced to name risk in a shared way before committing.</p>
 <h3 id="who-is-this-for">Who Is This For?</h3>
 <p>Because of its roots in high finance, the CAPM formula translates most directly to agencies that are serving large enterprise clients. Any agency running a large payroll that may be distributed across multiple political jurisdictions, operating in multiple currencies, and so on, will find CAPM directly relevant because of the macroeconomic risks they face. But today, even small agencies are likely to have some of these attributes and share in the same risks. Every category of macro/global risk has some micro/local impact and analog.</p>
 <p>CAPM is classically capitalistic: hyper-risk-averse, relentlessly focused on a single bottom line, and blind to externalities. If an extended or triple-bottom-line is your jam, or you’re one of the growing number of agencies organized as a cooperative or B-Corps, you’re still in the same ballpark where impact joins risk and profit. There’s a whole section at the end of this book for you that adapts CAPM for agencies that account for stakeholder governance, externalities, and multi-capital returns.</p>
@@ -561,7 +580,7 @@ Dan Knauss • March 2026</p>
 <p>If you have absorbed some of the key project management concepts from the PMBOK or studied for the Certified Associate in Project Management (CAPM) exam, you know about value formulas, critical path calculations, and process group mechanics. Those tools answer <em>operational</em> questions: Are we on schedule? Are we on budget? How efficiently is work getting done?</p>
 <p>But there is an earlier, more strategic question that most project management frameworks skip entirely: <em><strong>Should we take this project at all?</strong></em></p>
 <p>CAPM (the financial model, not the PM certification) provides a framework for answering exactly that question. It calculates the expected return on an investment given its risk relative to the market. In an agency context, each client engagement is an investment of time, capacity, and reputation. The financial CAPM gives you a principled way to decide whether the expected return on that engagement justifies the risk you are taking on. In this adaptation, especially in the hybrid layer, the value is organizational discipline more than quantitative purity.</p>
-<p>The rest of this document is written as a practical guide for agency teams. It introduces the financial CAPM, maps each of its components to <em>agency</em> realities, and shows how to assess and price risk before the project ever hits a Gantt chart. It also argues for using CAPM as a bridge between people and teams forming around a new project or proposal before it has become a contract with a client. In the pure approach, the mapping stays closer to the original theory. In the hybrid approach, the model becomes explicitly heuristic: a pricing-governance framework that borrows CAPM's structure to support better internal decisions.</p>
+<p>The rest of this document is written as a practical guide for agency teams. It introduces the financial CAPM, maps each of its components to <em>agency</em> realities, and shows how to assess and price risk before the project ever hits a Gantt chart. It also argues for using CAPM as a bridge between people and teams forming around a new project or proposal before it has become a contract with a client. That does not eliminate the need for early technical thinking. It means doing enough presales solutioning to price responsibly without slipping into unpaid delivery planning. In the pure approach, the mapping stays closer to the original theory. In the hybrid approach, the model becomes explicitly heuristic: a pricing-governance framework that borrows CAPM's structure to support better internal decisions.</p>
 <p>Risk assessment is something a good sales executive does, and it’s central to solutions teams, project managers, and even delivery and strategy teams in enterprise agencies. Engaging senior technical and project staff in pricing estimation and project scoping at the end of the sales funnel — rather than siloing them from it — will produce better outcomes.</p>
 <p>If consultative sales and proposals informed by technical team members are already your practice, CAPM gives you a simple model to formalize the risk assessment you're already doing intuitively. Everyone on agile, cross-functional teams will have their own take on how to run the numbers. Let them — and take the average to draw on your own “wisdom of the crowd.”</p>
 <h3 id="the-origin-and-applicability-of-capm-for-agencies">The Origin and Applicability of CAPM for Agencies</h3>
@@ -610,9 +629,8 @@ But then I asked, Why not? Hasn’t anyone made this connection? The answer turn
 </tbody>
 </table>
 <p>The core insight: you should never accept a return lower than the risk-free rate, and the more risk you take on, the higher the return you should demand.</p>
-<blockquote>
-<p>Figure: Security Market Line illustration. See the interactive app for the visual version.</p>
-</blockquote>
+<p><a target="_blank" rel="noopener noreferrer" href="./figures/security-market-line.png"><img src="./figures/security-market-line.png" alt="Security Market Line illustration showing the CAPM line, the risk-free intercept, and examples above, on, and below the line." style="max-width: 100%;"></a></p>
+<p><em>Figure 1. Security Market Line illustration. <a href="./figures/security-market-line.pdf">PDF version</a>.</em></p>
 <p>In the standard model, every asset should sit on the Security Market Line (SML). From here on, we’ll call it “The Line”. Anything above the Line is delivering more return than its risk warrants; anything below the Line is underperforming.</p>
 <h2 id="mapping-capm-to-agency-work">Mapping CAPM to Agency Work</h2>
 <p>Each component of the CAPM formula has a direct analog in the agency project pricing, planning, and management context. The mapping is not merely metaphorical. It reflects real financial and operational dynamics that determine whether a project is worth pursuing. Here’s the agency remix:</p>
@@ -633,7 +651,7 @@ But then I asked, Why not? Hasn’t anyone made this connection? The answer turn
 <p><strong>Client track record</strong> — Have they worked with agencies before? Do they provide feedback on time? Do they pay reliably?</p>
 </li>
 <li>
-<p><strong>Scope clarity</strong> — Are requirements well-defined, or will this be a discovery engagement?</p>
+<p><strong>Scope clarity</strong> — Are requirements well-defined, or does the opportunity require a paid discovery phase before implementation can be priced confidently?</p>
 </li>
 <li>
 <p><strong>Technical complexity</strong> — Is this a familiar stack, or does it involve unfamiliar APIs, legacy systems, or experimental technology?</p>
@@ -731,12 +749,11 @@ But then I asked, Why not? Hasn’t anyone made this connection? The answer turn
 <p>The composite score informs whether your risk premium and baseline beta calibration need adjustment. This is not a mechanical formula — it's a structured conversation that replaces the unstructured one most agencies aren't having at all.</p>
 <p><strong>For agencies using the pure approach,</strong> the systematic calibration is the primary input to the CAPM calculation. The risk premium and beta baseline are adjusted here, and engagement-level factors are handled separately through contingency planning.</p>
 <p><strong>For agencies using the hybrid approach,</strong> the systematic calibration still sets the environment, but it also contextualizes the engagement-level scores described in Layer Two. A moderate engagement score in a high-systematic-risk environment compounds differently than the same score in a calm one.</p>
-<blockquote>
-<p>Figure: Layer One systematic-risk calibration illustration. See the interactive app for the visual version.</p>
-</blockquote>
+<p><a target="_blank" rel="noopener noreferrer" href="./figures/layer1-systematic-calibration.png"><img src="./figures/layer1-systematic-calibration.png" alt="Layer One systematic-risk calibration illustration showing how calm, normal, and turbulent conditions rotate the required-margin line." style="max-width: 100%;"></a></p>
+<p><em>Figure 2. Layer One systematic-risk calibration illustration. <a href="./figures/layer1-systematic-calibration.pdf">PDF version</a>.</em></p>
 <p>Layer One doesn't move individual engagements — it rotates the entire line steeper or flatter depending on the systematic environment. When the talent market tightens and your platform is in turmoil, the Line gets steeper: every level of beta demands a higher margin.</p>
 <h3 id="layer-two-engagement-risk-scoring">Layer Two: Engagement Risk Scoring</h3>
-<p>This is the per-project assessment conducted during presales or discovery. It evaluates the risk characteristics of <em>this specific engagement</em> — the factors that vary from project to project, regardless of what the broader market is doing.</p>
+<p>This is the per-project assessment conducted during presales, before delivery planning is committed. It evaluates the risk characteristics of <em>this specific engagement</em> — the factors that vary from project to project, regardless of what the broader market is doing. When implementation risk is still too uncertain to price responsibly, this same assessment should justify and price a paid discovery phase first, rather than smuggling planning effort into the sale.</p>
 <p>In the pure approach, this layer does not feed into the CAPM beta calculation. It produces a <em>project risk index</em> that informs contingency sizing, contract structure decisions, and go/no-go judgment — but the pricing premium comes from Layer One.</p>
 <p>In the hybrid approach, this layer contributes directly to beta alongside the systematic calibration. The engagement risk score and the portfolio-level systematic score are combined to produce a blended beta that reflects both dimensions. This is the point where the framework is most obviously heuristic: the output is a disciplined pricing coefficient for governance and comparison, not a literal CAPM beta in the financial-economics sense.</p>
 <h4 id="engagement-risk-scoring-table">Engagement Risk Scoring Table</h4>
@@ -815,9 +832,8 @@ But then I asked, Why not? Hasn’t anyone made this connection? The answer turn
 <p><strong>In the hybrid approach:</strong> Sum the scores and normalize to a beta range by dividing by 21 (the midpoint, producing β = 1.0 for an average-scoring engagement). Then weight this engagement beta against the current systematic environment from Layer One. A simple weighting method:</p>
 <p><strong>Blended β = (Engagement Score / 21) × Systematic Adjustment Factor</strong></p>
 <p>Where the systematic adjustment factor is derived from the Layer One review — for example, 1.0 in a normal environment, 1.1–1.2 when systematic risk is elevated, 0.9 when conditions are unusually favorable. This keeps the engagement scoring practical while ensuring the broader environment is reflected in every engagement's pricing. The intent is not to claim quantitative precision. The intent is to create a repeatable decision process that disciplines presales judgment and makes risk assumptions discussable.</p>
-<blockquote>
-<p>Figure: Layer Two blended-beta illustration. See the interactive app for the visual version.</p>
-</blockquote>
+<p><a target="_blank" rel="noopener noreferrer" href="./figures/layer2-blended-beta.png"><img src="./figures/layer2-blended-beta.png" alt="Layer Two blended-beta illustration showing safe, stretch, and failing engagements compared against the hurdle line." style="max-width: 100%;"></a></p>
+<p><em>Figure 3. Layer Two blended-beta illustration. <a href="./figures/layer2-blended-beta.pdf">PDF version</a>.</em></p>
 <p>Each engagement's blended beta (engagement score × systematic factor) determines where it sits on the horizontal axis, and The Line tells you the minimum margin at that point. The safe bet can usually clear the hurdle with standard pricing; the stretch project often demands renegotiation; the money pit usually points toward walking away unless terms change materially.</p>
 <h2 id="what-is-systematic-risk">What Is Systematic Risk?</h2>
 <p>The Capital Asset Pricing Model (CAPM) comes from the world of Financial Economics, which is concerned with the use and distribution of resources in (mostly global) markets, focusing on monetary activities where money appears on both sides of a trade. It combines microeconomic theory, accounting, and quantitative methods to study asset pricing, risk management, corporate finance, and decision-making over time. The CAPM formula brings these concerns together, and risk plays a significant role in it. How risk — specifically <em>systematic</em> risk — is defined is essential to the model.</p>
@@ -851,14 +867,14 @@ But then I asked, Why not? Hasn’t anyone made this connection? The answer turn
 <p><strong>The practical move is to identify whichever revenue stream in your agency's mix carries the lowest systematic exposure and use its typical margin as your baseline.</strong> The risk premium is then the spread between that baseline and your average project margins — compensation not for project-specific headaches like scope changes or client delays, which belong in per-project contingency planning, but for exposure to the non-diversifiable forces that project-based work carries and your baseline revenue largely avoids.</p>
 <h2 id="the-solutions-team-as-risk-translator">The Solutions Team as Risk Translator</h2>
 <p>In many small to mid-sized agencies (but probably many more large ones than want to admit it) the decision to take on a project is made by sales or account management, with the solution and project teams handed whatever was sold. Our two-layer framework suggests a more collaborative model — and the agency solutions team is the natural bridge between the layers.</p>
-<p>For agencies large enough to have a dedicated solutions team, no single person owns the risk assessment. The solutions team sits at the intersection of business development, strategy, technical architecture, and delivery planning. Leadership and finance own the systematic calibration of agency-wide risk. The solutions team drives the engagement-level scoring. But the solutions function is uniquely positioned to <em>translate between the two</em> — to carry the portfolio-level context into the presales conversation and to surface engagement-level signals that should feed back into the strategic view.</p>
+<p>For agencies large enough to have a dedicated solutions team, no single person owns the risk assessment. The solutions team sits at the intersection of business development, strategy, technical architecture, and delivery planning. Leadership and finance own the systematic calibration of agency-wide risk. The solutions team drives the engagement-level scoring. But the solutions function is uniquely positioned to <em>translate between the two</em> — to carry the portfolio-level context into the presales conversation and to surface engagement-level signals that should feed back into the strategic view. Their job here is not to produce a full delivery plan before the deal is priced. It is to contribute the technical judgment required to estimate complexity, surface client-specific concerns, and decide whether the next thing to price is implementation or discovery.</p>
 <p>In practice, this looks like:</p>
 <ul>
 <li>
 <p><strong>The solutions team participates in the periodic systematic risk review,</strong> contributing the technical perspective: platform stability, tooling shifts, talent availability for specific skill sets. Solutions and delivery staff see the delivery side of systematic risk in a way that leadership and finance may not.</p>
 </li>
 <li>
-<p><strong>The solutions team conducts the engagement-level risk scoring</strong> during presales or discovery, using the scoring table and their judgment about scope, client dynamics, technical complexity, and capacity.</p>
+<p><strong>The solutions team conducts the engagement-level risk scoring</strong> during presales, using the scoring table and their judgment about scope, client dynamics, technical complexity, and capacity. If the uncertainty is still too high, they recommend pricing a discovery phase instead of pretending implementation has already been understood well enough to quote cleanly.</p>
 </li>
 <li>
 <p><strong>The solutions team bridges the two layers</strong> by contextualizing the engagement score within the current systematic environment. This is where the real value lives.</p>
@@ -1183,9 +1199,8 @@ But then I asked, Why not? Hasn’t anyone made this connection? The answer turn
 <h4 id="option-b-impact-integrated-beta">Option B: Impact-Integrated Beta</h4>
 <p>Fold impact factors into the beta itself by including the B-Corp engagement factors (mission alignment, human-rights risk, environmental impact and circularity, responsible marketing and transparency) in the Layer Two scoring table alongside the standard engagement risk factors. This produces a single blended beta that captures both financial and impact risk in one number. Simpler to calculate but harder to decompose when you need to explain decisions to stakeholders with different priorities.</p>
 <p><strong>Recommendation:</strong> Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical.</p>
-<blockquote>
-<p>Figure: Standard, layered, and B-Corp CAPM comparison illustration. See the interactive app for the visual version.</p>
-</blockquote>
+<p><a target="_blank" rel="noopener noreferrer" href="./figures/capm-comparison.png"><img src="./figures/capm-comparison.png" alt="Comparison illustration showing standard CAPM, layered agency CAPM, and B-Corp CAPM with impact-adjusted movement above or below the financial hurdle." style="max-width: 100%;"></a></p>
+<p><em>Figure 4. Standard, layered, and B-Corp CAPM comparison illustration. <a href="./figures/capm-comparison.pdf">PDF version</a>.</em></p>
 <p>Reviewing the diagram above, refer back to the original CAPM model and our two agency adaptations to see how they differ but are fundamentally related.</p>
 <p>The <strong>standard CAPM</strong> from finance economics establishes the principle: <em>higher beta demands higher return, and anything off the line is mispriced.</em></p>
 <p><strong>Layer One</strong> shows that the line itself isn't fixed — the systematic environment rotates it steeper or flatter, which is why the quarterly recalibration matters.</p>
@@ -1224,6 +1239,9 @@ But then I asked, Why not? Hasn’t anyone made this connection? The answer turn
 </ul>
 
           </article>
+          <footer class="site-footer">
+            This repository and its web content are licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)</a>. See the <a href="../LICENSE">LICENSE</a>.
+          </footer>
         </div>
       </main>
     </div>

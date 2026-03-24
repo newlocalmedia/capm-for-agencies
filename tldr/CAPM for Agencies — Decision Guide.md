@@ -8,6 +8,8 @@ Use this as a repeatable presales workflow for:
 * checking whether a specific deal clears it
 * making go, caution, or stop decisions before commitment
 
+The hook is still "price before you plan," but in practice that means price before delivery planning is committed, not before the solutions team has done enough technical assessment to price responsibly.
+
 ## Inputs
 
 You need five commercial inputs:
@@ -54,6 +56,8 @@ In the app, the combined Layer 1 score maps to a **systematic adjustment factor*
 This factor sets the pricing environment for every engagement.
 
 ## Step 3 — Score Layer 2
+
+This is a presales risk assessment, not full delivery planning. You want enough solutions-team input to price responsibly: technical complexity, client concerns, scope shape, and capacity pressure. If implementation still cannot be priced confidently, the right next move is to price a discovery phase first.
 
 Score the seven engagement factors:
 

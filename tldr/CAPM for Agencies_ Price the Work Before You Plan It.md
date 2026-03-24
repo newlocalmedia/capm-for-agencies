@@ -2,6 +2,8 @@
 
 **Most agencies price risk backwards.**
 
+The hook is right, but it needs one qualifier: price before *delivery planning*, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether implementation or discovery is the thing to sell.
+
 They plan the work, estimate the hours, add some padding, and hope the margin holds. When things feel uncertain, they increase contingency. When things feel safe, they get aggressive.
 
 It works until it does not.
@@ -113,6 +115,8 @@ This layer sets the **systematic adjustment factor** that frames the pricing env
 ### Layer 2: Engagement Risk
 
 This is the specific deal.
+
+It is a presales assessment, not a full delivery plan. The point is to get enough input from the solutions team to judge complexity, client concerns, and scope risk before commitment. If that still is not enough to price implementation responsibly, then discovery is the thing to price.
 
 You score:
 

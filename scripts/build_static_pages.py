@@ -362,6 +362,12 @@ PAGE_STYLE = """
   .prose img {
     max-width: 100%;
     height: auto;
+    display: block;
+    margin: 1.9rem auto 0.7rem;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.52);
+    box-shadow: 0 18px 36px rgba(32, 29, 26, 0.08);
   }
 
   .prose .lead {
@@ -372,6 +378,19 @@ PAGE_STYLE = """
   .empty-toc {
     color: var(--muted);
     font-size: 0.95rem;
+  }
+
+  .site-footer {
+    max-width: 860px;
+    margin: 28px auto 0;
+    text-align: center;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .site-footer a {
+    color: var(--blue);
   }
 
   @media (max-width: 980px) {
@@ -413,7 +432,7 @@ PAGES = [
         "title": "CAPM for Agencies — Manuscript",
         "eyebrow": "Long-Form Theory",
         "heading": "CAPM for Agencies",
-        "deck": "A proper reading edition of the manuscript, with editorial typography and a live table of contents. This is the theory layer behind the decision cards.",
+        "deck": "This is the theory layer behind the decision cards: the deeper argument, its assumptions, the math, some cool line charts, and a little economics history. There's also a section explaining how CAPM is adapted to \u24b7 Lab Standards and the \u24b7 Impact Assessment (BIA). A proper reading edition for a work-in-progress, with proper typography and a live table of contents.",
         "deck_link_text": "the decision cards",
         "deck_link_href": "../index.html",
         "meta": "Use this version when you want the full argument, not just the calculator. The hybrid layer is presented here as pricing governance rather than a literal asset-pricing engine.",
@@ -535,6 +554,15 @@ def build_deck(page: dict) -> str:
     return deck.replace(html.escape(link_text), link, 1)
 
 
+def build_footer() -> str:
+    return (
+        'This repository and its web content are licensed under the '
+        '<a href="https://creativecommons.org/licenses/by-sa/4.0/">'
+        'Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)'
+        '</a>. See the <a href="../LICENSE">LICENSE</a>.'
+    )
+
+
 def build_html(page: dict, article_html: str, toc_html: str) -> str:
     lead_script = """
   <script>
@@ -586,6 +614,9 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
           <article class="prose">
             {article_html}
           </article>
+          <footer class="site-footer">
+            {build_footer()}
+          </footer>
         </div>
       </main>
     </div>

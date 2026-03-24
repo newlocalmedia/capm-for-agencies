@@ -354,6 +354,12 @@
   .prose img {
     max-width: 100%;
     height: auto;
+    display: block;
+    margin: 1.9rem auto 0.7rem;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.52);
+    box-shadow: 0 18px 36px rgba(32, 29, 26, 0.08);
   }
 
   .prose .lead {
@@ -364,6 +370,19 @@
   .empty-toc {
     color: var(--muted);
     font-size: 0.95rem;
+  }
+
+  .site-footer {
+    max-width: 860px;
+    margin: 28px auto 0;
+    text-align: center;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+
+  .site-footer a {
+    color: var(--blue);
   }
 
   @media (max-width: 980px) {
@@ -444,6 +463,7 @@
           <article class="prose">
             <h2 id="capm-for-agencies-price-the-work-before-you-plan-it">CAPM for Agencies: Price the Work Before You Plan It</h2>
 <p><strong>Most agencies price risk backwards.</strong></p>
+<p>The hook is right, but it needs one qualifier: price before <em>delivery planning</em>, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether implementation or discovery is the thing to sell.</p>
 <p>They plan the work, estimate the hours, add some padding, and hope the margin holds. When things feel uncertain, they increase contingency. When things feel safe, they get aggressive.</p>
 <p>It works until it does not.</p>
 <p>The problem is not estimation by itself. The problem is that most agencies never separate the kinds of risk they are taking on. They treat all uncertainty the same, even though some risks are project-specific and some affect the whole business at once.</p>
@@ -529,6 +549,7 @@
 <p>This layer sets the <strong>systematic adjustment factor</strong> that frames the pricing environment for every deal.</p>
 <h3 id="layer-2-engagement-risk">Layer 2: Engagement Risk</h3>
 <p>This is the specific deal.</p>
+<p>It is a presales assessment, not a full delivery plan. The point is to get enough input from the solutions team to judge complexity, client concerns, and scope risk before commitment. If that still is not enough to price implementation responsibly, then discovery is the thing to price.</p>
 <p>You score:</p>
 <ul>
 <li>client track record</li>
@@ -630,6 +651,9 @@
 <p>Then check whether the actual deal economics clear the bar before you commit.</p>
 
           </article>
+          <footer class="site-footer">
+            This repository and its web content are licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)</a>. See the <a href="../LICENSE">LICENSE</a>.
+          </footer>
         </div>
       </main>
     </div>
