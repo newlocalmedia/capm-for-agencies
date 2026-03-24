@@ -17,14 +17,17 @@ A per-engagement assessment during presales that scores project-specific factors
 ## Usage
 
 ### Interactive (browser)
-Visit the hosted version and click to score each factor. The calculators update in real time.
+Visit the hosted version and click to score each factor. The calculators update in real time. The interactive app lives in `docs/index.html`.
 
 ### Printable (PDF)
-Download reference cards from the `/pdf` directory:
+Download reference cards from the `docs/pdf/` directory:
 - `capm-decision-cards.pdf` — All cards
 - `capm-layer1-systematic-risk.pdf` — Systematic risk card only.
 - `capm-layer2-engagement-risk.pdf` — Engagement risk card only.
 - `capm-b-corp-engagement-risk.pdf` — B-Corp impact-adjusted risk card only.
+
+### Manuscript
+The long-form theory and commentary live in `manuscript/capm-for-agencies.md`.
 
 
 ## The Formula
@@ -47,7 +50,7 @@ This repo is most useful as a shared language for risk naming and deal governanc
 
 ## Hosting
 
-This repo is configured for GitHub Pages. Enable Pages in your repo settings with source set to the root (`/`) of the `main` branch.
+This repo is configured for GitHub Pages. Enable Pages in your repo settings with source set to the `docs/` folder on the `main` branch.
 
 ## License
 
