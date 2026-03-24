@@ -116,6 +116,38 @@
     font-size: 14px;
   }
 
+  .reading-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 8px;
+  }
+
+  .reading-item {
+    padding: 16px 18px;
+    border: 1px solid var(--gray200);
+    border-radius: 10px;
+    background: rgba(43,76,126,0.03);
+  }
+
+  .reading-item h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    line-height: 1.25;
+  }
+
+  .reading-item p {
+    margin: 0 0 10px;
+  }
+
+  .reading-item a {
+    color: var(--blue);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-decoration: none;
+  }
+
   @media (max-width: 640px) {
     .hero,
     .section {
@@ -131,19 +163,42 @@
 <body>
   <div class="wrap">
     <section class="hero">
-      <div class="eyebrow">CAPM For Agencies</div>
+      <div class="eyebrow">CAPM for Agencies</div>
       <h1>Overview</h1>
-      <p>This project adapts CAPM into a shared decision framework for agency pricing. The main app is the interactive calculator, but the value of the model is the discipline around naming systematic risk, engagement risk, and impact tradeoffs before a deal is accepted.</p>
+      <p>This project adapts CAPM into a shared decision framework for agency pricing. The main app is the interactive calculator, but the model is most useful when it forces sales, solutions, delivery, and leadership to name risk in the same language before a deal is accepted.</p>
       <p>The hybrid layer should be read as heuristic pricing governance, not as a statistically correct asset-pricing engine. Its practical utility is internal alignment, presales discipline, and postmortem calibration.</p>
       <div class="actions">
-        <a class="button primary" href="../">Open the App</a>
-        <a class="button secondary" href="https://github.com/newlocalmedia/capm-for-agencies/blob/main/manuscript/capm-for-agencies.md">Read the Manuscript</a>
+        <a class="button primary" href="../index.html">Open the App</a>
+        <a class="button secondary" href="../tldr/CAPM%20for%20Agencies_%20Price%20the%20Work%20Before%20You%20Plan%20It.md">Read the Short Overview</a>
+        <a class="button secondary" href="../manuscript/capm-for-agencies.md">Read the Manuscript</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="eyebrow">Reading Path</div>
+      <h2>Start Short, Then Go Deeper</h2>
+      <div class="reading-list">
+        <div class="reading-item">
+          <h3>Short Overview</h3>
+          <p>The fastest way to understand the thesis: price the work before you plan it, and compare the real deal margin against the hurdle.</p>
+          <a href="../tldr/CAPM%20for%20Agencies_%20Price%20the%20Work%20Before%20You%20Plan%20It.md">Open “Price the Work Before You Plan It”</a>
+        </div>
+        <div class="reading-item">
+          <h3>Decision Guide</h3>
+          <p>A compact guide for running the model in practice with baselines, scoring, proposed margin, and decision thresholds.</p>
+          <a href="../tldr/CAPM%20for%20Agencies%20%E2%80%94%20Decision%20Guide.md">Open the Decision Guide</a>
+        </div>
+        <div class="reading-item">
+          <h3>Full Manuscript</h3>
+          <p>The long-form argument, assumptions, worked examples, caveats, and B-Corp extension for readers who want the full theory.</p>
+          <a href="../manuscript/capm-for-agencies.md">Open the Full Manuscript</a>
+        </div>
       </div>
     </section>
 
     <section class="section">
       <div class="eyebrow">What It Does</div>
-      <h2>Three Layers Of Use</h2>
+      <h2>Three Layers of Use</h2>
       <ul>
         <li>Layer 1 scores portfolio-wide systematic conditions that shape the pricing environment across the whole book of business.</li>
         <li>Layer 2 scores deal-level uncertainty, then compares the proposed deal margin against a required hurdle rate.</li>
@@ -152,10 +207,10 @@
     </section>
 
     <section class="section">
-      <div class="eyebrow">How To Read It</div>
-      <h2>Use The Math As Governance</h2>
-      <p>The model is most useful when sales, solutions, delivery, and leadership are forced to use the same vocabulary for risk before committing. The numbers matter, but the governance effect matters more.</p>
-      <p class="note">If you want the full argument, assumptions, and B-Corp theory section, read <a href="/manuscript/capm-for-agencies.md">the full manuscript.</p>
+      <div class="eyebrow">How to Read It</div>
+      <h2>Governance, Not Precision</h2>
+      <p>The short overview is the right first read for most people. The manuscript is there for determine readers who want the deeper argument, its assumptions, the math, some cool line charts, and a little economics history. There's also a section explaining how CAPM is adapted to Ⓑ Lab Standards and the Ⓑ Impact Assessment (BIA). Keep in mind this is all very experimental — it's just in <em>Beta</em> release. 😁</p>
+      <p class="note">The numbers matter, but the governance effect matters more.</p>
     </section>
   </div>
 </body>
