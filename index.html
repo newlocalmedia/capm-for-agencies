@@ -128,6 +128,85 @@
   .primer a {
     color: var(--blue);
   }
+  .primer .note {
+    font-size: 13px;
+    color: var(--gray400);
+  }
+  .start-map {
+    display: grid;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, rgba(43,76,126,0.06), rgba(196,93,62,0.04) 52%, rgba(47,107,77,0.05));
+    border: 1px solid rgba(35,72,106,0.12);
+    border-radius: 10px;
+  }
+  .start-map-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+  }
+  .start-map-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .start-chip {
+    display: grid;
+    gap: 4px;
+    min-height: 64px;
+    padding: 12px 14px;
+    text-decoration: none;
+    background: rgba(255,255,255,0.88);
+    border: 1px solid rgba(35,72,106,0.14);
+    border-left: 4px solid rgba(35,72,106,0.26);
+    border-radius: 10px;
+    color: var(--ink);
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  .start-chip:hover,
+  .start-chip:focus-visible {
+    transform: translateY(-1px);
+    background: #fff;
+    border-color: rgba(35,72,106,0.28);
+    outline: none;
+  }
+  .start-chip strong {
+    color: var(--blue-dark);
+    font-size: 13px;
+  }
+  .start-chip span {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--gray400);
+  }
+  .start-chip.layer1-start {
+    background: linear-gradient(145deg, rgba(212,223,233,0.72), rgba(255,255,255,0.9));
+    border-color: rgba(43,76,126,0.18);
+    border-left-color: var(--blue);
+  }
+  .start-chip.layer1-start strong {
+    color: var(--blue-dark);
+  }
+  .start-chip.layer2-start {
+    background: linear-gradient(145deg, rgba(240,212,203,0.72), rgba(255,255,255,0.9));
+    border-color: rgba(196,93,62,0.18);
+    border-left-color: var(--accent);
+  }
+  .start-chip.layer2-start strong {
+    color: var(--accent-dark);
+  }
+  .start-chip.layer3-start {
+    background: linear-gradient(145deg, rgba(208,232,218,0.76), rgba(255,255,255,0.9));
+    border-color: rgba(47,107,77,0.18);
+    border-left-color: var(--green);
+  }
+  .start-chip.layer3-start strong {
+    color: var(--green-dark);
+  }
   .primer-export-row {
     margin-top: 14px;
     padding-top: 14px;
@@ -657,6 +736,9 @@
     margin-top: 14px;
   }
   .action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     appearance: none;
     border: 1px solid rgba(35,72,106,0.18);
     background: rgba(35,72,106,0.08);
@@ -669,7 +751,50 @@
     font-weight: 700;
     letter-spacing: 0.04em;
     cursor: pointer;
+    text-decoration: none;
     transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .jump-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray400);
+    margin-right: 2px;
+  }
+  .action-btn.layer1-jump {
+    background: rgba(43,76,126,0.12);
+    border-color: rgba(43,76,126,0.22);
+    color: var(--blue-dark);
+  }
+  .action-btn.layer1-jump:hover,
+  .action-btn.layer1-jump:focus-visible {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+  .action-btn.layer2-jump {
+    background: rgba(196,93,62,0.12);
+    border-color: rgba(196,93,62,0.22);
+    color: var(--accent-dark);
+  }
+  .action-btn.layer2-jump:hover,
+  .action-btn.layer2-jump:focus-visible {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+  .action-btn.layer3-jump {
+    background: rgba(47,107,77,0.12);
+    border-color: rgba(47,107,77,0.22);
+    color: var(--green-dark);
+  }
+  .action-btn.layer3-jump:hover,
+  .action-btn.layer3-jump:focus-visible {
+    background: var(--green);
+    border-color: var(--green);
+    color: #fff;
   }
   .action-btn:hover,
   .action-btn:focus-visible {
@@ -786,6 +911,9 @@
   @media (max-width: 980px) {
     .card-body { padding: 22px 18px; }
     .card-header { padding: 18px 22px; flex-wrap: wrap; }
+    .start-map-grid {
+      grid-template-columns: 1fr;
+    }
     .score-table {
       display: block;
       overflow-x: auto;
@@ -842,7 +970,28 @@
   <p><strong>Where to start:</strong> Enterprise and international agencies will usually find the pure portfolio-level approach easier to defend, because their risk exposure tracks macro conditions more directly. Small and mid-sized agencies will usually start with the hybrid model, where engagement-specific risk is folded into pricing governance.</p>
   <p>These decision cards use CAPM as pricing governance, not as a statistically exact pricing engine. For a fuller plain-language explanation, start with the <a href="overview/index.html">overview</a>.</p>
   <p class="note"><strong>Known limits:</strong> in the hybrid model, <em>β</em> is a scored managerial coefficient rather than an observed market covariance, the calibration thresholds are policy choices, and the one-decimal outputs should be read as directional guidance rather than false precision.</p>
+  <div class="start-map" aria-label="Recommended starting points">
+    <div class="start-map-label">Start here</div>
+    <div class="start-map-grid">
+      <a class="start-chip layer1-start" href="#layer1-card">
+        <strong>Enterprise / Global Agency</strong>
+        <span>Begin with Layer 1 for the portfolio-level view, then continue to Layer 2 for the current deal.</span>
+      </a>
+      <a class="start-chip layer2-start" href="#layer2-card">
+        <strong>Small or Mid-Sized Agency</strong>
+        <span>Begin with Layer 2 for the practical go/no-go workflow, then refine it with Layer 1 when needed.</span>
+      </a>
+      <a class="start-chip layer3-start" href="#bcorp-card">
+        <strong>B-Corp / Mission-Driven Agency</strong>
+        <span>Work through Layer 1 and Layer 2 first, then use Layer 3 for the impact-adjusted decision.</span>
+      </a>
+    </div>
+  </div>
   <div class="export-row primer-export-row">
+    <span class="jump-label">Jump to card below:</span>
+    <a class="action-btn layer1-jump" href="#layer1-card">Layer 1</a>
+    <a class="action-btn layer2-jump" href="#layer2-card">Layer 2</a>
+    <a class="action-btn layer3-jump" href="#bcorp-card">Layer 3</a>
     <button type="button" class="action-btn" id="export-summary-btn" onclick="exportDecisionSummary()" disabled aria-disabled="true">Export Decision Summary</button>
     <span class="export-note" id="export-summary-note">Complete any full layer to enable export.</span>
   </div>
