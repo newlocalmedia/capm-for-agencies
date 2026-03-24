@@ -11,6 +11,7 @@ from urllib import request
 ROOT = Path(__file__).resolve().parents[1]
 GITHUB_MARKDOWN_API = "https://api.github.com/markdown/raw"
 USER_AGENT = "capm-for-agencies-static-builder"
+SITE_URL = "https://newlocalmedia.github.io/capm-for-agencies"
 
 
 PAGE_STYLE = """
@@ -596,6 +597,8 @@ PAGES = [
         "source": ROOT / "theory" / "capm-for-agencies.md",
         "output": ROOT / "theory" / "index.html",
         "title": "CAPM for Agencies — Theory and Background",
+        "description": "The long-form theory behind CAPM for Agencies: the full argument, formulas, worked examples, limitations, and B-Corp extension.",
+        "social_image": "/theory/figures/capm-comparison.png",
         "eyebrow": "Theory and Background",
         "heading": "CAPM for Agencies",
         "deck": "This is the theory behind the decision cards: the deeper argument, its assumptions, the math, some cool line charts, and a little economics history. There's also a section explaining how CAPM is adapted to \u24b7 Lab Standards and the \u24b7 Impact Assessment (BIA).",
@@ -617,6 +620,8 @@ PAGES = [
         "source": ROOT / "tldr" / "CAPM for Agencies_ Price the Work Before You Plan It.md",
         "output": ROOT / "tldr" / "price-the-work-before-you-plan-it.html",
         "title": "CAPM for Agencies — Short Overview",
+        "description": "A short explanation of CAPM for Agencies: why most agencies price risk backwards, how the hybrid model works as pricing governance, and how deals clear or fail the hurdle.",
+        "social_image": "/theory/figures/layer2-blended-beta.png",
         "eyebrow": "Short Overview",
         "heading": "Price the Work Before You Plan It",
         "article_kicker": "CAPM for Agencies",
@@ -639,6 +644,8 @@ PAGES = [
         "source": ROOT / "tldr" / "CAPM for Agencies — Decision Guide.md",
         "output": ROOT / "tldr" / "decision-guide.html",
         "title": "CAPM for Agencies — Decision Guide",
+        "description": "A practical presales guide for scoring risk, setting baselines, comparing proposed margin to the hurdle, and deciding whether to proceed, reprice, or sell discovery first.",
+        "social_image": "/theory/figures/layer2-blended-beta.png",
         "eyebrow": "Decision Guide",
         "heading": "CAPM for Agencies — Decision Guide",
         "toc_skip_first_heading": True,
@@ -659,6 +666,8 @@ PAGES = [
         "source": ROOT / "tldr" / "CAPM for Agencies — Calibration Notes.md",
         "output": ROOT / "tldr" / "calibration-notes.html",
         "title": "CAPM for Agencies — Calibration Notes",
+        "description": "Implementation detail for the current Decision Cards build: score mappings, calibration choices, and sanity-test scenarios for the CAPM for Agencies model.",
+        "social_image": "/theory/figures/bcorp-impact-adjusted-return.png",
         "eyebrow": "Calibration Notes",
         "heading": "How the Current Decision Cards Are Calibrated",
         "toc_skip_first_heading": True,
@@ -759,6 +768,38 @@ def build_toc(entries, level_min: int, level_max: int, skip_first_heading: bool 
         f'<a class="level-{level}" href="#{html.escape(slug)}">{html.escape(text)}</a>'
         for level, slug, text in filtered
     )
+
+
+def absolute_page_url(output_path: Path) -> str:
+    relative = output_path.relative_to(ROOT).as_posix()
+    return f"{SITE_URL}/{relative}"
+
+
+def absolute_asset_url(asset_path: str) -> str:
+    return f"{SITE_URL}{asset_path}"
+
+
+def build_social_meta(page: dict) -> str:
+    description = page.get("description") or strip_tags(page.get("deck", ""))
+    page_url = absolute_page_url(page["output"])
+    image_url = absolute_asset_url(page.get("social_image", "/theory/figures/capm-comparison.png"))
+    title = page["title"]
+
+    return "\n".join([
+        f'<meta name="description" content="{html.escape(description)}">',
+        f'<link rel="canonical" href="{html.escape(page_url)}">',
+        f'<meta property="og:site_name" content="CAPM for Agencies">',
+        f'<meta property="og:type" content="website">',
+        f'<meta property="og:title" content="{html.escape(title)}">',
+        f'<meta property="og:description" content="{html.escape(description)}">',
+        f'<meta property="og:url" content="{html.escape(page_url)}">',
+        f'<meta property="og:image" content="{html.escape(image_url)}">',
+        '<meta property="og:image:type" content="image/png">',
+        '<meta name="twitter:card" content="summary_large_image">',
+        f'<meta name="twitter:title" content="{html.escape(title)}">',
+        f'<meta name="twitter:description" content="{html.escape(description)}">',
+        f'<meta name="twitter:image" content="{html.escape(image_url)}">',
+    ])
 
 
 def build_actions(actions) -> str:
@@ -865,6 +906,7 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{html.escape(page["title"])}</title>
+{build_social_meta(page)}
 <style>
 {PAGE_STYLE}
 </style>
