@@ -30,6 +30,21 @@ test('Layer 2 hybrid scenario stays aligned with current calculator logic', () =
   assert.equal(Math.round(Calc.minimumDealPrice(150000, required)), 208914);
 });
 
+test('Layer 2 verdict boundaries stay stable at exact thresholds', () => {
+  assert.equal(
+    Calc.layer2Verdict(0),
+    'Go — proposed margin clears the hurdle rate'
+  );
+  assert.equal(
+    Calc.layer2Verdict(-3),
+    'Caution — close, but below hurdle; reprice or reduce risk'
+  );
+  assert.equal(
+    Calc.layer2Verdict(-3.1),
+    'Stop — proposed margin does not cover the required return'
+  );
+});
+
 test('Mission-aligned B-Corp scenario produces a moderate discount', () => {
   const standard = 17.4;
   const adjustment = Calc.bcorpImpactAdjustment(12, 6);
@@ -61,4 +76,25 @@ test('Harmful B-Corp scenario raises the hurdle without forcing an automatic sto
 test('B-Corp portfolio midpoint is neutral', () => {
   assert.equal(Calc.round(Calc.bcorpPortfolioModifier(18), 2), 1.00);
   assert.equal(Calc.bcorpImpactAdjustment(18, 12), 0.0);
+});
+
+test('Minimum deal price returns null when required margin reaches or exceeds 100 percent', () => {
+  assert.equal(Calc.minimumDealPrice(100000, 100), null);
+  assert.equal(Calc.minimumDealPrice(100000, 125), null);
+  assert.equal(Math.round(Calc.minimumDealPrice(100000, 99.9)), 100000000);
+});
+
+test('B-Corp verdict boundaries stay stable at exact thresholds', () => {
+  assert.equal(
+    Calc.bcorpVerdict(20, 20, 0),
+    'Go — proposed margin clears the impact-adjusted hurdle'
+  );
+  assert.equal(
+    Calc.bcorpVerdict(17, 20, 0),
+    'Caution — below E(R*); reprice, reduce risk, or document the trade-off'
+  );
+  assert.equal(
+    Calc.bcorpVerdict(16.9, 20, 0),
+    'Stop — proposed margin does not clear the impact-adjusted hurdle'
+  );
 });

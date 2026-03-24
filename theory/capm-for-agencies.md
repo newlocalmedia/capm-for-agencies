@@ -261,6 +261,8 @@ Each factor is scored on a 1–5 scale (1 \= low risk, 5 \= high risk).
 
 Where the systematic adjustment factor is derived from the Layer One review — for example, 1.0 in a normal environment, roughly 1.05–1.15 when systematic risk is elevated, and roughly 0.85–0.95 when conditions are unusually favorable. This keeps the engagement scoring practical while ensuring the broader environment is reflected in every engagement's pricing. The intent is not to claim quantitative precision. The intent is to create a repeatable decision process that disciplines presales judgment and makes risk assumptions discussable.
 
+This is a midpoint-anchored calibration, not an endpoint-anchored one. In the current design, a neutral engagement score maps to market-like β \= 1.0, rather than forcing the lowest possible score to β \= 0. That is deliberate: it prevents zero-risk pricing while preserving more headroom for difficult deals at the high end. It makes the hybrid model more conservative as pricing governance, which is appropriate for a framework that is supposed to discipline presales judgment rather than optimize for mathematical symmetry.
+
 ![Layer Two blended-beta illustration showing safe, stretch, and failing engagements compared against the hurdle line.](./figures/layer2-blended-beta.png)
 
 *Figure 3. Layer Two blended-beta illustration. [PDF version](./figures/layer2-blended-beta.pdf).*
@@ -348,7 +350,7 @@ The solution team’s two-layer risk assessment is what turns pricing from guess
 ## Worked Examples: Risk-Margin Comparison Table
 The examples below should be read as **hurdle-rate examples**, not as automatic decisions. The practical decision question is whether the proposed deal price can realistically deliver the required margin.
 
-| Scenario | Engagement Score | Blended β | Required Margin E(R) | Recommendation |
+| Scenario | Engagement β | Blended β | Required Margin E(R) | Recommendation |
 | :---- | :---- | :---- | :---- | :---- |
 | **A: The Safe Bet** | 0.71 | 0.82 | 19.8% | Likely Go if the deal can clear the hurdle at standard pricing. |
 | **B: The Stretch Project** | 1.38 | 1.59 | 29.1% | Renegotiate if the quoted deal cannot clear the hurdle. |
@@ -365,7 +367,9 @@ Consider a digital agency with the following baseline numbers:
 #### Scenario A: The Safe Bet
 A long-standing client wants a straightforward site redesign. Clear scope, established relationship, T\&M contract, no political complexity.
 
-**Engagement score:** 15/21 \= 0.71 **Blended β:** 0.71 × 1.15 \= 0.82
+**Raw engagement score:** 15/35  
+**Engagement β:** 15/21 \= 0.71  
+**Blended β:** 0.71 × 1.15 \= 0.82
 
 **E(R) \= 10% \+ 0.82 × 12% \= 10% \+ 9.8% \= 19.8%**
 
@@ -374,7 +378,9 @@ Even with the elevated systematic risk environment, this project can usually cle
 #### Scenario B: The Stretch Project
 A new client wants a complex platform build with custom integrations, a fixed-price contract, six stakeholders, and an immovable launch date.
 
-**Engagement score:** 29/21 \= 1.38 **Blended β:** 1.38 × 1.15 \= 1.59
+**Raw engagement score:** 29/35  
+**Engagement β:** 29/21 \= 1.38  
+**Blended β:** 1.38 × 1.15 \= 1.59
 
 **E(R) \= 10% \+ 1.59 × 12% \= 10% \+ 19.1% \= 29.1%**
 
@@ -383,7 +389,9 @@ The systematic environment amplifies an already risky engagement. At 29.1% requi
 #### Scenario C: The Money Pit
 An unvetted client, vague requirements, experimental technology, an overcommitted team, and a fixed-price contract with an aggressive timeline.
 
-**Engagement score:** 32/21 \= 1.52 **Blended β:** 1.52 × 1.15 \= 1.75
+**Raw engagement score:** 32/35  
+**Engagement β:** 32/21 \= 1.52  
+**Blended β:** 1.52 × 1.15 \= 1.75
 
 **E(R) \= 10% \+ 1.75 × 12% \= 10% \+ 21.0% \= 31.0%**
 
@@ -570,7 +578,7 @@ Fold impact factors into the beta itself by including the B-Corp engagement fact
 
 **Recommendation:** Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical. The current Decision Cards build presents this as an [impact-adjusted B-Corp card](../index.html#bcorp-card) that keeps the standard hurdle visible while showing the shift to `E(R*)`.
 
-In the current Decision Cards implementation, the B-Corp calibration is intentionally moderate rather than aggressive. The portfolio-level B-Corp score is neutral at its midpoint and only widens or narrows the adjustment around that center. The engagement-level B-Corp score then moves the hurdle by about one margin point per point of deviation from its midpoint before that portfolio modifier is applied. For the exact current implementation and worked sanity checks, see the [calibration notes](../tldr/calibration-notes.html).
+In the current Decision Cards implementation, the B-Corp calibration is intentionally moderate rather than aggressive. The portfolio-level B-Corp score is neutral at its midpoint and only widens or narrows the adjustment around that center. The engagement-level B-Corp score then moves the hurdle by about one margin point per point of deviation from its midpoint before that portfolio modifier is applied. This is also a deliberate midpoint-anchored choice: neutral B-Corp impact maps to no mission discount or harm premium, while more strongly aligned or harmful work moves the hurdle downward or upward from that center. For the exact current implementation and worked sanity checks, see the [calibration notes](../tldr/calibration-notes.html).
 
 ![B-Corp impact-adjusted return illustration showing how mission-aligned work can move below the standard financial hurdle while harmful work must clear a higher one.](./figures/bcorp-impact-adjusted-return.png)
 
