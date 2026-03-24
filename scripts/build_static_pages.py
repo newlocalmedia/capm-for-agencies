@@ -671,7 +671,7 @@ PAGES = [
         "eyebrow": "Calibration Notes",
         "heading": "How the Current Decision Cards Are Calibrated",
         "toc_skip_first_heading": True,
-        "deck": "Implementation detail for people who want it: the current score mappings, the moderation changes to the B-Corp overlay, and a few sanity-test scenarios run against the live calculator.",
+        "deck": "Implementation detail for data nerds: the current score mappings, the moderation changes to the B-Corp overlay, and a few sanity-test scenarios run against the live calculator.",
         "meta": "Use this when you want to inspect the current decision-card math and calibration choices rather than just use the workflow.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
