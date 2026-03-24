@@ -1247,7 +1247,23 @@
 <p>Think of CAPM as the pre-flight checklist and EVM as the cockpit instruments. You need both.</p>
 <h2 id="limitations-and-caveats">Limitations and Caveats</h2>
 <p>The financial CAPM has well-known limitations in its native domain. Some carry over to the agency analogy; others lose their force entirely when CAPM is used as a decision framework rather than a predictive model of market returns. This section addresses both the inherent limitations and the major academic criticisms.</p>
+<p>Before getting into the academic objections, it is worth naming the most practical vulnerabilities of this adaptation directly:</p>
 <ul>
+<li>
+<p>The pure approach is closer to financial CAPM than the hybrid approach. In the hybrid model, beta is a scored managerial coefficient, not an observed covariance with a market portfolio.</p>
+</li>
+<li>
+<p>The calibration choices are normative. Dividing by <code>21</code>, mapping Layer One into a bounded factor range, and using a <code>3</code>-point caution band are governance decisions about risk tolerance, not values derived from first principles.</p>
+</li>
+<li>
+<p>The additive scoring model is a usability compromise. Real engagement risk often compounds non-linearly: a vague scope plus an immovable deadline is usually worse than the simple sum of those two factors suggests.</p>
+</li>
+<li>
+<p>The agency analog of the risk-free rate is only approximate. Retainer and maintenance revenue are lower-risk baselines, not truly risk-free instruments in the finance sense.</p>
+</li>
+<li>
+<p>The displayed precision can outrun the input quality. A result like <code>28.2%</code> required margin is still built on subjective 1–5 scores. It should be read as decision guidance, not as a claim to measurement-grade accuracy.</p>
+</li>
 <li>
 <p>Beta is backward-looking. Historical data may not predict future risk, especially with new clients or emerging technology.</p>
 </li>
@@ -1278,6 +1294,7 @@
 <p><strong>The low-beta anomaly</strong>: Empirically, low-beta stocks outperform and high-beta stocks underperform relative to what CAPM predicts. This matters enormously if you are running a hedge fund. It is irrelevant here because the framework is not betting on which projects will outperform some efficient frontier. It is setting a minimum acceptable margin — a hurdle rate. Whether some low-risk projects happen to outperform that hurdle is a welcome outcome, not a model failure.</p>
 <p><strong>Behavioral finance criticisms</strong>: Investors are not rational, markets are not efficient, and people have biases and herd behavior. All true for financial markets. But our framework explicitly accounts for this. The entire point of the structured scoring tables is to replace gut-feel bias with a disciplined process. The framework does not assume agencies are rational — it provides a tool precisely because they are not.</p>
 <p><strong>Beta instability</strong>: Beta changes over time, so historical beta does not predict future beta. Valid in finance. But the two-layer structure addresses this directly. The Layer One systematic review is designed to be re-run quarterly, recalibrating what β = 1.0 means in the current environment. The framework does not assume beta is static — it builds recalibration into the workflow.</p>
+<p><strong>False precision and interaction effects</strong>: The app can display results to one decimal place, but that should not be mistaken for empirical exactness. The underlying inputs are ordinal scores and judgment calls. Likewise, the additive scoring model is intentionally simple and may understate compounding tail risk when several red-flag factors cluster together. Those are practical trade-offs in favor of usability, not claims about the true shape of risk.</p>
 <p><strong>The single-period assumption</strong> — CAPM assumes a one-period investment horizon, which does not match multi-year realities. For an agency evaluating a three-to-six-month engagement, this is actually a better fit than it is for stock markets. The “investment period” really is roughly one period — the engagement lifecycle. The assumption is less wrong here than in its native domain.</p>
 <p>As Mullins argued in the 1982 HBR article cited in the introduction, CAPM’s value is not as a perfect predictor but as a discipline for thinking about risk. It forces you to separate systematic from idiosyncratic risk, to quantify your risk assessment rather than hand-waving, and to demand a return proportional to the risk you cannot control. Those benefits survive every critique because they concern the framework’s structure, not its empirical accuracy. The distinction between systematic and idiosyncratic risk, the principle that non-diversifiable risk deserves a premium, and the discipline of quantifying expected returns against a risk-adjusted hurdle rate are all contributions that survive the transition from financial theory to agency practice. In the hybrid layer, the formula is best understood as a vehicle for shared language and disciplined governance, not as a quantitatively correct pricing engine.</p>
 <h2 id="conclusion-pricing-the-work-before-you-plan-it">Conclusion: Pricing the Work Before You Plan It</h2>

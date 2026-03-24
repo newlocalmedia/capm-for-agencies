@@ -68,6 +68,22 @@ In the current decision-card calibration, the Layer 1 adjustment factor is cente
 
 This repo is most useful as a shared language for risk naming and deal governance. It is not a quantitatively correct pricing engine on its own.
 
+## Adoption Notes
+
+The strongest adoption barriers right now are practical, not theoretical:
+
+- many agencies still rely on relationship judgment and founder instinct, so the framework only works if leadership agrees to use it
+- new users may not have enough historical margin data to calibrate `R_f`, `R_m`, and Layer 1 confidently
+- a standalone static tool is harder to adopt than something that fits into existing CRM, spreadsheet, or presales workflows
+- the CAPM framing signals rigor to some readers and “not for me” to others
+
+The strongest adoption accelerators are:
+
+- a simple first-use path with explicit defaults
+- retrospective scoring and backtesting against completed projects
+- lightweight integrations or exports into tools teams already use
+- real case studies showing agencies using the framework successfully
+
 ## Hosting
 
 This repo is configured for GitHub Pages. Enable Pages in your repo settings with source set to the root (`/`) of the `main` branch.
