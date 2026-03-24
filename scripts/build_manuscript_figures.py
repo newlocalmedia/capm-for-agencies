@@ -10,7 +10,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT_DIR = ROOT / "manuscript" / "figures"
+OUT_DIR = ROOT / "theory" / "figures"
 
 WIDTH = 1600
 HEIGHT = 980

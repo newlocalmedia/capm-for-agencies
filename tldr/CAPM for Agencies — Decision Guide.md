@@ -18,6 +18,12 @@ Run the workflow in the app:
 * [Layer 2 card](../index.html#layer2-card)
 * [B-Corp card](../index.html#bcorp-card)
 
+### Who Should Start Where
+
+For **enterprise and international agencies**, the pure approach is often the cleaner governance model. It keeps systematic exposure at the portfolio level and treats engagement risk separately through contingency, structure, and escalation.
+
+For **small and mid-sized agencies**, the hybrid approach is usually the practical starting point. When a single engagement can still damage the whole book of business, folding deal-specific risk into the pricing hurdle is often the more honest move.
+
 ## Inputs
 
 You need five commercial inputs:
@@ -136,6 +142,8 @@ For the pure approach:
 * treat the Layer 2 score as a **risk index**, not as CAPM beta
 * use it to size contingency, shape contract structure, and flag delivery risk
 * use the Layer 1 environment to set the portfolio-wide hurdle
+
+If you want adjacent standards language for that split, compare PMI on [contingency reserve analysis](https://www.pmi.org/learning/library/contingency-are-covered-6099), the GAO's [Cost Estimating and Assessment Guide](https://www.gao.gov/products/gao-20-195g), and AACE's [Guide to Quantitative Risk Analysis](https://web.aacei.org/resources/professional-guidance-documents). They all push in the same direction: make uncertainty, assumptions, and reserve logic explicit instead of hiding them in arbitrary padding.
 
 Pure-approach hurdle:
 

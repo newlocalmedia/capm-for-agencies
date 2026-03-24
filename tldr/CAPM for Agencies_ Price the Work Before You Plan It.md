@@ -1,4 +1,4 @@
-## Most agencies price risk backwards.
+## Agencies price risk backwards.
 
 [[APP_CARDS_ASIDE]]
 
@@ -58,6 +58,12 @@ You still have to compare that hurdle to the actual economics of the deal:
 * resulting **proposed margin**
 
 That is the real go/no-go test.
+
+## Where Different Agencies Start
+
+For **enterprise and international agencies**, the cleanest starting point is usually the pure approach. Their risk exposure more clearly tracks macro forces like currency shifts, cross-border regulation, global talent markets, and platform dependencies at scale.
+
+For **small and mid-sized agencies**, the practical starting point is usually the hybrid approach. When you only have a handful of active deals, one difficult engagement can still behave like a portfolio event, so folding deal-specific risk into pricing governance is often the more useful move.
 
 ## What Most Agencies Get Wrong
 
