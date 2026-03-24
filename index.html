@@ -25,9 +25,9 @@
     --red-light: #f0d0d0;
     --gray100: #f0ede8;
     --gray200: #e0ddd6;
-    --gray300: #b8b4ab;
-    --gray400: #8a8680;
-    --gray500: #5c5955;
+    --gray300: #9a958d;
+    --gray400: #5f5a53;
+    --gray500: #45413c;
     --radius: 6px;
     --shadow: 0 2px 12px rgba(26,26,46,0.08);
   }
@@ -71,6 +71,14 @@
     border-color: var(--blue);
     color: #fff;
   }
+  .header-link:focus-visible,
+  .dl-btn:focus-visible,
+  .factor-help summary:focus-visible,
+  .info-tip summary:focus-visible,
+  .score-btn:focus-visible {
+    outline: 2px solid rgba(43,76,126,0.45);
+    outline-offset: 2px;
+  }
   .header h1 {
     font-size: 28px;
     font-weight: 700;
@@ -82,6 +90,28 @@
     font-size: 14px;
     color: var(--gray400);
     font-weight: 300;
+  }
+  .primer {
+    max-width: 900px;
+    margin: 0 auto 32px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid var(--gray200);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 18px 22px;
+  }
+  .primer p {
+    margin: 0;
+    color: var(--gray500);
+  }
+  .primer p + p {
+    margin-top: 8px;
+  }
+  .primer strong {
+    color: var(--ink);
+  }
+  .primer a {
+    color: var(--blue);
   }
 
   .card {
@@ -229,6 +259,81 @@
     margin-top: 2px;
     text-align: center;
   }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .factor-help {
+    margin-top: 8px;
+    font-size: 11px;
+    color: var(--gray500);
+  }
+  .factor-help summary {
+    cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+  }
+  .factor-help summary::-webkit-details-marker {
+    display: none;
+  }
+  .factor-help summary::before {
+    content: '+';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: rgba(43,76,126,0.08);
+    border: 1px solid rgba(43,76,126,0.16);
+    font-size: 12px;
+    line-height: 1;
+  }
+  .factor-help[open] summary::before {
+    content: '−';
+  }
+  .factor-help-body {
+    margin-top: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--gray200);
+    background: rgba(255,255,255,0.62);
+    line-height: 1.5;
+  }
+  .factor-help-body p + p {
+    margin-top: 6px;
+  }
+  .factor-scale {
+    margin-top: 8px;
+    display: grid;
+    gap: 4px;
+  }
+  .factor-scale div {
+    font-size: 11px;
+  }
+  .factor-scale strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--gray400);
+    margin-right: 6px;
+  }
 
   .mobile-score-list {
     display: none;
@@ -352,6 +457,11 @@
   }
   .info-tip {
     position: relative;
+    display: inline-block;
+    text-transform: none;
+  }
+  .info-tip summary {
+    list-style: none;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -365,8 +475,10 @@
     font-size: 10px;
     font-weight: 700;
     line-height: 1;
-    cursor: help;
-    text-transform: none;
+    cursor: pointer;
+  }
+  .info-tip summary::-webkit-details-marker {
+    display: none;
   }
   .info-tip .tooltip-text {
     position: absolute;
@@ -384,16 +496,11 @@
     line-height: 1.4;
     text-transform: none;
     box-shadow: var(--shadow);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.15s ease;
-    pointer-events: none;
+    display: none;
     z-index: 10;
   }
-  .info-tip:hover .tooltip-text,
-  .info-tip:focus-visible .tooltip-text {
-    opacity: 1;
-    visibility: visible;
+  .info-tip[open] .tooltip-text {
+    display: block;
   }
   .calc-field input {
     font-family: 'JetBrains Mono', monospace;
@@ -655,6 +762,11 @@
   <p>Two-layer risk assessment with scoring and calculators, plus a B-Corp impact overlay.</p>
 </div>
 
+<div class="primer">
+  <p><strong>What is CAPM?</strong> CAPM is a finance model for deciding what return is worth a given level of risk; here, it is adapted to help agencies separate portfolio risk from deal risk, set minimum acceptable margins, and make clearer go/no-go decisions.</p>
+  <p>This app uses CAPM as pricing governance, not as a statistically exact pricing engine. For a fuller plain-language explanation, start with the <a href="overview/index.html">overview</a>.</p>
+</div>
+
 <!-- LAYER ONE CARD -->
 <div class="card" id="layer1-card">
   <div class="card-header layer1">
@@ -891,25 +1003,28 @@
       <div class="calc-row">
         <div class="calc-field">
           <label>Base Margin / Agency <em>R<sub>f</sub></em>
-            <span class="info-tip" tabindex="0" aria-label="Agency Rf help">?
-              <span class="tooltip-text">Your agency equivalent of the risk-free rate: the typical margin from your lowest-risk, most predictable revenue, such as retainers, maintenance, or other stable contracted work.</span>
-            </span>
+            <details class="info-tip">
+              <summary aria-label="Agency Rf help">?</summary>
+              <div class="tooltip-text">Your agency equivalent of the risk-free rate: the typical margin from your lowest-risk, most predictable revenue, such as retainers, maintenance, or other stable contracted work.</div>
+            </details>
           </label>
           <div><input type="number" id="rf" value="10" step="0.1" oninput="calcLayer2()"><span class="unit">%</span></div>
         </div>
         <div class="calc-field">
           <label>Portfolio Margin / <em>R<sub>m</sub></em>
-            <span class="info-tip" tabindex="0" aria-label="Portfolio Rm help">?
-              <span class="tooltip-text">Your agency equivalent of the market return: the average margin across project work in your portfolio, or the best benchmark you have for typical project profitability.</span>
-            </span>
+            <details class="info-tip">
+              <summary aria-label="Portfolio Rm help">?</summary>
+              <div class="tooltip-text">Your agency equivalent of the market return: the average margin across project work in your portfolio, or the best benchmark you have for typical project profitability.</div>
+            </details>
           </label>
           <div><input type="number" id="rm" value="22" step="0.1" oninput="calcLayer2()"><span class="unit">%</span></div>
         </div>
         <div class="calc-field">
           <label>L1 Adj. Factor
-            <span class="info-tip" tabindex="0" aria-label="Layer 1 factor help">?
-              <span class="tooltip-text">Auto-filled from Layer 1 when all systematic factors are scored. You can override it manually for scenario testing.</span>
-            </span>
+            <details class="info-tip">
+              <summary aria-label="Layer 1 factor help">?</summary>
+              <div class="tooltip-text">Auto-filled from Layer 1 when all systematic factors are scored. You can override it manually for scenario testing.</div>
+            </details>
           </label>
           <div><input type="number" id="l1-input" value="" step="0.01" placeholder="—" oninput="calcLayer2()"></div>
         </div>
@@ -964,7 +1079,7 @@
           <span class="result-sub" id="l2-min-price-sub">needed to clear <em>E</em>(<em>R</em>)</span>
         </div>
       </div>
-      <div id="l2-verdict"></div>
+      <div id="l2-verdict" role="status" aria-live="polite"></div>
 
       <div class="chart-panel">
         <div class="chart-header">The Line</div>
@@ -1183,7 +1298,16 @@
           <span class="result-sub" id="bc-er-sub">impact-adjusted</span>
         </div>
       </div>
-      <div id="bc-verdict"></div>
+      <div id="bc-verdict" role="status" aria-live="polite"></div>
+
+      <div class="chart-panel">
+        <div class="chart-header">Impact Shift</div>
+        <svg id="bc-chart" class="capm-chart" viewBox="0 0 640 320" role="img" aria-labelledby="bc-chart-title bc-chart-desc">
+          <title id="bc-chart-title">B-Corp impact-adjusted chart</title>
+          <desc id="bc-chart-desc">Shows the shift from the standard CAPM hurdle to the B-Corp impact-adjusted hurdle for the current engagement.</desc>
+        </svg>
+        <div class="chart-note" id="bc-chart-note">Score the B-Corp factors to show how the impact adjustment shifts the hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).</div>
+      </div>
 
       <div class="approach-note">
         <strong>How the impact adjustment works:</strong> B-Corp engagement scores below the midpoint (mission-aligned, low-harm, transparent work) produce a negative adjustment — a "mission discount" that lowers the financial margin threshold. Scores above the midpoint (mission tension, elevated human-rights or environmental risk, misleading claims) produce a positive adjustment — a "harm premium" that raises the hurdle rate. The B-Corp systematic score shifts the baseline: high portfolio-level impact risk widens both discounts and premiums. Use the manual override to set a conscious, documented impact adjustment for board-level decisions.
@@ -1210,6 +1334,59 @@
 </footer>
 
 <script>
+  const scoreGuides = {
+    layer1: {
+      platform: ['Stable', 'Mostly stable', 'Mixed signals', 'Serious strain', 'Crisis'],
+      talent: ['Ample', 'Moderately tight', 'Tight', 'Hard to staff', 'Acute'],
+      economic: ['Growing', 'Softening', 'Flat', 'Weakening', 'Contracting'],
+      regulatory: ['Calm', 'Emerging', 'Adapting', 'Significant change', 'Major disruption'],
+      concentration: ['Diverse', 'Some concentration', 'Moderate', 'Heavy', 'More than 30% dependent'],
+      rate: ['Rising', 'Holding', 'Flat', 'Softening', 'Compressing']
+    },
+    bcorp_l1: {
+      portfolio_alignment: ['Aligned', 'Mostly aligned', 'Mixed', 'Mostly misaligned', 'Misaligned'],
+      customer_stewardship: ['Embedded', 'Strong but uneven', 'Partial', 'Thin', 'Weak'],
+      environmental_readiness: ['Embedded', 'Advancing', 'Partial', 'Limited', 'Weak'],
+      stakeholder_governance: ['Embedded', 'Strong but uneven', 'Partial', 'Thin', 'Weak'],
+      human_rights: ['Mature', 'Established', 'Partial', 'Limited', 'Major gaps'],
+      mission_drift: ['Aligned', 'Some pressure', 'Strained', 'Defensive', 'Survival']
+    }
+  };
+
+  const factorHelpQuestions = {
+    layer1: {
+      platform: 'How stable are the platforms and partners your agency depends on?',
+      talent: 'How hard is it to hire and keep the people your delivery work depends on?',
+      economic: 'How healthy are budgets and buying conditions in the market you sell into?',
+      regulatory: 'How much are new rules or compliance demands changing the work you deliver?',
+      concentration: 'How exposed are you to a small number of clients, channels, or verticals?',
+      rate: 'How much downward pressure is the market putting on your rates?'
+    },
+    layer2: {
+      client: 'How confident are you in this client relationship and the client team\'s reliability?',
+      scope: 'How clearly is the work defined, and how much uncertainty is still hiding in the requirements?',
+      tech: 'How much unfamiliar technology, integration risk, or technical uncertainty is in this engagement?',
+      capacity: 'How much real delivery room do you have for this work right now?',
+      contract: 'How much delivery and change risk is the contract pushing onto the agency?',
+      political: 'How messy is the stakeholder and approval environment around this work?',
+      timeline: 'How much schedule pressure is being imposed on this engagement?'
+    },
+    bcorp_l1: {
+      portfolio_alignment: 'How well does your overall client mix line up with the agency\'s stated purpose?',
+      customer_stewardship: 'How strong are your systems for privacy, security, quality, and customer accountability?',
+      environmental_readiness: 'How ready is the agency to manage environmental expectations in client work?',
+      stakeholder_governance: 'How strong are your governance systems for purpose, accountability, and stakeholder oversight?',
+      human_rights: 'How mature is your human-rights due diligence across operations, vendors, and client relationships?',
+      mission_drift: 'How much commercial pressure is pulling the agency away from its public purpose?'
+    },
+    bcorp_l2: {
+      mission_alignment: 'How well does this engagement advance, support, or conflict with your stated purpose?',
+      human_rights_risk: 'How much stakeholder harm or human-rights risk could this engagement create or amplify?',
+      environmental_impact: 'How heavy is the environmental footprint or circularity burden of this deliverable?',
+      responsible_marketing: 'How credible and responsible are the claims and impact communications around this work?'
+    }
+  };
+
   const state = {
     layer1: {},
     layer2: {},
@@ -1217,14 +1394,79 @@
     bcorp_l2: {}
   };
 
+  function getScoreGuide(layer, factor, row) {
+    const configured = scoreGuides[layer] && scoreGuides[layer][factor];
+    if (configured) return configured;
+
+    const cells = row ? [...row.querySelectorAll('.score-cell')] : [];
+    const labels = cells.map((cell, index) => {
+      const label = cell.querySelector('.score-label');
+      return label ? label.textContent.trim() : 'Score ' + (index + 1);
+    });
+    return labels.length ? labels : ['1', '2', '3', '4', '5'];
+  }
+
+  function getFactorHelpQuestion(layer, factor, fallback) {
+    return (factorHelpQuestions[layer] && factorHelpQuestions[layer][factor]) || fallback;
+  }
+
+  function buildFactorHelpMarkup(question, guide, factorName) {
+    return (
+      '<details class="factor-help">' +
+        '<summary>How to score this<span class="sr-only"> for ' + escapeHtml(factorName) + '</span></summary>' +
+        '<div class="factor-help-body">' +
+          '<p>' + escapeHtml(question) + '</p>' +
+          '<div class="factor-scale">' +
+            guide.map((label, index) => (
+              '<div><strong>' + (index + 1) + '</strong>' + escapeHtml(label) + '</div>'
+            )).join('') +
+          '</div>' +
+        '</div>' +
+      '</details>'
+    );
+  }
+
+  function syncScoreButtonAccessibility(row, layer, factor) {
+    const factorName = row.querySelector('.factor-name')?.textContent.trim() || factor;
+    const guide = getScoreGuide(layer, factor, row);
+    row.querySelectorAll('.score-btn').forEach((button, index) => {
+      const val = index + 1;
+      button.setAttribute('type', 'button');
+      button.setAttribute('aria-label', factorName + ', score ' + val + ' of 5: ' + guide[index]);
+      button.setAttribute('aria-pressed', state[layer][factor] === val ? 'true' : 'false');
+    });
+  }
+
+  function enhanceScoreTables() {
+    document.querySelectorAll('.score-table[data-layer]').forEach((table) => {
+      const layer = table.dataset.layer;
+      table.querySelectorAll('tbody tr[data-factor]').forEach((row) => {
+        const factor = row.dataset.factor;
+        const desc = row.querySelector('.factor-desc')?.textContent.trim() || '';
+        const factorName = row.querySelector('.factor-name')?.textContent.trim() || factor;
+        const guide = getScoreGuide(layer, factor, row);
+        const question = getFactorHelpQuestion(layer, factor, desc);
+        const firstCell = row.querySelector('td');
+
+        if (firstCell && !firstCell.querySelector('.factor-help')) {
+          firstCell.insertAdjacentHTML('beforeend', buildFactorHelpMarkup(question, guide, factorName));
+        }
+
+        syncScoreButtonAccessibility(row, layer, factor);
+      });
+    });
+  }
+
   function updateTableRowSelection(layer, factor, val) {
     const row = document.querySelector('.score-table[data-layer="' + layer + '"] tr[data-factor="' + factor + '"]');
     if (!row) return;
 
     row.querySelectorAll('.score-btn').forEach((button) => {
       button.className = 'score-btn';
+      button.setAttribute('aria-pressed', 'false');
       if (parseInt(button.dataset.val) === val) {
         button.className = 'score-btn selected-' + val;
+        button.setAttribute('aria-pressed', 'true');
       }
     });
   }
@@ -1284,11 +1526,8 @@
         const factor = row.dataset.factor;
         const name = row.querySelector('.factor-name')?.textContent || factor;
         const desc = row.querySelector('.factor-desc')?.textContent || '';
-        const scoreCells = [...row.querySelectorAll('.score-cell')];
-        const labels = scoreCells.map((cell) => {
-          const label = cell.querySelector('.score-label');
-          return label ? label.textContent.trim() : '';
-        });
+        const question = getFactorHelpQuestion(layer, factor, desc);
+        const labels = getScoreGuide(layer, factor, row);
 
         const card = document.createElement('div');
         card.className = 'mobile-score-card';
@@ -1321,10 +1560,11 @@
             [1, 2, 3, 4, 5].map((val) => {
               const selectedClass = activeValue === val ? ' selected-' + val : '';
               const pressed = activeValue === val ? 'true' : 'false';
-              return '<button type="button" class="mobile-score-option' + selectedClass + '" data-val="' + val + '" aria-pressed="' + pressed + '">' + val + '</button>';
+              return '<button type="button" class="mobile-score-option' + selectedClass + '" data-val="' + val + '" aria-pressed="' + pressed + '" aria-label="' + safeName + ', score ' + val + ' of 5: ' + escapeHtml(labels[val - 1]) + '">' + val + '</button>';
             }).join('') +
           '</div>' +
-          '<div class="mobile-score-anchors"><span>' + safeLeft + '</span><span>' + safeRight + '</span></div>';
+          '<div class="mobile-score-anchors"><span>' + safeLeft + '</span><span>' + safeRight + '</span></div>' +
+          buildFactorHelpMarkup(question, labels, name);
 
         mobileList.appendChild(card);
 
@@ -1450,6 +1690,36 @@
     };
   }
 
+  function buildAxesMarkup(opts) {
+    const { width, height, margin, xMax, yMax, xScaleFn, yScaleFn } = opts;
+    const yTicks = [];
+    for (let tick = 0; tick <= yMax; tick += 5) yTicks.push(tick);
+    const xTicks = [];
+    for (let tick = 0; tick <= xMax + 0.001; tick += 0.5) xTicks.push(Math.round(tick * 10) / 10);
+    let axesMarkup = '';
+
+    yTicks.forEach((tick) => {
+      const y = yScaleFn(tick);
+      axesMarkup += '<line x1="' + margin.left + '" y1="' + y + '" x2="' + (width - margin.right) + '" y2="' + y + '" stroke="rgba(61,56,49,0.10)" stroke-width="1"></line>';
+      if (tick < yMax) {
+        axesMarkup += '<text x="' + (margin.left - 12) + '" y="' + (y + 4) + '" text-anchor="end" fill="#7a756c" font-size="12">' + tick + '%</text>';
+      }
+    });
+
+    xTicks.forEach((tick) => {
+      const x = xScaleFn(tick);
+      axesMarkup += '<line x1="' + x + '" y1="' + margin.top + '" x2="' + x + '" y2="' + (height - margin.bottom) + '" stroke="rgba(61,56,49,0.08)" stroke-width="1"></line>';
+      axesMarkup += '<text x="' + x + '" y="' + (height - margin.bottom + 22) + '" text-anchor="middle" fill="#7a756c" font-size="12">' + tick.toFixed(1) + '</text>';
+    });
+
+    axesMarkup += '<line x1="' + margin.left + '" y1="' + margin.top + '" x2="' + margin.left + '" y2="' + (height - margin.bottom) + '" stroke="#7a756c" stroke-width="2"></line>';
+    axesMarkup += '<line x1="' + margin.left + '" y1="' + (height - margin.bottom) + '" x2="' + (width - margin.right) + '" y2="' + (height - margin.bottom) + '" stroke="#7a756c" stroke-width="2"></line>';
+    axesMarkup += '<text x="' + margin.left + '" y="' + (margin.top - 8) + '" fill="#6b6963" font-size="13" font-weight="700">Required margin</text>';
+    axesMarkup += '<text x="' + ((margin.left + width - margin.right) / 2) + '" y="' + (height - 14) + '" text-anchor="middle" fill="#6b6963" font-size="13" font-weight="700">Blended β</text>';
+
+    return axesMarkup;
+  }
+
   function getDealMetrics() {
     const price = parseFloat(document.getElementById('deal-price').value);
     const cost = parseFloat(document.getElementById('deal-cost').value);
@@ -1480,35 +1750,6 @@
     const placeholderXScale = (value) => margin.left + (value / placeholderXMax) * plotWidth;
     const placeholderYScale = (value) => margin.top + plotHeight - (value / placeholderYMax) * plotHeight;
 
-    const buildAxesMarkup = (xMax, yMax, xScaleFn, yScaleFn) => {
-      const yTicks = [];
-      for (let tick = 0; tick <= yMax; tick += 5) yTicks.push(tick);
-      const xTicks = [];
-      for (let tick = 0; tick <= xMax + 0.001; tick += 0.5) xTicks.push(Math.round(tick * 10) / 10);
-      let axesMarkup = '';
-
-      yTicks.forEach((tick) => {
-        const y = yScaleFn(tick);
-        axesMarkup += '<line x1="' + margin.left + '" y1="' + y + '" x2="' + (width - margin.right) + '" y2="' + y + '" stroke="rgba(61,56,49,0.10)" stroke-width="1"></line>';
-        if (tick < yMax) {
-          axesMarkup += '<text x="' + (margin.left - 12) + '" y="' + (y + 4) + '" text-anchor="end" fill="#7a756c" font-size="12">' + tick + '%</text>';
-        }
-      });
-
-      xTicks.forEach((tick) => {
-        const x = xScaleFn(tick);
-        axesMarkup += '<line x1="' + x + '" y1="' + margin.top + '" x2="' + x + '" y2="' + (height - margin.bottom) + '" stroke="rgba(61,56,49,0.08)" stroke-width="1"></line>';
-        axesMarkup += '<text x="' + x + '" y="' + (height - margin.bottom + 22) + '" text-anchor="middle" fill="#7a756c" font-size="12">' + tick.toFixed(1) + '</text>';
-      });
-
-      axesMarkup += '<line x1="' + margin.left + '" y1="' + margin.top + '" x2="' + margin.left + '" y2="' + (height - margin.bottom) + '" stroke="#7a756c" stroke-width="2"></line>';
-      axesMarkup += '<line x1="' + margin.left + '" y1="' + (height - margin.bottom) + '" x2="' + (width - margin.right) + '" y2="' + (height - margin.bottom) + '" stroke="#7a756c" stroke-width="2"></line>';
-      axesMarkup += '<text x="' + margin.left + '" y="' + (margin.top - 8) + '" fill="#6b6963" font-size="13" font-weight="700">Required margin</text>';
-      axesMarkup += '<text x="' + ((margin.left + width - margin.right) / 2) + '" y="' + (height - 14) + '" text-anchor="middle" fill="#6b6963" font-size="13" font-weight="700">Blended β</text>';
-
-      return axesMarkup;
-    };
-
     if (!data || !data.ready) {
       const placeholderLineY = (x) => placeholderRf + (placeholderPremium * x);
       const ghostX = placeholderXScale(1.1);
@@ -1516,7 +1757,7 @@
 
       svg.innerHTML =
         '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="10" fill="rgba(255,255,255,0.6)"></rect>' +
-        buildAxesMarkup(placeholderXMax, placeholderYMax, placeholderXScale, placeholderYScale) +
+        buildAxesMarkup({ width, height, margin, xMax: placeholderXMax, yMax: placeholderYMax, xScaleFn: placeholderXScale, yScaleFn: placeholderYScale }) +
         '<line x1="' + placeholderXScale(0) + '" y1="' + placeholderYScale(placeholderRf) + '" x2="' + placeholderXScale(placeholderXMax) + '" y2="' + placeholderYScale(placeholderLineY(placeholderXMax)) + '" stroke="rgba(43,76,126,0.55)" stroke-width="4"></line>' +
         '<circle cx="' + placeholderXScale(0) + '" cy="' + placeholderYScale(placeholderRf) + '" r="6" fill="#2b4c7e" stroke="#ffffff" stroke-width="2"></circle>' +
         buildChartPill({
@@ -1557,7 +1798,7 @@
     const gapLabel = data.hasDeal ? (data.gap >= 0 ? '+' : '') + data.gap.toFixed(1) + ' pts' : 'Enter price and cost to plot the deal';
 
     let markup = '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="10" fill="rgba(255,255,255,0.6)"></rect>' +
-      buildAxesMarkup(xMax, yMax, xScale, yScale);
+      buildAxesMarkup({ width, height, margin, xMax, yMax, xScaleFn: xScale, yScaleFn: yScale });
 
     markup += '<line x1="' + xScale(0) + '" y1="' + yScale(data.rf) + '" x2="' + xScale(xMax) + '" y2="' + yScale(lineY(xMax)) + '" stroke="#2b4c7e" stroke-width="4"></line>';
     markup += '<circle cx="' + xScale(0) + '" cy="' + yScale(data.rf) + '" r="6" fill="#2b4c7e" stroke="#ffffff" stroke-width="2"></circle>';
@@ -1627,6 +1868,110 @@
       (data.hasDeal
         ? 'The current deal is <strong>' + gapLabel + '</strong> relative to the hurdle.'
         : 'Enter deal price and estimated delivery cost to plot the proposed margin against the line.');
+  }
+
+  function renderBcorpChart(data) {
+    const svg = document.getElementById('bc-chart');
+    const note = document.getElementById('bc-chart-note');
+    if (!svg || !note) return;
+
+    const width = 640;
+    const height = 320;
+    const margin = { top: 24, right: 28, bottom: 50, left: 64 };
+    const plotWidth = width - margin.left - margin.right;
+    const plotHeight = height - margin.top - margin.bottom;
+
+    if (!data || !data.ready) {
+      const xMax = 2.2;
+      const yMax = 35;
+      const xScale = (value) => margin.left + (value / xMax) * plotWidth;
+      const yScale = (value) => margin.top + plotHeight - (value / yMax) * plotHeight;
+      const lineY = (x) => 10 + (12 * x);
+      const markerX = xScale(1.1);
+      const markerY = yScale(lineY(1.1));
+
+      svg.innerHTML =
+        '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="10" fill="rgba(255,255,255,0.6)"></rect>' +
+        buildAxesMarkup({ width, height, margin, xMax, yMax, xScaleFn: xScale, yScaleFn: yScale }) +
+        '<line x1="' + xScale(0) + '" y1="' + yScale(10) + '" x2="' + xScale(xMax) + '" y2="' + yScale(lineY(xMax)) + '" stroke="rgba(43,76,126,0.45)" stroke-width="4"></line>' +
+        '<circle cx="' + markerX + '" cy="' + markerY + '" r="7" fill="rgba(58,125,92,0.18)" stroke="#ffffff" stroke-width="2"></circle>' +
+        buildChartPill({
+          x: markerX + 18,
+          y: markerY - 28,
+          text: 'Impact shift appears here',
+          color: '#3a7d5c',
+          stroke: 'rgba(58,125,92,0.20)',
+          chartWidth: width,
+          chartHeight: height
+        }).markup;
+      note.innerHTML = 'Score the B-Corp factors to show how the impact adjustment shifts the hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).';
+      return;
+    }
+
+    const xMax = Math.max(2.1, Math.ceil((data.blended * 1.35) * 10) / 10, 2.2);
+    const yMaxRaw = Math.max(data.rf, data.rm, data.standardEr, data.adjustedEr, data.proposedMargin || 0) + 6;
+    const yMax = Math.max(15, Math.ceil(yMaxRaw / 5) * 5);
+    const xScale = (value) => margin.left + (value / xMax) * plotWidth;
+    const yScale = (value) => margin.top + plotHeight - (value / yMax) * plotHeight;
+    const lineY = (x) => data.rf + (data.premium * x);
+    const pointX = xScale(data.blended);
+    const standardY = yScale(data.standardEr);
+    const adjustedY = yScale(data.adjustedEr);
+    const proposedY = data.hasDeal ? yScale(data.proposedMargin) : null;
+    const directionColor = data.adjustment < 0 ? '#3a7d5c' : data.adjustment > 0 ? '#b53a3a' : '#5c5955';
+    const directionStroke = data.adjustment < 0 ? 'rgba(58,125,92,0.20)' : data.adjustment > 0 ? 'rgba(181,58,58,0.20)' : 'rgba(92,89,85,0.15)';
+    const anchor = pointX > (width - margin.right - 190) ? 'end' : 'start';
+    const labelX = anchor === 'end' ? pointX - 16 : pointX + 16;
+
+    const entries = [
+      { key: 'proposed', text: data.hasDeal ? 'Proposed ' + data.proposedMargin.toFixed(1) + '%' : '', y: proposedY !== null ? proposedY - 38 : null, color: '#426347', stroke: 'rgba(58,125,92,0.20)' },
+      { key: 'adjusted', text: 'Impact-adjusted E(R*) ' + data.adjustedEr.toFixed(1) + '%', y: adjustedY - 12, color: directionColor, stroke: directionStroke },
+      { key: 'standard', text: 'Standard E(R) ' + data.standardEr.toFixed(1) + '%', y: standardY - 12, color: '#cb8922', stroke: 'rgba(203,137,34,0.22)' }
+    ].filter((entry) => entry.y !== null);
+
+    entries.sort((a, b) => a.y - b.y);
+    const minGap = 28;
+    let prevTop = 8;
+    entries.forEach((entry) => {
+      entry.y = clamp(entry.y, 8, height - 32);
+      if (entry.y < prevTop) entry.y = prevTop;
+      prevTop = entry.y + minGap;
+    });
+    for (let i = entries.length - 2; i >= 0; i--) {
+      if (entries[i].y + minGap > entries[i + 1].y) {
+        entries[i].y = Math.max(8, entries[i + 1].y - minGap);
+      }
+    }
+
+    let markup = '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="10" fill="rgba(255,255,255,0.6)"></rect>' +
+      buildAxesMarkup({ width, height, margin, xMax, yMax, xScaleFn: xScale, yScaleFn: yScale });
+
+    markup += '<line x1="' + xScale(0) + '" y1="' + yScale(data.rf) + '" x2="' + xScale(xMax) + '" y2="' + yScale(lineY(xMax)) + '" stroke="#2b4c7e" stroke-width="4"></line>';
+    markup += '<line x1="' + pointX + '" y1="' + standardY + '" x2="' + pointX + '" y2="' + adjustedY + '" stroke="' + directionColor + '" stroke-width="2" stroke-dasharray="6 5"></line>';
+    markup += '<circle cx="' + pointX + '" cy="' + standardY + '" r="7" fill="#cb8922" stroke="#ffffff" stroke-width="2"></circle>';
+    markup += '<circle cx="' + pointX + '" cy="' + adjustedY + '" r="7" fill="' + directionColor + '" stroke="#ffffff" stroke-width="2"></circle>';
+
+    if (data.hasDeal) {
+      markup += '<circle cx="' + pointX + '" cy="' + proposedY + '" r="7" fill="#426347" stroke="#ffffff" stroke-width="2"></circle>';
+    }
+
+    entries.forEach((entry) => {
+      markup += buildChartPill({
+        x: labelX,
+        y: entry.y,
+        text: entry.text,
+        color: entry.color,
+        stroke: entry.stroke,
+        anchor,
+        chartWidth: width,
+        chartHeight: height
+      }).markup;
+    });
+
+    svg.innerHTML = markup;
+
+    const adjustmentLabel = (data.adjustment >= 0 ? '+' : '') + data.adjustment.toFixed(1) + ' pts';
+    note.innerHTML = 'At <strong>' + data.blended.toFixed(2) + '</strong> blended <em>β</em>, the B-Corp adjustment shifts the hurdle by <strong>' + adjustmentLabel + '</strong> from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).';
   }
 
   function calcLayer2() {
@@ -1772,6 +2117,13 @@
     // Get standard E(R) from Layer 2
     const stdErText = document.getElementById('l2-er').textContent;
     const stdEr = parseFloat(stdErText);
+    const blendedText = document.getElementById('l2-blended').textContent;
+    const blended = parseFloat(blendedText);
+    const rf = parseFloat(document.getElementById('rf').value) || 0;
+    const rm = parseFloat(document.getElementById('rm').value) || 0;
+    const premium = rm - rf;
+    const deal = getDealMetrics();
+    let bcChartData = { ready: false };
 
     if (!isNaN(stdEr)) {
       document.getElementById('bc-std-er').value = stdEr.toFixed(1) + '%';
@@ -1789,12 +2141,25 @@
         document.getElementById('bc-adj-sub').textContent = 'manual override';
         document.getElementById('bc-er-star').textContent = erStar.toFixed(1) + '%';
         document.getElementById('bc-er-sub').textContent = stdEr.toFixed(1) + '% + (' + manualAdj.toFixed(1) + '%)';
+        bcChartData = {
+          ready: !isNaN(blended),
+          rf,
+          rm,
+          premium,
+          blended,
+          standardEr: stdEr,
+          adjustedEr: erStar,
+          adjustment: manualAdj,
+          hasDeal: !!deal,
+          proposedMargin: deal ? Math.round(deal.proposedMargin * 10) / 10 : null
+        };
 
         document.getElementById('bc-formula').innerHTML =
           '<strong>B-Corp:</strong> <em>E</em>(<em>R</em>*) = <span class="hl">' + stdEr.toFixed(1) + '%</span> + <span class="hl3">' + manualAdj.toFixed(1) + '%</span> = <strong>' + erStar.toFixed(1) + '%</strong> (manual)';
 
         setBcorpVerdict(erStar, manualAdj);
       }
+      renderBcorpChart(bcChartData);
       return;
     }
 
@@ -1817,12 +2182,25 @@
       const erStar = Math.round((stdEr + impactAdj) * 10) / 10;
       document.getElementById('bc-er-star').textContent = erStar.toFixed(1) + '%';
       document.getElementById('bc-er-sub').textContent = stdEr.toFixed(1) + '% + (' + impactAdj.toFixed(1) + '%)';
+      bcChartData = {
+        ready: !isNaN(blended),
+        rf,
+        rm,
+        premium,
+        blended,
+        standardEr: stdEr,
+        adjustedEr: erStar,
+        adjustment: impactAdj,
+        hasDeal: !!deal,
+        proposedMargin: deal ? Math.round(deal.proposedMargin * 10) / 10 : null
+      };
 
       document.getElementById('bc-formula').innerHTML =
         '<strong>B-Corp:</strong> <em>E</em>(<em>R</em>*) = <span class="hl">' + stdEr.toFixed(1) + '%</span> + <span class="hl3">' + impactAdj.toFixed(1) + '%</span> = <strong>' + erStar.toFixed(1) + '%</strong>';
 
       setBcorpVerdict(erStar, impactAdj);
     }
+    renderBcorpChart(bcChartData);
   }
 
   function setBcorpVerdict(erStar, impactAdj) {
@@ -1852,7 +2230,10 @@
     document.getElementById('bc-verdict').innerHTML = verdict;
   }
 
+  enhanceScoreTables();
   createMobileScorecards();
+  calcLayer2();
+  calcBcorp();
 </script>
 </body>
 </html>

@@ -16,16 +16,18 @@ By adapting the **Capital Asset Pricing Model (CAPM)** from financial economics,
 * **The Hurdle Rate:** Your baseline revenue margin from low-risk, predictable work like retainers.  
 * **The Risk Multiplier:** A measurement of how much riskier a project is compared to your average engagement.  
 * **The Two-Layer Assessment:**   
-  * **Layer 1 (Portfolio):** Quarterly reviews of macro factors like platform stability, talent markets, and economic shifts.  
-  * **Layer 2 (Engagement):** Presales scoring of client track record, scope clarity, and technical complexity.
+  * **[Layer 1 (Portfolio)](../index.html#layer1-card):** Quarterly reviews of macro factors like platform stability, talent markets, and economic shifts.  
+  * **[Layer 2 (Engagement)](../index.html#layer2-card):** Presales scoring of client track record, scope clarity, and technical complexity.
 
 ### Strategic Benefits
 1. **Disciplined Go/No-Go Decisions:** Provides the math to say "no" to high-risk, low-margin "money pits" with data-backed confidence.  
 2. **Cross-Functional Alignment:** Engages solutions, technical, and sales teams in a shared language for risk translation before a contract is signed.  
-3. **B-Corp Integration:** For impact-driven agencies, the model allows for a "conscious mission discount" on high-impact work while penalizing mission-inconsistent projects with higher margin requirements.
+3. **[B-Corp Integration](../index.html#bcorp-card):** For impact-driven agencies, the model allows for a "conscious mission discount" on high-impact work while penalizing mission-inconsistent projects with higher margin requirements.
 
 ## Overview
 Most small to mid-sized agencies (and even more large ones than want to admit it) price risk through gut-feel contingency percentages, hourly padding, or by shifting uncertainty onto clients via retainer models — none of which distinguish between the kinds of risk that matter most when they’re realized in events. These are the systematic risks that can’t be controlled. 
+
+For readers coming from outside finance, CAPM begins with a simple question: what return should be demanded for taking on a given level of risk? In investing, it is used to estimate required return, cost of equity, and hurdle rates. In agency work, the same logic helps separate market-wide risk from deal-specific risk, set a minimum acceptable margin, and decide whether a project is worth taking on at all.
 
 Borrowing from CAPM, a foundational risk-based pricing model from financial economics, people in technical and non-technical roles at agencies of all sizes can bring a more principled framework to engagement pricing by separating *systematic* risk (factors correlated with agency-wide vulnerabilities like capacity crunches, platform/licensing shifts, or talent market contraction) from *idiosyncratic* risk (project-specific variables — including individual client dysfunction — that wash out across a healthy portfolio of engagements). For agencies, especially small and mid-sized shops, this is best understood as a governance model for pricing decisions rather than as a literal asset-pricing engine. 
 
@@ -195,7 +197,7 @@ The composite score informs whether your risk premium and baseline beta calibrat
 
 *Figure 2. Layer One systematic-risk calibration illustration. [PDF version](./figures/layer1-systematic-calibration.pdf).*
 
-Layer One doesn't move individual engagements — it rotates the entire line steeper or flatter depending on the systematic environment. When the talent market tightens and your platform is in turmoil, the Line gets steeper: every level of beta demands a higher margin.
+Layer One doesn't move individual engagements — it rotates the entire line steeper or flatter depending on the systematic environment. When the talent market tightens and your platform is in turmoil, the Line gets steeper: every level of beta demands a higher margin. The live version of this review is the [Layer 1 card in the app](../index.html#layer1-card).
 
 ### Layer Two: Engagement Risk Scoring
 This is the per-project assessment conducted during presales, before delivery planning is committed. It evaluates the risk characteristics of *this specific engagement* — the factors that vary from project to project, regardless of what the broader market is doing. When implementation risk is still too uncertain to price responsibly, this same assessment should justify and price a paid discovery phase first, rather than smuggling planning effort into the sale.
@@ -229,7 +231,7 @@ Where the systematic adjustment factor is derived from the Layer One review — 
 
 *Figure 3. Layer Two blended-beta illustration. [PDF version](./figures/layer2-blended-beta.pdf).*
 
-Each engagement's blended beta (engagement score × systematic factor) determines where it sits on the horizontal axis, and The Line tells you the minimum margin at that point. The safe bet can usually clear the hurdle with standard pricing; the stretch project often demands renegotiation; the money pit usually points toward walking away unless terms change materially. 
+Each engagement's blended beta (engagement score × systematic factor) determines where it sits on the horizontal axis, and The Line tells you the minimum margin at that point. The safe bet can usually clear the hurdle with standard pricing; the stretch project often demands renegotiation; the money pit usually points toward walking away unless terms change materially. You can run that exact workflow in the [Layer 2 card](../index.html#layer2-card).
 
 ## What Is Systematic Risk?
 The Capital Asset Pricing Model (CAPM) comes from the world of Financial Economics, which is concerned with the use and distribution of resources in (mostly global) markets, focusing on monetary activities where money appears on both sides of a trade. It combines microeconomic theory, accounting, and quantitative methods to study asset pricing, risk management, corporate finance, and decision-making over time. The CAPM formula brings these concerns together, and risk plays a significant role in it. How risk — specifically *systematic* risk — is defined is essential to the model. 
@@ -528,7 +530,7 @@ Where the Impact Adjustment is negative for projects that advance mission and bu
 #### Option B: Impact-Integrated Beta
 Fold impact factors into the beta itself by including the B-Corp engagement factors (mission alignment, human-rights risk, environmental impact and circularity, responsible marketing and transparency) in the Layer Two scoring table alongside the standard engagement risk factors. This produces a single blended beta that captures both financial and impact risk in one number. Simpler to calculate but harder to decompose when you need to explain decisions to stakeholders with different priorities.
 
-**Recommendation:** Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical.
+**Recommendation:** Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical. The app currently presents this as an [impact-adjusted B-Corp card](../index.html#bcorp-card) that keeps the standard hurdle visible while showing the shift to `E(R*)`.
 
 ![B-Corp impact-adjusted return illustration showing how mission-aligned work can move below the standard financial hurdle while harmful work must clear a higher one.](./figures/bcorp-impact-adjusted-return.png)
 
@@ -635,6 +637,7 @@ Rather than treating the three bottom lines as separate accounts that cannot be 
 **Work Breakdown Structure (WBS)**: A structured decomposition of project scope into smaller deliverables and work packages used during planning and execution.
 
 ### Suggested Reading
+* McCracken Alliance. *CAPM Formula Explained: What It Is, How It Works, and When to Use It*. Beginner-friendly overview of CAPM in finance, including required return, hurdle rates, and valuation use cases. [McCracken Alliance](https://www.mccrackenalliance.com/blog/capm-formula-explained-what-it-is-how-it-works-and-when-to-use-it)  
 * Pástor, Ľ., Stambaugh, R. F., & Taylor, L. A. (2021). Sustainable investing in equilibrium. *Journal of Financial Economics*, 142(2), 550–571. [NBER Working Paper](https://www.nber.org/papers/w26549)  
 * Johnstone, D. (2025). Zero-beta risks and required returns: ESG and CAPM. *Financial Management*. [Wiley](https://onlinelibrary.wiley.com/doi/full/10.1111/fima.12475)  
 * Annals of Operations Research (2024). Modelling sustainable investing in the CAPM. [Springer](https://link.springer.com/article/10.1007/s10479-024-06110-5)  

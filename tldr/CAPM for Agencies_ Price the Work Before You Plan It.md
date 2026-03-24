@@ -1,12 +1,10 @@
-## CAPM for Agencies: Price the Work Before You Plan It
+## Most agencies price risk backwards.
 
-**Most agencies price risk backwards.**
-
-The hook is right, but it needs one qualifier: price before *delivery planning*, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether implementation or discovery is the thing to sell.
+[[APP_CARDS_ASIDE]]
 
 They plan the work, estimate the hours, add some padding, and hope the margin holds. When things feel uncertain, they increase contingency. When things feel safe, they get aggressive.
 
-It works until it does not.
+It works until it doesn't.
 
 The problem is not estimation by itself. The problem is that most agencies never separate the kinds of risk they are taking on. They treat all uncertainty the same, even though some risks are project-specific and some affect the whole business at once.
 
@@ -17,6 +15,8 @@ In financial economics, the Capital Asset Pricing Model exists to think clearly 
 What return is required for this level of exposure?
 
 That idea translates well to agency work, especially if you treat it as a governance model for pricing decisions rather than as a literal asset-pricing engine.
+
+[[PLANNING_NOTE_ASIDE]]
 
 ## The Core Idea
 
@@ -110,13 +110,13 @@ Examples:
 * revenue concentration
 * rate pressure
 
-This layer sets the **systematic adjustment factor** that frames the pricing environment for every deal.
+This layer sets the **systematic adjustment factor** that frames the pricing environment for every deal. In the app, that work happens in the [Layer 1 card](../index.html#layer1-card).
 
 ### Layer 2: Engagement Risk
 
 This is the specific deal.
 
-It is a presales assessment, not a full delivery plan. The point is to get enough input from the solutions team to judge complexity, client concerns, and scope risk before commitment. If that still is not enough to price implementation responsibly, then discovery is the thing to price.
+It is a presales assessment, not a full delivery plan. The point is to get enough input from the solutions team to judge complexity, client concerns, and scope risk before commitment. If that still is not enough to price implementation responsibly, then discovery is the thing to price. In the app, this is the [Layer 2 card](../index.html#layer2-card).
 
 You score:
 
@@ -136,7 +136,7 @@ In the hybrid calculator, the current logic is:
 
 * **Engagement β = Engagement Score / 21**
 * **Blended β = Engagement β × Layer 1 factor**
-* **Required Margin E(R) = R_f + Blended β × (R_m - R_f)**
+* **Required Margin <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Blended <em>β</em> × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)**
 
 Then:
 
@@ -148,17 +148,19 @@ That comparison is the point.
 
 Without it, you only know what the deal should clear in theory. With it, you know whether the quoted work actually deserves a yes.
 
+If you are a mission-driven or certified agency, the [B-Corp card](../index.html#bcorp-card) adds an impact adjustment that shifts the standard hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).
+
 ## A Simple Example
 
 Say:
 
-* base margin `R_f` = `10%`
-* portfolio margin `R_m` = `22%`
+* base margin <em>R<sub>f</sub></em> = `10%`
+* portfolio margin <em>R<sub>m</sub></em> = `22%`
 * risk premium = `12%`
 
 And after scoring the deal and current environment, the model gives you:
 
-* **Required Margin** `E(R) = 29%`
+* **Required Margin** <em>E</em>(<em>R</em>) = `29%`
 
 Now assume:
 
