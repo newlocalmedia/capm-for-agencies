@@ -5,71 +5,79 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CAPM for Agencies — Overview</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap');
-
   :root {
-    --ink: #1a1a2e;
-    --paper: #f7f5f0;
-    --blue: #2b4c7e;
-    --accent: #c45d3e;
-    --gray100: #f0ede8;
-    --gray200: #e0ddd6;
-    --gray400: #8a8680;
-    --shadow: 0 2px 12px rgba(26,26,46,0.08);
+    --ink: #201d1a;
+    --paper: #f8f2e8;
+    --paper-deep: #efe6d8;
+    --canvas: #e8ddcc;
+    --line: rgba(32, 29, 26, 0.12);
+    --line-strong: rgba(32, 29, 26, 0.18);
+    --accent: #8c3f2f;
+    --blue: #23486a;
+    --muted: #6a635b;
+    --shadow: 0 18px 50px rgba(32, 29, 26, 0.12);
   }
 
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
-    font-family: 'DM Sans', sans-serif;
-    background: var(--gray100);
+    font-family: Georgia, "Times New Roman", serif;
+    background:
+      radial-gradient(circle at top left, rgba(140, 63, 47, 0.08), transparent 28%),
+      radial-gradient(circle at top right, rgba(35, 72, 106, 0.09), transparent 24%),
+      linear-gradient(180deg, #efe5d7 0%, #e7dccb 100%);
     color: var(--ink);
-    line-height: 1.6;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
     padding: 32px 20px 80px;
   }
 
   .wrap {
-    max-width: 820px;
+    max-width: 920px;
     margin: 0 auto;
   }
 
   .hero,
   .section {
-    background: var(--paper);
-    border: 1px solid var(--gray200);
-    border-radius: 12px;
+    background: linear-gradient(145deg, rgba(248, 242, 232, 0.92), rgba(239, 230, 216, 0.95));
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    border-radius: 24px;
     box-shadow: var(--shadow);
-    padding: 28px 32px;
+    padding: 30px 34px;
     margin-bottom: 24px;
   }
 
   .eyebrow {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1.2px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--gray400);
-    margin-bottom: 10px;
+    color: var(--muted);
+    margin-bottom: 12px;
   }
 
   h1, h2 {
     margin: 0 0 12px;
-    line-height: 1.2;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: #1d1915;
   }
 
   h1 {
-    font-size: 34px;
-    color: var(--blue);
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    color: #241d17;
   }
 
   h2 {
-    font-size: 21px;
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
   }
 
   p {
     margin: 0 0 14px;
+    font-size: 1.08rem;
+    color: #38322d;
   }
 
   .actions {
@@ -80,26 +88,35 @@
   }
 
   .button {
-    display: inline-block;
-    padding: 10px 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 16px;
     border-radius: 999px;
     text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.04em;
     border: 1px solid transparent;
+    transition: transform 0.16s ease, background 0.16s ease, color 0.16s ease, border-color 0.16s ease;
+  }
+
+  .button:hover {
+    transform: translateY(-1px);
   }
 
   .button.primary {
-    background: var(--blue);
-    color: #fff;
+    background: var(--accent);
+    color: #fff8f3;
+    border-color: var(--accent);
   }
 
   .button.secondary {
-    background: rgba(43,76,126,0.08);
-    border-color: rgba(43,76,126,0.16);
-    color: var(--blue);
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(32, 29, 26, 0.1);
+    color: var(--ink);
   }
 
   ul {
@@ -112,8 +129,8 @@
   }
 
   .note {
-    color: var(--gray400);
-    font-size: 14px;
+    color: var(--muted);
+    font-size: 0.98rem;
   }
 
   .reading-list {
@@ -124,15 +141,16 @@
 
   .reading-item {
     padding: 16px 18px;
-    border: 1px solid var(--gray200);
-    border-radius: 10px;
-    background: rgba(43,76,126,0.03);
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.42);
   }
 
   .reading-item h3 {
     margin: 0 0 6px;
-    font-size: 18px;
-    line-height: 1.25;
+    font-size: 1.25rem;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
   }
 
   .reading-item p {
@@ -141,10 +159,10 @@
 
   .reading-item a {
     color: var(--blue);
-    font-family: 'JetBrains Mono', monospace;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: 0.3px;
+    letter-spacing: 0.04em;
     text-decoration: none;
   }
 
@@ -152,7 +170,7 @@
     text-align: center;
     font-size: 13px;
     line-height: 1.6;
-    color: var(--gray400);
+    color: var(--muted);
     padding: 8px 12px 0;
   }
 
@@ -163,11 +181,15 @@
   @media (max-width: 640px) {
     .hero,
     .section {
-      padding: 22px 18px;
+      padding: 22px 20px;
     }
 
     h1 {
-      font-size: 28px;
+      font-size: 2.25rem;
+    }
+
+    p {
+      font-size: 1rem;
     }
   }
 </style>
