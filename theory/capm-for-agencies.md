@@ -115,6 +115,8 @@ If CAPM (the financial model) is unfamiliar to you, you can get some good backgr
 
 Mullins defends CAPM as a useful model for *disciplined thinking about risk*, specifically systematic risk (i.e., beta) —  the things you cannot control and are not responsible for. He recommends CAPM as a practical, primary benchmark for evaluating risk-adjusted returns — exactly what agencies need for project selection.
 
+*Dan Knauss*
+
 ## The Formula
 **E(R) \= Rf \+ β × (Rm − Rf)**
 
@@ -229,7 +231,7 @@ The composite score informs whether your risk premium and baseline beta calibrat
 
 *Figure 2. Layer One systematic-risk calibration illustration. [PDF version](./figures/layer1-systematic-calibration.pdf).*
 
-Layer One doesn't move individual engagements — it rotates the entire line steeper or flatter depending on the systematic environment. When the talent market tightens and your platform is in turmoil, the Line gets steeper: every level of beta demands a higher margin. The live version of this review is the [Layer 1 card in the app](../index.html#layer1-card).
+Layer One doesn't move individual engagements — it rotates the entire line steeper or flatter depending on the systematic environment. When the talent market tightens and your platform is in turmoil, the Line gets steeper: every level of beta demands a higher margin. The live version of this review is the [Layer 1 card in the Decision Cards](../index.html#layer1-card).
 
 ### Layer Two: Engagement Risk Scoring
 This is the per-project assessment conducted during presales, before delivery planning is committed. It evaluates the risk characteristics of *this specific engagement* — the factors that vary from project to project, regardless of what the broader market is doing. When implementation risk is still too uncertain to price responsibly, this same assessment should justify and price a paid discovery phase first, rather than smuggling planning effort into the sale.
@@ -257,7 +259,7 @@ Each factor is scored on a 1–5 scale (1 \= low risk, 5 \= high risk).
 
 **Blended β \= (Engagement Score / 21\) × Systematic Adjustment Factor**
 
-Where the systematic adjustment factor is derived from the Layer One review — for example, 1.0 in a normal environment, 1.1–1.2 when systematic risk is elevated, 0.9 when conditions are unusually favorable. This keeps the engagement scoring practical while ensuring the broader environment is reflected in every engagement's pricing. The intent is not to claim quantitative precision. The intent is to create a repeatable decision process that disciplines presales judgment and makes risk assumptions discussable.
+Where the systematic adjustment factor is derived from the Layer One review — for example, 1.0 in a normal environment, roughly 1.05–1.15 when systematic risk is elevated, and roughly 0.85–0.95 when conditions are unusually favorable. This keeps the engagement scoring practical while ensuring the broader environment is reflected in every engagement's pricing. The intent is not to claim quantitative precision. The intent is to create a repeatable decision process that disciplines presales judgment and makes risk assumptions discussable.
 
 ![Layer Two blended-beta illustration showing safe, stretch, and failing engagements compared against the hurdle line.](./figures/layer2-blended-beta.png)
 
@@ -566,7 +568,9 @@ Where the Impact Adjustment is negative for projects that advance mission and bu
 #### Option B: Impact-Integrated Beta
 Fold impact factors into the beta itself by including the B-Corp engagement factors (mission alignment, human-rights risk, environmental impact and circularity, responsible marketing and transparency) in the Layer Two scoring table alongside the standard engagement risk factors. This produces a single blended beta that captures both financial and impact risk in one number. Simpler to calculate but harder to decompose when you need to explain decisions to stakeholders with different priorities.
 
-**Recommendation:** Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical. The app currently presents this as an [impact-adjusted B-Corp card](../index.html#bcorp-card) that keeps the standard hurdle visible while showing the shift to `E(R*)`.
+**Recommendation:** Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical. The current Decision Cards build presents this as an [impact-adjusted B-Corp card](../index.html#bcorp-card) that keeps the standard hurdle visible while showing the shift to `E(R*)`.
+
+In the current Decision Cards implementation, the B-Corp calibration is intentionally moderate rather than aggressive. The portfolio-level B-Corp score is neutral at its midpoint and only widens or narrows the adjustment around that center. The engagement-level B-Corp score then moves the hurdle by about one margin point per point of deviation from its midpoint before that portfolio modifier is applied. For the exact current implementation and worked sanity checks, see the [calibration notes](../tldr/calibration-notes.html).
 
 ![B-Corp impact-adjusted return illustration showing how mission-aligned work can move below the standard financial hurdle while harmful work must clear a higher one.](./figures/bcorp-impact-adjusted-return.png)
 

@@ -1,0 +1,13 @@
+{
+  "name": "capm-for-agencies",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Static decision cards and theory pages for CAPM for Agencies.",
+  "scripts": {
+    "build:static": "python3 scripts/build_static_pages.py",
+    "check:app": "node scripts/check-app.js",
+    "check:generated": "node scripts/verify-generated.js",
+    "test": "node --test",
+    "ci": "npm run check:app && npm test && npm run build:static && npm run check:generated"
+  }
+}

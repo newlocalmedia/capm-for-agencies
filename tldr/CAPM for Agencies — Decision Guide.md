@@ -12,7 +12,7 @@ The hook is still "price before you plan," but in practice that means price befo
 
 CAPM in one sentence: it is a finance model for deciding what return is worth a given level of risk. In this agency version, it helps you separate portfolio risk from deal risk, set a minimum acceptable margin, and decide whether the work deserves a yes at the quoted price.
 
-Run the workflow in the app:
+Run the workflow in the decision cards:
 
 * [Layer 1 card](../index.html#layer1-card)
 * [Layer 2 card](../index.html#layer2-card)
@@ -61,11 +61,11 @@ Score the six Layer 1 factors in the [Layer 1 card](../index.html#layer1-card):
 * revenue concentration
 * rate pressure
 
-In the app, the combined Layer 1 score maps to a **systematic adjustment factor**:
+In the decision cards, the combined Layer 1 score maps to a **systematic adjustment factor**:
 
 * `6` maps to `0.85`
 * `18` maps to `1.00`
-* `30` maps to `1.25`
+* `30` maps to `1.15`
 
 This factor sets the pricing environment for every engagement.
 
@@ -114,7 +114,7 @@ The model is not complete when you know the hurdle. It is complete when you comp
 
 ## Step 6 — Decide
 
-In the current app:
+In the current decision-card build:
 
 | Outcome | Condition | Action |
 | ----- | ----- | ----- |
@@ -133,7 +133,14 @@ If you are using the [B-Corp card](../index.html#bcorp-card), do one more pass:
 * review the **impact adjustment**
 * compare the proposed margin against **impact-adjusted** <em>E</em>(<em>R</em>*)
 
-In the current app, the B-Corp card keeps the standard hurdle visible, then shows how mission discount or harm premium shifts it up or down.
+In the current decision-card build, the B-Corp card keeps the standard hurdle visible, then shows how mission discount or harm premium shifts it up or down.
+
+The current calibration is intentionally moderate:
+
+* the B-Corp portfolio score is neutral at its midpoint and only widens or narrows the adjustment around that center
+* each B-Corp engagement point away from the midpoint is worth about one margin point before the portfolio modifier is applied
+
+If you want the implementation details and sanity-test scenarios, read the [calibration notes](./calibration-notes.html).
 
 ## Step 8 — Use The Pure Approach Correctly
 
