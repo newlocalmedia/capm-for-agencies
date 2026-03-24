@@ -49,11 +49,16 @@ A deeper implementation note for the current scoring ranges, scenario tests, and
 
 In agency terms:
 
-**Minimum Margin = Base Margin + Blended β × Risk Premium**
+**Minimum Margin = Base Margin + (Engagement β × Layer 1 factor) × Risk Premium**
 
-Where Blended β = (Engagement Score / 21) × Systematic Adjustment Factor
+Where:
 
-In the current decision-card calibration, the Layer 1 adjustment factor is centered on `1.00` at the midpoint score, and the B-Corp overlay uses a neutral midpoint plus moderate widening or narrowing of the impact adjustment rather than an aggressive default amplification. See the [calibration notes](./tldr/calibration-notes.html).
+- `Engagement β = Engagement Score / 21`
+- `Blended β = Engagement β × Layer 1 factor`
+
+This midpoint-anchored mapping is a deliberate design choice. A neutral Layer 2 engagement score maps to market-like `β = 1.0`, rather than forcing the low end to `β = 0`. That prevents zero-risk pricing while preserving more headroom for difficult deals.
+
+In the current decision-card calibration, the Layer 1 adjustment factor is centered on `1.00` at the midpoint score, and the B-Corp overlay uses a neutral midpoint plus moderate widening or narrowing of the impact adjustment rather than an aggressive default amplification. Neutral operational engagement risk maps to market-like beta, and neutral B-Corp impact maps to no mission discount or harm premium. See the [calibration notes](./tldr/calibration-notes.html).
 
 ## What this is good for
 

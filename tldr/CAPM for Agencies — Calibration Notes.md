@@ -52,6 +52,8 @@ The current hybrid implementation is:
 * **Blended** `β = (Engagement Score / 21) × Layer 1 factor`
 * **Required Margin** <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Blended <em>β</em> × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)
 
+This is a midpoint-anchored calibration, not an endpoint-anchored one. A neutral Layer 2 engagement score maps to market-like `β = 1.0`. The low end does not collapse to `β = 0`, which intentionally prevents zero-risk pricing while preserving more headroom for difficult deals.
+
 The decision thresholds are:
 
 * **Go**: proposed margin is at or above <em>E</em>(<em>R</em>)
@@ -76,7 +78,7 @@ So the current automatic adjustment is:
 
 * `Impact Adjustment = (B-Corp L2 score - 12) × 1.0 × portfolio modifier`
 
-This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium.
+This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium. It is also midpoint-anchored by design: neutral B-Corp impact maps to no mission discount or harm premium, while more strongly aligned or more harmful work moves the hurdle down or up from that center.
 
 ## Sanity-Test Scenarios
 

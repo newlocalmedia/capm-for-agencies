@@ -930,7 +930,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="mobile-score-list" id="layer1-mobile-scores" aria-label="Layer 1 mobile scoring"></div>
+    <div class="mobile-score-list" id="layer1-mobile-scores" role="group" aria-label="Layer 1 mobile scoring"></div>
 
     <span class="section-label">Systematic Adjustment Factor</span>
     <div class="calc-panel">
@@ -1075,7 +1075,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="mobile-score-list" id="layer2-mobile-scores" aria-label="Layer 2 mobile scoring"></div>
+    <div class="mobile-score-list" id="layer2-mobile-scores" role="group" aria-label="Layer 2 mobile scoring"></div>
 
     <span class="section-label">CAPM Decision Calculator</span>
     <div class="calc-panel">
@@ -1316,7 +1316,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="mobile-score-list" id="bcorp-l1-mobile-scores" aria-label="B-Corp Layer 1 mobile scoring"></div>
+    <div class="mobile-score-list" id="bcorp-l1-mobile-scores" role="group" aria-label="B-Corp Layer 1 mobile scoring"></div>
 
     <span class="section-label">B-Corp Engagement Factors (extends Layer 2)</span>
     <table class="score-table" id="bcorp-l2-table" data-layer="bcorp_l2">
@@ -1377,7 +1377,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="mobile-score-list" id="bcorp-l2-mobile-scores" aria-label="B-Corp Layer 2 mobile scoring"></div>
+    <div class="mobile-score-list" id="bcorp-l2-mobile-scores" role="group" aria-label="B-Corp Layer 2 mobile scoring"></div>
 
     <span class="section-label">Impact-Adjusted CAPM Calculator</span>
     <div class="calc-panel">
@@ -1572,6 +1572,7 @@
     dirty: true,
     lastExportSignature: null
   };
+  let helpContentId = 0;
 
   function getScoreGuide(layer, factor, row) {
     const configured = scoreGuides[layer] && scoreGuides[layer][factor];
@@ -1590,10 +1591,11 @@
   }
 
   function buildFactorHelpMarkup(question, guide, factorName) {
+    const bodyId = 'factor-help-' + (++helpContentId);
     return (
       '<details class="factor-help">' +
-        '<summary>How to score this<span class="sr-only"> for ' + escapeHtml(factorName) + '</span></summary>' +
-        '<div class="factor-help-body">' +
+        '<summary aria-controls="' + bodyId + '" aria-expanded="false">How to score this<span class="sr-only"> for ' + escapeHtml(factorName) + '</span></summary>' +
+        '<div class="factor-help-body" id="' + bodyId + '">' +
           '<p>' + escapeHtml(question) + '</p>' +
           '<div class="factor-scale">' +
             guide.map((label, index) => (
@@ -1605,15 +1607,45 @@
     );
   }
 
+  function getRadioTabIndex(currentValue, buttonValue) {
+    if (currentValue) return currentValue === buttonValue ? '0' : '-1';
+    return buttonValue === 1 ? '0' : '-1';
+  }
+
   function syncScoreButtonAccessibility(row, layer, factor) {
     const factorName = row.querySelector('.factor-name')?.textContent.trim() || factor;
     const guide = getScoreGuide(layer, factor, row);
+    const currentValue = state[layer][factor];
+    row.setAttribute('role', 'radiogroup');
+    row.setAttribute('aria-label', factorName + ' score');
     row.querySelectorAll('.score-btn').forEach((button, index) => {
       const val = index + 1;
       button.setAttribute('type', 'button');
+      button.setAttribute('role', 'radio');
       button.setAttribute('aria-label', factorName + ', score ' + val + ' of 5: ' + guide[index]);
-      button.setAttribute('aria-pressed', state[layer][factor] === val ? 'true' : 'false');
+      button.setAttribute('aria-checked', currentValue === val ? 'true' : 'false');
+      button.setAttribute('tabindex', getRadioTabIndex(currentValue, val));
     });
+  }
+
+  function handleScoreRadioKeydown(event, layer, factor, values) {
+    const currentTarget = event.currentTarget;
+    const currentValue = parseInt(currentTarget.dataset.val, 10);
+    let nextValue = null;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextValue = Math.min(values, currentValue + 1);
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextValue = Math.max(1, currentValue - 1);
+    if (event.key === 'Home') nextValue = 1;
+    if (event.key === 'End') nextValue = values;
+
+    if (nextValue === null) return;
+
+    event.preventDefault();
+    applyScore(layer, factor, nextValue);
+
+    const group = currentTarget.closest('[role="radiogroup"]');
+    const nextButton = group ? group.querySelector('[data-val="' + nextValue + '"]') : null;
+    nextButton?.focus();
   }
 
   function enhanceScoreTables() {
@@ -1632,6 +1664,11 @@
         }
 
         syncScoreButtonAccessibility(row, layer, factor);
+        row.querySelectorAll('.score-btn').forEach((button) => {
+          if (button.dataset.keyboardBound === 'true') return;
+          button.dataset.keyboardBound = 'true';
+          button.addEventListener('keydown', (event) => handleScoreRadioKeydown(event, layer, factor, 5));
+        });
       });
     });
   }
@@ -1642,10 +1679,12 @@
 
     row.querySelectorAll('.score-btn').forEach((button) => {
       button.className = 'score-btn';
-      button.setAttribute('aria-pressed', 'false');
+      button.setAttribute('aria-checked', 'false');
+      button.setAttribute('tabindex', '-1');
       if (parseInt(button.dataset.val) === val) {
         button.className = 'score-btn selected-' + val;
-        button.setAttribute('aria-pressed', 'true');
+        button.setAttribute('aria-checked', 'true');
+        button.setAttribute('tabindex', '0');
       }
     });
   }
@@ -1661,10 +1700,12 @@
 
     card.querySelectorAll('.mobile-score-option').forEach((option) => {
       option.className = 'mobile-score-option';
-      option.setAttribute('aria-pressed', 'false');
+      option.setAttribute('aria-checked', 'false');
+      option.setAttribute('tabindex', '-1');
       if (parseInt(option.dataset.val) === val) {
         option.className = 'mobile-score-option selected-' + val;
-        option.setAttribute('aria-pressed', 'true');
+        option.setAttribute('aria-checked', 'true');
+        option.setAttribute('tabindex', '0');
       }
     });
   }
@@ -1744,13 +1785,41 @@
   function initInfoTips() {
     document.querySelectorAll('.info-tip').forEach((tip) => {
       const summary = tip.querySelector('summary');
+      const content = tip.querySelector('.tooltip-text');
+      if (summary && content && !content.id) {
+        const contentId = 'info-tip-' + (++helpContentId);
+        content.id = contentId;
+        summary.setAttribute('aria-controls', contentId);
+        summary.setAttribute('aria-expanded', tip.open ? 'true' : 'false');
+      }
+    });
+
+    document.querySelectorAll('.factor-help').forEach((help) => {
+      const summary = help.querySelector('summary');
+      const content = help.querySelector('.factor-help-body');
+      if (summary && content) {
+        summary.setAttribute('aria-controls', content.id);
+        summary.setAttribute('aria-expanded', help.open ? 'true' : 'false');
+      }
+    });
+
+    document.querySelectorAll('.info-tip').forEach((tip) => {
+      const summary = tip.querySelector('summary');
       if (summary) {
         summary.addEventListener('click', () => {
           if (!tip.open) closeInfoTips(tip);
         });
       }
       tip.addEventListener('toggle', () => {
+        if (summary) summary.setAttribute('aria-expanded', tip.open ? 'true' : 'false');
         if (tip.open) closeInfoTips(tip);
+      });
+    });
+
+    document.querySelectorAll('.factor-help').forEach((help) => {
+      const summary = help.querySelector('summary');
+      help.addEventListener('toggle', () => {
+        if (summary) summary.setAttribute('aria-expanded', help.open ? 'true' : 'false');
       });
     });
 
@@ -1821,11 +1890,12 @@
               escapeHtml(activeValue ? (activeValue + ' · ' + activeLabel) : activeLabel) +
             '</div>' +
           '</div>' +
-          '<div class="mobile-score-strip" role="group" aria-label="' + safeName + ' score">' +
+          '<div class="mobile-score-strip" role="radiogroup" aria-label="' + safeName + ' score">' +
             [1, 2, 3, 4, 5].map((val) => {
               const selectedClass = activeValue === val ? ' selected-' + val : '';
-              const pressed = activeValue === val ? 'true' : 'false';
-              return '<button type="button" class="mobile-score-option' + selectedClass + '" data-val="' + val + '" aria-pressed="' + pressed + '" aria-label="' + safeName + ', score ' + val + ' of 5: ' + escapeHtml(labels[val - 1]) + '">' + val + '</button>';
+              const checked = activeValue === val ? 'true' : 'false';
+              const tabIndex = activeValue ? (activeValue === val ? '0' : '-1') : (val === 1 ? '0' : '-1');
+              return '<button type="button" role="radio" class="mobile-score-option' + selectedClass + '" data-val="' + val + '" aria-checked="' + checked + '" tabindex="' + tabIndex + '" aria-label="' + safeName + ', score ' + val + ' of 5: ' + escapeHtml(labels[val - 1]) + '">' + val + '</button>';
             }).join('') +
           '</div>' +
           '<div class="mobile-score-anchors"><span>' + safeLeft + '</span><span>' + safeRight + '</span></div>' +
@@ -1872,6 +1942,7 @@
           option.addEventListener('click', () => {
             applyScore(layer, factor, parseInt(option.dataset.val));
           });
+          option.addEventListener('keydown', (event) => handleScoreRadioKeydown(event, layer, factor, 5));
         });
       });
     });
@@ -2125,6 +2196,13 @@
     return axesMarkup;
   }
 
+  function setAccessibleChartMarkup(svg, titleId, titleText, descId, descText, bodyMarkup) {
+    svg.innerHTML =
+      '<title id="' + titleId + '">' + escapeHtml(titleText) + '</title>' +
+      '<desc id="' + descId + '">' + escapeHtml(descText) + '</desc>' +
+      bodyMarkup;
+  }
+
   function getDealMetrics() {
     const price = parseFloat(document.getElementById('deal-price').value);
     const cost = parseFloat(document.getElementById('deal-cost').value);
@@ -2160,7 +2238,8 @@
       const ghostX = placeholderXScale(1.1);
       const ghostY = placeholderYScale(placeholderLineY(1.1));
 
-      svg.innerHTML =
+      const descText = 'Placeholder CAPM line chart showing the required-margin line, the Rf intercept, and the location where the current engagement will plot once Layer 2 is fully scored.';
+      setAccessibleChartMarkup(svg, 'l2-chart-title', 'CAPM line chart', 'l2-chart-desc', descText,
         '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="10" fill="rgba(255,255,255,0.6)"></rect>' +
         buildAxesMarkup({ width, height, margin, xMax: placeholderXMax, yMax: placeholderYMax, xScaleFn: placeholderXScale, yScaleFn: placeholderYScale }) +
         '<line x1="' + placeholderXScale(0) + '" y1="' + placeholderYScale(placeholderRf) + '" x2="' + placeholderXScale(placeholderXMax) + '" y2="' + placeholderYScale(placeholderLineY(placeholderXMax)) + '" stroke="rgba(43,76,126,0.55)" stroke-width="4"></line>' +
@@ -2185,7 +2264,8 @@
           stroke: 'rgba(203,137,34,0.20)',
           chartWidth: width,
           chartHeight: height
-        }).markup;
+        }).markup
+      );
       note.innerHTML = 'The chart always shows the CAPM frame. Score all Layer 2 factors and enter the Layer 1 factor to plot the engagement against <em>E</em>(<em>R</em>).';
       return;
     }
@@ -2266,13 +2346,18 @@
       }).markup;
     }
 
-    svg.innerHTML = markup;
-
     note.innerHTML = 'The blue line shows the minimum acceptable margin across blended <em>β</em> values. ' +
       'This engagement sits at <strong>' + data.blended.toFixed(2) + '</strong> blended <em>β</em>. ' +
       (data.hasDeal
         ? 'The current deal is <strong>' + gapLabel + '</strong> relative to the hurdle.'
         : 'Enter deal price and estimated delivery cost to plot the proposed margin against the line.');
+    const descText =
+      'The Line chart. The CAPM hurdle starts at ' + data.rf.toFixed(1) + ' percent and reaches a required margin of ' +
+      data.er.toFixed(1) + ' percent at blended beta ' + data.blended.toFixed(2) + '. ' +
+      (data.hasDeal
+        ? 'The proposed margin is ' + data.proposedMargin.toFixed(1) + ' percent, which is ' + gapLabel + ' relative to the hurdle.'
+        : 'A proposed margin is not plotted yet because deal price and estimated delivery cost are missing.');
+    setAccessibleChartMarkup(svg, 'l2-chart-title', 'CAPM line chart', 'l2-chart-desc', descText, markup);
   }
 
   function renderBcorpChart(data) {
@@ -2295,7 +2380,8 @@
       const markerX = xScale(1.1);
       const markerY = yScale(lineY(1.1));
 
-      svg.innerHTML =
+      const descText = 'Placeholder B-Corp impact chart showing where the standard hurdle and the impact-adjusted hurdle will appear for the current engagement once the B-Corp factors are scored.';
+      setAccessibleChartMarkup(svg, 'bc-chart-title', 'B-Corp impact-adjusted chart', 'bc-chart-desc', descText,
         '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="10" fill="rgba(255,255,255,0.6)"></rect>' +
         buildAxesMarkup({ width, height, margin, xMax, yMax, xScaleFn: xScale, yScaleFn: yScale }) +
         '<line x1="' + xScale(0) + '" y1="' + yScale(10) + '" x2="' + xScale(xMax) + '" y2="' + yScale(lineY(xMax)) + '" stroke="rgba(43,76,126,0.45)" stroke-width="4"></line>' +
@@ -2308,7 +2394,8 @@
           stroke: 'rgba(58,125,92,0.20)',
           chartWidth: width,
           chartHeight: height
-        }).markup;
+        }).markup
+      );
       note.innerHTML = 'Score the B-Corp factors to show how the impact adjustment shifts the hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).';
       return;
     }
@@ -2373,10 +2460,16 @@
       }).markup;
     });
 
-    svg.innerHTML = markup;
-
     const adjustmentLabel = (data.adjustment >= 0 ? '+' : '') + data.adjustment.toFixed(1) + ' pts';
     note.innerHTML = 'At <strong>' + data.blended.toFixed(2) + '</strong> blended <em>β</em>, the B-Corp adjustment shifts the hurdle by <strong>' + adjustmentLabel + '</strong> from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).';
+    const descText =
+      'B-Corp impact chart. At blended beta ' + data.blended.toFixed(2) + ', the standard hurdle is ' +
+      data.standardEr.toFixed(1) + ' percent and the impact-adjusted hurdle is ' + data.adjustedEr.toFixed(1) +
+      ' percent, a shift of ' + adjustmentLabel + '. ' +
+      (data.hasDeal
+        ? 'The proposed margin is ' + data.proposedMargin.toFixed(1) + ' percent.'
+        : 'A proposed margin is not plotted yet because deal price and estimated delivery cost are missing.');
+    setAccessibleChartMarkup(svg, 'bc-chart-title', 'B-Corp impact-adjusted chart', 'bc-chart-desc', descText, markup);
   }
 
   function calcLayer2() {

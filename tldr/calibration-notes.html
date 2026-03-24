@@ -697,6 +697,7 @@ The systematic adjustment factor now maps:</p>
 <li>
 <strong>Required Margin</strong> <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Blended <em>β</em> × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)</li>
 </ul>
+<p>This is a midpoint-anchored calibration, not an endpoint-anchored one. A neutral Layer 2 engagement score maps to market-like <code>β = 1.0</code>. The low end does not collapse to <code>β = 0</code>, which intentionally prevents zero-risk pricing while preserving more headroom for difficult deals.</p>
 <p>The decision thresholds are:</p>
 <ul>
 <li>
@@ -726,7 +727,7 @@ The systematic adjustment factor now maps:</p>
 <ul>
 <li><code>Impact Adjustment = (B-Corp L2 score - 12) × 1.0 × portfolio modifier</code></li>
 </ul>
-<p>This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium.</p>
+<p>This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium. It is also midpoint-anchored by design: neutral B-Corp impact maps to no mission discount or harm premium, while more strongly aligned or more harmful work moves the hurdle down or up from that center.</p>
 <h2 id="sanity-test-scenarios">Sanity-Test Scenarios</h2>
 <p>The scenarios below were run against the live form and checked against the displayed outputs.</p>
 <h3 id="scenario-1--calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</h3>
