@@ -53,6 +53,7 @@ BODY_FONT = load_font(GEORGIA, 24)
 SMALL_FONT = load_font(GEORGIA, 20)
 MONO_FONT = load_font(MENLO, 20)
 MONO_SMALL = load_font(MENLO, 17)
+MONO_TINY = load_font(MENLO, 15)
 
 
 @dataclass
@@ -122,7 +123,7 @@ def draw_axes(draw: ImageDraw.ImageDraw, area: PlotArea, x_ticks: Iterable[float
         text(draw, (px, py0 + 18), f"{x:.1f}", MONO_SMALL, fill=COLORS["muted"], anchor="ma")
 
     text(draw, ((area.x0 + area.x1) // 2, area.y1 + 62), x_label, LABEL_FONT, fill=COLORS["muted"], anchor="ma")
-    text(draw, (area.x0 - 72, (area.y0 + area.y1) // 2), y_label, LABEL_FONT, fill=COLORS["muted"], anchor="ma")
+    text(draw, (area.x0, area.y0 - 34), y_label, LABEL_FONT, fill=COLORS["muted"])
 
 
 def draw_line(draw: ImageDraw.ImageDraw, area: PlotArea, points: list[tuple[float, float]], fill: str, width: int = 6):
@@ -165,6 +166,27 @@ def label_box(draw: ImageDraw.ImageDraw, xy: tuple[int, int], label: str, fill: 
     text(draw, (x + w // 2, y + h // 2 + 1), label, MONO_FONT, fill=text_fill, anchor="mm")
 
 
+def text_box(
+    draw: ImageDraw.ImageDraw,
+    xy: tuple[int, int],
+    value: str,
+    font,
+    fill: str = COLORS["ink"],
+    background: str = "#fffaf4",
+    padding: tuple[int, int] = (12, 9),
+    radius: int = 16,
+    outline: str = COLORS["line"],
+):
+    x, y = xy
+    lines = value.split("\n")
+    widths = [draw.textlength(line, font=font) for line in lines] or [0]
+    line_height = font.size + 6 if hasattr(font, "size") else 26
+    w = int(max(widths)) + padding[0] * 2
+    h = line_height * len(lines) + padding[1] * 2 - 6
+    draw.rounded_rectangle((x, y, x + w, y + h), radius=radius, fill=background, outline=outline, width=2)
+    multiline_text(draw, (x + padding[0], y + padding[1] - 2), value, font, fill=fill, spacing=6)
+
+
 def save_outputs(img: Image.Image, stem: str):
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     png_path = OUT_DIR / f"{stem}.png"
@@ -191,8 +213,8 @@ def wrap_text(draw: ImageDraw.ImageDraw, value: str, font, width: int) -> str:
 
 def build_security_market_line():
     img, draw = new_canvas()
-    draw_title(draw, "Security Market Line", "The baseline CAPM view: higher beta demands higher return.")
-    area = PlotArea(200, 250, 1120, 820, 2.2, 30, 0, 0)
+    draw_title(draw, "Securities Market Line", "The baseline CAPM view: higher beta demands higher return.")
+    area = PlotArea(220, 250, 1050, 820, 2.2, 30, 0, 0)
     draw_axes(draw, area, [0.0, 0.5, 1.0, 1.5, 2.0], [5, 10, 15, 20, 25, 30], "β (systematic risk)", "Required return")
 
     rf = 8
@@ -202,7 +224,7 @@ def build_security_market_line():
     circle(draw, rf_point, 10, COLORS["accent"])
     text(draw, (rf_point[0] + 22, rf_point[1] - 18), "R_f", MONO_FONT, fill=COLORS["accent"])
 
-    above = area.map(1.45, 24.5)
+    above = area.map(1.38, 24.5)
     below = area.map(1.55, 18.0)
     on_line = area.map(0.85, rf + premium * 0.85)
 
@@ -210,28 +232,28 @@ def build_security_market_line():
     circle(draw, below, 12, COLORS["red"])
     circle(draw, on_line, 11, COLORS["blue"])
 
-    text(draw, (above[0] + 20, above[1] - 28), "Above the line:\npriced better than required", BODY_FONT, fill=COLORS["green"])
-    text(draw, (below[0] + 22, below[1] - 12), "Below the line:\nunderpricing risk", BODY_FONT, fill=COLORS["red"])
-    text(draw, (on_line[0] - 12, on_line[1] - 54), "On the line:\nmeets the hurdle", BODY_FONT, fill=COLORS["blue"], anchor="ra")
+    text_box(draw, (above[0] + 16, above[1] - 40), "Above the line\npriced better than required", BODY_FONT, fill=COLORS["green"])
+    text_box(draw, (below[0] + 24, below[1] - 26), "Below the line\nunderpricing risk", BODY_FONT, fill=COLORS["red"])
+    text_box(draw, (on_line[0] - 230, on_line[1] - 78), "On the line\nmeets the hurdle", BODY_FONT, fill=COLORS["blue"])
 
-    callout = (1160, 286, 1510, 650)
+    callout = (1110, 286, 1514, 664)
     draw.rounded_rectangle(callout, radius=26, fill="#fffaf4", outline=COLORS["line"], width=2)
-    label_box(draw, (1190, 316), "E(R) = R_f + β × (R_m − R_f)", COLORS["blue"])
+    label_box(draw, (1138, 316), "E(R) = R_f + β × (R_m − R_f)", COLORS["blue"])
     explainer = (
         "For agency work, the line is a minimum acceptable margin.\n\n"
         "The intercept is your baseline low-risk margin.\n"
         "The slope is the reward required for taking on more systematic risk."
     )
-    wrapped = "\n\n".join(wrap_text(draw, block, BODY_FONT, 280) for block in explainer.split("\n\n"))
-    multiline_text(draw, (1190, 382), wrapped, BODY_FONT, fill=COLORS["ink"], spacing=10)
+    wrapped = "\n\n".join(wrap_text(draw, block, BODY_FONT, 340) for block in explainer.split("\n\n"))
+    multiline_text(draw, (1140, 382), wrapped, BODY_FONT, fill=COLORS["ink"], spacing=10)
     save_outputs(img, "security-market-line")
 
 
 def build_layer1_calibration():
     img, draw = new_canvas()
     draw_title(draw, "Layer One: Systematic Calibration", "Systematic conditions rotate the line steeper or flatter for every deal.")
-    area = PlotArea(180, 250, 1120, 820, 2.2, 34, 0, 0)
-    draw_axes(draw, area, [0.0, 0.5, 1.0, 1.5, 2.0], [5, 10, 15, 20, 25, 30], "β (baseline engagement risk)", "Required margin")
+    area = PlotArea(200, 250, 1050, 820, 2.2, 34, 0, 0)
+    draw_axes(draw, area, [0.0, 0.5, 1.0, 1.5, 2.0], [5, 10, 15, 20, 25, 30], "β (baseline engagement risk)", "Required return")
 
     rf = 9
     calm = [(0, rf), (2.0, 21)]
@@ -244,37 +266,34 @@ def build_layer1_calibration():
     beta = 1.2
     px, _ = area.map(beta, 0)
     draw.line((px, area.y0, px, area.y1), fill=COLORS["gold"], width=3)
-    for name, point, color in [
-        ("Calm market", area.map(beta, rf + (21 - rf) / 2.0 * beta), COLORS["green"]),
-        ("Normal market", area.map(beta, rf + (25 - rf) / 2.0 * beta), COLORS["blue"]),
-        ("Turbulent market", area.map(beta, rf + (30 - rf) / 2.0 * beta), COLORS["accent"]),
+    for name, point, color, offset in [
+        ("Calm market", area.map(beta, rf + (21 - rf) / 2.0 * beta), COLORS["green"], (22, -4)),
+        ("Normal market", area.map(beta, rf + (25 - rf) / 2.0 * beta), COLORS["blue"], (22, -10)),
+        ("Turbulent market", area.map(beta, rf + (30 - rf) / 2.0 * beta), COLORS["accent"], (22, -18)),
     ]:
         circle(draw, point, 10, color)
-        text(draw, (point[0] + 20, point[1] - 10), name, BODY_FONT, fill=color)
+        text_box(draw, (point[0] + offset[0], point[1] + offset[1]), name, SMALL_FONT, fill=color)
 
     draw.polygon([(930, 255), (965, 255), (948, 215)], fill=COLORS["accent"])
     text(draw, (1000, 206), "Talent crunch, platform instability,\nregulatory repricing", BODY_FONT, fill=COLORS["accent"])
     text(draw, (992, 680), "Same engagement beta.\nDifferent margin hurdle\nonce Layer One changes.", LABEL_FONT, fill=COLORS["ink"])
 
-    formula_box = (1160, 286, 1510, 648)
+    formula_box = (1110, 286, 1514, 646)
     draw.rounded_rectangle(formula_box, radius=26, fill="#fffaf4", outline=COLORS["line"], width=2)
-    label_box(draw, (1190, 316), "L1 Output", COLORS["accent"])
+    label_box(draw, (1138, 316), "L1 Output", COLORS["accent"])
     explainer = (
-        "Periodic portfolio review sets:\n\n"
-        "• the baseline risk premium\n"
-        "• what β = 1.0 means right now\n"
-        "• whether the whole line gets steeper or flatter"
+        "Periodic portfolio review sets the baseline risk premium, what β = 1.0 means right now, and whether the whole line gets steeper or flatter."
     )
-    wrapped = "\n\n".join(wrap_text(draw, block, BODY_FONT, 290) for block in explainer.split("\n\n"))
-    multiline_text(draw, (1190, 382), wrapped, BODY_FONT, spacing=11)
+    wrapped = wrap_text(draw, explainer, BODY_FONT, 344)
+    multiline_text(draw, (1140, 388), wrapped, BODY_FONT, spacing=11)
     save_outputs(img, "layer1-systematic-calibration")
 
 
 def build_layer2_blended_beta():
     img, draw = new_canvas()
     draw_title(draw, "Layer Two: Blended Beta", "Engagement score plus Layer One factor produces the pricing-governance coefficient.")
-    area = PlotArea(180, 250, 1120, 820, 2.2, 34, 0, 0)
-    draw_axes(draw, area, [0.0, 0.5, 1.0, 1.5, 2.0], [5, 10, 15, 20, 25, 30], "Blended β", "Required margin")
+    area = PlotArea(200, 250, 1050, 820, 2.2, 34, 0, 0)
+    draw_axes(draw, area, [0.0, 0.5, 1.0, 1.5, 2.0], [5, 10, 15, 20, 25, 30], "Blended β", "Required return")
 
     rf = 9
     line_end = 28
@@ -292,21 +311,29 @@ def build_layer2_blended_beta():
         dashed_line(draw, req_pt, prop_pt, fill=color, width=3)
         circle(draw, req_pt, 9, COLORS["blue"])
         circle(draw, prop_pt, 12, color)
-        text(draw, (prop_pt[0] + 18, prop_pt[1] - 16), f"{label}\n{verdict}", BODY_FONT, fill=color)
+        label_x = prop_pt[0] + 18
+        label_y = prop_pt[1] - 26
+        if label == "Stretch project":
+            label_x = prop_pt[0] + 16
+            label_y = prop_pt[1] - 48
+        if label == "Money pit":
+            label_x = prop_pt[0] + 12
+            label_y = prop_pt[1] - 6
+        text_box(draw, (label_x, label_y), f"{label}\n{verdict}", SMALL_FONT, fill=color)
 
-    formula_box = (1160, 254, 1510, 708)
+    formula_box = (1110, 254, 1514, 708)
     draw.rounded_rectangle(formula_box, radius=26, fill="#fffaf4", outline=COLORS["line"], width=2)
-    label_box(draw, (1190, 280), "Hybrid formula", COLORS["blue"])
+    label_box(draw, (1138, 280), "Hybrid formula", COLORS["blue"])
     formula = "Blended β =\n(Engagement score / 21)\n× Layer One factor"
-    multiline_text(draw, (1190, 342), formula, MONO_FONT, fill=COLORS["ink"], spacing=11)
+    multiline_text(draw, (1140, 342), formula, MONO_FONT, fill=COLORS["ink"], spacing=11)
     note = (
         "This is not market covariance.\n"
         "It is a governance coefficient\n"
         "for comparing proposed margin\n"
         "to the required margin."
     )
-    multiline_text(draw, (1190, 470), note, BODY_FONT, fill=COLORS["ink"], spacing=10)
-    text(draw, (1190, 630), "Governance, not precision.", LABEL_FONT, fill=COLORS["accent"])
+    multiline_text(draw, (1140, 470), note, BODY_FONT, fill=COLORS["ink"], spacing=10)
+    text(draw, (1140, 628), "Governance, not precision.", LABEL_FONT, fill=COLORS["accent"])
     save_outputs(img, "layer2-blended-beta")
 
 
@@ -320,6 +347,48 @@ def draw_panel_box(draw: ImageDraw.ImageDraw, box: tuple[int, int, int, int], ti
 def draw_panel_axes(draw: ImageDraw.ImageDraw, area: PlotArea):
     draw.line((area.x0, area.y0, area.x0, area.y1), fill=COLORS["axis"], width=2)
     draw.line((area.x0, area.y1, area.x1, area.y1), fill=COLORS["axis"], width=2)
+
+
+def build_bcorp_adjustment():
+    img, draw = new_canvas()
+    draw_title(draw, "B-Corp CAPM: Impact-Adjusted Return", "Mission-aligned work can clear a lower financial hurdle; harmful work must clear a higher one.")
+    area = PlotArea(200, 250, 1050, 820, 2.2, 34, 0, 0)
+    draw_axes(draw, area, [0.0, 0.5, 1.0, 1.5, 2.0], [5, 10, 15, 20, 25, 30], "Blended β", "Required return")
+
+    rf = 9
+    line_end = 27
+    draw_line(draw, area, [(0, rf), (2.0, line_end)], COLORS["blue"], width=6)
+
+    mission_beta = 1.05
+    harm_beta = 1.68
+    mission_std = rf + (line_end - rf) / 2.0 * mission_beta
+    harm_std = rf + (line_end - rf) / 2.0 * harm_beta
+    mission_adj = mission_std - 3.2
+    harm_adj = harm_std + 3.5
+
+    mission_ghost = area.map(mission_beta, mission_std)
+    mission_real = area.map(mission_beta, mission_adj)
+    harm_ghost = area.map(harm_beta, harm_std)
+    harm_real = area.map(harm_beta, harm_adj)
+
+    for start, end, color in [(mission_ghost, mission_real, COLORS["green"]), (harm_ghost, harm_real, COLORS["red"])]:
+        dashed_line(draw, start, end, fill=color, width=3)
+        circle(draw, start, 8, COLORS["paper_deep"], outline=COLORS["muted"], width=2)
+        circle(draw, end, 11, color)
+
+    text_box(draw, (mission_real[0] + 16, mission_real[1] - 42), "Mission-aligned\nimpact discount", SMALL_FONT, fill=COLORS["green"])
+    text_box(draw, (harm_real[0] + 18, harm_real[1] - 42), "Mission tension or harm\nimpact premium", SMALL_FONT, fill=COLORS["red"])
+    text_box(draw, (mission_ghost[0] - 78, mission_ghost[1] - 80), "Standard E(R)", SMALL_FONT, fill=COLORS["muted"])
+
+    formula_box = (1110, 286, 1514, 676)
+    draw.rounded_rectangle(formula_box, radius=26, fill="#fffaf4", outline=COLORS["line"], width=2)
+    label_box(draw, (1138, 316), "E(R*) = E(R) + impact adjustment", COLORS["green"])
+    explainer = (
+        "Negative adjustment:\nmission-aligned, low-harm work\ncan justify a conscious discount.\n\n"
+        "Positive adjustment:\nmission-inconsistent or harmful\nwork must clear a higher hurdle."
+    )
+    multiline_text(draw, (1140, 380), explainer, BODY_FONT, fill=COLORS["ink"], spacing=10)
+    save_outputs(img, "bcorp-impact-adjusted-return")
 
 
 def build_comparison():
@@ -358,8 +427,8 @@ def build_comparison():
     for label, x, y, color in [("Asset A", 0.8, 15.5, COLORS["blue"]), ("Asset B", 1.6, 23.0, COLORS["green"])]:
         pt = areas[0].map(x, y)
         circle(draw, pt, 9, color)
-        text(draw, (pt[0] + 14, pt[1] - 14), label, SMALL_FONT, fill=color)
-    text(draw, (boxes[0][0] + 26, boxes[0][3] - 48), "Question: does return justify risk?", SMALL_FONT, fill=COLORS["muted"])
+        text_box(draw, (pt[0] + 14, pt[1] - 28), label, SMALL_FONT, fill=color)
+    text(draw, (boxes[0][0] + 26, boxes[0][3] - 48), wrap_text(draw, "Question: does return justify risk?", SMALL_FONT, 250), SMALL_FONT, fill=COLORS["muted"])
 
     # Layered panel
     draw_line(draw, areas[1], [(0, rf), (2.0, 22)], COLORS["green"], width=4)
@@ -370,8 +439,8 @@ def build_comparison():
     dashed_line(draw, req, deal, fill=COLORS["gold"], width=3)
     circle(draw, req, 8, COLORS["blue"])
     circle(draw, deal, 10, COLORS["gold"])
-    text(draw, (deal[0] + 12, deal[1] - 10), "Actual deal", SMALL_FONT, fill=COLORS["gold"])
-    text(draw, (boxes[1][0] + 26, boxes[1][3] - 48), "Question: does the deal clear the hurdle?", SMALL_FONT, fill=COLORS["muted"])
+    text_box(draw, (deal[0] + 12, deal[1] - 22), "Actual deal", SMALL_FONT, fill=COLORS["gold"])
+    multiline_text(draw, (boxes[1][0] + 26, boxes[1][3] - 62), wrap_text(draw, "Question: does the deal clear the hurdle?", SMALL_FONT, 258), SMALL_FONT, fill=COLORS["muted"], spacing=5)
 
     # B-Corp panel
     draw_line(draw, areas[2], [(0, rf), (2.0, 27)], COLORS["blue"], width=5)
@@ -383,9 +452,9 @@ def build_comparison():
         dashed_line(draw, start, end, fill=color, width=3)
         circle(draw, start, 8, COLORS["paper_deep"], outline=COLORS["muted"], width=2)
         circle(draw, end, 10, color)
-    text(draw, (mission_real[0] + 14, mission_real[1] - 16), "Mission-aligned\nimpact discount", SMALL_FONT, fill=COLORS["green"])
-    text(draw, (harm_real[0] + 14, harm_real[1] - 12), "Harm premium", SMALL_FONT, fill=COLORS["red"])
-    text(draw, (boxes[2][0] + 26, boxes[2][3] - 48), "Question: what risk and impact should clear?", SMALL_FONT, fill=COLORS["muted"])
+    text_box(draw, (mission_real[0] + 14, mission_real[1] - 34), "Mission-aligned\nimpact discount", SMALL_FONT, fill=COLORS["green"])
+    text_box(draw, (harm_real[0] + 12, harm_real[1] - 24), "Harm premium", SMALL_FONT, fill=COLORS["red"])
+    multiline_text(draw, (boxes[2][0] + 26, boxes[2][3] - 78), wrap_text(draw, "Question: what risk and impact should clear?", SMALL_FONT, 250), SMALL_FONT, fill=COLORS["muted"], spacing=5)
 
     save_outputs(img, "capm-comparison")
 
@@ -395,6 +464,7 @@ def main():
     build_security_market_line()
     build_layer1_calibration()
     build_layer2_blended_beta()
+    build_bcorp_adjustment()
     build_comparison()
     print(f"built figures in {OUT_DIR.relative_to(ROOT)}")
 

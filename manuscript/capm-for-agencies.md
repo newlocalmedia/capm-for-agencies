@@ -528,9 +528,13 @@ Fold impact factors into the beta itself by including the B-Corp engagement fact
 
 **Recommendation:** Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical.
 
+![B-Corp impact-adjusted return illustration showing how mission-aligned work can move below the standard financial hurdle while harmful work must clear a higher one.](./figures/bcorp-impact-adjusted-return.png)
+
+*Figure 4. B-Corp impact-adjusted return illustration. [PDF version](./figures/bcorp-impact-adjusted-return.pdf).*
+
 ![Comparison illustration showing standard CAPM, layered agency CAPM, and B-Corp CAPM with impact-adjusted movement above or below the financial hurdle.](./figures/capm-comparison.png)
 
-*Figure 4. Standard, layered, and B-Corp CAPM comparison illustration. [PDF version](./figures/capm-comparison.pdf).*
+*Figure 5. Standard, layered, and B-Corp CAPM comparison illustration. [PDF version](./figures/capm-comparison.pdf).*
 
 Reviewing the diagram above, refer back to the original CAPM model and our two agency adaptations to see how they differ but are fundamentally related.
 

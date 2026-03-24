@@ -370,6 +370,11 @@ PAGE_STYLE = """
     box-shadow: 0 18px 36px rgba(32, 29, 26, 0.08);
   }
 
+  .prose a:has(> img) {
+    display: inline-block;
+    cursor: zoom-in;
+  }
+
   .prose .lead {
     font-size: 1.18rem;
     color: #38322d;
@@ -391,6 +396,60 @@ PAGE_STYLE = """
 
   .site-footer a {
     color: var(--blue);
+  }
+
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+    background: rgba(24, 21, 18, 0.82);
+    z-index: 9999;
+  }
+
+  .lightbox.is-open {
+    display: flex;
+  }
+
+  .lightbox-dialog {
+    position: relative;
+    max-width: min(94vw, 1600px);
+    max-height: 94vh;
+  }
+
+  .lightbox-image {
+    display: block;
+    max-width: 100%;
+    max-height: calc(94vh - 48px);
+    width: auto;
+    height: auto;
+    border-radius: 18px;
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+    background: #fffdf8;
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: -16px;
+    right: -16px;
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(32, 29, 26, 0.88);
+    color: #fffdf8;
+    cursor: pointer;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .lightbox-caption {
+    margin-top: 12px;
+    text-align: center;
+    color: #f3ede3;
+    font-size: 0.95rem;
   }
 
   @media (max-width: 980px) {
@@ -573,6 +632,58 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
   </script>
 """ if page["lead"] else ""
 
+    lightbox_script = """
+  <script>
+    const lightbox = document.querySelector('[data-lightbox]');
+    const lightboxImage = lightbox?.querySelector('[data-lightbox-image]');
+    const lightboxCaption = lightbox?.querySelector('[data-lightbox-caption]');
+    const lightboxClose = lightbox?.querySelector('[data-lightbox-close]');
+    const imageLinks = document.querySelectorAll('.prose a[href$=".png"], .prose a[href$=".jpg"], .prose a[href$=".jpeg"], .prose a[href$=".webp"]');
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function openLightbox(href, altText) {
+      if (!lightbox || !lightboxImage) return;
+      lightboxImage.src = href;
+      lightboxImage.alt = altText || '';
+      if (lightboxCaption) {
+        lightboxCaption.textContent = altText || '';
+      }
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    imageLinks.forEach((link) => {
+      const image = link.querySelector('img');
+      if (!image) return;
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        openLightbox(link.getAttribute('href'), image.getAttribute('alt'));
+      });
+    });
+
+    lightbox?.addEventListener('click', (event) => {
+      if (event.target === lightbox) {
+        closeLightbox();
+      }
+    });
+
+    lightboxClose?.addEventListener('click', closeLightbox);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  </script>
+"""
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -621,7 +732,15 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
       </main>
     </div>
   </div>
+  <div class="lightbox" data-lightbox aria-hidden="true">
+    <div class="lightbox-dialog" role="dialog" aria-modal="true" aria-label="Expanded image view">
+      <button class="lightbox-close" type="button" aria-label="Close image" data-lightbox-close>&times;</button>
+      <img class="lightbox-image" src="" alt="" data-lightbox-image>
+      <div class="lightbox-caption" data-lightbox-caption></div>
+    </div>
+  </div>
 {lead_script}
+{lightbox_script}
 </body>
 </html>
 """
