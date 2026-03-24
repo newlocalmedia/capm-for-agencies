@@ -54,6 +54,8 @@ SMALL_FONT = load_font(GEORGIA, 20)
 MONO_FONT = load_font(MENLO, 20)
 MONO_SMALL = load_font(MENLO, 17)
 MONO_TINY = load_font(MENLO, 15)
+ITALIC_FONT = load_font(GEORGIA_ITALIC, 24)
+ITALIC_SMALL = load_font(GEORGIA_ITALIC, 18)
 
 
 @dataclass
@@ -158,12 +160,26 @@ def dashed_line(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[in
         dist += dash + gap
 
 
-def label_box(draw: ImageDraw.ImageDraw, xy: tuple[int, int], label: str, fill: str, text_fill: str = COLORS["white"]):
+def label_box(
+    draw: ImageDraw.ImageDraw,
+    xy: tuple[int, int],
+    label: str,
+    fill: str,
+    text_fill: str = COLORS["white"],
+    font=MONO_FONT,
+):
     x, y = xy
-    w = int(draw.textlength(label, font=MONO_FONT)) + 28
+    w = int(draw.textlength(label, font=font)) + 28
     h = 38
     draw.rounded_rectangle((x, y, x + w, y + h), radius=16, fill=fill)
-    text(draw, (x + w // 2, y + h // 2 + 1), label, MONO_FONT, fill=text_fill, anchor="mm")
+    text(draw, (x + w // 2, y + h // 2 + 1), label, font, fill=text_fill, anchor="mm")
+
+
+def draw_rf_label(draw: ImageDraw.ImageDraw, xy: tuple[int, int], fill: str):
+    x, y = xy
+    text(draw, (x, y), "R", ITALIC_FONT, fill=fill)
+    r_width = draw.textlength("R", font=ITALIC_FONT)
+    text(draw, (int(x + r_width + 2), y + 9), "f", ITALIC_SMALL, fill=fill)
 
 
 def text_box(
@@ -222,7 +238,7 @@ def build_security_market_line():
     draw_line(draw, area, [(0, rf), (2.0, rf + premium * 2.0)], COLORS["accent"], width=7)
     rf_point = area.map(0, rf)
     circle(draw, rf_point, 10, COLORS["accent"])
-    text(draw, (rf_point[0] + 22, rf_point[1] - 18), "R_f", MONO_FONT, fill=COLORS["accent"])
+    draw_rf_label(draw, (rf_point[0] + 28, rf_point[1] + 6), COLORS["accent"])
 
     above = area.map(1.38, 24.5)
     below = area.map(1.55, 18.0)
@@ -314,8 +330,8 @@ def build_layer2_blended_beta():
         label_x = prop_pt[0] + 18
         label_y = prop_pt[1] - 26
         if label == "Stretch project":
-            label_x = prop_pt[0] + 16
-            label_y = prop_pt[1] - 48
+            label_x = prop_pt[0] - 66
+            label_y = prop_pt[1] - 76
         if label == "Money pit":
             label_x = prop_pt[0] + 12
             label_y = prop_pt[1] - 6
@@ -377,12 +393,12 @@ def build_bcorp_adjustment():
         circle(draw, end, 11, color)
 
     text_box(draw, (mission_real[0] + 16, mission_real[1] - 42), "Mission-aligned\nimpact discount", SMALL_FONT, fill=COLORS["green"])
-    text_box(draw, (harm_real[0] + 18, harm_real[1] - 42), "Mission tension or harm\nimpact premium", SMALL_FONT, fill=COLORS["red"])
+    text_box(draw, (harm_real[0] - 66, harm_real[1] - 90), "Mission tension or harm\nimpact premium", SMALL_FONT, fill=COLORS["red"])
     text_box(draw, (mission_ghost[0] - 78, mission_ghost[1] - 80), "Standard E(R)", SMALL_FONT, fill=COLORS["muted"])
 
-    formula_box = (1110, 286, 1514, 676)
+    formula_box = (1110, 286, 1536, 676)
     draw.rounded_rectangle(formula_box, radius=26, fill="#fffaf4", outline=COLORS["line"], width=2)
-    label_box(draw, (1138, 316), "E(R*) = E(R) + impact adjustment", COLORS["green"])
+    label_box(draw, (1138, 316), "E(R*) = E(R) + impact adjustment", COLORS["green"], font=MONO_TINY)
     explainer = (
         "Negative adjustment:\nmission-aligned, low-harm work\ncan justify a conscious discount.\n\n"
         "Positive adjustment:\nmission-inconsistent or harmful\nwork must clear a higher hurdle."
@@ -395,7 +411,7 @@ def build_comparison():
     img, draw = new_canvas()
     draw_title(draw, "Standard, Layered, and B-Corp CAPM", "Same structure, different uses: finance model, pricing governance, and impact-adjusted governance.")
 
-    panel_w = 392
+    panel_w = 402
     gutter = 36
     top = 240
     left = 96
@@ -428,7 +444,8 @@ def build_comparison():
         pt = areas[0].map(x, y)
         circle(draw, pt, 9, color)
         text_box(draw, (pt[0] + 14, pt[1] - 28), label, SMALL_FONT, fill=color)
-    text(draw, (boxes[0][0] + 26, boxes[0][3] - 48), wrap_text(draw, "Question: does return justify risk?", SMALL_FONT, 250), SMALL_FONT, fill=COLORS["muted"])
+    question_y = 744
+    multiline_text(draw, (areas[0].x0, question_y), wrap_text(draw, "Question: does return justify risk?", SMALL_FONT, 248), SMALL_FONT, fill=COLORS["muted"], spacing=5)
 
     # Layered panel
     draw_line(draw, areas[1], [(0, rf), (2.0, 22)], COLORS["green"], width=4)
@@ -440,7 +457,7 @@ def build_comparison():
     circle(draw, req, 8, COLORS["blue"])
     circle(draw, deal, 10, COLORS["gold"])
     text_box(draw, (deal[0] + 12, deal[1] - 22), "Actual deal", SMALL_FONT, fill=COLORS["gold"])
-    multiline_text(draw, (boxes[1][0] + 26, boxes[1][3] - 62), wrap_text(draw, "Question: does the deal clear the hurdle?", SMALL_FONT, 258), SMALL_FONT, fill=COLORS["muted"], spacing=5)
+    multiline_text(draw, (areas[1].x0, question_y), wrap_text(draw, "Question: does the deal clear the hurdle?", SMALL_FONT, 248), SMALL_FONT, fill=COLORS["muted"], spacing=5)
 
     # B-Corp panel
     draw_line(draw, areas[2], [(0, rf), (2.0, 27)], COLORS["blue"], width=5)
@@ -453,8 +470,8 @@ def build_comparison():
         circle(draw, start, 8, COLORS["paper_deep"], outline=COLORS["muted"], width=2)
         circle(draw, end, 10, color)
     text_box(draw, (mission_real[0] + 14, mission_real[1] - 34), "Mission-aligned\nimpact discount", SMALL_FONT, fill=COLORS["green"])
-    text_box(draw, (harm_real[0] + 12, harm_real[1] - 24), "Harm premium", SMALL_FONT, fill=COLORS["red"])
-    multiline_text(draw, (boxes[2][0] + 26, boxes[2][3] - 78), wrap_text(draw, "Question: what risk and impact should clear?", SMALL_FONT, 250), SMALL_FONT, fill=COLORS["muted"], spacing=5)
+    text_box(draw, (harm_real[0] - 18, harm_real[1] - 64), "Harm premium", SMALL_FONT, fill=COLORS["red"])
+    multiline_text(draw, (areas[2].x0, question_y), wrap_text(draw, "Question: what risk and impact should clear?", SMALL_FONT, 248), SMALL_FONT, fill=COLORS["muted"], spacing=5)
 
     save_outputs(img, "capm-comparison")
 
