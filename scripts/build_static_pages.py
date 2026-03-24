@@ -421,6 +421,7 @@ PAGES = [
             ("Open the App", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
             ("Short Overview", "../tldr/price-the-work-before-you-plan-it.html", "secondary"),
+            ("Decision Guide", "../tldr/decision-guide.html", "secondary"),
         ],
         "toc_min": 2,
         "toc_max": 4,
