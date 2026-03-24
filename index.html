@@ -46,6 +46,31 @@
     margin: 0 auto 40px;
     text-align: center;
   }
+  .header-links {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+  .header-link {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+    background: rgba(43,76,126,0.08);
+    border: 1px solid rgba(43,76,126,0.16);
+    border-radius: 999px;
+    padding: 8px 12px;
+    text-decoration: none;
+  }
+  .header-link:hover {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
   .header h1 {
     font-size: 28px;
     font-weight: 700;
@@ -463,6 +488,10 @@
 <body>
 
 <div class="header">
+  <div class="header-links">
+    <a class="header-link" href="text/">Text Overview</a>
+    <a class="header-link" href="https://github.com/newlocalmedia/capm-for-agencies/blob/main/manuscript/capm-for-agencies.md">Full Manuscript</a>
+  </div>
   <h1>CAPM for Agencies — Decision Cards</h1>
   <p>Two-layer risk assessment with scoring and calculators</p>
 </div>
