@@ -1,10 +1,10 @@
 # CAPM for Agencies
-
 *The Capital Asset Pricing Model Applied to Agency Project Pricing and Risk Assessment*
-
 Dan Knauss • March 2026
 
 ## Executive Summary
+
+The goal of CAPM for Agencies is to **price the work before you plan it**. It ensures that the agency is always compensated fairly for the uncertainty it accepts, protecting long-term profitability and sustainability.
 
 ### The Problem: "Gut-Feel" Pricing
 Most agencies price project risk using arbitrary contingency percentages or hourly padding. These methods fail to distinguish between **systematic risks** (market-wide forces you cannot control) and **idiosyncratic risks** (project-specific variables that should wash out across a healthy portfolio).
@@ -23,9 +23,6 @@ By adapting the **Capital Asset Pricing Model (CAPM)** from financial economics,
 1. **Disciplined Go/No-Go Decisions:** Provides the math to say "no" to high-risk, low-margin "money pits" with data-backed confidence.  
 2. **Cross-Functional Alignment:** Engages solutions, technical, and sales teams in a shared language for risk translation before a contract is signed.  
 3. **B-Corp Integration:** For impact-driven agencies, the model allows for a "conscious mission discount" on high-impact work while penalizing mission-inconsistent projects with higher margin requirements.
-
-### Conclusion
-The goal of CAPM for Agencies is to **price the work before you plan it**. It ensures that the agency is always compensated fairly for the uncertainty it accepts, protecting long-term profitability and sustainability.
 
 ## Overview
 Most small to mid-sized agencies (and even more large ones than want to admit it) price risk through gut-feel contingency percentages, hourly padding, or by shifting uncertainty onto clients via retainer models — none of which distinguish between the kinds of risk that matter most when they’re realized in events. These are the systematic risks that can’t be controlled. 
