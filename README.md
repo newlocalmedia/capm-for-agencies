@@ -27,7 +27,7 @@ Download reference cards from the `pdf/` directory:
 - `capm-b-corp-engagement-risk.pdf` — B-Corp impact-adjusted risk card only.
 
 ### Text Overview
-A text-first landing page lives in `text/index.html`.
+A text-first landing page lives in `overview/index.html`.
 
 ### Manuscript
 The long-form theory and commentary live in `manuscript/capm-for-agencies.md`.
