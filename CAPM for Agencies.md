@@ -572,39 +572,39 @@ B Lab's stakeholder governance framework is explicit: the corporate and financia
 
 ### **3\. Expand the Systematic Risk Table**
 
-The Layer One systematic risk review in the base CAPM for Agencies framework covers platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure. A B-Corp version adds dimensions specific to multi-stakeholder governance:
+The Layer One systematic risk review in the base CAPM for Agencies framework covers platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure. A B-Corp version adds dimensions closer to current B Lab concepts and to the agency systems that shape the whole portfolio:
 
 | B-Corp Systematic Factor | What It Measures | 1 | 3 | 5 |
 | ----- | ----- | ----- | ----- | ----- |
-| **Stakeholder Alignment** | Are your clients' values and practices consistent with your mission? | Strong alignment across the portfolio | Mixed; some tension | Significant misalignment threatens certification |
-| **Impact Measurement Risk** | Are the standards you're certified against stable and clear? | Stable framework, predictable cycle | Known changes, adaptation underway | Major framework overhaul or credibility crisis |
-| **Supply Chain Ethics** | Are your vendors, hosting partners, and subcontractors maintaining standards? | Verified ethical practices | Some gaps are manageable | Significant violations or opacity |
-| **Greenwashing Exposure** | Is the broader market's erosion of sustainability credibility affecting your differentiation? | The B-Corp brand is strong and differentiated | Growing skepticism, some confusion | Widespread greenwashing undermines all sustainability claims |
-| **Externality Regulatory Risk** | Are new mandates emerging that penalize the externalities your work creates or enables? | No material exposure | Known legislation, adaptation underway | Major mandates repricing digital externalities |
-| **Mission Drift Pressure** | Is financial pressure pushing you to take work that compromises your stated purpose? | Mission fully funded by aligned work | Some compromise necessary | Survival requires significant mission-inconsistent work |
+| **Client Portfolio Alignment** | How aligned is the agency's client mix with its stated purpose? | Portfolio is mostly mission-aligned | Mixed book with manageable tension | Misaligned client mix undermines purpose |
+| **Customer Stewardship Readiness** | How mature are the systems for privacy, security, quality, and customer feedback? | Embedded and consistently applied | Partial and uneven | Weak or largely reactive |
+| **Environmental Stewardship Readiness** | How mature are the agency's environmental policies and client-screening practices? | Embedded and consistently applied | Partial and uneven | Weak or largely reactive |
+| **Stakeholder Governance Readiness** | How strong are the policies, accountability, and oversight around stakeholder governance? | Embedded and consistently applied | Partial and uneven | Weak or largely reactive |
+| **Human Rights Due Diligence** | How well does the agency identify and manage human-rights risk across operations and value chains? | Mature and documented | Partial and improving | Major gaps or weak controls |
+| **Purpose Drift Pressure** | Is financial pressure pushing you to take work that compromises your stated purpose? | Mission fully funded by aligned work | Some compromise necessary | Survival requires significant mission-inconsistent work |
 
-These factors are genuinely systematic for a B-Corp — they hit the whole portfolio, not one project. A crisis in B-Corp credibility, a major shift in the B Impact Assessment framework, or a wave of greenwashing scandals reprices every engagement and every client relationship simultaneously. They are non-diversifiable within the B-Corp model.
+These factors are genuinely systematic for a B-Corp agency because they describe portfolio composition and agency-wide operating readiness, not one project. A weak customer-stewardship system, poor stakeholder governance, or mounting purpose drift changes the risk profile of the whole book of business at once. They are non-diversifiable within the B-Corp model.
 
 ### **4\. Add Mission Alignment to Engagement Scoring**
 
-The Layer Two engagement risk scoring in the base framework evaluates project-specific factors like scope clarity, client track record, and technical complexity. A B-Corp agency adds engagement-level factors that capture impact risk:
+The Layer Two engagement risk scoring in the base framework evaluates project-specific factors like scope clarity, client track record, and technical complexity. A B-Corp agency adds engagement-level factors that capture impact risk in B Lab-adjacent terms:
 
 | B-Corp Engagement Factor | 1 | 2 | 3 | 4 | 5 |
 | ----- | ----- | ----- | ----- | ----- | ----- |
 | **Mission Alignment** | Core to purpose | Strongly aligned | Neutral | Tension with purpose | Contradicts mission |
-| **Externality Profile** | Net positive impact | Some positive impact | Neutral | Some negative externalities | Significant harm enabled |
-| **Stakeholder Impact** | Broad benefit across stakeholders | Benefit to several groups | No material impact | Harm to some stakeholders | Exploitation or extraction |
-| **Certification Risk** | Strengthens B-Corp standing | No impact | Minor tension | Potential audit concern | Jeopardizes certification |
+| **Human Rights Risk** | Low and well-managed | Some exposure, controlled | Neutral or unclear | Elevated harm risk | Severe harm risk |
+| **Environmental Impact & Circularity** | Regenerative or clearly positive | Light footprint | Neutral | Heavy footprint | Extractive or wasteful |
+| **Responsible Marketing & Transparency** | Clear and evidence-based | Sound with minor caveats | Neutral | Aggressive or overstated | Misleading or non-transparent |
 
-In the hybrid approach, these factors fold into the blended beta alongside the standard engagement risk factors. An engagement that scores poorly on mission alignment and externality profile gets a *higher* effective beta — meaning it requires a higher financial margin to justify the risk — even if its scope is clear and the client is well-known. This is because mission-inconsistent work threatens the non-financial assets (reputation, certification, team morale, stakeholder trust) that the B-Corp depends on across its entire portfolio.
+In the hybrid approach, these factors fold into the blended beta alongside the standard engagement risk factors. An engagement that scores poorly on mission alignment, human-rights risk, environmental footprint, or transparency gets a *higher* effective beta — meaning it requires a higher financial margin to justify the risk — even if its scope is clear and the client is well-known. This is because mission-inconsistent or harmful work threatens the non-financial assets (reputation, certification, team morale, stakeholder trust) that the B-Corp depends on across its entire portfolio.
 
 ### **5\. Reframe the Go/No-Go Decision**
 
 In a standard agency CAPM, you walk away when the financial margin cannot clear the hurdle rate. A B-Corp agency has a more complex decision matrix:
 
-**High financial return, negative impact:** An engagement that clears the financial hurdle but fails the impact test — a high-margin project for a client whose operations create negative externalities that the agency would be enabling. Standard CAPM says go. B-Corp CAPM may say stop, because the engagement increases externality risk and mission drift pressure across the portfolio.
+**High financial return, negative impact:** An engagement that clears the financial hurdle but fails the impact test — for example, a high-margin project that increases surveillance, greenwashes impact claims, or creates material human-rights or environmental harm. Standard CAPM says go. B-Corp CAPM may say stop, because the engagement increases harm exposure and mission drift pressure across the portfolio.
 
-**Low financial return, high impact:** An engagement that sits below the financial hurdle but generates enough positive externality return to justify the investment — accessible technology for underserved communities, sustainability infrastructure, or projects that reduce environmental footprint at scale. Standard CAPM says walk away. B-Corp CAPM says go, with a conscious and documented "mission discount" — the difference between the financial hurdle and the actual margin, explicitly priced and tracked rather than absorbed invisibly.
+**Low financial return, high impact:** An engagement that sits below the financial hurdle but generates enough positive impact to justify the investment — accessible technology for underserved communities, sustainability infrastructure, or projects that reduce environmental footprint at scale. Standard CAPM says walk away. B-Corp CAPM says go, with a conscious and documented "mission discount" — the difference between the financial hurdle and the actual margin, explicitly priced and tracked rather than absorbed invisibly.
 
 **The conscious greenium:** Research on sustainable investing within CAPM models finds that investments with strong ESG characteristics may carry a financial return discount — a "greenium" — compensated by non-pecuniary utility. For a B-Corp agency, this means being honest that mission-aligned work may carry a financial margin discount and pricing that discount explicitly. If the blended beta on a mission-aligned engagement produces a minimum margin of 25%, and the agency is willing to accept 20% because the impact return makes up the difference, that is a conscious strategic decision documented in the model — not a vague feeling about "doing good."
 
@@ -624,7 +624,7 @@ Where the Impact Adjustment is negative for projects that advance mission and bu
 
 ### **Option B: Impact-Integrated Beta**
 
-Fold impact factors into the beta itself by including the B-Corp engagement factors (mission alignment, externality profile, stakeholder impact, certification risk) in the Layer Two scoring table alongside the standard engagement risk factors. This produces a single blended beta that captures both financial and impact risk in one number. Simpler to calculate but harder to decompose when you need to explain decisions to stakeholders with different priorities.
+Fold impact factors into the beta itself by including the B-Corp engagement factors (mission alignment, human-rights risk, environmental impact and circularity, responsible marketing and transparency) in the Layer Two scoring table alongside the standard engagement risk factors. This produces a single blended beta that captures both financial and impact risk in one number. Simpler to calculate but harder to decompose when you need to explain decisions to stakeholders with different priorities.
 
 **Recommendation:** Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical.
 
