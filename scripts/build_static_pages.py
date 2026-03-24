@@ -420,7 +420,7 @@ PAGES = [
         "actions": [
             ("Open the App", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
-            ("Short Overview", "../tldr/price-the-work-before-you-plan-it.html", "secondary"),
+            ("TL;DR", "../tldr/price-the-work-before-you-plan-it.html", "secondary"),
             ("Decision Guide", "../tldr/decision-guide.html", "secondary"),
         ],
         "toc_min": 2,
@@ -456,7 +456,7 @@ PAGES = [
         "actions": [
             ("Open the App", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
-            ("Short Overview", "./price-the-work-before-you-plan-it.html", "secondary"),
+            ("TL;DR", "./price-the-work-before-you-plan-it.html", "secondary"),
             ("Full Manuscript", "../manuscript/index.html", "secondary"),
         ],
         "toc_min": 2,
