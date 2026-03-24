@@ -530,7 +530,7 @@
     <p class="card-intro">
       <strong>Who:</strong> Solutions team, project managers, senior developers, account managers.<br>
       <strong>When:</strong> During presales or discovery for each engagement.<br>
-      <strong>Output:</strong> Engagement risk index (pure) or blended β (hybrid), feeding the CAPM minimum margin.
+      <strong>Output:</strong> Engagement risk index (pure) or blended β (hybrid), feeding the CAPM minimum margin and a comparison against the proposed deal margin.
     </p>
 
     <span class="section-label">Engagement Risk Scoring</span>
@@ -626,25 +626,33 @@
       </tbody>
     </table>
 
-    <span class="section-label">CAPM Calculator</span>
+    <span class="section-label">CAPM Decision Calculator</span>
     <div class="calc-panel">
       <div class="calc-row">
         <div class="calc-field">
-          <label>Risk-Free Rate (Rf)</label>
-          <div><input type="number" id="rf" value="10" step="1" oninput="calcLayer2()"><span class="unit">%</span></div>
+          <label>Base Margin / Agency Rf</label>
+          <div><input type="number" id="rf" value="10" step="0.1" oninput="calcLayer2()"><span class="unit">%</span></div>
         </div>
         <div class="calc-field">
-          <label>Market Return (Rm)</label>
-          <div><input type="number" id="rm" value="22" step="1" oninput="calcLayer2()"><span class="unit">%</span></div>
+          <label>Portfolio Margin / Rm</label>
+          <div><input type="number" id="rm" value="22" step="0.1" oninput="calcLayer2()"><span class="unit">%</span></div>
         </div>
         <div class="calc-field">
           <label>L1 Adj. Factor</label>
           <div><input type="number" id="l1-input" value="" step="0.01" placeholder="—" oninput="calcLayer2()"></div>
         </div>
+        <div class="calc-field">
+          <label>Deal Price</label>
+          <div><input type="number" id="deal-price" value="" step="100" placeholder="0" oninput="calcLayer2()"><span class="unit">$</span></div>
+        </div>
+        <div class="calc-field">
+          <label>Estimated Delivery Cost</label>
+          <div><input type="number" id="deal-cost" value="" step="100" placeholder="0" oninput="calcLayer2()"><span class="unit">$</span></div>
+        </div>
       </div>
 
       <div class="formula-bar" id="l2-formula">
-        <strong>Hybrid:</strong> E(R) = <span class="hl">Rf</span> + (<span class="hl2">Engagement β</span> × <span class="hl">L1 Factor</span>) × (<span class="hl">Rm</span> − <span class="hl">Rf</span>) — score all factors to calculate
+        <strong>Hybrid:</strong> E(R) = <span class="hl">Rf</span> + (<span class="hl2">Engagement β</span> × <span class="hl">L1 Factor</span>) × (<span class="hl">Rm</span> − <span class="hl">Rf</span>) — then compare the proposed deal margin against E(R)
       </div>
 
       <div class="result-box">
@@ -664,16 +672,32 @@
           <span class="result-sub" id="l2-blended-sub">× L1 factor</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Min. Margin E(R)</span>
+          <span class="result-label">Required Margin E(R)</span>
           <span class="result-value accent" id="l2-er">—</span>
           <span class="result-sub" id="l2-er-sub">required return</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Proposed Margin</span>
+          <span class="result-value accent" id="l2-proposed">—</span>
+          <span class="result-sub" id="l2-proposed-sub">enter price and cost</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Margin Gap</span>
+          <span class="result-value accent" id="l2-gap">—</span>
+          <span class="result-sub" id="l2-gap-sub">proposed - required</span>
+        </div>
+        <div class="result-item">
+          <span class="result-label">Min. Deal Price</span>
+          <span class="result-value accent" id="l2-min-price">—</span>
+          <span class="result-sub" id="l2-min-price-sub">needed to clear E(R)</span>
         </div>
       </div>
       <div id="l2-verdict"></div>
 
       <div class="approach-note">
-        <strong>Pure approach:</strong> Use the engagement score (of 35) as a risk index to size per-project contingency. The CAPM minimum margin comes from Layer One alone: E(R) = Rf + L1 Factor × (Rm − Rf).<br>
-        <strong>Hybrid approach:</strong> Blended β = (Engagement Score / 21) × L1 Factor. This feeds directly into the CAPM formula for a per-engagement minimum margin.
+        <strong>Pure approach:</strong> Use the engagement score (of 35) as a risk index to size per-project contingency. The CAPM minimum margin comes from Layer One alone: E(R) = Rf + L1 Factor × (Rm − Rf), and the proposed deal margin should still be checked against that hurdle.<br>
+        <strong>Hybrid approach:</strong> Blended β = (Engagement Score / 21) × L1 Factor. This feeds directly into the CAPM formula for a per-engagement minimum margin.<br>
+        <strong>Governance note:</strong> This hybrid calculator is a heuristic decision tool, not a statistically correct pricing engine. Its main value is internal alignment, presales discipline, and postmortem calibration.
       </div>
     </div>
   </div>
@@ -960,6 +984,23 @@
     }
   }
 
+  function formatMoney(amount) {
+    return '$' + Math.round(amount).toLocaleString('en-US');
+  }
+
+  function getDealMetrics() {
+    const price = parseFloat(document.getElementById('deal-price').value);
+    const cost = parseFloat(document.getElementById('deal-cost').value);
+
+    if (isNaN(price) || price <= 0 || isNaN(cost) || cost < 0) return null;
+
+    return {
+      price,
+      cost,
+      proposedMargin: ((price - cost) / price) * 100
+    };
+  }
+
   function calcLayer2() {
     const vals = Object.values(state.layer2);
     const sum = vals.reduce((a,b) => a+b, 0);
@@ -970,6 +1011,22 @@
     const rm = parseFloat(document.getElementById('rm').value) || 0;
     const l1f = parseFloat(document.getElementById('l1-input').value);
     const premium = rm - rf;
+    const deal = getDealMetrics();
+
+    if (deal) {
+      const proposedMargin = Math.round(deal.proposedMargin * 10) / 10;
+      document.getElementById('l2-proposed').textContent = proposedMargin.toFixed(1) + '%';
+      document.getElementById('l2-proposed-sub').textContent =
+        formatMoney(deal.price) + ' - ' + formatMoney(deal.cost) + ' over ' + formatMoney(deal.price);
+    } else {
+      document.getElementById('l2-proposed').textContent = '—';
+      document.getElementById('l2-proposed-sub').textContent = 'enter price and cost';
+    }
+
+    document.getElementById('l2-gap').textContent = '—';
+    document.getElementById('l2-gap-sub').textContent = 'proposed - required';
+    document.getElementById('l2-min-price').textContent = '—';
+    document.getElementById('l2-min-price-sub').textContent = 'needed to clear E(R)';
 
     if (count > 0) {
       document.getElementById('l2-raw').textContent = sum;
@@ -990,16 +1047,34 @@
           document.getElementById('l2-formula').innerHTML =
             '<strong>Hybrid:</strong> E(R) = <span class="hl">' + rf + '%</span> + (<span class="hl2">' + engBeta.toFixed(2) + '</span> × <span class="hl">' + l1f.toFixed(2) + '</span>) × <span class="hl">' + premium + '%</span> = <strong>' + er.toFixed(1) + '%</strong>';
 
-          // Verdict
-          let verdict = '';
-          if (er <= rm) {
-            verdict = '<span class="verdict go">Go — within normal margins</span>';
-          } else if (er <= rm * 1.35) {
-            verdict = '<span class="verdict caution">Caution — renegotiate terms or reduce scope</span>';
+          if (deal) {
+            const proposedMargin = Math.round(deal.proposedMargin * 10) / 10;
+            const gap = Math.round((proposedMargin - er) * 10) / 10;
+            document.getElementById('l2-gap').textContent = (gap >= 0 ? '+' : '') + gap.toFixed(1) + '%';
+            document.getElementById('l2-gap-sub').textContent = proposedMargin.toFixed(1) + '% - ' + er.toFixed(1) + '%';
+
+            if (er < 100) {
+              const minPrice = deal.cost / (1 - (er / 100));
+              document.getElementById('l2-min-price').textContent = formatMoney(minPrice);
+              document.getElementById('l2-min-price-sub').textContent = 'at ' + er.toFixed(1) + '% required margin';
+            } else {
+              document.getElementById('l2-min-price').textContent = 'n/a';
+              document.getElementById('l2-min-price-sub').textContent = 'required margin exceeds 100%';
+            }
+
+            let verdict = '';
+            if (gap >= 0) {
+              verdict = '<span class="verdict go">Go — proposed margin clears the hurdle rate</span>';
+            } else if (gap >= -3) {
+              verdict = '<span class="verdict caution">Caution — close, but below hurdle; reprice or reduce risk</span>';
+            } else {
+              verdict = '<span class="verdict stop">Stop — proposed margin does not cover the required return</span>';
+            }
+            document.getElementById('l2-verdict').innerHTML = verdict;
           } else {
-            verdict = '<span class="verdict stop">Stop — walk away or fundamentally restructure</span>';
+            document.getElementById('l2-verdict').innerHTML =
+              '<span class="verdict caution">Enter deal price and estimated delivery cost to evaluate the proposal</span>';
           }
-          document.getElementById('l2-verdict').innerHTML = verdict;
         } else {
           document.getElementById('l2-blended').textContent = '—';
           document.getElementById('l2-blended-sub').textContent = 'enter L1 factor';
@@ -1011,8 +1086,16 @@
         document.getElementById('l2-beta').textContent = '...';
         document.getElementById('l2-blended').textContent = '—';
         document.getElementById('l2-er').textContent = '—';
+        document.getElementById('l2-er-sub').textContent = 'complete scoring first';
         document.getElementById('l2-verdict').innerHTML = '';
       }
+    } else {
+      document.getElementById('l2-raw').textContent = '—';
+      document.getElementById('l2-beta').textContent = '—';
+      document.getElementById('l2-blended').textContent = '—';
+      document.getElementById('l2-er').textContent = '—';
+      document.getElementById('l2-er-sub').textContent = 'required return';
+      document.getElementById('l2-verdict').innerHTML = '';
     }
     calcBcorp();
   }
@@ -1085,18 +1168,28 @@
   }
 
   function setBcorpVerdict(erStar, impactAdj) {
-    const rm = parseFloat(document.getElementById('rm').value) || 0;
+    const deal = getDealMetrics();
     let verdict = '';
-    if (impactAdj < -3) {
-      verdict = '<span class="verdict go">Mission-aligned — conscious discount justified</span>';
-    } else if (impactAdj > 5) {
-      verdict = '<span class="verdict stop">Impact risk — decline or fundamentally restructure</span>';
-    } else if (erStar <= rm) {
-      verdict = '<span class="verdict go">Go — within margins, impact acceptable</span>';
-    } else if (erStar <= rm * 1.35) {
-      verdict = '<span class="verdict caution">Caution — review impact trade-offs and renegotiate</span>';
+
+    if (!deal) {
+      verdict = '<span class="verdict caution">Enter deal price and estimated delivery cost to evaluate E(R*)</span>';
+      document.getElementById('bc-verdict').innerHTML = verdict;
+      return;
+    }
+
+    const proposedMargin = Math.round(deal.proposedMargin * 10) / 10;
+    const gap = Math.round((proposedMargin - erStar) * 10) / 10;
+
+    if (gap >= 0 && impactAdj < -3) {
+      verdict = '<span class="verdict go">Mission-aligned — conscious discount justified and hurdle cleared</span>';
+    } else if (gap >= 0 && impactAdj > 5) {
+      verdict = '<span class="verdict caution">Harm premium cleared financially — review mission trade-offs explicitly</span>';
+    } else if (gap >= 0) {
+      verdict = '<span class="verdict go">Go — proposed margin clears the impact-adjusted hurdle</span>';
+    } else if (gap >= -3) {
+      verdict = '<span class="verdict caution">Caution — below E(R*); reprice, reduce risk, or document the trade-off</span>';
     } else {
-      verdict = '<span class="verdict stop">Stop — financial and impact risk both elevated</span>';
+      verdict = '<span class="verdict stop">Stop — proposed margin does not clear the impact-adjusted hurdle</span>';
     }
     document.getElementById('bc-verdict').innerHTML = verdict;
   }

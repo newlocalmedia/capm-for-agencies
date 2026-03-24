@@ -6,13 +6,13 @@ Interactive two-layer risk assessment tools for agency project pricing, based on
 
 Most agencies price risk through gut-feel contingency percentages or hourly padding. The CAPM framework gives you a principled, portfolio-aware approach by separating **systematic risk** (forces that hit your whole book of work) from **idiosyncratic risk** (project-specific variables that wash out across engagements).
 
-These playbook cards implement a two-layer risk assessment:
+These playbook cards implement a two-layer risk assessment. In the pure portfolio-level use, the framework stays closer to CAPM as a hurdle-rate model. In the hybrid engagement-level use, it should be treated as heuristic pricing governance rather than a literal asset-pricing engine.
 
 ### Layer 1: Systematic Risk Calibration
 A periodic strategic review (quarterly or on market shift) that scores portfolio-level risk factors: platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure. Produces a systematic adjustment factor that sets the environment for all engagement pricing.
 
 ### Layer 2: Engagement Risk Scoring
-A per-engagement assessment during presales that scores project-specific factors: client track record, scope clarity, technical complexity, internal capacity, contract type, political complexity, and timeline pressure. Combined with the Layer 1 factor, it produces a minimum acceptable margin via the CAPM formula.
+A per-engagement assessment during presales that scores project-specific factors: client track record, scope clarity, technical complexity, internal capacity, contract type, political complexity, and timeline pressure. Combined with the Layer 1 factor, it produces a minimum acceptable margin via the CAPM formula, which then needs to be compared against the proposed deal margin.
 
 ## Usage
 
@@ -36,6 +36,14 @@ In agency terms:
 **Minimum Margin = Base Margin + Blended β × Risk Premium**
 
 Where Blended β = (Engagement Score / 21) × Systematic Adjustment Factor
+
+## What this is good for
+
+- Internal alignment across sales, solutions, delivery, and leadership.
+- Presales discipline before committing to risky work.
+- Postmortem calibration by comparing required margin, proposed margin, and realized outcomes.
+
+This repo is most useful as a shared language for risk naming and deal governance. It is not a quantitatively correct pricing engine on its own.
 
 ## Hosting
 
