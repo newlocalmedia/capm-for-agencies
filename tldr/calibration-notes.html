@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CAPM for Agencies — Short Overview</title>
+<title>CAPM for Agencies — Calibration Notes</title>
 <style>
 
   :root {
@@ -586,17 +586,18 @@
 <body>
   <div class="shell">
     <header class="masthead">
-      <div class="eyebrow">Short Overview</div>
+      <div class="eyebrow">Calibration Notes</div>
       <div class="masthead-grid">
         <div>
-          <h1>Price the Work Before You Plan It</h1>
-          <p class="deck">A short introduction to the CAPM model and the problem we're trying to solve with it: <strong>most agencies price work only after they have started imagining delivery</strong>. Learn what we're borrowing from finance, why the hybrid approach is best understood as pricing governance rather than prediction, and how proposed deal economics either clear the hurdle or fail it. We also explain why enterprise agencies may lean toward the pure approach while small and mid-sized agencies often begin with the hybrid one.</p>
+          <h1>How the Current Decision Cards Are Calibrated</h1>
+          <p class="deck">Implementation detail for people who want it: the current score mappings, the moderation changes to the B-Corp overlay, and a few sanity-test scenarios run against the live calculator.</p>
         </div>
         <div class="meta">
-          <div class="meta-copy">Start here if you want the thesis without the theory. This is the best first read for most people.</div>
+          <div class="meta-copy">Use this when you want to inspect the current decision-card math and calibration choices rather than just use the workflow.</div>
           <div class="actions">
             <a class="button primary" href="../index.html">Open the Decision Cards</a>
 <a class="button secondary" href="../overview/index.html">Overview</a>
+<a class="button secondary" href="./price-the-work-before-you-plan-it.html">TL;DR</a>
 <a class="button secondary" href="./decision-guide.html">Decision Guide</a>
 <a class="button secondary" href="./calibration-notes.html">Calibration Notes</a>
 <a class="button secondary" href="../theory/index.html">Understand the Theory</a>
@@ -609,228 +610,282 @@
       <aside class="toc-card">
         <h2 class="toc-title">On This Page</h2>
         <nav class="toc">
-          <a class="level-2" href="#the-core-idea">The Core Idea</a>
-<a class="level-2" href="#where-different-agencies-start">Where Different Agencies Start</a>
-<a class="level-2" href="#what-most-agencies-get-wrong">What Most Agencies Get Wrong</a>
-<a class="level-3" href="#1-underpricing-systematic-risk">1. Underpricing Systematic Risk</a>
-<a class="level-3" href="#2-mishandling-engagement-risk">2. Mishandling Engagement Risk</a>
-<a class="level-2" href="#the-two-layer-model">The Two-Layer Model</a>
-<a class="level-3" href="#layer-1-systematic-risk">Layer 1: Systematic Risk</a>
-<a class="level-3" href="#layer-2-engagement-risk">Layer 2: Engagement Risk</a>
-<a class="level-2" href="#turning-risk-into-a-decision">Turning Risk Into A Decision</a>
-<a class="level-2" href="#a-simple-example">A Simple Example</a>
-<a class="level-2" href="#why-this-is-useful">Why This Is Useful</a>
-<a class="level-2" href="#what-the-hybrid-model-really-is">What The Hybrid Model Really Is</a>
-<a class="level-2" href="#the-real-shift">The Real Shift</a>
+          <a class="level-3" href="#purpose">Purpose</a>
+<a class="level-2" href="#what-changed">What Changed</a>
+<a class="level-2" href="#current-formula-choices">Current Formula Choices</a>
+<a class="level-3" href="#layer-1">Layer 1</a>
+<a class="level-3" href="#layer-2">Layer 2</a>
+<a class="level-3" href="#b-corp-overlay">B-Corp Overlay</a>
+<a class="level-2" href="#sanity-test-scenarios">Sanity-Test Scenarios</a>
+<a class="level-3" href="#scenario-1--calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</a>
+<a class="level-3" href="#scenario-2--elevated-risk-market-ugly-fixed-price-build">Scenario 2 — Elevated-Risk Market, Ugly Fixed-Price Build</a>
+<a class="level-3" href="#scenario-3--mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B-Corp Work</a>
+<a class="level-3" href="#scenario-4--harmful-but-financially-attractive-work">Scenario 4 — Harmful but Financially Attractive Work</a>
+<a class="level-2" href="#what-to-watch-for">What To Watch For</a>
+<a class="level-2" href="#recommended-use">Recommended Use</a>
         </nav>
       </aside>
 
       <main class="article-card">
         <div class="article-frame">
           <article class="prose">
-            <div class="article-kicker">CAPM for Agencies</div>
-            <h2 id="agencies-price-risk-backwards">Agencies price risk backwards.</h2>
-<aside class="reader-aside">
-  <p class="reader-aside-title">Open the live cards</p>
-  <p>If you want to move between the text and the tool, jump straight into the interactive decision cards:</p>
-  <ul>
-    <li><a href="../index.html#layer1-card">Layer 1 card</a></li>
-    <li><a href="../index.html#layer2-card">Layer 2 card</a></li>
-    <li><a href="../index.html#bcorp-card">B-Corp card</a></li>
-  </ul>
-</aside>
-<p>They plan the work, estimate the hours, add some padding, and hope the margin holds. When things feel uncertain, they increase contingency. When things feel safe, they get aggressive.</p>
-<p>It works until it doesn't.</p>
-<p>The problem is not estimation by itself. The problem is that most agencies never separate the kinds of risk they are taking on. They treat all uncertainty the same, even though some risks are project-specific and some affect the whole business at once.</p>
-<p>That distinction matters.</p>
-<p>In financial economics, the Capital Asset Pricing Model exists to think clearly about exactly this problem. It separates risk into categories and asks a simple question:</p>
-<p>What return is required for this level of exposure?</p>
-<p>That idea translates well to agency work, especially if you treat it as a governance model for pricing decisions rather than as a literal asset-pricing engine.</p>
-<aside class="reader-note">
-  <p><strong>Clarification:</strong> Price before you plan is narrower than it sounds: price before delivery planning is committed, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether implementation or discovery is the thing to sell.</p>
-</aside>
-<h2 id="the-core-idea">The Core Idea</h2>
-<p>Every client engagement is an investment.</p>
-<p>You are investing:</p>
+            
+            <h2 id="capm-for-agencies--calibration-notes">CAPM for Agencies — Calibration Notes</h2>
+<h3 id="purpose">Purpose</h3>
+<p>Use this if you want the implementation details behind the current Decision Cards build: the score mappings, the current calibration choices, and a few sanity-test scenarios run against the live calculator.</p>
+<p>Run the current implementation here:</p>
 <ul>
-<li>time</li>
-<li>capacity</li>
-<li>reputation</li>
-<li>opportunity cost</li>
+<li><a href="../index.html#layer1-card">Layer 1 card</a></li>
+<li><a href="../index.html#layer2-card">Layer 2 card</a></li>
+<li><a href="../index.html#bcorp-card">B-Corp card</a></li>
 </ul>
-<p>The question is not just:</p>
-<p>Can we deliver this project?</p>
-<p>It is:</p>
-<p>Should we take this project at this price?</p>
-<p>Translated to agency work, the model becomes:</p>
-<p><strong>Minimum Acceptable Margin = Base Margin + β × Risk Premium</strong></p>
+<h2 id="what-changed">What Changed</h2>
+<p>Two calibration changes matter in the current build:</p>
+<ol>
+<li>
+<p><strong>Layer 1 is now truly neutral at the midpoint.</strong>
+The systematic adjustment factor now maps:</p>
+<ul>
+<li>
+<code>6</code> to <code>0.85</code>
+</li>
+<li>
+<code>18</code> to <code>1.00</code>
+</li>
+<li>
+<code>30</code> to <code>1.15</code>
+</li>
+</ul>
+<p>This makes the midpoint score behave like a real normal environment instead of quietly pushing the hybrid hurdle upward.</p>
+</li>
+<li>
+<p><strong>The B-Corp overlay is now less aggressive by default.</strong></p>
+<ul>
+<li>the B-Corp portfolio score is neutral at its midpoint</li>
+<li>the portfolio modifier now ranges from <code>0.8</code> to <code>1.2</code>
+</li>
+<li>each B-Corp engagement point away from its midpoint is worth about <code>1.0</code> margin point before that modifier is applied</li>
+</ul>
+<p>This keeps the overlay useful as governance without turning it into a large automatic pricing swing.</p>
+</li>
+</ol>
+<h2 id="current-formula-choices">Current Formula Choices</h2>
+<h3 id="layer-1">Layer 1</h3>
+<p>The Layer 1 composite score is mapped into a <strong>systematic adjustment factor</strong>. In the current build, the range is intentionally moderate:</p>
+<ul>
+<li>lowest environment: <code>0.85</code>
+</li>
+<li>midpoint environment: <code>1.00</code>
+</li>
+<li>highest environment: <code>1.15</code>
+</li>
+</ul>
+<p>That factor is then used in two ways:</p>
+<ul>
+<li>in the <strong>pure approach</strong>, it sets the portfolio-wide hurdle directly</li>
+<li>in the <strong>hybrid approach</strong>, it weights the engagement beta</li>
+</ul>
+<h3 id="layer-2">Layer 2</h3>
+<p>The current hybrid implementation is:</p>
+<ul>
+<li>
+<strong>Engagement</strong> <code>β = Score / 21</code>
+</li>
+<li>
+<strong>Blended</strong> <code>β = (Engagement Score / 21) × Layer 1 factor</code>
+</li>
+<li>
+<strong>Required Margin</strong> <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Blended <em>β</em> × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)</li>
+</ul>
+<p>The decision thresholds are:</p>
+<ul>
+<li>
+<strong>Go</strong>: proposed margin is at or above <em>E</em>(<em>R</em>)</li>
+<li>
+<strong>Caution</strong>: proposed margin is within <code>3</code> margin points below <em>E</em>(<em>R</em>)</li>
+<li>
+<strong>Stop</strong>: proposed margin is more than <code>3</code> points below <em>E</em>(<em>R</em>)</li>
+</ul>
+<h3 id="b-corp-overlay">B-Corp Overlay</h3>
+<p>The current B-Corp implementation uses:</p>
+<ul>
+<li>
+<strong>Standard hurdle</strong>: <em>E</em>(<em>R</em>) from Layer 2</li>
+<li>
+<strong>Impact-adjusted hurdle</strong>: <em>E</em>(<em>R</em>*) = <em>E</em>(<em>R</em>) + Impact Adjustment</li>
+</ul>
 <p>Where:</p>
 <ul>
-<li>
-<strong>Base Margin</strong> is what you earn from your safest work</li>
-<li>
-<strong>Risk Premium</strong> is the extra margin your project work historically earns</li>
-<li>
-<strong>β</strong> is how risky this engagement is relative to your average</li>
-</ul>
-<p>That gives you a hurdle rate.</p>
-<p>But the decision is not finished there.</p>
-<p>You still have to compare that hurdle to the actual economics of the deal:</p>
-<ul>
-<li>quoted <strong>deal price</strong>
+<li>B-Corp Layer 1 midpoint is neutral</li>
+<li>B-Corp Layer 1 modifies scale from <code>0.8</code> to <code>1.2</code>
 </li>
-<li>estimated <strong>delivery cost</strong>
-</li>
-<li>resulting <strong>proposed margin</strong>
-</li>
+<li>B-Corp Layer 2 midpoint is neutral</li>
+<li>each B-Corp Layer 2 point away from midpoint is worth about <code>1.0</code> point before that portfolio modifier is applied</li>
 </ul>
-<p>That is the real go/no-go test.</p>
-<h2 id="where-different-agencies-start">Where Different Agencies Start</h2>
-<p>For <strong>enterprise and international agencies</strong>, the cleanest starting point is usually the pure approach. Their risk exposure more clearly tracks macro forces like currency shifts, cross-border regulation, global talent markets, and platform dependencies at scale.</p>
-<p>For <strong>small and mid-sized agencies</strong>, the practical starting point is usually the hybrid approach. When you only have a handful of active deals, one difficult engagement can still behave like a portfolio event, so folding deal-specific risk into pricing governance is often the more useful move.</p>
-<h2 id="what-most-agencies-get-wrong">What Most Agencies Get Wrong</h2>
-<p>Most agencies:</p>
+<p>So the current automatic adjustment is:</p>
 <ul>
-<li>pad hours</li>
-<li>add contingency percentages</li>
-<li>rely on intuition</li>
+<li><code>Impact Adjustment = (B-Corp L2 score - 12) × 1.0 × portfolio modifier</code></li>
 </ul>
-<p>But they do not distinguish between:</p>
-<ul>
-<li><strong>risk that washes out across projects</strong></li>
-<li><strong>risk that hits everything at once</strong></li>
-</ul>
-<p>That leads to two problems.</p>
-<h3 id="1-underpricing-systematic-risk">1. Underpricing Systematic Risk</h3>
-<p>When:</p>
-<ul>
-<li>talent markets tighten</li>
-<li>platforms shift</li>
-<li>budgets freeze</li>
-<li>rate pressure increases</li>
-</ul>
-<p>every project gets harder at the same time.</p>
-<p>If you have not priced that in, your whole portfolio suffers.</p>
-<h3 id="2-mishandling-engagement-risk">2. Mishandling Engagement Risk</h3>
-<p>Client quirks, unclear scope, contractual structure, and technical surprises are real. They matter. But they are not the same kind of thing as market-wide exposure.</p>
-<p>The practical mistake is not just misclassifying them. It is failing to name them consistently before a deal closes.</p>
-<h2 id="the-two-layer-model">The Two-Layer Model</h2>
-<p>To fix this, the model separates risk into two layers.</p>
-<h3 id="layer-1-systematic-risk">Layer 1: Systematic Risk</h3>
-<p>This is the environment the agency operates in.</p>
-<p>Examples:</p>
-<ul>
-<li>platform stability</li>
-<li>talent market</li>
-<li>economic conditions</li>
-<li>regulatory exposure</li>
-<li>revenue concentration</li>
-<li>rate pressure</li>
-</ul>
-<p>This layer sets the <strong>systematic adjustment factor</strong> that frames the pricing environment for every deal. In the <a href="../index.html">Decision Cards</a>, that work happens in the <a href="../index.html#layer1-card">Layer 1 card</a>.</p>
-<h3 id="layer-2-engagement-risk">Layer 2: Engagement Risk</h3>
-<p>This is the specific deal.</p>
-<p>It is a presales assessment, not a full delivery plan. The point is to get enough input from the solutions team to judge complexity, client concerns, and scope risk before commitment. If that still is not enough to price implementation responsibly, then discovery is the thing to price. In the <a href="../index.html">Decision Cards</a>, this is the <a href="../index.html#layer2-card">Layer 2 card</a>.</p>
-<p>You score:</p>
-<ul>
-<li>client track record</li>
-<li>scope clarity</li>
-<li>technical complexity</li>
-<li>internal capacity</li>
-<li>contract type</li>
-<li>political complexity</li>
-<li>timeline pressure</li>
-</ul>
-<p>This layer gives you the engagement score and engagement beta used in the hybrid model.</p>
-<h2 id="turning-risk-into-a-decision">Turning Risk Into A Decision</h2>
-<p>In the hybrid calculator, the current logic is:</p>
-<ul>
-<li><strong>Engagement β = Engagement Score / 21</strong></li>
-<li><strong>Blended β = Engagement β × Layer 1 factor</strong></li>
-<li><strong>Required Margin <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Blended <em>β</em> × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)</strong></li>
-</ul>
-<p>Then:</p>
-<ul>
-<li><strong>Proposed Margin = (Deal Price - Delivery Cost) / Deal Price</strong></li>
-</ul>
-<p>Now you can compare the proposed margin against the hurdle.</p>
-<p>That comparison is the point.</p>
-<p>Without it, you only know what the deal should clear in theory. With it, you know whether the quoted work actually deserves a yes.</p>
-<p>If you are a mission-driven or certified agency, the <a href="../index.html#bcorp-card">B-Corp card</a> adds an impact adjustment that shifts the standard hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).</p>
-<h2 id="a-simple-example">A Simple Example</h2>
-<p>Say:</p>
-<ul>
-<li>base margin <em>R<sub>f</sub></em> = <code>10%</code>
-</li>
-<li>portfolio margin <em>R<sub>m</sub></em> = <code>22%</code>
-</li>
-<li>risk premium = <code>12%</code>
-</li>
-</ul>
-<p>And after scoring the deal and current environment, the model gives you:</p>
+<p>This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium.</p>
+<h2 id="sanity-test-scenarios">Sanity-Test Scenarios</h2>
+<p>The scenarios below were run against the live form and checked against the displayed outputs.</p>
+<h3 id="scenario-1--calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</h3>
+<p>Inputs:</p>
 <ul>
 <li>
-<strong>Required Margin</strong> <em>E</em>(<em>R</em>) = <code>29%</code>
-</li>
-</ul>
-<p>Now assume:</p>
-<ul>
-<li>
-<strong>Deal Price</strong> = <code>$120,000</code>
+<em>R<sub>f</sub></em> = <code>10%</code>
 </li>
 <li>
-<strong>Estimated Delivery Cost</strong> = <code>$90,000</code>
+<em>R<sub>m</sub></em> = <code>22%</code>
+</li>
+<li>Layer 1 scores: all <code>2</code>
+</li>
+<li>Layer 2 scores: all <code>2</code>
+</li>
+<li>Deal price: <code>$120,000</code>
+</li>
+<li>Estimated cost: <code>$92,000</code>
 </li>
 </ul>
-<p>That means:</p>
+<p>Expected behavior:</p>
+<ul>
+<li>Layer 1 factor should be mildly favorable</li>
+<li>the hurdle should stay below the portfolio average</li>
+<li>the proposed margin should clear comfortably</li>
+</ul>
+<p>Observed result:</p>
+<ul>
+<li>Layer 1 factor: <code>0.93</code>
+</li>
+<li>Engagement <code>β</code>: <code>0.67</code>
+</li>
+<li>Blended <code>β</code>: <code>0.62</code>
+</li>
+<li>Required margin: <code>17.4%</code>
+</li>
+<li>Proposed margin: <code>23.3%</code>
+</li>
+<li>Gap: <code>+5.9 points</code>
+</li>
+<li>Verdict: <strong>Go</strong>
+</li>
+</ul>
+<p>This makes sense.</p>
+<h3 id="scenario-2--elevated-risk-market-ugly-fixed-price-build">Scenario 2 — Elevated-Risk Market, Ugly Fixed-Price Build</h3>
+<p>Inputs:</p>
 <ul>
 <li>
-<strong>Proposed Margin</strong> = <code>25%</code>
+<em>R<sub>f</sub></em> = <code>10%</code>
+</li>
+<li>
+<em>R<sub>m</sub></em> = <code>22%</code>
+</li>
+<li>Layer 1 scores: <code>4, 4, 3, 4, 4, 4</code>
+</li>
+<li>Layer 2 scores: <code>4, 5, 4, 4, 4, 4, 5</code>
+</li>
+<li>Deal price: <code>$200,000</code>
+</li>
+<li>Estimated cost: <code>$150,000</code>
 </li>
 </ul>
-<p>So the decision is not:</p>
-<p>The project feels promising.</p>
-<p>It is:</p>
-<p>The project is <strong>4 margin points below the hurdle</strong>, so reprice it, reduce risk, or walk away.</p>
-<p>That is much more useful.</p>
-<h2 id="why-this-is-useful">Why This Is Useful</h2>
-<p>This model is not valuable because it predicts outcomes with statistical precision.</p>
-<p>It is valuable because it enforces discipline.</p>
-<p>It forces the agency to:</p>
+<p>Observed result:</p>
 <ul>
-<li>separate systematic and engagement risk</li>
-<li>make judgment explicit</li>
-<li>compare required margin with actual deal economics</li>
-<li>document why a deal should proceed or stop</li>
+<li>Layer 1 factor: <code>1.06</code>
+</li>
+<li>Engagement <code>β</code>: <code>1.43</code>
+</li>
+<li>Blended <code>β</code>: <code>1.52</code>
+</li>
+<li>Required margin: <code>28.2%</code>
+</li>
+<li>Proposed margin: <code>25.0%</code>
+</li>
+<li>Gap: <code>-3.2 points</code>
+</li>
+<li>Verdict: <strong>Stop</strong>
+</li>
 </ul>
-<p>Most importantly, it forces:</p>
+<p>This also makes sense. The deal is not absurdly underwater, but it still fails the stated threshold.</p>
+<h3 id="scenario-3--mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B-Corp Work</h3>
+<p>Inputs:</p>
 <ul>
-<li>sales</li>
-<li>solutions</li>
-<li>delivery</li>
-<li>leadership</li>
+<li>same financial inputs as Scenario 1</li>
+<li>B-Corp Layer 1 scores: all <code>2</code>
+</li>
+<li>B-Corp Layer 2 scores: <code>1, 1, 2, 2</code>
+</li>
 </ul>
-<p>to use the same vocabulary for risk before committing.</p>
-<p>That is the real win.</p>
-<h2 id="what-the-hybrid-model-really-is">What The Hybrid Model Really Is</h2>
-<p>For most agencies, the hybrid layer should be understood as <strong>heuristic pricing governance</strong>.</p>
-<p>It is not a statistically correct pricing engine.</p>
-<p>Its practical utility is:</p>
+<p>Observed result:</p>
 <ul>
-<li>internal alignment</li>
-<li>presales discipline</li>
-<li>postmortem calibration</li>
+<li>Standard hurdle: <code>17.4%</code>
+</li>
+<li>B-Corp impact adjustment: <code>-5.4%</code>
+</li>
+<li>Impact-adjusted hurdle: <code>12.0%</code>
+</li>
+<li>Verdict: <strong>Mission-aligned</strong>
+</li>
 </ul>
-<p>The math matters, but the governance effect matters more.</p>
-<h2 id="the-real-shift">The Real Shift</h2>
-<p>Most agencies:</p>
+<p>This is still a meaningful mission discount, but it is more defensible than the earlier, much larger automatic swing.</p>
+<h3 id="scenario-4--harmful-but-financially-attractive-work">Scenario 4 — Harmful but Financially Attractive Work</h3>
+<p>Inputs:</p>
 <ul>
-<li>plan first</li>
-<li>price second</li>
+<li>
+<em>R<sub>f</sub></em> = <code>10%</code>
+</li>
+<li>
+<em>R<sub>m</sub></em> = <code>22%</code>
+</li>
+<li>Layer 1 scores: all <code>3</code>
+</li>
+<li>Layer 2 scores: all <code>3</code>
+</li>
+<li>Deal price: <code>$210,000</code>
+</li>
+<li>Estimated cost: <code>$150,000</code>
+</li>
+<li>B-Corp Layer 1 scores: all <code>4</code>
+</li>
+<li>B-Corp Layer 2 scores: <code>5, 4, 4, 4</code>
+</li>
 </ul>
-<p>This flips it:</p>
-<p><strong>Price the work before you plan it.</strong></p>
-<p>Then check whether the actual deal economics clear the bar before you commit.</p>
+<p>Observed result:</p>
+<ul>
+<li>Standard hurdle: <code>22.0%</code>
+</li>
+<li>B-Corp impact adjustment: <code>+5.5%</code>
+</li>
+<li>Impact-adjusted hurdle: <code>27.5%</code>
+</li>
+<li>Proposed margin: <code>28.6%</code>
+</li>
+<li>Verdict: <strong>Harm premium cleared financially — review mission trade-offs explicitly</strong>
+</li>
+</ul>
+<p>This is a good example of the B-Corp overlay doing what it should: making the mission cost visible without automatically forcing every bad-fit deal into a stop.</p>
+<h2 id="what-to-watch-for">What To Watch For</h2>
+<p>The current Decision Cards build is strongest when:</p>
+<ul>
+<li>the team agrees on what the score anchors mean</li>
+<li>the same people score similar deals repeatedly</li>
+<li>the agency compares required margin, proposed margin, and actual outcomes over time</li>
+</ul>
+<p>It is weakest when:</p>
+<ul>
+<li>users treat the numbers as statistically discovered truths</li>
+<li>the portfolio baselines are guessed rather than observed</li>
+<li>the B-Corp overlay is mistaken for an official B Lab formula</li>
+</ul>
+<h2 id="recommended-use">Recommended Use</h2>
+<p>Treat these calibrations as defaults, not doctrine.</p>
+<p>If you have enough historical data, you should revise them:</p>
+<ul>
+<li>based on closed-won and closed-lost deals</li>
+<li>based on margin slippage in delivery</li>
+<li>based on how often <code>Go</code>, <code>Caution</code>, and <code>Stop</code> calls proved right in retrospect</li>
+</ul>
+<p>That is the real point of the model: not numerical purity, but disciplined judgment that gets better over time.</p>
 
           </article>
           <footer class="site-footer">

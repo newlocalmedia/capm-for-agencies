@@ -13,11 +13,13 @@
     --ink: #1a1a2e;
     --paper: #f7f5f0;
     --accent: #c45d3e;
+    --accent-dark: #9a4327;
     --accent-light: #f0d4cb;
     --blue: #2b4c7e;
     --blue-light: #d4dfe9;
     --blue-dark: #1a3050;
-    --green: #3a7d5c;
+    --green: #2f6b4d;
+    --green-dark: #1f4b36;
     --green-light: #d0e8da;
     --amber: #c48b2c;
     --amber-light: #f5e6c4;
@@ -113,6 +115,11 @@
   .primer a {
     color: var(--blue);
   }
+  .primer-export-row {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--gray200);
+  }
 
   .card {
     max-width: 900px;
@@ -120,7 +127,7 @@
     background: var(--paper);
     border-radius: 12px;
     box-shadow: var(--shadow);
-    overflow: hidden;
+    overflow: visible;
     border: 1px solid var(--gray200);
   }
 
@@ -129,6 +136,7 @@
     display: flex;
     align-items: center;
     gap: 16px;
+    border-radius: 12px 12px 0 0;
   }
   .card-header.layer1 { background: var(--blue); }
   .card-header.layer2 { background: var(--accent); }
@@ -142,8 +150,8 @@
     font-weight: 700;
     letter-spacing: 1.5px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.86);
+    background: rgba(0,0,0,0.16);
     padding: 4px 10px;
     border-radius: 4px;
     flex-shrink: 0;
@@ -155,13 +163,19 @@
     flex: 1;
   }
   .card-header .cadence {
-    font-size: 12px;
-    color: rgba(255,255,255,0.7);
-    font-weight: 500;
+    font-size: 13px;
+    color: #fff;
+    font-weight: 700;
     white-space: nowrap;
+    background: rgba(0,0,0,0.12);
+    border-radius: 999px;
+    padding: 5px 10px;
   }
 
-  .card-body { padding: 28px 32px; }
+  .card-body {
+    padding: 28px 32px;
+    border-radius: 0 0 12px 12px;
+  }
 
   .card-intro {
     font-size: 14px;
@@ -435,16 +449,16 @@
   .calc-row:last-child { margin-bottom: 0; }
 
   .calc-field label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    flex-wrap: wrap;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: var(--gray400);
     margin-bottom: 4px;
+  }
+  .calc-field label .info-tip {
+    margin-left: 6px;
+    vertical-align: middle;
   }
   .calc-field label em {
     font-style: italic;
@@ -549,6 +563,10 @@
     text-transform: uppercase;
     color: var(--gray400);
   }
+  .result-label .info-tip {
+    margin-left: 6px;
+    vertical-align: middle;
+  }
   .result-label em,
   .result-sub em,
   .formula-bar em {
@@ -589,7 +607,7 @@
     word-break: break-all;
   }
   .formula-bar .hl { color: var(--blue); font-weight: 700; }
-  .formula-bar .hl2 { color: var(--accent); font-weight: 700; }
+  .formula-bar .hl2 { color: var(--accent-dark); font-weight: 700; }
   .formula-bar .hl3 { color: var(--green); font-weight: 700; }
 
   .verdict {
@@ -617,6 +635,50 @@
     line-height: 1.6;
   }
   .approach-note strong { color: var(--gray500); font-style: normal; }
+
+  .export-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    margin-top: 14px;
+  }
+  .action-btn {
+    appearance: none;
+    border: 1px solid rgba(35,72,106,0.18);
+    background: rgba(35,72,106,0.08);
+    color: var(--blue-dark);
+    border-radius: 999px;
+    min-height: 38px;
+    padding: 0 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .action-btn:hover,
+  .action-btn:focus-visible {
+    transform: translateY(-1px);
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+    outline: none;
+  }
+  .action-btn:disabled,
+  .action-btn[aria-disabled="true"] {
+    cursor: not-allowed;
+    transform: none;
+    background: rgba(154,149,141,0.14);
+    border-color: rgba(154,149,141,0.28);
+    color: var(--gray300);
+  }
+  .export-note {
+    font-size: 12px;
+    color: var(--gray400);
+    line-height: 1.5;
+  }
 
   .chart-panel {
     margin-top: 18px;
@@ -657,7 +719,7 @@
     margin: 0 auto;
     text-align: center;
     font-size: 11px;
-    color: var(--gray300);
+    color: var(--gray400);
   }
 
   .downloads {
@@ -695,9 +757,9 @@
   }
   .blue-dl { background: var(--blue-light); color: var(--blue); }
   .blue-dl:hover { background: var(--blue); color: #fff; }
-  .accent-dl { background: var(--accent-light); color: var(--accent); }
+  .accent-dl { background: var(--accent-light); color: var(--accent-dark); }
   .accent-dl:hover { background: var(--accent); color: #fff; }
-  .green-dl { background: var(--green-light); color: var(--green); }
+  .green-dl { background: var(--green-light); color: var(--green-dark); }
   .green-dl:hover { background: var(--green); color: #fff; }
 
   @media print {
@@ -752,7 +814,7 @@
 </style>
 </head>
 <body>
-
+<main id="main-content">
 <div class="header">
   <div class="header-links">
     <a class="header-link" href="overview/index.html">Overview</a>
@@ -765,7 +827,11 @@
 <div class="primer">
   <p><strong>What is CAPM?</strong> CAPM is a finance model for deciding what return is worth a given level of risk; here, it is adapted to help agencies separate portfolio risk from deal risk, set minimum acceptable margins, and make clearer go/no-go decisions.</p>
   <p><strong>Where to start:</strong> Enterprise and international agencies will usually find the pure portfolio-level approach easier to defend, because their risk exposure tracks macro conditions more directly. Small and mid-sized agencies will usually start with the hybrid model, where engagement-specific risk is folded into pricing governance.</p>
-  <p>This app uses CAPM as pricing governance, not as a statistically exact pricing engine. For a fuller plain-language explanation, start with the <a href="overview/index.html">overview</a>.</p>
+  <p>These decision cards use CAPM as pricing governance, not as a statistically exact pricing engine. For a fuller plain-language explanation, start with the <a href="overview/index.html">overview</a>.</p>
+  <div class="export-row primer-export-row">
+    <button type="button" class="action-btn" id="export-summary-btn" onclick="exportDecisionSummary()" disabled aria-disabled="true">Export Decision Summary</button>
+    <span class="export-note" id="export-summary-note">Complete any full layer to enable export.</span>
+  </div>
 </div>
 
 <!-- LAYER ONE CARD -->
@@ -873,12 +939,22 @@
       </div>
       <div class="result-box">
         <div class="result-item">
-          <span class="result-label">Composite</span>
+          <span class="result-label">Composite
+            <details class="info-tip">
+              <summary aria-label="Composite score help">?</summary>
+              <div class="tooltip-text">The total Layer 1 score across all six systematic-risk factors. It sets the current portfolio environment before any specific deal is evaluated.</div>
+            </details>
+          </span>
           <span class="result-value blue" id="l1-score">—</span>
           <span class="result-sub">of 30</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Adjustment Factor</span>
+          <span class="result-label">Adjustment Factor
+            <details class="info-tip">
+              <summary aria-label="Adjustment factor help">?</summary>
+              <div class="tooltip-text">The Layer 1 score mapped into a pricing multiplier. In the current calibration, 6 maps to 0.85, 18 maps to 1.00, and 30 maps to 1.15.</div>
+            </details>
+          </span>
           <span class="result-value blue" id="l1-factor">—</span>
           <span class="result-sub" id="l1-env">score all factors</span>
         </div>
@@ -1005,39 +1081,49 @@
     <div class="calc-panel">
       <div class="calc-row">
         <div class="calc-field">
-          <label>Base Margin / Agency <em>R<sub>f</sub></em>
+          <label for="rf">Base Margin / Agency <em>R<sub>f</sub></em>
             <details class="info-tip">
               <summary aria-label="Agency Rf help">?</summary>
               <div class="tooltip-text">Your agency equivalent of the risk-free rate: the typical margin from your lowest-risk, most predictable revenue, such as retainers, maintenance, or other stable contracted work.</div>
             </details>
           </label>
-          <div><input type="number" id="rf" value="10" step="0.1" oninput="calcLayer2()"><span class="unit">%</span></div>
+          <div><input type="number" id="rf" value="10" step="0.1" oninput="calcLayer2(); markExportDirty()"><span class="unit">%</span></div>
         </div>
         <div class="calc-field">
-          <label>Portfolio Margin / <em>R<sub>m</sub></em>
+          <label for="rm">Portfolio Margin / <em>R<sub>m</sub></em>
             <details class="info-tip">
               <summary aria-label="Portfolio Rm help">?</summary>
               <div class="tooltip-text">Your agency equivalent of the market return: the average margin across project work in your portfolio, or the best benchmark you have for typical project profitability.</div>
             </details>
           </label>
-          <div><input type="number" id="rm" value="22" step="0.1" oninput="calcLayer2()"><span class="unit">%</span></div>
+          <div><input type="number" id="rm" value="22" step="0.1" oninput="calcLayer2(); markExportDirty()"><span class="unit">%</span></div>
         </div>
         <div class="calc-field">
-          <label>L1 Adj. Factor
+          <label for="l1-input">L1 Adj. Factor
             <details class="info-tip">
               <summary aria-label="Layer 1 factor help">?</summary>
               <div class="tooltip-text">Auto-filled from Layer 1 when all systematic factors are scored. You can override it manually for scenario testing.</div>
             </details>
           </label>
-          <div><input type="number" id="l1-input" value="" step="0.01" placeholder="—" oninput="calcLayer2()"></div>
+          <div><input type="number" id="l1-input" value="" step="0.01" placeholder="—" oninput="calcLayer2(); markExportDirty()"></div>
         </div>
         <div class="calc-field">
-          <label>Deal Price</label>
-          <div><input type="number" id="deal-price" value="" step="100" placeholder="0" oninput="calcLayer2()"><span class="unit">$</span></div>
+          <label for="deal-price">Deal Price
+            <details class="info-tip">
+              <summary aria-label="Deal price help">?</summary>
+              <div class="tooltip-text">The quoted commercial price for the current engagement. This is compared with estimated delivery cost to calculate the proposed margin.</div>
+            </details>
+          </label>
+          <div><input type="number" id="deal-price" value="" step="100" placeholder="0" oninput="calcLayer2(); markExportDirty()"><span class="unit">$</span></div>
         </div>
         <div class="calc-field">
-          <label>Estimated Delivery Cost</label>
-          <div><input type="number" id="deal-cost" value="" step="100" placeholder="0" oninput="calcLayer2()"><span class="unit">$</span></div>
+          <label for="deal-cost">Estimated Delivery Cost
+            <details class="info-tip">
+              <summary aria-label="Estimated delivery cost help">?</summary>
+              <div class="tooltip-text">Your best current estimate of internal delivery cost for the engagement, including labor and any material project cost you want included in margin.</div>
+            </details>
+          </label>
+          <div><input type="number" id="deal-cost" value="" step="100" placeholder="0" oninput="calcLayer2(); markExportDirty()"><span class="unit">$</span></div>
         </div>
       </div>
 
@@ -1047,37 +1133,72 @@
 
       <div class="result-box">
         <div class="result-item">
-          <span class="result-label">Engagement Score</span>
+          <span class="result-label">Engagement Score
+            <details class="info-tip">
+              <summary aria-label="Engagement score help">?</summary>
+              <div class="tooltip-text">The total Layer 2 score across the seven deal-level risk factors. In the hybrid model it becomes the starting point for engagement beta.</div>
+            </details>
+          </span>
           <span class="result-value accent" id="l2-raw">—</span>
           <span class="result-sub">of 35</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Engagement <em>β</em></span>
+          <span class="result-label">Engagement <em>β</em>
+            <details class="info-tip">
+              <summary aria-label="Engagement beta help">?</summary>
+              <div class="tooltip-text">The Layer 2 score normalized into a deal-level beta coefficient by dividing the engagement score by 21.</div>
+            </details>
+          </span>
           <span class="result-value accent" id="l2-beta">—</span>
           <span class="result-sub">score / 21</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Blended <em>β</em></span>
+          <span class="result-label">Blended <em>β</em>
+            <details class="info-tip">
+              <summary aria-label="Blended beta help">?</summary>
+              <div class="tooltip-text">The engagement beta weighted by the current Layer 1 adjustment factor. This is the beta used in the hybrid hurdle calculation.</div>
+            </details>
+          </span>
           <span class="result-value accent" id="l2-blended">—</span>
           <span class="result-sub" id="l2-blended-sub">× L1 factor</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Required Margin <em>E</em>(<em>R</em>)</span>
+          <span class="result-label">Required Margin <em>E</em>(<em>R</em>)
+            <details class="info-tip">
+              <summary aria-label="Required margin help">?</summary>
+              <div class="tooltip-text">The minimum acceptable margin implied by the current CAPM inputs and scores. The deal should clear this hurdle to justify the risk.</div>
+            </details>
+          </span>
           <span class="result-value accent" id="l2-er">—</span>
           <span class="result-sub" id="l2-er-sub">required return</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Proposed Margin</span>
+          <span class="result-label">Proposed Margin
+            <details class="info-tip">
+              <summary aria-label="Proposed margin help">?</summary>
+              <div class="tooltip-text">The margin implied by the current deal price and estimated delivery cost. This is the number being tested against the CAPM hurdle.</div>
+            </details>
+          </span>
           <span class="result-value accent" id="l2-proposed">—</span>
           <span class="result-sub" id="l2-proposed-sub">enter price and cost</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Margin Gap</span>
+          <span class="result-label">Margin Gap
+            <details class="info-tip">
+              <summary aria-label="Margin gap help">?</summary>
+              <div class="tooltip-text">The difference between the proposed margin and the required margin. Positive means the deal clears the hurdle; negative means it falls short.</div>
+            </details>
+          </span>
           <span class="result-value accent" id="l2-gap">—</span>
           <span class="result-sub" id="l2-gap-sub">proposed - required</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Min. Deal Price</span>
+          <span class="result-label">Min. Deal Price
+            <details class="info-tip">
+              <summary aria-label="Minimum deal price help">?</summary>
+              <div class="tooltip-text">The minimum quoted deal price needed to reach the current required margin, given the estimated delivery cost.</div>
+            </details>
+          </span>
           <span class="result-value accent" id="l2-min-price">—</span>
           <span class="result-sub" id="l2-min-price-sub">needed to clear <em>E</em>(<em>R</em>)</span>
         </div>
@@ -1262,16 +1383,31 @@
     <div class="calc-panel">
       <div class="calc-row">
         <div class="calc-field">
-          <label>Standard <em>E</em>(<em>R</em>)</label>
+          <label for="bc-std-er">Standard <em>E</em>(<em>R</em>)
+            <details class="info-tip">
+              <summary aria-label="Standard expected return help">?</summary>
+              <div class="tooltip-text">The unadjusted financial hurdle carried over from Layer 2 before any mission discount or harm premium is applied.</div>
+            </details>
+          </label>
           <div><input type="text" id="bc-std-er" value="—" readonly style="background:var(--gray100);color:var(--gray400);width:80px;"></div>
         </div>
         <div class="calc-field">
-          <label>Impact Adjustment (±%)</label>
+          <label for="bc-impact-adj">Impact Adjustment (±%)
+            <details class="info-tip">
+              <summary aria-label="Impact adjustment help">?</summary>
+              <div class="tooltip-text">The B-Corp overlay’s mission discount or harm premium. Negative lowers the hurdle for mission-aligned work; positive raises it for higher-impact-risk work. In the current calibration, each engagement point away from midpoint is worth about one margin point before the portfolio modifier is applied.</div>
+            </details>
+          </label>
           <div><input type="text" id="bc-impact-adj" value="—" readonly style="background:var(--gray100);color:var(--gray400);width:80px;"></div>
         </div>
         <div class="calc-field">
-          <label>Manual Override</label>
-          <div><input type="number" id="bc-manual-adj" value="" step="0.5" placeholder="±%" style="width:80px;" oninput="calcBcorp()"><span class="unit">%</span></div>
+          <label for="bc-manual-adj">Manual Override
+            <details class="info-tip">
+              <summary aria-label="Manual override help">?</summary>
+              <div class="tooltip-text">Use this to set a documented impact adjustment directly when leadership wants to override the automatic B-Corp scoring output.</div>
+            </details>
+          </label>
+          <div><input type="number" id="bc-manual-adj" value="" step="0.5" placeholder="±%" style="width:80px;" oninput="calcBcorp(); markExportDirty()"><span class="unit">%</span></div>
         </div>
       </div>
 
@@ -1281,22 +1417,42 @@
 
       <div class="result-box">
         <div class="result-item">
-          <span class="result-label">Portfolio Impact Score</span>
+          <span class="result-label">Portfolio Impact Score
+            <details class="info-tip">
+              <summary aria-label="Portfolio impact score help">?</summary>
+              <div class="tooltip-text">The total score from the B-Corp portfolio factors. It widens or narrows the range of possible discounts and premiums.</div>
+            </details>
+          </span>
           <span class="result-value green" id="bc-l1-score">—</span>
           <span class="result-sub">of 30</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Engagement Impact Score</span>
+          <span class="result-label">Engagement Impact Score
+            <details class="info-tip">
+              <summary aria-label="Engagement impact score help">?</summary>
+              <div class="tooltip-text">The total score from the B-Corp engagement factors. It drives the mission discount or harm premium for the specific deal.</div>
+            </details>
+          </span>
           <span class="result-value green" id="bc-l2-score">—</span>
           <span class="result-sub">of 20</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Impact Adjustment</span>
+          <span class="result-label">Impact Adjustment
+            <details class="info-tip">
+              <summary aria-label="Impact adjustment result help">?</summary>
+              <div class="tooltip-text">The net adjustment applied to the standard hurdle after combining the B-Corp portfolio and engagement scores.</div>
+            </details>
+          </span>
           <span class="result-value green" id="bc-adj-display">—</span>
           <span class="result-sub" id="bc-adj-sub">% points</span>
         </div>
         <div class="result-item">
-          <span class="result-label"><em>E</em>(<em>R</em>*) Min. Margin</span>
+          <span class="result-label"><em>E</em>(<em>R</em>*) Min. Margin
+            <details class="info-tip">
+              <summary aria-label="Impact-adjusted minimum margin help">?</summary>
+              <div class="tooltip-text">The final B-Corp hurdle rate after applying the impact adjustment to the standard financial hurdle.</div>
+            </details>
+          </span>
           <span class="result-value green" id="bc-er-star">—</span>
           <span class="result-sub" id="bc-er-sub">impact-adjusted</span>
         </div>
@@ -1313,7 +1469,7 @@
       </div>
 
       <div class="approach-note">
-        <strong>How the impact adjustment works:</strong> B-Corp engagement scores below the midpoint (mission-aligned, low-harm, transparent work) produce a negative adjustment — a "mission discount" that lowers the financial margin threshold. Scores above the midpoint (mission tension, elevated human-rights or environmental risk, misleading claims) produce a positive adjustment — a "harm premium" that raises the hurdle rate. The B-Corp systematic score shifts the baseline: high portfolio-level impact risk widens both discounts and premiums. Use the manual override to set a conscious, documented impact adjustment for board-level decisions.
+        <strong>How the impact adjustment works:</strong> B-Corp engagement scores below the midpoint (mission-aligned, low-harm, transparent work) produce a negative adjustment — a "mission discount" that lowers the financial margin threshold. Scores above the midpoint (mission tension, elevated human-rights or environmental risk, misleading claims) produce a positive adjustment — a "harm premium" that raises the hurdle rate. The B-Corp portfolio score widens or narrows that effect around a neutral midpoint instead of amplifying it by default. In the current calibration, each engagement point away from the midpoint is worth about one margin point before the portfolio modifier is applied. Use the manual override to set a conscious, documented impact adjustment for board-level decisions.
       </div>
     </div>
   </div>
@@ -1330,13 +1486,21 @@
   <p class="print-note">Scores are interactive in the browser. PDFs are printable reference cards.</p>
 </div>
 
+</main>
+
 <footer class="site-footer">
+  A <a href="https://newlocalmedia.com/">New Local Media</a> project ·
+  <a href="https://linkedin.com/in/danknauss">LinkedIn</a> ·
+  <a href="mailto:dan@newlocalmedia.com?subject=CAPM%20for%20Agencies%20feedback">Feedback</a> ·
+  <a href="https://github.com/newlocalmedia/capm-for-agencies/issues">Issues</a><br>
   This repository and its web content are licensed under the
   <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)</a>.
   See the <a href="LICENSE">LICENSE</a>.
 </footer>
 
+<script src="scripts/calc-core.js"></script>
 <script>
+  const Calc = window.CapmCalculations;
   const scoreGuides = {
     layer1: {
       platform: ['Stable', 'Mostly stable', 'Mixed signals', 'Serious strain', 'Crisis'],
@@ -1395,6 +1559,18 @@
     layer2: {},
     bcorp_l1: {},
     bcorp_l2: {}
+  };
+
+  const exportLayerTargets = {
+    layer1: 6,
+    layer2: 7,
+    bcorp_l1: 6,
+    bcorp_l2: 4
+  };
+
+  const exportState = {
+    dirty: true,
+    lastExportSignature: null
   };
 
   function getScoreGuide(layer, factor, row) {
@@ -1502,10 +1678,96 @@
       .replace(/'/g, '&#39;');
   }
 
+  function currentExportSignature() {
+    return JSON.stringify({
+      state,
+      rf: document.getElementById('rf')?.value || '',
+      rm: document.getElementById('rm')?.value || '',
+      l1Input: document.getElementById('l1-input')?.value || '',
+      price: document.getElementById('deal-price')?.value || '',
+      cost: document.getElementById('deal-cost')?.value || '',
+      bcManual: document.getElementById('bc-manual-adj')?.value || ''
+    });
+  }
+
+  function hasCompleteLayer() {
+    return Object.entries(exportLayerTargets).some(([layer, target]) => Object.keys(state[layer]).length === target);
+  }
+
+  function updateExportControls() {
+    const button = document.getElementById('export-summary-btn');
+    const note = document.getElementById('export-summary-note');
+    if (!button || !note) return;
+
+    const complete = hasCompleteLayer();
+    const canExport = complete && (exportState.lastExportSignature === null || exportState.dirty);
+    button.disabled = !canExport;
+    button.setAttribute('aria-disabled', canExport ? 'false' : 'true');
+
+    if (!complete) {
+      note.textContent = 'Complete any full layer to enable export.';
+    } else if (!exportState.dirty && exportState.lastExportSignature !== null) {
+      note.textContent = 'Make a change before exporting again.';
+    } else {
+      note.textContent = 'Open a styled summary with charts, ready to print or save as PDF.';
+    }
+  }
+
+  function markExportDirty() {
+    if (exportState.lastExportSignature === null) {
+      exportState.dirty = true;
+    } else {
+      exportState.dirty = currentExportSignature() !== exportState.lastExportSignature;
+    }
+    updateExportControls();
+  }
+
+  function collectFactorData(layer, tableSelector) {
+    return [...document.querySelectorAll(tableSelector + ' tr[data-factor]')].map((row) => {
+      const factor = row.dataset.factor;
+      const value = state[layer][factor];
+      const name = row.querySelector('.factor-name')?.textContent.trim() || factor;
+      return {
+        name,
+        value: value || null,
+        label: value ? getScoreLabel(layer, factor, value) : null
+      };
+    });
+  }
+
+  function closeInfoTips(except) {
+    document.querySelectorAll('.info-tip[open]').forEach((tip) => {
+      if (tip !== except) tip.removeAttribute('open');
+    });
+  }
+
+  function initInfoTips() {
+    document.querySelectorAll('.info-tip').forEach((tip) => {
+      const summary = tip.querySelector('summary');
+      if (summary) {
+        summary.addEventListener('click', () => {
+          if (!tip.open) closeInfoTips(tip);
+        });
+      }
+      tip.addEventListener('toggle', () => {
+        if (tip.open) closeInfoTips(tip);
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('.info-tip')) closeInfoTips();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') closeInfoTips();
+    });
+  }
+
   function applyScore(layer, factor, val) {
     state[layer][factor] = val;
     updateTableRowSelection(layer, factor, val);
     updateMobileCardSelection(layer, factor, val);
+    markExportDirty();
 
     if (layer === 'layer1') calcLayer1();
     else if (layer === 'layer2') calcLayer2();
@@ -1627,9 +1889,8 @@
     document.getElementById('l1-score').textContent = sum;
 
     if (count === total) {
-      // Map 6-30 to factor range: 6=0.85, 18=1.0, 30=1.25
-      const factor = 0.85 + (sum - 6) * (0.40 / 24);
-      const factorRounded = Math.round(factor * 100) / 100;
+      // Map 6-30 to factor range: 6=0.85, 18=1.00, 30=1.15
+      const factorRounded = Calc.layer1FactorFromScore(sum);
 
       document.getElementById('l1-factor-display').textContent = factorRounded.toFixed(2);
       document.getElementById('l1-factor').textContent = factorRounded.toFixed(2);
@@ -1637,12 +1898,7 @@
       document.getElementById('l1-note-factor-hybrid').textContent = factorRounded.toFixed(2);
 
       // Set environment label
-      let env = '';
-      if (factorRounded <= 0.95) env = 'Favorable environment';
-      else if (factorRounded <= 1.05) env = 'Normal environment';
-      else if (factorRounded <= 1.15) env = 'Elevated risk';
-      else env = 'High systematic risk';
-      document.getElementById('l1-env').textContent = env;
+      document.getElementById('l1-env').textContent = Calc.layer1EnvironmentLabel(factorRounded);
 
       // Auto-populate Layer 2 input
       document.getElementById('l1-input').value = factorRounded.toFixed(2);
@@ -1658,6 +1914,152 @@
 
   function formatMoney(amount) {
     return '$' + Math.round(amount).toLocaleString('en-US');
+  }
+
+  function formatPercentValue(value, digits = 1) {
+    return isNaN(value) ? '—' : value.toFixed(digits) + '%';
+  }
+
+  function getScoreLabel(layer, factor, value) {
+    const configured = scoreGuides[layer] && scoreGuides[layer][factor];
+    if (!configured || !configured[value - 1]) return String(value);
+    return configured[value - 1];
+  }
+
+  function collectFactorLines(layer, tableSelector) {
+    const rows = [...document.querySelectorAll(tableSelector + ' tr[data-factor]')];
+    return rows.map((row) => {
+      const factor = row.dataset.factor;
+      const value = state[layer][factor];
+      const name = row.querySelector('.factor-name')?.textContent.trim() || factor;
+      if (!value) return '- ' + name + ': not scored';
+      return '- ' + name + ': ' + value + '/5 (' + getScoreLabel(layer, factor, value) + ')';
+    });
+  }
+
+  function renderExportTable(title, rows) {
+    const body = rows.map((row) => {
+      return '<tr><th>' + escapeHtml(row.name) + '</th><td>' + (row.value ? (row.value + '/5') : '—') + '</td><td>' + escapeHtml(row.label || 'Not scored') + '</td></tr>';
+    }).join('');
+    return (
+      '<section class="report-card">' +
+        '<h3>' + escapeHtml(title) + '</h3>' +
+        '<table class="report-table">' +
+          '<thead><tr><th>Factor</th><th>Score</th><th>Meaning</th></tr></thead>' +
+          '<tbody>' + body + '</tbody>' +
+        '</table>' +
+      '</section>'
+    );
+  }
+
+  function exportDecisionSummary() {
+    if (!hasCompleteLayer()) {
+      updateExportControls();
+      return;
+    }
+    if (exportState.lastExportSignature !== null && !exportState.dirty) {
+      updateExportControls();
+      return;
+    }
+
+    const now = new Date();
+    const rf = parseFloat(document.getElementById('rf').value);
+    const rm = parseFloat(document.getElementById('rm').value);
+    const l1Input = parseFloat(document.getElementById('l1-input').value);
+    const l1Score = document.getElementById('l1-score').textContent.trim();
+    const l1Factor = document.getElementById('l1-factor').textContent.trim();
+    const l2Score = document.getElementById('l2-raw').textContent.trim();
+    const l2Beta = document.getElementById('l2-beta').textContent.trim();
+    const blended = document.getElementById('l2-blended').textContent.trim();
+    const requiredMargin = document.getElementById('l2-er').textContent.trim();
+    const proposedMargin = document.getElementById('l2-proposed').textContent.trim();
+    const marginGap = document.getElementById('l2-gap').textContent.trim();
+    const minPrice = document.getElementById('l2-min-price').textContent.trim();
+    const l2Verdict = document.getElementById('l2-verdict').textContent.trim() || 'Not evaluated yet';
+    const deal = getDealMetrics();
+
+    const bcStandard = document.getElementById('bc-std-er').value.trim();
+    const bcAdjustment = document.getElementById('bc-impact-adj').value.trim();
+    const bcErStar = document.getElementById('bc-er-star').textContent.trim();
+    const bcVerdict = document.getElementById('bc-verdict').textContent.trim();
+
+    const layer1Data = collectFactorData('layer1', '#layer1-table tbody');
+    const layer2Data = collectFactorData('layer2', '#layer2-table tbody');
+    const bcorpL1Data = collectFactorData('bcorp_l1', '#bcorp-l1-table tbody');
+    const bcorpL2Data = collectFactorData('bcorp_l2', '#bcorp-l2-table tbody');
+    const l2ChartSvg = document.getElementById('l2-chart')?.outerHTML || '';
+    const bcChartSvg = document.getElementById('bc-chart')?.outerHTML || '';
+
+    const reportHtml = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CAPM Decision Summary</title><style>' +
+      'body{margin:0;padding:32px;background:#f0ede8;color:#1a1a2e;font-family:Georgia,serif;line-height:1.6;}' +
+      '.wrap{max-width:980px;margin:0 auto;}' +
+      '.toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:flex-end;gap:10px;padding:0 0 18px;}' +
+      '.toolbar-btn{appearance:none;border:1px solid rgba(35,72,106,0.18);background:rgba(255,255,255,0.92);color:#1a3050;border-radius:999px;min-height:38px;padding:0 16px;font:700 12px "SFMono-Regular",Consolas,monospace;letter-spacing:0.04em;cursor:pointer;}' +
+      '.hero,.report-card{background:#fff;border:1px solid #e0ddd6;border-radius:18px;box-shadow:0 8px 28px rgba(26,26,46,0.08);padding:24px 28px;margin-bottom:18px;}' +
+      '.kicker{font-family:"SFMono-Regular",Consolas,monospace;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#5f5a53;margin-bottom:10px;}' +
+      'h1,h2,h3{margin:0 0 12px;line-height:1.1;color:#1a3050;}h1{font-size:2.2rem;}h2{font-size:1.4rem;}h3{font-size:1.15rem;color:#201d1a;}' +
+      'p{margin:0 0 12px;color:#45413c;}strong{color:#201d1a;}code{font-family:"SFMono-Regular",Consolas,monospace;background:#f7f5f0;padding:2px 6px;border-radius:6px;}' +
+      '.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px;}' +
+      '.metric{background:#f7f5f0;border:1px solid #e0ddd6;border-radius:14px;padding:14px;}.metric-label{font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;color:#5f5a53;margin-bottom:8px;display:block;}' +
+      '.metric-value{font-size:1.35rem;font-weight:700;color:#1a3050;}.metric-sub{font-size:0.92rem;color:#5f5a53;display:block;margin-top:4px;}' +
+      '.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}.report-grid.full{grid-template-columns:1fr;}@media (max-width:760px){body{padding:18px}.hero,.report-card{padding:18px}.report-grid{grid-template-columns:1fr;}}' +
+      '.report-table{width:100%;border-collapse:collapse;font-size:0.96rem;}.report-table th,.report-table td{padding:10px 8px;border-bottom:1px solid #e0ddd6;text-align:left;vertical-align:top;}.report-table thead th{font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;color:#5f5a53;}' +
+      '.chart-card svg{width:100%;height:auto;display:block;background:#fcfaf7;border-radius:12px;}.verdict{display:inline-block;padding:6px 10px;border-radius:999px;font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;background:#f0d4cb;color:#8c3f2f;}' +
+      '.footer-note{font-size:0.92rem;color:#5f5a53;}' +
+      '@media print{body{padding:0;background:#fff;}.wrap{max-width:none;}.toolbar{display:none;}.hero,.report-card{box-shadow:none;border:1px solid #d6d1c8;break-inside:avoid;}}' +
+      '</style></head><body><div class="wrap">' +
+      '<div class="toolbar"><button type="button" class="toolbar-btn" onclick="window.print()">Print / Save as PDF</button></div>' +
+      '<section class="hero"><div class="kicker">CAPM for Agencies</div><h1>Decision Summary</h1><p>Generated from the interactive decision cards on ' + escapeHtml(now.toLocaleString()) + '.</p>' +
+      '<div class="metrics">' +
+        '<div class="metric"><span class="metric-label">Agency R_f</span><span class="metric-value">' + escapeHtml(formatPercentValue(rf)) + '</span><span class="metric-sub">Base margin from lowest-risk work</span></div>' +
+        '<div class="metric"><span class="metric-label">Portfolio R_m</span><span class="metric-value">' + escapeHtml(formatPercentValue(rm)) + '</span><span class="metric-sub">Average project margin</span></div>' +
+        '<div class="metric"><span class="metric-label">Required E(R)</span><span class="metric-value">' + escapeHtml(requiredMargin || '—') + '</span><span class="metric-sub">Hybrid hurdle rate</span></div>' +
+        '<div class="metric"><span class="metric-label">Proposed Margin</span><span class="metric-value">' + escapeHtml(proposedMargin || '—') + '</span><span class="metric-sub">Current deal economics</span></div>' +
+        '<div class="metric"><span class="metric-label">Margin Gap</span><span class="metric-value">' + escapeHtml(marginGap || '—') + '</span><span class="metric-sub">Proposed minus required</span></div>' +
+        '<div class="metric"><span class="metric-label">Verdict</span><span class="metric-value" style="font-size:1rem;">' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</span><span class="metric-sub">Decision-card output</span></div>' +
+      '</div></section>' +
+      '<div class="report-grid">' +
+        '<section class="report-card"><h2>Commercial Inputs</h2><p><strong>Layer 1 factor input:</strong> ' + escapeHtml(isNaN(l1Input) ? '—' : l1Input.toFixed(2)) + '<br><strong>Deal price:</strong> ' + escapeHtml(deal ? formatMoney(deal.price) : '—') + '<br><strong>Estimated delivery cost:</strong> ' + escapeHtml(deal ? formatMoney(deal.cost) : '—') + '<br><strong>Minimum deal price:</strong> ' + escapeHtml(minPrice || '—') + '</p></section>' +
+        '<section class="report-card"><h2>Layer 2 Summary</h2><p><strong>Engagement score:</strong> ' + escapeHtml(l2Score || '—') + '<br><strong>Engagement beta:</strong> ' + escapeHtml(l2Beta || '—') + '<br><strong>Blended beta:</strong> ' + escapeHtml(blended || '—') + '<br><strong>Verdict:</strong> <span class="verdict">' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</span></p></section>' +
+      '</div>' +
+      '<div class="report-grid full">' +
+        '<section class="report-card chart-card"><h2>The Line</h2>' + l2ChartSvg + '<p class="footer-note">The chart is exported as rendered in the decision cards at the time of download.</p></section>' +
+      '</div>' +
+      '<div class="report-grid">' +
+        renderExportTable('Layer 1 — Systematic Risk Calibration', layer1Data) +
+        renderExportTable('Layer 2 — Engagement Risk Scoring', layer2Data) +
+      '</div>';
+
+    const hasBcorpScores = Object.keys(state.bcorp_l1).length || Object.keys(state.bcorp_l2).length || bcVerdict;
+    const bcorpSection = hasBcorpScores
+      ? '<div class="report-grid">' +
+          '<section class="report-card"><h2>B-Corp Overlay</h2><p><strong>Standard E(R):</strong> ' + escapeHtml(bcStandard || '—') + '<br><strong>Impact adjustment:</strong> ' + escapeHtml(bcAdjustment || '—') + '<br><strong>Impact-adjusted E(R*):</strong> ' + escapeHtml(bcErStar || '—') + '<br><strong>Verdict:</strong> ' + escapeHtml(bcVerdict || 'Not evaluated yet') + '</p></section>' +
+          '<section class="report-card chart-card"><h2>Impact Shift</h2>' + bcChartSvg + '</section>' +
+        '</div>' +
+        '<div class="report-grid">' +
+          renderExportTable('B-Corp Portfolio Factors', bcorpL1Data) +
+          renderExportTable('B-Corp Engagement Factors', bcorpL2Data) +
+        '</div>'
+      : '';
+
+    const footerHtml = '<section class="report-card"><h2>Notes</h2><p class="footer-note">This export is a styled snapshot of the current decision-card state. The hybrid model is a governance tool, not a statistically exact pricing engine.</p></section></div></body></html>';
+
+    const blob = new Blob([reportHtml + bcorpSection + footerHtml], { type: 'text/html;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const preview = window.open(url, '_blank', 'noopener,noreferrer');
+    if (!preview) {
+      const stamp = now.toISOString().slice(0, 19).replace(/[:T]/g, '-');
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'capm-decision-summary-' + stamp + '.html';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    exportState.lastExportSignature = currentExportSignature();
+    exportState.dirty = false;
+    updateExportControls();
   }
 
   function clamp(value, min, max) {
@@ -1732,7 +2134,7 @@
     return {
       price,
       cost,
-      proposedMargin: ((price - cost) / price) * 100
+      proposedMargin: Calc.proposedMargin(price, cost)
     };
   }
 
@@ -1991,7 +2393,7 @@
     let chartData = { ready: false };
 
     if (deal) {
-      const proposedMargin = Math.round(deal.proposedMargin * 10) / 10;
+      const proposedMargin = Calc.round(deal.proposedMargin, 1);
       document.getElementById('l2-proposed').textContent = proposedMargin.toFixed(1) + '%';
       document.getElementById('l2-proposed-sub').textContent =
         formatMoney(deal.price) + ' - ' + formatMoney(deal.cost) + ' over ' + formatMoney(deal.price);
@@ -2011,18 +2413,18 @@
       document.getElementById('l2-pure-score').textContent = sum;
 
       if (count === total) {
-        const engBeta = Math.round((sum / 21) * 100) / 100;
+        const engBeta = Calc.engagementBetaFromScore(sum);
         document.getElementById('l2-beta').textContent = engBeta.toFixed(2);
 
         if (!isNaN(l1f) && l1f > 0) {
-          const pureEr = Math.round((rf + l1f * premium) * 10) / 10;
+          const pureEr = Calc.requiredReturn(rf, rm, l1f);
           document.getElementById('l2-pure-er').innerHTML = '<em>E</em>(<em>R</em>) <strong>' + pureEr.toFixed(1) + '%</strong>';
 
-          const blended = Math.round(engBeta * l1f * 100) / 100;
+          const blended = Calc.blendedBeta(engBeta, l1f);
           document.getElementById('l2-blended').textContent = blended.toFixed(2);
           document.getElementById('l2-blended-sub').textContent = engBeta.toFixed(2) + ' × ' + l1f.toFixed(2);
 
-          const er = Math.round((rf + blended * premium) * 10) / 10;
+          const er = Calc.requiredReturn(rf, rm, blended);
           document.getElementById('l2-er').textContent = er.toFixed(1) + '%';
           document.getElementById('l2-er-sub').textContent = rf + '% + ' + blended.toFixed(2) + ' × ' + premium + '%';
           chartData = {
@@ -2034,8 +2436,8 @@
             blended,
             er,
             hasDeal: !!deal,
-            proposedMargin: deal ? Math.round(deal.proposedMargin * 10) / 10 : null,
-            gap: deal ? Math.round(((Math.round(deal.proposedMargin * 10) / 10) - er) * 10) / 10 : null
+            proposedMargin: deal ? Calc.round(deal.proposedMargin, 1) : null,
+            gap: deal ? Calc.gap(Calc.round(deal.proposedMargin, 1), er) : null
           };
 
           document.getElementById('l2-formula').innerHTML =
@@ -2046,13 +2448,13 @@
             '(<span class="hl">' + premium + '%</span>) = <strong>' + er.toFixed(1) + '%</strong>';
 
           if (deal) {
-            const proposedMargin = Math.round(deal.proposedMargin * 10) / 10;
-            const gap = Math.round((proposedMargin - er) * 10) / 10;
+            const proposedMargin = Calc.round(deal.proposedMargin, 1);
+            const gap = Calc.gap(proposedMargin, er);
             document.getElementById('l2-gap').textContent = (gap >= 0 ? '+' : '') + gap.toFixed(1) + '%';
             document.getElementById('l2-gap-sub').textContent = proposedMargin.toFixed(1) + '% - ' + er.toFixed(1) + '%';
 
             if (er < 100) {
-              const minPrice = deal.cost / (1 - (er / 100));
+              const minPrice = Calc.minimumDealPrice(deal.cost, er);
               document.getElementById('l2-min-price').textContent = formatMoney(minPrice);
               document.getElementById('l2-min-price-sub').textContent = 'at ' + er.toFixed(1) + '% required margin';
             } else {
@@ -2061,12 +2463,13 @@
             }
 
             let verdict = '';
+            const verdictText = Calc.layer2Verdict(gap);
             if (gap >= 0) {
-              verdict = '<span class="verdict go">Go — proposed margin clears the hurdle rate</span>';
+              verdict = '<span class="verdict go">' + verdictText + '</span>';
             } else if (gap >= -3) {
-              verdict = '<span class="verdict caution">Caution — close, but below hurdle; reprice or reduce risk</span>';
+              verdict = '<span class="verdict caution">' + verdictText + '</span>';
             } else {
-              verdict = '<span class="verdict stop">Stop — proposed margin does not cover the required return</span>';
+              verdict = '<span class="verdict stop">' + verdictText + '</span>';
             }
             document.getElementById('l2-verdict').innerHTML = verdict;
           } else {
@@ -2114,8 +2517,16 @@
     const bl1Count = bl1Vals.length;
     const bl2Count = bl2Vals.length;
 
-    if (bl1Count > 0) document.getElementById('bc-l1-score').textContent = bl1Sum;
-    if (bl2Count > 0) document.getElementById('bc-l2-score').textContent = bl2Sum;
+    document.getElementById('bc-l1-score').textContent = bl1Count > 0 ? bl1Sum : '—';
+    document.getElementById('bc-l2-score').textContent = bl2Count > 0 ? bl2Sum : '—';
+    document.getElementById('bc-impact-adj').value = '—';
+    document.getElementById('bc-adj-display').textContent = '—';
+    document.getElementById('bc-adj-sub').textContent = '% points';
+    document.getElementById('bc-er-star').textContent = '—';
+    document.getElementById('bc-er-sub').textContent = 'impact-adjusted';
+    document.getElementById('bc-verdict').innerHTML = '';
+    document.getElementById('bc-formula').innerHTML =
+      '<strong>B-Corp:</strong> <em>E</em>(<em>R</em>*) = <em>E</em>(<em>R</em>) + Impact Adjustment — score all factors to calculate';
 
     // Get standard E(R) from Layer 2
     const stdErText = document.getElementById('l2-er').textContent;
@@ -2138,7 +2549,7 @@
     if (!isNaN(manualAdj) && document.getElementById('bc-manual-adj').value !== '') {
       // Manual override mode
       if (!isNaN(stdEr)) {
-        const erStar = Math.round((stdEr + manualAdj) * 10) / 10;
+        const erStar = Calc.round(stdEr + manualAdj, 1);
         document.getElementById('bc-impact-adj').value = (manualAdj >= 0 ? '+' : '') + manualAdj.toFixed(1) + '%';
         document.getElementById('bc-adj-display').textContent = (manualAdj >= 0 ? '+' : '') + manualAdj.toFixed(1) + '%';
         document.getElementById('bc-adj-sub').textContent = 'manual override';
@@ -2154,7 +2565,7 @@
           adjustedEr: erStar,
           adjustment: manualAdj,
           hasDeal: !!deal,
-          proposedMargin: deal ? Math.round(deal.proposedMargin * 10) / 10 : null
+          proposedMargin: deal ? Calc.round(deal.proposedMargin, 1) : null
         };
 
         document.getElementById('bc-formula').innerHTML =
@@ -2168,21 +2579,15 @@
 
     // Auto-calculate from B-Corp scores
     if (bl1Count === 6 && bl2Count === 4 && !isNaN(stdEr)) {
-      // B-Corp L1: 6-30 range. Midpoint=18. Adds systematic impact risk modifier.
-      // Shifts the adjustment scale: high L1 = wider premiums/discounts
-      const l1Modifier = 0.8 + (bl1Sum - 6) * (0.8 / 24); // 0.8 to 1.6
-
-      // B-Corp L2: 4-20 range. Midpoint=12.
-      // Below midpoint = mission discount (negative adj), above = harm premium (positive adj)
-      const l2Deviation = bl2Sum - 12;
-      // Each point of deviation = ~1.5% adjusted by L1 modifier
-      const impactAdj = Math.round(l2Deviation * 1.5 * l1Modifier * 10) / 10;
+      // B-Corp L1: 6-30 range. Midpoint=18 is neutral.
+      // High L1 widens discounts/premiums, low L1 narrows them.
+      const impactAdj = Calc.bcorpImpactAdjustment(bl1Sum, bl2Sum);
 
       document.getElementById('bc-impact-adj').value = (impactAdj >= 0 ? '+' : '') + impactAdj.toFixed(1) + '%';
       document.getElementById('bc-adj-display').textContent = (impactAdj >= 0 ? '+' : '') + impactAdj.toFixed(1) + '%';
       document.getElementById('bc-adj-sub').textContent = (impactAdj < 0 ? 'mission discount' : impactAdj > 0 ? 'harm premium' : 'neutral');
 
-      const erStar = Math.round((stdEr + impactAdj) * 10) / 10;
+      const erStar = Calc.round(stdEr + impactAdj, 1);
       document.getElementById('bc-er-star').textContent = erStar.toFixed(1) + '%';
       document.getElementById('bc-er-sub').textContent = stdEr.toFixed(1) + '% + (' + impactAdj.toFixed(1) + '%)';
       bcChartData = {
@@ -2195,7 +2600,7 @@
         adjustedEr: erStar,
         adjustment: impactAdj,
         hasDeal: !!deal,
-        proposedMargin: deal ? Math.round(deal.proposedMargin * 10) / 10 : null
+        proposedMargin: deal ? Calc.round(deal.proposedMargin, 1) : null
       };
 
       document.getElementById('bc-formula').innerHTML =
@@ -2216,27 +2621,30 @@
       return;
     }
 
-    const proposedMargin = Math.round(deal.proposedMargin * 10) / 10;
-    const gap = Math.round((proposedMargin - erStar) * 10) / 10;
+    const proposedMargin = Calc.round(deal.proposedMargin, 1);
+    const gap = Calc.gap(proposedMargin, erStar);
+    const verdictText = Calc.bcorpVerdict(proposedMargin, erStar, impactAdj);
 
     if (gap >= 0 && impactAdj < -3) {
-      verdict = '<span class="verdict go">Mission-aligned — conscious discount justified and hurdle cleared</span>';
+      verdict = '<span class="verdict go">' + verdictText + '</span>';
     } else if (gap >= 0 && impactAdj > 5) {
-      verdict = '<span class="verdict caution">Harm premium cleared financially — review mission trade-offs explicitly</span>';
+      verdict = '<span class="verdict caution">' + verdictText + '</span>';
     } else if (gap >= 0) {
-      verdict = '<span class="verdict go">Go — proposed margin clears the impact-adjusted hurdle</span>';
+      verdict = '<span class="verdict go">' + verdictText + '</span>';
     } else if (gap >= -3) {
-      verdict = '<span class="verdict caution">Caution — below <em>E</em>(<em>R</em>*); reprice, reduce risk, or document the trade-off</span>';
+      verdict = '<span class="verdict caution">' + verdictText.replace('E(R*)', '<em>E</em>(<em>R</em>*)') + '</span>';
     } else {
-      verdict = '<span class="verdict stop">Stop — proposed margin does not clear the impact-adjusted hurdle</span>';
+      verdict = '<span class="verdict stop">' + verdictText + '</span>';
     }
     document.getElementById('bc-verdict').innerHTML = verdict;
   }
 
   enhanceScoreTables();
   createMobileScorecards();
+  initInfoTips();
   calcLayer2();
   calcBcorp();
+  updateExportControls();
 </script>
 </body>
 </html>

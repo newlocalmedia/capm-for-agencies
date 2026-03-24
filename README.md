@@ -24,7 +24,7 @@ An additional impact-governance pass for mission-driven agencies. It extends the
 ## Usage
 
 ### Interactive (browser)
-Visit the hosted version and click to score each factor. The calculators update in real time. The interactive app lives in `index.html`.
+Visit the hosted version and click to score each factor. The calculators update in real time. The interactive decision cards live in `index.html`.
 
 ### Printable (PDF)
 Download reference cards from the `pdf/` directory:
@@ -39,6 +39,9 @@ A text-first landing page lives in `overview/index.html`.
 ### Theory and Background
 The long-form theory text and commentary live in `theory/capm-for-agencies.md`.
 
+### Calibration Notes
+A deeper implementation note for the current scoring ranges, scenario tests, and calibration choices lives in `tldr/calibration-notes.html`.
+
 
 ## The Formula
 
@@ -49,6 +52,8 @@ In agency terms:
 **Minimum Margin = Base Margin + Blended β × Risk Premium**
 
 Where Blended β = (Engagement Score / 21) × Systematic Adjustment Factor
+
+In the current decision-card calibration, the Layer 1 adjustment factor is centered on `1.00` at the midpoint score, and the B-Corp overlay uses a neutral midpoint plus moderate widening or narrowing of the impact adjustment rather than an aggressive default amplification. See the [calibration notes](./tldr/calibration-notes.html).
 
 ## What this is good for
 
@@ -61,6 +66,18 @@ This repo is most useful as a shared language for risk naming and deal governanc
 ## Hosting
 
 This repo is configured for GitHub Pages. Enable Pages in your repo settings with source set to the root (`/`) of the `main` branch.
+
+## Development
+
+The repo now includes a small test and verification layer:
+
+- `npm test` runs calculator regression tests
+- `npm run check:app` parses the inline app script and checks that the shared calculation module is wired in
+- `npm run build:static` regenerates the theory and TL;DR HTML pages
+- `npm run check:generated` fails if the generated pages are out of sync with the committed outputs
+- `npm run ci` runs the full local verification sequence used in GitHub Actions
+
+See [CHANGELOG.md](./CHANGELOG.md) for notable changes.
 
 ## License
 

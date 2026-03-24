@@ -603,10 +603,11 @@ PAGES = [
         "deck_link_href": "../index.html",
         "meta": "Use this version when you want the full argument, not just the calculator. The hybrid layer is presented here as pricing governance rather than a literal asset-pricing engine.",
         "actions": [
-            ("Open the App", "../index.html", "primary"),
+            ("Open the Decision Cards", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
             ("TL;DR", "../tldr/price-the-work-before-you-plan-it.html", "secondary"),
             ("Decision Guide", "../tldr/decision-guide.html", "secondary"),
+            ("Calibration Notes", "../tldr/calibration-notes.html", "secondary"),
         ],
         "toc_min": 2,
         "toc_max": 4,
@@ -624,9 +625,10 @@ PAGES = [
         "deck_html": True,
         "meta": "Start here if you want the thesis without the theory. This is the best first read for most people.",
         "actions": [
-            ("Open the App", "../index.html", "primary"),
+            ("Open the Decision Cards", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
             ("Decision Guide", "./decision-guide.html", "secondary"),
+            ("Calibration Notes", "./calibration-notes.html", "secondary"),
             ("Understand the Theory", "../theory/index.html", "secondary"),
         ],
         "toc_min": 2,
@@ -641,11 +643,33 @@ PAGES = [
         "heading": "CAPM for Agencies — Decision Guide",
         "toc_skip_first_heading": True,
         "deck": "A practical presales guide for running the CAPM model: set baselines, score the current environment and the deal, compare proposed margin to the hurdle, then decide whether to proceed, reprice, or sell discovery first.",
-        "meta": "Use this when you want the procedure rather than the theory. It tracks the current decision logic in the app.",
+        "meta": "Use this when you want the procedure rather than the theory. It tracks the current decision logic in the decision cards.",
         "actions": [
-            ("Open the App", "../index.html", "primary"),
+            ("Open the Decision Cards", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
             ("TL;DR", "./price-the-work-before-you-plan-it.html", "secondary"),
+            ("Calibration Notes", "./calibration-notes.html", "secondary"),
+            ("Understand the Theory", "../theory/index.html", "secondary"),
+        ],
+        "toc_min": 2,
+        "toc_max": 3,
+        "lead": False,
+    },
+    {
+        "source": ROOT / "tldr" / "CAPM for Agencies — Calibration Notes.md",
+        "output": ROOT / "tldr" / "calibration-notes.html",
+        "title": "CAPM for Agencies — Calibration Notes",
+        "eyebrow": "Calibration Notes",
+        "heading": "How the Current Decision Cards Are Calibrated",
+        "toc_skip_first_heading": True,
+        "deck": "Implementation detail for people who want it: the current score mappings, the moderation changes to the B-Corp overlay, and a few sanity-test scenarios run against the live calculator.",
+        "meta": "Use this when you want to inspect the current decision-card math and calibration choices rather than just use the workflow.",
+        "actions": [
+            ("Open the Decision Cards", "../index.html", "primary"),
+            ("Overview", "../overview/index.html", "secondary"),
+            ("TL;DR", "./price-the-work-before-you-plan-it.html", "secondary"),
+            ("Decision Guide", "./decision-guide.html", "secondary"),
+            ("Calibration Notes", "./calibration-notes.html", "secondary"),
             ("Understand the Theory", "../theory/index.html", "secondary"),
         ],
         "toc_min": 2,
@@ -665,7 +689,7 @@ TOKEN_REPLACEMENTS = {
     "[[APP_CARDS_ASIDE]]": """
 <aside class="reader-aside">
   <p class="reader-aside-title">Open the live cards</p>
-  <p>If you want to move between the text and the tool, jump straight into the app:</p>
+  <p>If you want to move between the text and the tool, jump straight into the interactive decision cards:</p>
   <ul>
     <li><a href="../index.html#layer1-card">Layer 1 card</a></li>
     <li><a href="../index.html#layer2-card">Layer 2 card</a></li>
@@ -757,6 +781,11 @@ def build_deck(page: dict) -> str:
 
 def build_footer() -> str:
     return (
+        'A <a href="https://newlocalmedia.com/">New Local Media</a> project · '
+        '<a href="https://linkedin.com/in/danknauss">LinkedIn</a> · '
+        '<a href="mailto:dan@newlocalmedia.com?subject=CAPM%20for%20Agencies%20feedback">Feedback</a> · '
+        '<a href="https://github.com/newlocalmedia/capm-for-agencies/issues">Issues</a><br>'
+        ' '
         'This repository and its web content are licensed under the '
         '<a href="https://creativecommons.org/licenses/by-sa/4.0/">'
         'Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)'

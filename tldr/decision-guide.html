@@ -593,11 +593,12 @@
           <p class="deck">A practical presales guide for running the CAPM model: set baselines, score the current environment and the deal, compare proposed margin to the hurdle, then decide whether to proceed, reprice, or sell discovery first.</p>
         </div>
         <div class="meta">
-          <div class="meta-copy">Use this when you want the procedure rather than the theory. It tracks the current decision logic in the app.</div>
+          <div class="meta-copy">Use this when you want the procedure rather than the theory. It tracks the current decision logic in the decision cards.</div>
           <div class="actions">
-            <a class="button primary" href="../index.html">Open the App</a>
+            <a class="button primary" href="../index.html">Open the Decision Cards</a>
 <a class="button secondary" href="../overview/index.html">Overview</a>
 <a class="button secondary" href="./price-the-work-before-you-plan-it.html">TL;DR</a>
+<a class="button secondary" href="./calibration-notes.html">Calibration Notes</a>
 <a class="button secondary" href="../theory/index.html">Understand the Theory</a>
           </div>
         </div>
@@ -638,7 +639,7 @@
 </ul>
 <p>The hook is still "price before you plan," but in practice that means price before delivery planning is committed, not before the solutions team has done enough technical assessment to price responsibly.</p>
 <p>CAPM in one sentence: it is a finance model for deciding what return is worth a given level of risk. In this agency version, it helps you separate portfolio risk from deal risk, set a minimum acceptable margin, and decide whether the work deserves a yes at the quoted price.</p>
-<p>Run the workflow in the app:</p>
+<p>Run the workflow in the decision cards:</p>
 <ul>
 <li><a href="../index.html#layer1-card">Layer 1 card</a></li>
 <li><a href="../index.html#layer2-card">Layer 2 card</a></li>
@@ -686,7 +687,7 @@
 <li>revenue concentration</li>
 <li>rate pressure</li>
 </ul>
-<p>In the app, the combined Layer 1 score maps to a <strong>systematic adjustment factor</strong>:</p>
+<p>In the decision cards, the combined Layer 1 score maps to a <strong>systematic adjustment factor</strong>:</p>
 <ul>
 <li>
 <code>6</code> maps to <code>0.85</code>
@@ -695,7 +696,7 @@
 <code>18</code> maps to <code>1.00</code>
 </li>
 <li>
-<code>30</code> maps to <code>1.25</code>
+<code>30</code> maps to <code>1.15</code>
 </li>
 </ul>
 <p>This factor sets the pricing environment for every engagement.</p>
@@ -745,7 +746,7 @@
 <p>This is the critical decision step.</p>
 <p>The model is not complete when you know the hurdle. It is complete when you compare the <strong>proposed margin</strong> to <em>E</em>(<em>R</em>).</p>
 <h2 id="step-6--decide">Step 6 — Decide</h2>
-<p>In the current app:</p>
+<p>In the current decision-card build:</p>
 <table>
 <thead>
 <tr>
@@ -782,7 +783,13 @@
 </li>
 <li>compare the proposed margin against <strong>impact-adjusted</strong> <em>E</em>(<em>R</em>*)</li>
 </ul>
-<p>In the current app, the B-Corp card keeps the standard hurdle visible, then shows how mission discount or harm premium shifts it up or down.</p>
+<p>In the current decision-card build, the B-Corp card keeps the standard hurdle visible, then shows how mission discount or harm premium shifts it up or down.</p>
+<p>The current calibration is intentionally moderate:</p>
+<ul>
+<li>the B-Corp portfolio score is neutral at its midpoint and only widens or narrows the adjustment around that center</li>
+<li>each B-Corp engagement point away from the midpoint is worth about one margin point before the portfolio modifier is applied</li>
+</ul>
+<p>If you want the implementation details and sanity-test scenarios, read the <a href="./calibration-notes.html">calibration notes</a>.</p>
 <h2 id="step-8--use-the-pure-approach-correctly">Step 8 — Use The Pure Approach Correctly</h2>
 <p>For the pure approach:</p>
 <ul>
@@ -819,7 +826,7 @@
 
           </article>
           <footer class="site-footer">
-            This repository and its web content are licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)</a>. See the <a href="../LICENSE">LICENSE</a>.
+            A <a href="https://newlocalmedia.com/">New Local Media</a> project · <a href="https://linkedin.com/in/danknauss">LinkedIn</a> · <a href="mailto:dan@newlocalmedia.com?subject=CAPM%20for%20Agencies%20feedback">Feedback</a> · <a href="https://github.com/newlocalmedia/capm-for-agencies/issues">Issues</a><br> This repository and its web content are licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)</a>. See the <a href="../LICENSE">LICENSE</a>.
           </footer>
         </div>
       </main>

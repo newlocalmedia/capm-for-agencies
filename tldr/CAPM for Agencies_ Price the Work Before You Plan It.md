@@ -116,13 +116,13 @@ Examples:
 * revenue concentration
 * rate pressure
 
-This layer sets the **systematic adjustment factor** that frames the pricing environment for every deal. In the app, that work happens in the [Layer 1 card](../index.html#layer1-card).
+This layer sets the **systematic adjustment factor** that frames the pricing environment for every deal. In the [Decision Cards](../index.html), that work happens in the [Layer 1 card](../index.html#layer1-card).
 
 ### Layer 2: Engagement Risk
 
 This is the specific deal.
 
-It is a presales assessment, not a full delivery plan. The point is to get enough input from the solutions team to judge complexity, client concerns, and scope risk before commitment. If that still is not enough to price implementation responsibly, then discovery is the thing to price. In the app, this is the [Layer 2 card](../index.html#layer2-card).
+It is a presales assessment, not a full delivery plan. The point is to get enough input from the solutions team to judge complexity, client concerns, and scope risk before commitment. If that still is not enough to price implementation responsibly, then discovery is the thing to price. In the [Decision Cards](../index.html), this is the [Layer 2 card](../index.html#layer2-card).
 
 You score:
 
