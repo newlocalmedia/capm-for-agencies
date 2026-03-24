@@ -330,7 +330,7 @@ def build_layer2_blended_beta():
         label_x = prop_pt[0] + 18
         label_y = prop_pt[1] - 26
         if label == "Stretch project":
-            label_x = prop_pt[0] - 66
+            label_x = prop_pt[0] - 118
             label_y = prop_pt[1] - 76
         if label == "Money pit":
             label_x = prop_pt[0] + 12

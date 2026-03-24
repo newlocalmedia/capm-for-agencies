@@ -171,7 +171,11 @@ PAGE_STYLE = """
   .toc-card {
     position: sticky;
     top: 20px;
+    max-height: calc(100vh - 40px);
     padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
   }
 
   .toc-title {
@@ -187,6 +191,8 @@ PAGE_STYLE = """
   .toc {
     display: grid;
     gap: 2px;
+    overflow-y: auto;
+    padding-right: 4px;
   }
 
   .toc a {

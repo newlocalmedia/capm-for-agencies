@@ -63,9 +63,10 @@ CAPM is classically capitalistic: hyper-risk-averse, relentlessly focused on a s
 - [Limitations and Caveats](#limitations-and-caveats)
 - [Conclusion: Pricing the Work Before You Plan It](#conclusion-pricing-the-work-before-you-plan-it)
 - [CAPM for B-Corp Agencies](#capm-for-b-corp-agencies)
+- [Glossary](#glossary)
 
 ## Introduction: Two CAPMs
-If you have absorbed some of the key project management concepts from the PMBOK or studied for the Certified Associate in Project Management (CAPM) exam, you know about value formulas, critical path calculations, and process group mechanics. Those tools answer *operational* questions: Are we on schedule? Are we on budget? How efficiently is work getting done?
+If you have absorbed some of the key project management concepts from the *Project Management Body of Knowledge* (PMBOK) or studied for the Certified Associate in Project Management (CAPM) exam, you know about value formulas, critical path calculations, and process group mechanics. Those tools answer *operational* questions: Are we on schedule? Are we on budget? How efficiently is work getting done?
 
 But there is an earlier, more strategic question that most project management frameworks skip entirely: ***Should we take this project at all?***
 
@@ -80,8 +81,9 @@ If consultative sales and proposals informed by technical team members are alrea
 ### The Origin and Applicability of CAPM for Agencies
 Dating back to the 1960s in its origins, CAPM remains a popular instrument in finance but has been heavily criticized over the decades by a number of economists. The heavy criticisms of CAPM are almost entirely aimed at CAPM as a predictive model of actual market returns. Our agency application isn't doing that. It's using CAPM as a decision framework for pricing risk. Those are fundamentally different use cases.
 
-I vaguely knew about the Capital Asset Pricing Model (CAPM) from financial economics before I had ever heard of the same acronym in project management — the Project Management Institute’s (PMI) Certified Associate in Project Management. When I saw the latter being used as a credential, I wondered if it had to do with capital asset pricing applied to project management. Nope\!   
-But then I asked, Why not? Hasn’t anyone made this connection? The answer turned out to be “nope” again. 
+I vaguely knew about the Capital Asset Pricing Model (CAPM) from financial economics before I had ever heard of the same acronym in project management — the Project Management Institute’s (PMI) Certified Associate in Project Management. When I saw the latter being used as a credential, I wondered if it had to do with capital asset pricing applied to project management. Nope\!
+
+But then I asked, Why not? Hasn’t anyone made this connection? The answer turned out to be “nope” again.
 
 I didn’t see any strong reasons why CAPM wouldn’t be helpful in an agency context, so I started talking to Claude (AI) and human colleagues about it. This led to further research, reading, writing, and revision — and a website. This is the result — a CAPM-inspired agency risk-based pricing assessment model. It is closest to finance theory when used as a hurdle-rate framework at the portfolio level, and more heuristic when translated into per-engagement scoring for day-to-day agency work.
 
@@ -108,7 +110,7 @@ The core insight: you should never accept a return lower than the risk-free rate
 
 *Figure 1. Security Market Line illustration. [PDF version](./figures/security-market-line.pdf).*
 
-In the standard model, every asset should sit on the Security Market Line (SML). From here on, we’ll call it “The Line”. Anything above the Line is delivering more return than its risk warrants; anything below the Line is underperforming. 
+In the standard model, every asset should sit on the Security Market Line (SML). From here on, we’ll call it “The Line.” Anything above the Line is delivering more return than its risk warrants; anything below the Line is underperforming. 
 
 ## Mapping CAPM to Agency Work
 Each component of the CAPM formula has a direct analog in the agency project pricing, planning, and management context. The mapping is not merely metaphorical. It reflects real financial and operational dynamics that determine whether a project is worth pursuing. Here’s the agency remix:
@@ -377,7 +379,7 @@ The financial CAPM and PMI’s earned value management (EVM) formulas address di
 | **Key Question** | Should we take this project? | How is this project performing? |
 | **Risk Focus** | Systematic risk — market and client factors that the team cannot control | Execution risk — schedule and cost variance against the plan |
 | **Primary User** | Solutions team, agency leadership, sales | Project Manager, delivery team, finance |
-| **Output** | Required margin / go-no-go decision | SV, CV, SPI, CPI, EAC, VAC |
+| **Output** | Required margin / go-no-go decision | Schedule variance (SV), cost variance (CV), schedule performance index (SPI), cost performance index (CPI), estimate at completion (EAC), variance at completion (VAC) |
 
 The two frameworks are complementary, not competing. *CAPM tells you whether the expected return justifies taking the risk. EVM tells you whether you are actually realizing that return as the project unfolds. A project that passes the CAPM gate with a healthy expected margin but then shows a declining CPI during execution is a project where the risk you priced in is materializing — and the EVM numbers give you early warning to intervene.*
 
@@ -422,7 +424,7 @@ As Mullins argued in the 1982 HBR article cited in the introduction, CAPM’s va
 ## Conclusion: Pricing the Work Before You Plan It
 It’s unlikely the PMI CAPM exam will ever test you on the Capital Asset Pricing Model from finance. But the thinking behind it — that risk must be priced, that expected returns must compensate for uncertainty, and that a disciplined framework beats intuition — is deeply aligned with PMI’s emphasis on structured decision-making.
 
-For agency practitioners, the financial CAPM fills a gap that the PMBOK does not address: **the go/no-go decision**. By the time you are building a WBS or tracking earned value, you have already committed resources. The financial CAPM gives you a framework to make better commitments in the first place. Its practical value is highest when it helps teams align before the deal, price with more discipline during presales, and recalibrate after delivery by comparing expected and realized outcomes.
+For agency practitioners, the financial CAPM fills a gap that the PMBOK does not address: **the go/no-go decision**. By the time you are building a work breakdown structure (WBS) or tracking earned value, you have already committed resources. The financial CAPM gives you a framework to make better commitments in the first place. Its practical value is highest when it helps teams align before the deal, price with more discipline during presales, and recalibrate after delivery by comparing expected and realized outcomes.
 
 And the solutions team, sitting at the intersection of sales and delivery, is the natural hub for translating between portfolio-level systematic risk and engagement-level project risk — bridging strategic awareness and practical assessment before the team commits. The practical win is not the math alone. It is forcing sales, solutions, delivery, and leadership to name risk in a shared language before anyone signs the work. That is not just good risk management. It is ***the job.***
 
@@ -575,6 +577,63 @@ Rather than treating the three bottom lines as separate accounts that cannot be 
 
 **The B Impact Assessment is necessary but not sufficient.** The assessment measures impact holistically but does not provide a pricing framework. Your CAPM adaptation fills the gap: it connects impact measurement to project selection and margin requirements, giving the B-Corp agency a principled basis for every engagement decision — not just the certification review every three years.
 
+## Glossary
+**Alpha**: In finance, alpha is return above or below what CAPM predicts for a given beta. In this manuscript it appears mainly in the literature discussion, especially around green assets and “greenium” effects.
+
+**Beta (β)**: The CAPM measure of risk relative to the market. In the pure approach it stays closer to the finance concept; in the hybrid approach it becomes a scored managerial coefficient used for pricing governance.
+
+**B Impact Assessment (BIA)**: B Lab’s assessment framework for measuring company impact across stakeholder-related dimensions. In this manuscript it matters mainly as a measurement context, not as a pricing model.
+
+**Capital Asset Pricing Model (CAPM)**: A finance model that sets expected return as a function of the risk-free rate, beta, and the market risk premium. This project adapts its structure for agency pricing decisions.
+
+**Cost Performance Index (CPI)**: An earned value management metric comparing earned value to actual cost. It indicates cost efficiency during delivery.
+
+**Cost Variance (CV)**: An earned value management metric showing the gap between earned value and actual cost.
+
+**Earned Value Management (EVM)**: A project-control framework used during execution to measure schedule and cost performance against the plan.
+
+**Environmental, Social, and Governance (ESG)**: A broad framework for evaluating non-financial risk and impact factors related to environmental stewardship, social effects, and governance practices.
+
+**Estimate at Completion (EAC)**: An earned value management forecast of total project cost at completion based on current performance.
+
+**Expected Return, E(R)**: The minimum return or margin required for a given level of risk under the model.
+
+**Expected Return with Impact, E(R\*)**: The B-Corp adaptation of expected return, where impact considerations modify or extend the purely financial hurdle.
+
+**Greenium**: A financial-return discount investors may accept for sustainability-related benefits or non-pecuniary utility. In the agency adaptation, it maps to a conscious mission discount on mission-aligned work.
+
+**Heuristic Pricing Governance**: The manuscript’s preferred description of the hybrid model. It means a disciplined internal decision framework, not a statistically correct asset-pricing engine.
+
+**Idiosyncratic Risk**: Project-specific risk that does not affect the whole portfolio at once and, in theory, can wash out across enough engagements.
+
+**Market Return, Rm**: The average return of the relevant market. In the agency adaptation, this is usually the average margin across project work or comparable agency work.
+
+**Market Risk Premium, Rm − Rf**: The return above the risk-free baseline that compensates for taking on market or portfolio-level risk.
+
+**PMBOK**: The *Project Management Body of Knowledge*, published by the Project Management Institute, used as a standard reference in project management practice.
+
+**PEST**: A strategic framework covering political, economic, social, and technological forces.
+
+**PESTLE**: An expanded version of PEST that adds legal and environmental factors.
+
+**Project Management Institute (PMI)**: The professional body associated with standards and certifications such as CAPM and PMBOK.
+
+**Risk-Free Rate, Rf**: In finance, the return on a near-zero-risk asset. In this adaptation, it is the margin from the agency’s lowest-risk, most predictable work.
+
+**Schedule Performance Index (SPI)**: An earned value management metric comparing earned value to planned value. It indicates schedule efficiency during delivery.
+
+**Schedule Variance (SV)**: An earned value management metric showing the gap between earned value and planned value.
+
+**Securities Market Line (SML)**: The line in CAPM showing the return required for each level of beta. The manuscript refers to it informally as “The Line.”
+
+**Systematic Risk**: Risk that affects multiple engagements or the whole portfolio at once and cannot be diversified away by client mix alone.
+
+**Triple Bottom Line (TBL)**: A framework associated with evaluating people, planet, and profit together rather than as purely financial trade-offs.
+
+**Variance at Completion (VAC)**: An earned value management metric indicating the expected difference between the original budget and the forecast cost at completion.
+
+**Work Breakdown Structure (WBS)**: A structured decomposition of project scope into smaller deliverables and work packages used during planning and execution.
+
 ### Suggested Reading
 * Pástor, Ľ., Stambaugh, R. F., & Taylor, L. A. (2021). Sustainable investing in equilibrium. *Journal of Financial Economics*, 142(2), 550–571. [NBER Working Paper](https://www.nber.org/papers/w26549)  
 * Johnstone, D. (2025). Zero-beta risks and required returns: ESG and CAPM. *Financial Management*. [Wiley](https://onlinelibrary.wiley.com/doi/full/10.1111/fima.12475)  
@@ -582,4 +641,4 @@ Rather than treating the three bottom lines as separate accounts that cannot be 
 * Liute, A. & De Giacomo, M. R. (2022). The environmental performance of UK-based B Corp companies. *Business Strategy and the Environment*. [Wiley](https://onlinelibrary.wiley.com/doi/full/10.1002/bse.2919)  
 * Elkington, J. (2018). 25 Years Ago I Coined the Phrase "Triple Bottom Line." *Harvard Business Review*.  
 * B Lab. Stakeholder Governance. [bcorporation.net](https://www.bcorporation.net/en-us/movement/stakeholder-governance/)  
-* Pedersen, L. H., Fitzgibbons, S., & Pomorski, L. (2021). Responsible investing: The ESG-efficient frontier. *Journal of Financial Economics*, 142(2), 572–597.
+* Pedersen, L. H., Fitzgibbons, S., & Pomorski, L. (2021). Responsible investing: The ESG-efficient frontier. *Journal of Financial Economics*, 142(2), 572–597. [PDF](https://research-api.cbs.dk/ws/portalfiles/portal/68795021/Heje_Pedersen_Fitzgibbons_Pomorski_Resposible_Investing_PublishersVersion.pdf)
