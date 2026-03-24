@@ -164,7 +164,7 @@
     position: sticky;
     top: 20px;
     max-height: calc(100vh - 40px);
-    padding: 20px 18px;
+    padding: 20px 18px 20px 32px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -185,6 +185,7 @@
     gap: 2px;
     overflow-y: auto;
     padding-right: 4px;
+    padding-left: 18px;
   }
 
   .toc a {
@@ -213,7 +214,7 @@
   }
 
   .article-frame {
-    padding: clamp(24px, 4vw, 56px);
+    padding: 20px clamp(24px, 4vw, 56px) clamp(24px, 4vw, 56px);
   }
 
   .prose {
@@ -243,9 +244,11 @@
 
   .prose h2 {
     font-size: 2rem;
-    margin: 3.3rem 0 1rem;
-    padding-top: 0.25rem;
-    border-top: 1px solid var(--line);
+    margin: 3rem 0 1rem;
+  }
+
+  .prose > .article-kicker + h2 {
+    margin-top: 0;
   }
 
   .prose h3 {
@@ -314,10 +317,58 @@
     color: #473f38;
   }
 
-  .prose hr {
-    border: 0;
-    border-top: 1px solid var(--line);
-    margin: 2rem 0;
+  .prose .reader-aside {
+    float: right;
+    width: min(21rem, 42%);
+    margin: 0.1rem 0 1.1rem 1.4rem;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 10px 24px rgba(32, 29, 26, 0.08);
+  }
+
+  .prose .reader-aside .reader-aside-title {
+    margin: 0 0 0.45rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: #241d17;
+    font-weight: 700;
+  }
+
+  .prose .reader-aside p {
+    margin: 0 0 0.6rem;
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .prose .reader-aside ul {
+    margin: 0;
+    padding-left: 1.15rem;
+  }
+
+  .prose .reader-aside li {
+    margin-top: 0.25rem;
+  }
+
+  .prose .reader-note {
+    clear: both;
+    margin: 1.25rem 0 1.15rem;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(35, 72, 106, 0.14);
+    background: rgba(35, 72, 106, 0.06);
+    box-shadow: 0 10px 24px rgba(32, 29, 26, 0.06);
+  }
+
+  .prose .reader-note p {
+    margin: 0;
+    color: #3d3934;
+  }
+
+  .prose .reader-note strong {
+    color: #1f3650;
   }
 
   .prose table {
@@ -376,6 +427,16 @@
   .prose .lead {
     font-size: 1.18rem;
     color: #38322d;
+  }
+
+  .article-kicker {
+    margin: 0 0 0.45rem;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
   .empty-toc {
@@ -459,6 +520,12 @@
     .toc-card {
       position: static;
     }
+
+    .prose .reader-aside {
+      float: none;
+      width: auto;
+      margin: 0 0 1.1rem;
+    }
   }
 
   @media (max-width: 640px) {
@@ -489,7 +556,7 @@
       <div class="masthead-grid">
         <div>
           <h1>CAPM for Agencies — Decision Guide</h1>
-          <p class="deck">A compact operating guide for running the model in presales: set baselines, score the deal, compare proposed margin to the hurdle, and decide whether to proceed.</p>
+          <p class="deck">A practical presales guide for running the CAPM model: set baselines, score the current environment and the deal, compare proposed margin to the hurdle, then decide whether to proceed, reprice, or sell discovery first.</p>
         </div>
         <div class="meta">
           <div class="meta-copy">Use this when you want the procedure rather than the theory. It tracks the current decision logic in the app.</div>
@@ -507,8 +574,7 @@
       <aside class="toc-card">
         <h2 class="toc-title">On This Page</h2>
         <nav class="toc">
-          <a class="level-2" href="#capm-for-agencies--decision-guide">CAPM for Agencies — Decision Guide</a>
-<a class="level-3" href="#purpose">Purpose</a>
+          <a class="level-3" href="#purpose">Purpose</a>
 <a class="level-2" href="#inputs">Inputs</a>
 <a class="level-2" href="#step-1--set-your-baselines">Step 1 — Set Your Baselines</a>
 <a class="level-2" href="#step-2--calibrate-layer-1">Step 2 — Calibrate Layer 1</a>
@@ -516,7 +582,8 @@
 <a class="level-2" href="#step-4--calculate-the-hybrid-hurdle">Step 4 — Calculate The Hybrid Hurdle</a>
 <a class="level-2" href="#step-5--check-the-actual-deal">Step 5 — Check The Actual Deal</a>
 <a class="level-2" href="#step-6--decide">Step 6 — Decide</a>
-<a class="level-2" href="#step-7--use-the-pure-approach-correctly">Step 7 — Use The Pure Approach Correctly</a>
+<a class="level-2" href="#step-7--use-the-b-corp-overlay-when-it-matters">Step 7 — Use The B-Corp Overlay When It Matters</a>
+<a class="level-2" href="#step-8--use-the-pure-approach-correctly">Step 8 — Use The Pure Approach Correctly</a>
 <a class="level-2" href="#governance-note">Governance Note</a>
 <a class="level-2" href="#outputs">Outputs</a>
         </nav>
@@ -525,6 +592,7 @@
       <main class="article-card">
         <div class="article-frame">
           <article class="prose">
+            
             <h2 id="capm-for-agencies--decision-guide">CAPM for Agencies — Decision Guide</h2>
 <h3 id="purpose">Purpose</h3>
 <p>Use this as a repeatable presales workflow for:</p>
@@ -534,35 +602,44 @@
 <li>making go, caution, or stop decisions before commitment</li>
 </ul>
 <p>The hook is still "price before you plan," but in practice that means price before delivery planning is committed, not before the solutions team has done enough technical assessment to price responsibly.</p>
+<p>CAPM in one sentence: it is a finance model for deciding what return is worth a given level of risk. In this agency version, it helps you separate portfolio risk from deal risk, set a minimum acceptable margin, and decide whether the work deserves a yes at the quoted price.</p>
+<p>Run the workflow in the app:</p>
+<ul>
+<li><a href="../index.html#layer1-card">Layer 1 card</a></li>
+<li><a href="../index.html#layer2-card">Layer 2 card</a></li>
+<li><a href="../index.html#bcorp-card">B-Corp card</a></li>
+</ul>
 <h2 id="inputs">Inputs</h2>
 <p>You need five commercial inputs:</p>
 <ul>
 <li>
-<strong>Agency</strong> <code>R_f</code>: margin from your lowest-risk work</li>
+<strong>Agency</strong> <em>R<sub>f</sub></em>: margin from your lowest-risk work</li>
 <li>
-<strong>Portfolio</strong> <code>R_m</code>: average margin across project work</li>
+<strong>Portfolio</strong> <em>R<sub>m</sub></em>: average margin across project work</li>
 <li>
 <strong>Layer 1 factor</strong>: the current systematic environment</li>
 <li><strong>Deal Price</strong></li>
 <li><strong>Estimated Delivery Cost</strong></li>
 </ul>
 <h2 id="step-1--set-your-baselines">Step 1 — Set Your Baselines</h2>
-<p><strong>Agency</strong> <code>R_f</code></p>
+<p><strong>Agency</strong> <em>R<sub>f</sub></em></p>
 <ul>
 <li>use the margin from your safest, most predictable revenue</li>
 <li>typical examples: retainers, maintenance, contracted support</li>
 </ul>
-<p><strong>Portfolio</strong> <code>R_m</code></p>
+<p><strong>Portfolio</strong> <em>R<sub>m</sub></em></p>
 <ul>
 <li>use your average project margin over the last 1 to 2 years</li>
 <li>if internal history is weak, use the best benchmark you have</li>
 </ul>
 <p><strong>Risk premium</strong></p>
 <ul>
-<li><code>R_m - R_f</code></li>
+<li>
+<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>
+</li>
 </ul>
 <h2 id="step-2--calibrate-layer-1">Step 2 — Calibrate Layer 1</h2>
-<p>Score the six Layer 1 factors:</p>
+<p>Score the six Layer 1 factors in the <a href="../index.html#layer1-card">Layer 1 card</a>:</p>
 <ul>
 <li>platform stability</li>
 <li>talent market</li>
@@ -585,7 +662,7 @@
 </ul>
 <p>This factor sets the pricing environment for every engagement.</p>
 <h2 id="step-3--score-layer-2">Step 3 — Score Layer 2</h2>
-<p>This is a presales risk assessment, not full delivery planning. You want enough solutions-team input to price responsibly: technical complexity, client concerns, scope shape, and capacity pressure. If implementation still cannot be priced confidently, the right next move is to price a discovery phase first.</p>
+<p>This is a presales risk assessment, not full delivery planning. In the <a href="../index.html#layer2-card">Layer 2 card</a>, you want enough solutions-team input to price responsibly: technical complexity, client concerns, scope shape, and capacity pressure. If implementation still cannot be priced confidently, the right next move is to price a discovery phase first.</p>
 <p>Score the seven engagement factors:</p>
 <ul>
 <li>client track record</li>
@@ -612,8 +689,7 @@
 <strong>Blended</strong> <code>β = (Engagement Score / 21) × Layer 1 factor</code>
 </li>
 <li>
-<strong>Required Margin</strong> <code>E(R) = R_f + Blended β × (R_m - R_f)</code>
-</li>
+<strong>Required Margin</strong> <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Blended <em>β</em> × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)</li>
 </ul>
 <p>This gives you the minimum acceptable margin for the deal.</p>
 <h2 id="step-5--check-the-actual-deal">Step 5 — Check The Actual Deal</h2>
@@ -629,7 +705,7 @@
 </li>
 </ul>
 <p>This is the critical decision step.</p>
-<p>The model is not complete when you know the hurdle. It is complete when you compare the <strong>proposed margin</strong> to <code>E(R)</code>.</p>
+<p>The model is not complete when you know the hurdle. It is complete when you compare the <strong>proposed margin</strong> to <em>E</em>(<em>R</em>).</p>
 <h2 id="step-6--decide">Step 6 — Decide</h2>
 <p>In the current app:</p>
 <table>
@@ -643,26 +719,33 @@
 <tbody>
 <tr>
 <td><strong>Go</strong></td>
-<td>proposed margin is at or above <code>E(R)</code>
-</td>
+<td>proposed margin is at or above <em>E</em>(<em>R</em>)</td>
 <td>proceed</td>
 </tr>
 <tr>
 <td><strong>Caution</strong></td>
-<td>proposed margin is within 3 margin points below <code>E(R)</code>
-</td>
+<td>proposed margin is within 3 margin points below <em>E</em>(<em>R</em>)</td>
 <td>reprice, reduce risk, or change structure</td>
 </tr>
 <tr>
 <td><strong>Stop</strong></td>
-<td>proposed margin is more than 3 points below <code>E(R)</code>
-</td>
+<td>proposed margin is more than 3 points below <em>E</em>(<em>R</em>)</td>
 <td>decline or materially renegotiate</td>
 </tr>
 </tbody>
 </table>
 <p>Also check the <strong>minimum deal price</strong> implied by the hurdle. That gives you a concrete repricing number.</p>
-<h2 id="step-7--use-the-pure-approach-correctly">Step 7 — Use The Pure Approach Correctly</h2>
+<h2 id="step-7--use-the-b-corp-overlay-when-it-matters">Step 7 — Use The B-Corp Overlay When It Matters</h2>
+<p>If you are using the <a href="../index.html#bcorp-card">B-Corp card</a>, do one more pass:</p>
+<ul>
+<li>score the B-Corp portfolio factors</li>
+<li>score the B-Corp engagement factors</li>
+<li>review the <strong>impact adjustment</strong>
+</li>
+<li>compare the proposed margin against <strong>impact-adjusted</strong> <em>E</em>(<em>R</em>*)</li>
+</ul>
+<p>In the current app, the B-Corp card keeps the standard hurdle visible, then shows how mission discount or harm premium shifts it up or down.</p>
+<h2 id="step-8--use-the-pure-approach-correctly">Step 8 — Use The Pure Approach Correctly</h2>
 <p>For the pure approach:</p>
 <ul>
 <li>treat the Layer 2 score as a <strong>risk index</strong>, not as CAPM beta</li>
@@ -671,7 +754,8 @@
 </ul>
 <p>Pure-approach hurdle:</p>
 <ul>
-<li><code>E(R) = R_f + Layer 1 factor × (R_m - R_f)</code></li>
+<li>
+<em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Layer 1 factor × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)</li>
 </ul>
 <p>Then still compare the proposed deal margin against that hurdle.</p>
 <h2 id="governance-note">Governance Note</h2>
@@ -687,6 +771,7 @@
 <p>Every evaluated deal should leave with:</p>
 <ul>
 <li>a required margin</li>
+<li>an impact-adjusted margin if the B-Corp overlay is in play</li>
 <li>a proposed margin</li>
 <li>a margin gap</li>
 <li>a minimum deal price</li>

@@ -172,7 +172,7 @@ PAGE_STYLE = """
     position: sticky;
     top: 20px;
     max-height: calc(100vh - 40px);
-    padding: 20px 18px;
+    padding: 20px 18px 20px 32px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -193,6 +193,7 @@ PAGE_STYLE = """
     gap: 2px;
     overflow-y: auto;
     padding-right: 4px;
+    padding-left: 18px;
   }
 
   .toc a {
@@ -221,7 +222,7 @@ PAGE_STYLE = """
   }
 
   .article-frame {
-    padding: clamp(24px, 4vw, 56px);
+    padding: 20px clamp(24px, 4vw, 56px) clamp(24px, 4vw, 56px);
   }
 
   .prose {
@@ -251,9 +252,11 @@ PAGE_STYLE = """
 
   .prose h2 {
     font-size: 2rem;
-    margin: 3.3rem 0 1rem;
-    padding-top: 0.25rem;
-    border-top: 1px solid var(--line);
+    margin: 3rem 0 1rem;
+  }
+
+  .prose > .article-kicker + h2 {
+    margin-top: 0;
   }
 
   .prose h3 {
@@ -322,10 +325,58 @@ PAGE_STYLE = """
     color: #473f38;
   }
 
-  .prose hr {
-    border: 0;
-    border-top: 1px solid var(--line);
-    margin: 2rem 0;
+  .prose .reader-aside {
+    float: right;
+    width: min(21rem, 42%);
+    margin: 0.1rem 0 1.1rem 1.4rem;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 10px 24px rgba(32, 29, 26, 0.08);
+  }
+
+  .prose .reader-aside .reader-aside-title {
+    margin: 0 0 0.45rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: #241d17;
+    font-weight: 700;
+  }
+
+  .prose .reader-aside p {
+    margin: 0 0 0.6rem;
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .prose .reader-aside ul {
+    margin: 0;
+    padding-left: 1.15rem;
+  }
+
+  .prose .reader-aside li {
+    margin-top: 0.25rem;
+  }
+
+  .prose .reader-note {
+    clear: both;
+    margin: 1.25rem 0 1.15rem;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(35, 72, 106, 0.14);
+    background: rgba(35, 72, 106, 0.06);
+    box-shadow: 0 10px 24px rgba(32, 29, 26, 0.06);
+  }
+
+  .prose .reader-note p {
+    margin: 0;
+    color: #3d3934;
+  }
+
+  .prose .reader-note strong {
+    color: #1f3650;
   }
 
   .prose table {
@@ -384,6 +435,16 @@ PAGE_STYLE = """
   .prose .lead {
     font-size: 1.18rem;
     color: #38322d;
+  }
+
+  .article-kicker {
+    margin: 0 0 0.45rem;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
   .empty-toc {
@@ -467,6 +528,12 @@ PAGE_STYLE = """
     .toc-card {
       position: static;
     }
+
+    .prose .reader-aside {
+      float: none;
+      width: auto;
+      margin: 0 0 1.1rem;
+    }
   }
 
   @media (max-width: 640px) {
@@ -517,6 +584,8 @@ PAGES = [
         "title": "CAPM for Agencies — Short Overview",
         "eyebrow": "Short Overview",
         "heading": "Price the Work Before You Plan It",
+        "article_kicker": "CAPM for Agencies",
+        "toc_skip_first_heading": True,
         "deck": "The shortest useful explanation of the model: what it is for, why the hybrid layer is governance rather than prediction, and how deal economics actually clear or fail the hurdle.",
         "meta": "Start here if you want the thesis without the full manuscript. This is the best first read for most people.",
         "actions": [
@@ -535,7 +604,8 @@ PAGES = [
         "title": "CAPM for Agencies — Decision Guide",
         "eyebrow": "Decision Guide",
         "heading": "CAPM for Agencies — Decision Guide",
-        "deck": "A compact operating guide for running the model in presales: set baselines, score the deal, compare proposed margin to the hurdle, and decide whether to proceed.",
+        "toc_skip_first_heading": True,
+        "deck": "A practical presales guide for running the CAPM model: set baselines, score the current environment and the deal, compare proposed margin to the hurdle, then decide whether to proceed, reprice, or sell discovery first.",
         "meta": "Use this when you want the procedure rather than the theory. It tracks the current decision logic in the app.",
         "actions": [
             ("Open the App", "../index.html", "primary"),
@@ -555,6 +625,25 @@ HEADING_RE = re.compile(
     re.DOTALL,
 )
 TAG_RE = re.compile(r"<[^>]+>")
+
+TOKEN_REPLACEMENTS = {
+    "[[APP_CARDS_ASIDE]]": """
+<aside class="reader-aside">
+  <p class="reader-aside-title">Open the live cards</p>
+  <p>If you want to move between the text and the tool, jump straight into the app:</p>
+  <ul>
+    <li><a href="../index.html#layer1-card">Layer 1 card</a></li>
+    <li><a href="../index.html#layer2-card">Layer 2 card</a></li>
+    <li><a href="../index.html#bcorp-card">B-Corp card</a></li>
+  </ul>
+</aside>
+""".strip(),
+    "[[PLANNING_NOTE_ASIDE]]": """
+<aside class="reader-note">
+  <p><strong>Clarification:</strong> Price before you plan is narrower than it sounds: price before delivery planning is committed, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether implementation or discovery is the thing to sell.</p>
+</aside>
+""".strip()
+}
 
 
 def render_markdown(markdown_text: str) -> str:
@@ -576,6 +665,15 @@ def strip_tags(value: str) -> str:
     return html.unescape(TAG_RE.sub("", value)).replace("\n", " ").strip()
 
 
+def replace_tokens(rendered_html: str) -> str:
+    updated = rendered_html
+    for token, replacement in TOKEN_REPLACEMENTS.items():
+        updated = updated.replace(f"<p>{token}</p>", replacement)
+        updated = updated.replace(f"{token}</p>", replacement)
+        updated = updated.replace(token, replacement)
+    return updated
+
+
 def normalize_headings(rendered_html: str):
     toc_entries = []
 
@@ -591,8 +689,10 @@ def normalize_headings(rendered_html: str):
     return normalized, toc_entries
 
 
-def build_toc(entries, level_min: int, level_max: int) -> str:
+def build_toc(entries, level_min: int, level_max: int, skip_first_heading: bool = False) -> str:
     filtered = [entry for entry in entries if level_min <= entry[0] <= level_max]
+    if skip_first_heading and filtered:
+        filtered = filtered[1:]
     if not filtered:
         return '<p class="empty-toc">No section headings.</p>'
 
@@ -629,6 +729,10 @@ def build_footer() -> str:
 
 
 def build_html(page: dict, article_html: str, toc_html: str) -> str:
+    article_intro = ""
+    if page.get("article_kicker"):
+        article_intro = f'<div class="article-kicker">{html.escape(page["article_kicker"])}</div>'
+
     lead_script = """
   <script>
     const firstParagraph = document.querySelector('.prose p');
@@ -729,6 +833,7 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
       <main class="article-card">
         <div class="article-frame">
           <article class="prose">
+            {article_intro}
             {article_html}
           </article>
           <footer class="site-footer">
@@ -755,8 +860,14 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
 def generate_page(page: dict) -> None:
     markdown_text = page["source"].read_text(encoding="utf-8")
     rendered_html = render_markdown(markdown_text)
+    rendered_html = replace_tokens(rendered_html)
     normalized_html, toc_entries = normalize_headings(rendered_html)
-    toc_html = build_toc(toc_entries, page["toc_min"], page["toc_max"])
+    toc_html = build_toc(
+        toc_entries,
+        page["toc_min"],
+        page["toc_max"],
+        page.get("toc_skip_first_heading", False),
+    )
     output_html = build_html(page, normalized_html, toc_html)
     page["output"].write_text(output_html, encoding="utf-8")
 

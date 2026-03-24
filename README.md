@@ -9,10 +9,13 @@ Most agencies price risk through gut-feel contingency percentages or hourly padd
 These decision cards implement a two-layer risk assessment. In the pure portfolio-level use, the framework stays closer to CAPM as a hurdle-rate model. In the hybrid engagement-level use, it should be treated as heuristic pricing governance rather than a literal asset-pricing engine.
 
 ### Layer 1: Systematic Risk Calibration
-A periodic strategic review (quarterly or on market shift) that scores portfolio-level risk factors: platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure. Produces a systematic adjustment factor that sets the environment for all engagement pricing.
+A periodic strategic review (quarterly or on market shift) that scores portfolio-level risk factors: platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure. Produces a systematic adjustment factor that sets the environment for all engagement pricing. Use the [Layer 1 card](./index.html#layer1-card).
 
 ### Layer 2: Engagement Risk Scoring
-A per-engagement assessment during presales that scores project-specific factors: client track record, scope clarity, technical complexity, internal capacity, contract type, political complexity, and timeline pressure. Combined with the Layer 1 factor, it produces a minimum acceptable margin via the CAPM formula, which then needs to be compared against the proposed deal margin.
+A per-engagement assessment during presales that scores project-specific factors: client track record, scope clarity, technical complexity, internal capacity, contract type, political complexity, and timeline pressure. Combined with the Layer 1 factor, it produces a minimum acceptable margin via the CAPM formula, which then needs to be compared against the proposed deal margin. Use the [Layer 2 card](./index.html#layer2-card).
+
+### B-Corp Impact Overlay
+An additional impact-governance pass for mission-driven agencies. It extends the base model with B Lab-aligned portfolio and engagement factors, then shows how the impact adjustment shifts the standard hurdle from `E(R)` to `E(R*)`. Use the [B-Corp card](./index.html#bcorp-card).
 
 ## Usage
 

@@ -164,7 +164,7 @@
     position: sticky;
     top: 20px;
     max-height: calc(100vh - 40px);
-    padding: 20px 18px;
+    padding: 20px 18px 20px 32px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -185,6 +185,7 @@
     gap: 2px;
     overflow-y: auto;
     padding-right: 4px;
+    padding-left: 18px;
   }
 
   .toc a {
@@ -213,7 +214,7 @@
   }
 
   .article-frame {
-    padding: clamp(24px, 4vw, 56px);
+    padding: 20px clamp(24px, 4vw, 56px) clamp(24px, 4vw, 56px);
   }
 
   .prose {
@@ -243,9 +244,11 @@
 
   .prose h2 {
     font-size: 2rem;
-    margin: 3.3rem 0 1rem;
-    padding-top: 0.25rem;
-    border-top: 1px solid var(--line);
+    margin: 3rem 0 1rem;
+  }
+
+  .prose > .article-kicker + h2 {
+    margin-top: 0;
   }
 
   .prose h3 {
@@ -314,10 +317,58 @@
     color: #473f38;
   }
 
-  .prose hr {
-    border: 0;
-    border-top: 1px solid var(--line);
-    margin: 2rem 0;
+  .prose .reader-aside {
+    float: right;
+    width: min(21rem, 42%);
+    margin: 0.1rem 0 1.1rem 1.4rem;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 10px 24px rgba(32, 29, 26, 0.08);
+  }
+
+  .prose .reader-aside .reader-aside-title {
+    margin: 0 0 0.45rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: #241d17;
+    font-weight: 700;
+  }
+
+  .prose .reader-aside p {
+    margin: 0 0 0.6rem;
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .prose .reader-aside ul {
+    margin: 0;
+    padding-left: 1.15rem;
+  }
+
+  .prose .reader-aside li {
+    margin-top: 0.25rem;
+  }
+
+  .prose .reader-note {
+    clear: both;
+    margin: 1.25rem 0 1.15rem;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(35, 72, 106, 0.14);
+    background: rgba(35, 72, 106, 0.06);
+    box-shadow: 0 10px 24px rgba(32, 29, 26, 0.06);
+  }
+
+  .prose .reader-note p {
+    margin: 0;
+    color: #3d3934;
+  }
+
+  .prose .reader-note strong {
+    color: #1f3650;
   }
 
   .prose table {
@@ -376,6 +427,16 @@
   .prose .lead {
     font-size: 1.18rem;
     color: #38322d;
+  }
+
+  .article-kicker {
+    margin: 0 0 0.45rem;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
   .empty-toc {
@@ -458,6 +519,12 @@
 
     .toc-card {
       position: static;
+    }
+
+    .prose .reader-aside {
+      float: none;
+      width: auto;
+      margin: 0 0 1.1rem;
     }
   }
 
@@ -573,6 +640,7 @@
       <main class="article-card">
         <div class="article-frame">
           <article class="prose">
+            
             <h1 id="capm-for-agencies">CAPM for Agencies</h1>
 <p><em>The Capital Asset Pricing Model Applied to Agency Project Pricing and Risk Assessment</em>
 Dan Knauss • March 2026</p>
@@ -592,9 +660,9 @@ Dan Knauss • March 2026</p>
 <strong>The Two-Layer Assessment:</strong>
 <ul>
 <li>
-<strong>Layer 1 (Portfolio):</strong> Quarterly reviews of macro factors like platform stability, talent markets, and economic shifts.</li>
+<strong><a href="../index.html#layer1-card">Layer 1 (Portfolio)</a>:</strong> Quarterly reviews of macro factors like platform stability, talent markets, and economic shifts.</li>
 <li>
-<strong>Layer 2 (Engagement):</strong> Presales scoring of client track record, scope clarity, and technical complexity.</li>
+<strong><a href="../index.html#layer2-card">Layer 2 (Engagement)</a>:</strong> Presales scoring of client track record, scope clarity, and technical complexity.</li>
 </ul>
 </li>
 </ul>
@@ -605,10 +673,11 @@ Dan Knauss • March 2026</p>
 <li>
 <strong>Cross-Functional Alignment:</strong> Engages solutions, technical, and sales teams in a shared language for risk translation before a contract is signed.</li>
 <li>
-<strong>B-Corp Integration:</strong> For impact-driven agencies, the model allows for a "conscious mission discount" on high-impact work while penalizing mission-inconsistent projects with higher margin requirements.</li>
+<strong><a href="../index.html#bcorp-card">B-Corp Integration</a>:</strong> For impact-driven agencies, the model allows for a "conscious mission discount" on high-impact work while penalizing mission-inconsistent projects with higher margin requirements.</li>
 </ol>
 <h2 id="overview">Overview</h2>
 <p>Most small to mid-sized agencies (and even more large ones than want to admit it) price risk through gut-feel contingency percentages, hourly padding, or by shifting uncertainty onto clients via retainer models — none of which distinguish between the kinds of risk that matter most when they’re realized in events. These are the systematic risks that can’t be controlled.</p>
+<p>For readers coming from outside finance, CAPM begins with a simple question: what return should be demanded for taking on a given level of risk? In investing, it is used to estimate required return, cost of equity, and hurdle rates. In agency work, the same logic helps separate market-wide risk from deal-specific risk, set a minimum acceptable margin, and decide whether a project is worth taking on at all.</p>
 <p>Borrowing from CAPM, a foundational risk-based pricing model from financial economics, people in technical and non-technical roles at agencies of all sizes can bring a more principled framework to engagement pricing by separating <em>systematic</em> risk (factors correlated with agency-wide vulnerabilities like capacity crunches, platform/licensing shifts, or talent market contraction) from <em>idiosyncratic</em> risk (project-specific variables — including individual client dysfunction — that wash out across a healthy portfolio of engagements). For agencies, especially small and mid-sized shops, this is best understood as a governance model for pricing decisions rather than as a literal asset-pricing engine.</p>
 <p>Systematic risk deserves a pricing premium because it's the risk you can't diversify away by running a varied book of work. This gives agencies a structured language for what they usually handle by instinct — a principled basis for saying "this engagement's beta is high, so the required return needs to clear a higher bar," or even "we should walk away at this price" — replacing vibes with a defensible, portfolio-aware logic for go/no-go decisions and margin requirements. The hook is still right: price before you plan. But the practical meaning is price before <em>delivery</em> planning, not before presales solutioning. The practical win is not that the math is magically precise. It is that sales, solutions, delivery, and leadership are forced to name risk in a shared way before committing.</p>
 <h3 id="who-is-this-for">Who Is This For?</h3>
@@ -818,7 +887,7 @@ Dan Knauss • March 2026</p>
 <p><strong>For agencies using the hybrid approach,</strong> the systematic calibration still sets the environment, but it also contextualizes the engagement-level scores described in Layer Two. A moderate engagement score in a high-systematic-risk environment compounds differently than the same score in a calm one.</p>
 <p><a target="_blank" rel="noopener noreferrer" href="./figures/layer1-systematic-calibration.png"><img src="./figures/layer1-systematic-calibration.png" alt="Layer One systematic-risk calibration illustration showing how calm, normal, and turbulent conditions rotate the required-margin line." style="max-width: 100%;"></a></p>
 <p><em>Figure 2. Layer One systematic-risk calibration illustration. <a href="./figures/layer1-systematic-calibration.pdf">PDF version</a>.</em></p>
-<p>Layer One doesn't move individual engagements — it rotates the entire line steeper or flatter depending on the systematic environment. When the talent market tightens and your platform is in turmoil, the Line gets steeper: every level of beta demands a higher margin.</p>
+<p>Layer One doesn't move individual engagements — it rotates the entire line steeper or flatter depending on the systematic environment. When the talent market tightens and your platform is in turmoil, the Line gets steeper: every level of beta demands a higher margin. The live version of this review is the <a href="../index.html#layer1-card">Layer 1 card in the app</a>.</p>
 <h3 id="layer-two-engagement-risk-scoring">Layer Two: Engagement Risk Scoring</h3>
 <p>This is the per-project assessment conducted during presales, before delivery planning is committed. It evaluates the risk characteristics of <em>this specific engagement</em> — the factors that vary from project to project, regardless of what the broader market is doing. When implementation risk is still too uncertain to price responsibly, this same assessment should justify and price a paid discovery phase first, rather than smuggling planning effort into the sale.</p>
 <p>In the pure approach, this layer does not feed into the CAPM beta calculation. It produces a <em>project risk index</em> that informs contingency sizing, contract structure decisions, and go/no-go judgment — but the pricing premium comes from Layer One.</p>
@@ -901,7 +970,7 @@ Dan Knauss • March 2026</p>
 <p>Where the systematic adjustment factor is derived from the Layer One review — for example, 1.0 in a normal environment, 1.1–1.2 when systematic risk is elevated, 0.9 when conditions are unusually favorable. This keeps the engagement scoring practical while ensuring the broader environment is reflected in every engagement's pricing. The intent is not to claim quantitative precision. The intent is to create a repeatable decision process that disciplines presales judgment and makes risk assumptions discussable.</p>
 <p><a target="_blank" rel="noopener noreferrer" href="./figures/layer2-blended-beta.png"><img src="./figures/layer2-blended-beta.png" alt="Layer Two blended-beta illustration showing safe, stretch, and failing engagements compared against the hurdle line." style="max-width: 100%;"></a></p>
 <p><em>Figure 3. Layer Two blended-beta illustration. <a href="./figures/layer2-blended-beta.pdf">PDF version</a>.</em></p>
-<p>Each engagement's blended beta (engagement score × systematic factor) determines where it sits on the horizontal axis, and The Line tells you the minimum margin at that point. The safe bet can usually clear the hurdle with standard pricing; the stretch project often demands renegotiation; the money pit usually points toward walking away unless terms change materially.</p>
+<p>Each engagement's blended beta (engagement score × systematic factor) determines where it sits on the horizontal axis, and The Line tells you the minimum margin at that point. The safe bet can usually clear the hurdle with standard pricing; the stretch project often demands renegotiation; the money pit usually points toward walking away unless terms change materially. You can run that exact workflow in the <a href="../index.html#layer2-card">Layer 2 card</a>.</p>
 <h2 id="what-is-systematic-risk">What Is Systematic Risk?</h2>
 <p>The Capital Asset Pricing Model (CAPM) comes from the world of Financial Economics, which is concerned with the use and distribution of resources in (mostly global) markets, focusing on monetary activities where money appears on both sides of a trade. It combines microeconomic theory, accounting, and quantitative methods to study asset pricing, risk management, corporate finance, and decision-making over time. The CAPM formula brings these concerns together, and risk plays a significant role in it. How risk — specifically <em>systematic</em> risk — is defined is essential to the model.</p>
 <p><strong>PEST</strong> and <strong>PESTLE</strong> are simple strategic management acronyms that cover the main sources of external risk factors. They are highly focused on identifying systematic risk: <em>macro-environmental risks that affect an entire market or industry rather than a single company</em>.</p>
@@ -1265,7 +1334,7 @@ Dan Knauss • March 2026</p>
 <p>Where the Impact Adjustment is negative for projects that advance mission and build long-term brand and capability (allowing a lower financial margin threshold) and positive for projects that compromise mission (requiring a higher financial margin to compensate for the non-financial risk). This keeps the financial CAPM calculation clean and makes the impact trade-off visible as a separate, explicit line item.</p>
 <h4 id="option-b-impact-integrated-beta">Option B: Impact-Integrated Beta</h4>
 <p>Fold impact factors into the beta itself by including the B-Corp engagement factors (mission alignment, human-rights risk, environmental impact and circularity, responsible marketing and transparency) in the Layer Two scoring table alongside the standard engagement risk factors. This produces a single blended beta that captures both financial and impact risk in one number. Simpler to calculate but harder to decompose when you need to explain decisions to stakeholders with different priorities.</p>
-<p><strong>Recommendation:</strong> Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical.</p>
+<p><strong>Recommendation:</strong> Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical. The app currently presents this as an <a href="../index.html#bcorp-card">impact-adjusted B-Corp card</a> that keeps the standard hurdle visible while showing the shift to <code>E(R*)</code>.</p>
 <p><a target="_blank" rel="noopener noreferrer" href="./figures/bcorp-impact-adjusted-return.png"><img src="./figures/bcorp-impact-adjusted-return.png" alt="B-Corp impact-adjusted return illustration showing how mission-aligned work can move below the standard financial hurdle while harmful work must clear a higher one." style="max-width: 100%;"></a></p>
 <p><em>Figure 4. B-Corp impact-adjusted return illustration. <a href="./figures/bcorp-impact-adjusted-return.pdf">PDF version</a>.</em></p>
 <p><a target="_blank" rel="noopener noreferrer" href="./figures/capm-comparison.png"><img src="./figures/capm-comparison.png" alt="Comparison illustration showing standard CAPM, layered agency CAPM, and B-Corp CAPM with impact-adjusted movement above or below the financial hurdle." style="max-width: 100%;"></a></p>
@@ -1322,6 +1391,8 @@ Dan Knauss • March 2026</p>
 <p><strong>Work Breakdown Structure (WBS)</strong>: A structured decomposition of project scope into smaller deliverables and work packages used during planning and execution.</p>
 <h3 id="suggested-reading">Suggested Reading</h3>
 <ul>
+<li>McCracken Alliance. <em>CAPM Formula Explained: What It Is, How It Works, and When to Use It</em>. Beginner-friendly overview of CAPM in finance, including required return, hurdle rates, and valuation use cases. <a href="https://www.mccrackenalliance.com/blog/capm-formula-explained-what-it-is-how-it-works-and-when-to-use-it" rel="nofollow">McCracken Alliance</a>
+</li>
 <li>Pástor, Ľ., Stambaugh, R. F., &amp; Taylor, L. A. (2021). Sustainable investing in equilibrium. <em>Journal of Financial Economics</em>, 142(2), 550–571. <a href="https://www.nber.org/papers/w26549" rel="nofollow">NBER Working Paper</a>
 </li>
 <li>Johnstone, D. (2025). Zero-beta risks and required returns: ESG and CAPM. <em>Financial Management</em>. <a href="https://onlinelibrary.wiley.com/doi/full/10.1111/fima.12475" rel="nofollow">Wiley</a>

@@ -164,7 +164,7 @@
     position: sticky;
     top: 20px;
     max-height: calc(100vh - 40px);
-    padding: 20px 18px;
+    padding: 20px 18px 20px 32px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -185,6 +185,7 @@
     gap: 2px;
     overflow-y: auto;
     padding-right: 4px;
+    padding-left: 18px;
   }
 
   .toc a {
@@ -213,7 +214,7 @@
   }
 
   .article-frame {
-    padding: clamp(24px, 4vw, 56px);
+    padding: 20px clamp(24px, 4vw, 56px) clamp(24px, 4vw, 56px);
   }
 
   .prose {
@@ -243,9 +244,11 @@
 
   .prose h2 {
     font-size: 2rem;
-    margin: 3.3rem 0 1rem;
-    padding-top: 0.25rem;
-    border-top: 1px solid var(--line);
+    margin: 3rem 0 1rem;
+  }
+
+  .prose > .article-kicker + h2 {
+    margin-top: 0;
   }
 
   .prose h3 {
@@ -314,10 +317,58 @@
     color: #473f38;
   }
 
-  .prose hr {
-    border: 0;
-    border-top: 1px solid var(--line);
-    margin: 2rem 0;
+  .prose .reader-aside {
+    float: right;
+    width: min(21rem, 42%);
+    margin: 0.1rem 0 1.1rem 1.4rem;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 10px 24px rgba(32, 29, 26, 0.08);
+  }
+
+  .prose .reader-aside .reader-aside-title {
+    margin: 0 0 0.45rem;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: #241d17;
+    font-weight: 700;
+  }
+
+  .prose .reader-aside p {
+    margin: 0 0 0.6rem;
+    font-size: 0.94rem;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  .prose .reader-aside ul {
+    margin: 0;
+    padding-left: 1.15rem;
+  }
+
+  .prose .reader-aside li {
+    margin-top: 0.25rem;
+  }
+
+  .prose .reader-note {
+    clear: both;
+    margin: 1.25rem 0 1.15rem;
+    padding: 1rem 1.1rem;
+    border-radius: 18px;
+    border: 1px solid rgba(35, 72, 106, 0.14);
+    background: rgba(35, 72, 106, 0.06);
+    box-shadow: 0 10px 24px rgba(32, 29, 26, 0.06);
+  }
+
+  .prose .reader-note p {
+    margin: 0;
+    color: #3d3934;
+  }
+
+  .prose .reader-note strong {
+    color: #1f3650;
   }
 
   .prose table {
@@ -376,6 +427,16 @@
   .prose .lead {
     font-size: 1.18rem;
     color: #38322d;
+  }
+
+  .article-kicker {
+    margin: 0 0 0.45rem;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
   }
 
   .empty-toc {
@@ -459,6 +520,12 @@
     .toc-card {
       position: static;
     }
+
+    .prose .reader-aside {
+      float: none;
+      width: auto;
+      margin: 0 0 1.1rem;
+    }
   }
 
   @media (max-width: 640px) {
@@ -507,8 +574,7 @@
       <aside class="toc-card">
         <h2 class="toc-title">On This Page</h2>
         <nav class="toc">
-          <a class="level-2" href="#capm-for-agencies-price-the-work-before-you-plan-it">CAPM for Agencies: Price the Work Before You Plan It</a>
-<a class="level-2" href="#the-core-idea">The Core Idea</a>
+          <a class="level-2" href="#the-core-idea">The Core Idea</a>
 <a class="level-2" href="#what-most-agencies-get-wrong">What Most Agencies Get Wrong</a>
 <a class="level-3" href="#1-underpricing-systematic-risk">1. Underpricing Systematic Risk</a>
 <a class="level-3" href="#2-mishandling-engagement-risk">2. Mishandling Engagement Risk</a>
@@ -526,16 +592,27 @@
       <main class="article-card">
         <div class="article-frame">
           <article class="prose">
-            <h2 id="capm-for-agencies-price-the-work-before-you-plan-it">CAPM for Agencies: Price the Work Before You Plan It</h2>
-<p><strong>Most agencies price risk backwards.</strong></p>
-<p>The hook is right, but it needs one qualifier: price before <em>delivery planning</em>, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether implementation or discovery is the thing to sell.</p>
+            <div class="article-kicker">CAPM for Agencies</div>
+            <h2 id="most-agencies-price-risk-backwards">Most agencies price risk backwards.</h2>
+<aside class="reader-aside">
+  <p class="reader-aside-title">Open the live cards</p>
+  <p>If you want to move between the text and the tool, jump straight into the app:</p>
+  <ul>
+    <li><a href="../index.html#layer1-card">Layer 1 card</a></li>
+    <li><a href="../index.html#layer2-card">Layer 2 card</a></li>
+    <li><a href="../index.html#bcorp-card">B-Corp card</a></li>
+  </ul>
+</aside>
 <p>They plan the work, estimate the hours, add some padding, and hope the margin holds. When things feel uncertain, they increase contingency. When things feel safe, they get aggressive.</p>
-<p>It works until it does not.</p>
+<p>It works until it doesn't.</p>
 <p>The problem is not estimation by itself. The problem is that most agencies never separate the kinds of risk they are taking on. They treat all uncertainty the same, even though some risks are project-specific and some affect the whole business at once.</p>
 <p>That distinction matters.</p>
 <p>In financial economics, the Capital Asset Pricing Model exists to think clearly about exactly this problem. It separates risk into categories and asks a simple question:</p>
 <p>What return is required for this level of exposure?</p>
 <p>That idea translates well to agency work, especially if you treat it as a governance model for pricing decisions rather than as a literal asset-pricing engine.</p>
+<aside class="reader-note">
+  <p><strong>Clarification:</strong> Price before you plan is narrower than it sounds: price before delivery planning is committed, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether implementation or discovery is the thing to sell.</p>
+</aside>
 <h2 id="the-core-idea">The Core Idea</h2>
 <p>Every client engagement is an investment.</p>
 <p>You are investing:</p>
@@ -611,10 +688,10 @@
 <li>revenue concentration</li>
 <li>rate pressure</li>
 </ul>
-<p>This layer sets the <strong>systematic adjustment factor</strong> that frames the pricing environment for every deal.</p>
+<p>This layer sets the <strong>systematic adjustment factor</strong> that frames the pricing environment for every deal. In the app, that work happens in the <a href="../index.html#layer1-card">Layer 1 card</a>.</p>
 <h3 id="layer-2-engagement-risk">Layer 2: Engagement Risk</h3>
 <p>This is the specific deal.</p>
-<p>It is a presales assessment, not a full delivery plan. The point is to get enough input from the solutions team to judge complexity, client concerns, and scope risk before commitment. If that still is not enough to price implementation responsibly, then discovery is the thing to price.</p>
+<p>It is a presales assessment, not a full delivery plan. The point is to get enough input from the solutions team to judge complexity, client concerns, and scope risk before commitment. If that still is not enough to price implementation responsibly, then discovery is the thing to price. In the app, this is the <a href="../index.html#layer2-card">Layer 2 card</a>.</p>
 <p>You score:</p>
 <ul>
 <li>client track record</li>
@@ -631,7 +708,7 @@
 <ul>
 <li><strong>Engagement β = Engagement Score / 21</strong></li>
 <li><strong>Blended β = Engagement β × Layer 1 factor</strong></li>
-<li><strong>Required Margin E(R) = R_f + Blended β × (R_m - R_f)</strong></li>
+<li><strong>Required Margin <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Blended <em>β</em> × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)</strong></li>
 </ul>
 <p>Then:</p>
 <ul>
@@ -640,12 +717,13 @@
 <p>Now you can compare the proposed margin against the hurdle.</p>
 <p>That comparison is the point.</p>
 <p>Without it, you only know what the deal should clear in theory. With it, you know whether the quoted work actually deserves a yes.</p>
+<p>If you are a mission-driven or certified agency, the <a href="../index.html#bcorp-card">B-Corp card</a> adds an impact adjustment that shifts the standard hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).</p>
 <h2 id="a-simple-example">A Simple Example</h2>
 <p>Say:</p>
 <ul>
-<li>base margin <code>R_f</code> = <code>10%</code>
+<li>base margin <em>R<sub>f</sub></em> = <code>10%</code>
 </li>
-<li>portfolio margin <code>R_m</code> = <code>22%</code>
+<li>portfolio margin <em>R<sub>m</sub></em> = <code>22%</code>
 </li>
 <li>risk premium = <code>12%</code>
 </li>
@@ -653,7 +731,7 @@
 <p>And after scoring the deal and current environment, the model gives you:</p>
 <ul>
 <li>
-<strong>Required Margin</strong> <code>E(R) = 29%</code>
+<strong>Required Margin</strong> <em>E</em>(<em>R</em>) = <code>29%</code>
 </li>
 </ul>
 <p>Now assume:</p>
