@@ -132,6 +132,19 @@
     font-size: 13px;
     color: var(--gray400);
   }
+  .primer-status {
+    margin: 12px 0 0;
+    padding: 10px 12px;
+    background: rgba(255,255,255,0.78);
+    border: 1px solid rgba(35,72,106,0.12);
+    border-radius: 10px;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--gray500);
+  }
+  .primer-status strong {
+    color: var(--ink);
+  }
   .start-map {
     display: grid;
     gap: 10px;
@@ -874,6 +887,17 @@
     color: var(--gray400);
     line-height: 1.5;
   }
+  .action-btn.reset-btn {
+    background: rgba(255,255,255,0.7);
+    border-color: rgba(32,29,26,0.14);
+    color: var(--gray500);
+  }
+  .action-btn.reset-btn:hover,
+  .action-btn.reset-btn:focus-visible {
+    background: var(--gray500);
+    border-color: var(--gray500);
+    color: #fff;
+  }
 
   .chart-panel {
     margin-top: 18px;
@@ -1044,11 +1068,13 @@
       </a>
     </div>
   </div>
+  <p class="primer-status" id="primer-status-note" role="status" aria-live="polite"></p>
   <div class="export-row primer-export-row">
     <span class="jump-label">Jump to card below:</span>
     <a class="action-btn layer1-jump" href="#layer1-card">Layer 1</a>
     <a class="action-btn layer2-jump" href="#layer2-card">Layer 2</a>
     <a class="action-btn layer3-jump" href="#bcorp-card">Layer 3</a>
+    <button type="button" class="action-btn reset-btn" id="reset-all-btn" onclick="resetAll()">Reset All</button>
     <button type="button" class="action-btn" id="export-summary-btn" onclick="exportDecisionSummary()" disabled aria-disabled="true">Export Decision Summary</button>
     <span class="export-note" id="export-summary-note">Complete any full layer to enable export.</span>
   </div>
@@ -1326,7 +1352,7 @@
               <div class="tooltip-text">Auto-filled from Layer 1 when all systematic factors are scored. You can override it manually for scenario testing.</div>
             </details>
           </label>
-          <div><input type="number" id="l1-input" value="" step="0.01" placeholder="—" oninput="calcLayer2(); markExportDirty()"></div>
+          <div><input type="number" id="l1-input" value="1.00" step="0.01" placeholder="—" oninput="calcLayer2(); markExportDirty()"></div>
         </div>
         <div class="calc-field">
           <label for="deal-price">Deal Price
@@ -1830,6 +1856,7 @@
     bcorp_l1: {},
     bcorp_l2: {}
   };
+  const STORAGE_KEY = 'capm-for-agencies-state-v1';
 
   const exportLayerTargets = {
     layer1: 6,
@@ -1843,6 +1870,112 @@
     lastExportSignature: null
   };
   let helpContentId = 0;
+
+  function defaultInputValues() {
+    return {
+      rf: '10',
+      rm: '22',
+      l1Input: '1.00',
+      price: '',
+      cost: '',
+      bcManual: ''
+    };
+  }
+
+  function setPrimerStatus(mode) {
+    const note = document.getElementById('primer-status-note');
+    if (!note) return;
+
+    if (mode === 'restored') {
+      note.innerHTML = '<strong>Saved work restored.</strong> Scores and inputs were loaded from this browser. Changes save automatically here until you reset them.';
+      return;
+    }
+
+    note.innerHTML = '<strong>First-pass defaults are loaded.</strong> Agency <em>R<sub>f</sub></em> is set to 10%, portfolio <em>R<sub>m</sub></em> to 22%, and the Layer 1 factor to 1.00 so you can start with Layer 2 immediately. Changes save automatically in this browser.';
+  }
+
+  function getInputSnapshot() {
+    return {
+      rf: document.getElementById('rf')?.value || '',
+      rm: document.getElementById('rm')?.value || '',
+      l1Input: document.getElementById('l1-input')?.value || '',
+      price: document.getElementById('deal-price')?.value || '',
+      cost: document.getElementById('deal-cost')?.value || '',
+      bcManual: document.getElementById('bc-manual-adj')?.value || ''
+    };
+  }
+
+  function applyInputSnapshot(snapshot) {
+    const inputs = Object.assign(defaultInputValues(), snapshot || {});
+    const mapping = {
+      rf: 'rf',
+      rm: 'rm',
+      l1Input: 'l1-input',
+      price: 'deal-price',
+      cost: 'deal-cost',
+      bcManual: 'bc-manual-adj'
+    };
+
+    Object.entries(mapping).forEach(([key, id]) => {
+      const field = document.getElementById(id);
+      if (field) field.value = inputs[key] ?? '';
+    });
+  }
+
+  function sanitizeLayerState(rawLayer) {
+    const sanitized = {};
+    if (!rawLayer || typeof rawLayer !== 'object') return sanitized;
+
+    Object.entries(rawLayer).forEach(([factor, value]) => {
+      const parsed = parseInt(value, 10);
+      if (Number.isInteger(parsed) && parsed >= 1 && parsed <= 5) {
+        sanitized[factor] = parsed;
+      }
+    });
+
+    return sanitized;
+  }
+
+  function persistState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        version: 1,
+        state,
+        inputs: getInputSnapshot()
+      }));
+    } catch (error) {
+      // Ignore browsers or contexts where storage is unavailable.
+    }
+  }
+
+  function restorePersistedState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        applyInputSnapshot();
+        return false;
+      }
+
+      const parsed = JSON.parse(raw);
+      state.layer1 = sanitizeLayerState(parsed?.state?.layer1);
+      state.layer2 = sanitizeLayerState(parsed?.state?.layer2);
+      state.bcorp_l1 = sanitizeLayerState(parsed?.state?.bcorp_l1);
+      state.bcorp_l2 = sanitizeLayerState(parsed?.state?.bcorp_l2);
+      applyInputSnapshot(parsed?.inputs);
+      return true;
+    } catch (error) {
+      applyInputSnapshot();
+      return false;
+    }
+  }
+
+  function clearPersistedState() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (error) {
+      // Ignore browsers or contexts where storage is unavailable.
+    }
+  }
 
   function getScoreGuide(layer, factor, row) {
     const configured = scoreGuides[layer] && scoreGuides[layer][factor];
@@ -2044,6 +2177,7 @@
     } else {
       exportState.dirty = currentExportSignature() !== exportState.lastExportSignature;
     }
+    persistState();
     updateExportControls();
   }
 
@@ -2088,6 +2222,8 @@
     });
 
     document.querySelectorAll('.info-tip').forEach((tip) => {
+      if (tip.dataset.tipBound === 'true') return;
+      tip.dataset.tipBound = 'true';
       const summary = tip.querySelector('summary');
       if (summary) {
         summary.addEventListener('click', () => {
@@ -2101,18 +2237,40 @@
     });
 
     document.querySelectorAll('.factor-help').forEach((help) => {
+      if (help.dataset.helpBound === 'true') return;
+      help.dataset.helpBound = 'true';
       const summary = help.querySelector('summary');
       help.addEventListener('toggle', () => {
         if (summary) summary.setAttribute('aria-expanded', help.open ? 'true' : 'false');
       });
     });
 
-    document.addEventListener('click', (event) => {
-      if (!event.target.closest('.info-tip')) closeInfoTips();
-    });
+    if (document.body.dataset.infoTipsBound !== 'true') {
+      document.body.dataset.infoTipsBound = 'true';
+      document.addEventListener('click', (event) => {
+        if (!event.target.closest('.info-tip')) closeInfoTips();
+      });
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') closeInfoTips();
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeInfoTips();
+      });
+    }
+  }
+
+  function syncAllScoreSelections() {
+    document.querySelectorAll('.score-table[data-layer]').forEach((table) => {
+      const layer = table.dataset.layer;
+      table.querySelectorAll('tbody tr[data-factor]').forEach((row) => {
+        const factor = row.dataset.factor;
+        const currentValue = state[layer][factor];
+        syncScoreButtonAccessibility(row, layer, factor);
+        row.querySelectorAll('.score-btn').forEach((button) => {
+          button.className = 'score-btn';
+          if (currentValue && parseInt(button.dataset.val, 10) === currentValue) {
+            button.className = 'score-btn selected-' + currentValue;
+          }
+        });
+      });
     });
   }
 
@@ -2120,11 +2278,31 @@
     state[layer][factor] = val;
     updateTableRowSelection(layer, factor, val);
     updateMobileCardSelection(layer, factor, val);
-    markExportDirty();
 
     if (layer === 'layer1') calcLayer1();
     else if (layer === 'layer2') calcLayer2();
     else calcBcorp();
+
+    markExportDirty();
+  }
+
+  function resetAll() {
+    state.layer1 = {};
+    state.layer2 = {};
+    state.bcorp_l1 = {};
+    state.bcorp_l2 = {};
+    applyInputSnapshot();
+    clearPersistedState();
+    syncAllScoreSelections();
+    createMobileScorecards();
+    initInfoTips();
+    exportState.dirty = true;
+    exportState.lastExportSignature = null;
+    calcLayer1();
+    calcLayer2();
+    calcBcorp();
+    updateExportControls();
+    setPrimerStatus('defaults');
   }
 
   function score(btn, layer) {
@@ -2234,7 +2412,16 @@
 
   function calcLayer1() {
     const vals = Object.values(state.layer1);
-    if (vals.length === 0) return;
+    if (vals.length === 0) {
+      document.getElementById('l1-composite').textContent = '—';
+      document.getElementById('l1-score').textContent = '—';
+      document.getElementById('l1-factor-display').textContent = '—';
+      document.getElementById('l1-factor').textContent = '—';
+      document.getElementById('l1-env').textContent = 'Not scored yet';
+      document.getElementById('l1-note-factor').textContent = '—';
+      document.getElementById('l1-note-factor-hybrid').textContent = '—';
+      return;
+    }
 
     const sum = vals.reduce((a,b) => a+b, 0);
     const count = vals.length;
@@ -2265,6 +2452,7 @@
       document.getElementById('l1-note-factor').textContent = '—';
       document.getElementById('l1-note-factor-hybrid').textContent = '—';
     }
+    persistState();
   }
 
   function formatMoney(amount) {
@@ -3090,12 +3278,16 @@
     document.getElementById('bc-verdict').innerHTML = verdict;
   }
 
+  const restoredFromStorage = restorePersistedState();
   enhanceScoreTables();
+  syncAllScoreSelections();
   createMobileScorecards();
   initInfoTips();
+  calcLayer1();
   calcLayer2();
   calcBcorp();
   updateExportControls();
+  setPrimerStatus(restoredFromStorage ? 'restored' : 'defaults');
 </script>
 </body>
 </html>
