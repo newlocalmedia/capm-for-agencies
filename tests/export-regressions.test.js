@@ -26,3 +26,22 @@ test('export meaning column explains score direction and uses factor labels', ()
     /label: value \? getScoreGuide\(layer, factor, row\)\[value - 1\] \|\| getScoreLabel\(layer, factor, value\) : null/
   );
 });
+
+test('first-pass defaults are explicit for new users', () => {
+  assert.match(html, /id="l1-input" value="1\.00"/);
+  assert.match(html, /First-pass defaults are loaded/);
+  assert.match(html, /start with Layer 2 immediately/i);
+});
+
+test('app persists calculator state in localStorage', () => {
+  assert.match(html, /const STORAGE_KEY = 'capm-for-agencies-state-v1'/);
+  assert.match(html, /localStorage\.setItem\(STORAGE_KEY/);
+  assert.match(html, /localStorage\.getItem\(STORAGE_KEY\)/);
+});
+
+test('reset control clears saved state and restores defaults', () => {
+  assert.match(html, /id="reset-all-btn"/);
+  assert.match(html, /function resetAll\(\)/);
+  assert.match(html, /localStorage\.removeItem\(STORAGE_KEY\)/);
+  assert.match(html, /applyInputSnapshot\(\)/);
+});
