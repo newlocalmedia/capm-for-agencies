@@ -20,8 +20,8 @@ A periodic strategic review (quarterly or on market shift) that scores portfolio
 ### Layer 2: Engagement Risk Scoring
 A per-engagement assessment during presales that scores project-specific factors: client track record, scope clarity, technical complexity, internal capacity, contract type, political complexity, and timeline pressure. Combined with the Layer 1 factor, it produces a minimum acceptable margin via the CAPM formula, which then needs to be compared against the proposed deal margin. Use the [Layer 2 card](./index.html#layer2-card).
 
-### B-Corp Impact Overlay
-An additional impact-governance pass for mission-driven agencies. It extends the base model with B Lab-aligned portfolio and engagement factors, then shows how the impact adjustment shifts the standard hurdle from `E(R)` to `E(R*)`. Use the [B-Corp card](./index.html#bcorp-card).
+### B Corp Impact Overlay
+An additional impact-governance pass for mission-driven agencies. It extends the base model with B Lab-aligned portfolio and engagement factors, then shows how the impact adjustment shifts the standard hurdle from `E(R)` to `E(R*)`. Use the [B Corp card](./index.html#bcorp-card).
 
 ## Usage
 
@@ -33,7 +33,7 @@ Download reference cards from the `pdf/` directory:
 - `capm-decision-cards.pdf` — All cards
 - `capm-layer1-systematic-risk.pdf` — Systematic risk card only.
 - `capm-layer2-engagement-risk.pdf` — Engagement risk card only.
-- `capm-b-corp-engagement-risk.pdf` — B-Corp impact-adjusted risk card only.
+- `capm-b-corp-engagement-risk.pdf` — B Corp impact-adjusted risk card only.
 
 ### Text Overview
 A text-first landing page lives in `overview/index.html`.
@@ -60,7 +60,7 @@ Where:
 
 This midpoint-anchored mapping is a deliberate design choice. A neutral Layer 2 engagement score maps to market-like `β = 1.0`, rather than forcing the low end to `β = 0`. That prevents zero-risk pricing while preserving more headroom for difficult deals.
 
-In the current decision-card calibration, the Layer 1 adjustment factor is centered on `1.00` at the midpoint score, and the B-Corp overlay uses a neutral midpoint plus moderate widening or narrowing of the impact adjustment rather than an aggressive default amplification. Neutral operational engagement risk maps to market-like beta, and neutral B-Corp impact maps to no mission discount or harm premium. See the [calibration notes](./tldr/calibration-notes.html).
+In the current decision-card calibration, the Layer 1 adjustment factor is centered on `1.00` at the midpoint score, and the B Corp overlay uses a neutral midpoint plus moderate widening or narrowing of the impact adjustment rather than an aggressive default amplification. Neutral operational engagement risk maps to market-like beta, and neutral B Corp impact maps to no mission discount or harm premium. See the [calibration notes](./tldr/calibration-notes.html).
 
 ## What this is good for
 

@@ -154,7 +154,7 @@ That comparison is the point.
 
 Without it, you only know what the deal should clear in theory. With it, you know whether the quoted work actually deserves a yes.
 
-If you are a mission-driven or certified agency, the [B-Corp card](../index.html#bcorp-card) adds an impact adjustment that shifts the standard hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).
+If you are a mission-driven or certified agency, the [B Corp card](../index.html#bcorp-card) adds an impact adjustment that shifts the standard hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).
 
 ## A Simple Example
 

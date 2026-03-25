@@ -69,7 +69,7 @@ The intent is lightweight behavioral clarity, not a formal BDD framework.
 **Tasks:**
 - export current scores, inputs, hurdle, gap, and verdict as CSV
 - keep field names stable
-- include B-Corp values when present
+- include B Corp values when present
 
 **Estimate:** 1–2 hours
 
