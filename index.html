@@ -753,7 +753,7 @@
     background: rgba(245, 230, 196, 0.62);
     color: #6d5522;
   }
-  .warning-panel strong {
+  .warning-panel-title {
     display: block;
     margin-bottom: 8px;
     font-size: 12px;
@@ -769,6 +769,9 @@
   .warning-panel li {
     font-size: 12.5px;
     line-height: 1.5;
+  }
+  .warning-panel li strong {
+    color: #4f3a12;
   }
 
   .approach-note {
@@ -2052,7 +2055,7 @@
       return {
         name,
         value: value || null,
-        label: value ? getScoreLabel(layer, factor, value) : null
+        label: value ? getScoreGuide(layer, factor, row)[value - 1] || getScoreLabel(layer, factor, value) : null
       };
     });
   }
@@ -2309,6 +2312,18 @@
     return warnings;
   }
 
+  function formatWarningMarkup(warning) {
+    const text = String(warning || '').trim();
+    if (!text) return '';
+
+    const match = text.match(/^(.+?\.)\s+(.*)$/);
+    if (!match) {
+      return escapeHtml(text);
+    }
+
+    return '<strong>' + escapeHtml(match[1]) + '</strong> ' + escapeHtml(match[2]);
+  }
+
   function renderLayer2Warnings(warnings) {
     const target = document.getElementById('l2-warnings');
     if (!target) return;
@@ -2318,8 +2333,8 @@
     }
     target.innerHTML =
       '<div class="warning-panel">' +
-        '<strong>Interaction Warnings</strong>' +
-        '<ul>' + warnings.map((warning) => '<li>' + escapeHtml(warning) + '</li>').join('') + '</ul>' +
+        '<div class="warning-panel-title">⚠️ Engagement Warnings</div>' +
+        '<ul>' + warnings.map((warning) => '<li>' + formatWarningMarkup(warning) + '</li>').join('') + '</ul>' +
       '</div>';
   }
 
@@ -2331,7 +2346,7 @@
       '<section class="report-card">' +
         '<h3>' + escapeHtml(title) + '</h3>' +
         '<table class="report-table">' +
-          '<thead><tr><th>Factor</th><th>Score</th><th>Meaning</th></tr></thead>' +
+          '<thead><tr><th>Factor</th><th>Score</th><th>Meaning<br><span style="font-weight:500;letter-spacing:0;text-transform:none;">1 = more favorable, 5 = more adverse</span></th></tr></thead>' +
           '<tbody>' + body + '</tbody>' +
         '</table>' +
       '</section>'
@@ -2376,6 +2391,13 @@
     const bcorpL2Data = collectFactorData('bcorp_l2', '#bcorp-l2-table tbody');
     const l2ChartSvg = document.getElementById('l2-chart')?.outerHTML || '';
     const bcChartSvg = document.getElementById('bc-chart')?.outerHTML || '';
+    const exportMath = {
+      rf: '<span class="math-inline"><em>R<sub>f</sub></em></span>',
+      rm: '<span class="math-inline"><em>R<sub>m</sub></em></span>',
+      er: '<span class="math-inline"><em>E</em>(<em>R</em>)</span>',
+      erStar: '<span class="math-inline"><em>E</em>(<em>R</em>*)</span>',
+      beta: '<span class="math-inline"><em>β</em></span>'
+    };
 
     const reportHtml = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CAPM Decision Summary</title><style>' +
       'body{margin:0;padding:32px;background:#f0ede8;color:#1a1a2e;font-family:Georgia,serif;line-height:1.6;}' +
@@ -2386,29 +2408,30 @@
       '.kicker{font-family:"SFMono-Regular",Consolas,monospace;font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#5f5a53;margin-bottom:10px;}' +
       'h1,h2,h3{margin:0 0 12px;line-height:1.1;color:#1a3050;}h1{font-size:2.2rem;}h2{font-size:1.4rem;}h3{font-size:1.15rem;color:#201d1a;}' +
       'p{margin:0 0 12px;color:#45413c;}strong{color:#201d1a;}code{font-family:"SFMono-Regular",Consolas,monospace;background:#f7f5f0;padding:2px 6px;border-radius:6px;}' +
+      '.math-inline{display:inline-block;letter-spacing:0;text-transform:none;white-space:nowrap;}.math-inline em{font-style:italic;}.math-inline sub{font-size:0.72em;line-height:0;vertical-align:-0.28em;}' +
       '.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:14px;}' +
       '.metric{background:#f7f5f0;border:1px solid #e0ddd6;border-radius:14px;padding:14px;}.metric-label{font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;color:#5f5a53;margin-bottom:8px;display:block;}' +
       '.metric-value{font-size:1.35rem;font-weight:700;color:#1a3050;}.metric-sub{font-size:0.92rem;color:#5f5a53;display:block;margin-top:4px;}' +
       '.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}.report-grid.full{grid-template-columns:1fr;}@media (max-width:760px){body{padding:18px}.hero,.report-card{padding:18px}.report-grid{grid-template-columns:1fr;}}' +
       '.report-table{width:100%;border-collapse:collapse;font-size:0.96rem;}.report-table th,.report-table td{padding:10px 8px;border-bottom:1px solid #e0ddd6;text-align:left;vertical-align:top;}.report-table thead th{font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;color:#5f5a53;}' +
       '.chart-card svg{width:100%;height:auto;display:block;background:#fcfaf7;border-radius:12px;}.verdict{display:inline-block;padding:6px 10px;border-radius:999px;font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;background:#f0d4cb;color:#8c3f2f;}' +
-      '.report-warning-list{margin:12px 0 0 18px;display:grid;gap:8px;color:#6d5522;}' +
+      '.report-warning-list{margin:12px 0 0 18px;display:grid;gap:8px;color:#6d5522;}.report-warning-list strong{color:#4f3a12;}' +
       '.footer-note{font-size:0.92rem;color:#5f5a53;}' +
       '@media print{body{padding:0;background:#fff;}.wrap{max-width:none;}.toolbar{display:none;}.hero,.report-card{box-shadow:none;border:1px solid #d6d1c8;break-inside:avoid;}}' +
       '</style></head><body><div class="wrap">' +
       '<div class="toolbar"><button type="button" class="toolbar-btn" onclick="window.print()">Print / Save as PDF</button></div>' +
       '<section class="hero"><div class="kicker">CAPM for Agencies</div><h1>Decision Summary</h1><p>Generated from the interactive decision cards on ' + escapeHtml(now.toLocaleString()) + '.</p>' +
       '<div class="metrics">' +
-        '<div class="metric"><span class="metric-label">Agency R_f</span><span class="metric-value">' + escapeHtml(formatPercentValue(rf)) + '</span><span class="metric-sub">Base margin from lowest-risk work</span></div>' +
-        '<div class="metric"><span class="metric-label">Portfolio R_m</span><span class="metric-value">' + escapeHtml(formatPercentValue(rm)) + '</span><span class="metric-sub">Average project margin</span></div>' +
-        '<div class="metric"><span class="metric-label">Required E(R)</span><span class="metric-value">' + escapeHtml(requiredMargin || '—') + '</span><span class="metric-sub">Hybrid hurdle rate</span></div>' +
+        '<div class="metric"><span class="metric-label">Agency ' + exportMath.rf + '</span><span class="metric-value">' + escapeHtml(formatPercentValue(rf)) + '</span><span class="metric-sub">Base margin from lowest-risk work</span></div>' +
+        '<div class="metric"><span class="metric-label">Portfolio ' + exportMath.rm + '</span><span class="metric-value">' + escapeHtml(formatPercentValue(rm)) + '</span><span class="metric-sub">Average project margin</span></div>' +
+        '<div class="metric"><span class="metric-label">Required ' + exportMath.er + '</span><span class="metric-value">' + escapeHtml(requiredMargin || '—') + '</span><span class="metric-sub">Hybrid hurdle rate</span></div>' +
         '<div class="metric"><span class="metric-label">Proposed Margin</span><span class="metric-value">' + escapeHtml(proposedMargin || '—') + '</span><span class="metric-sub">Current deal economics</span></div>' +
         '<div class="metric"><span class="metric-label">Margin Gap</span><span class="metric-value">' + escapeHtml(marginGap || '—') + '</span><span class="metric-sub">Proposed minus required</span></div>' +
         '<div class="metric"><span class="metric-label">Verdict</span><span class="metric-value" style="font-size:1rem;">' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</span><span class="metric-sub">Decision-card output</span></div>' +
       '</div></section>' +
       '<div class="report-grid">' +
         '<section class="report-card"><h2>Commercial Inputs</h2><p><strong>Layer 1 factor input:</strong> ' + escapeHtml(isNaN(l1Input) ? '—' : l1Input.toFixed(2)) + '<br><strong>Deal price:</strong> ' + escapeHtml(deal ? formatMoney(deal.price) : '—') + '<br><strong>Estimated delivery cost:</strong> ' + escapeHtml(deal ? formatMoney(deal.cost) : '—') + '<br><strong>Minimum deal price:</strong> ' + escapeHtml(minPrice || '—') + '</p></section>' +
-        '<section class="report-card"><h2>Layer 2 Summary</h2><p><strong>Engagement score:</strong> ' + escapeHtml(l2Score || '—') + '<br><strong>Engagement beta:</strong> ' + escapeHtml(l2Beta || '—') + '<br><strong>Blended beta:</strong> ' + escapeHtml(blended || '—') + '<br><strong>Verdict:</strong> <span class="verdict">' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</span></p>' + (layer2Warnings.length ? '<p><strong>Interaction warnings:</strong></p><ul class="report-warning-list">' + layer2Warnings.map((warning) => '<li>' + escapeHtml(warning) + '</li>').join('') + '</ul>' : '') + '</section>' +
+        '<section class="report-card"><h2>Layer 2 Summary</h2><p><strong>Engagement score:</strong> ' + escapeHtml(l2Score || '—') + '<br><strong>Engagement ' + exportMath.beta + ':</strong> ' + escapeHtml(l2Beta || '—') + '<br><strong>Blended ' + exportMath.beta + ':</strong> ' + escapeHtml(blended || '—') + '<br><strong>Verdict:</strong> <span class="verdict">' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</span></p>' + (layer2Warnings.length ? '<p><strong>⚠️ Engagement Warnings:</strong></p><ul class="report-warning-list">' + layer2Warnings.map((warning) => '<li>' + formatWarningMarkup(warning) + '</li>').join('') + '</ul>' : '') + '</section>' +
       '</div>' +
       '<div class="report-grid full">' +
         '<section class="report-card chart-card"><h2>The Line</h2>' + l2ChartSvg + '<p class="footer-note">The chart is exported as rendered in the decision cards at the time of download.</p></section>' +
@@ -2421,7 +2444,7 @@
     const hasBcorpScores = Object.keys(state.bcorp_l1).length || Object.keys(state.bcorp_l2).length || bcVerdict;
     const bcorpSection = hasBcorpScores
       ? '<div class="report-grid">' +
-          '<section class="report-card"><h2>B-Corp Overlay</h2><p><strong>Standard E(R):</strong> ' + escapeHtml(bcStandard || '—') + '<br><strong>Impact adjustment:</strong> ' + escapeHtml(bcAdjustment || '—') + '<br><strong>Impact-adjusted E(R*):</strong> ' + escapeHtml(bcErStar || '—') + '<br><strong>Verdict:</strong> ' + escapeHtml(bcVerdict || 'Not evaluated yet') + '</p></section>' +
+          '<section class="report-card"><h2>B-Corp Overlay</h2><p><strong>Standard ' + exportMath.er + ':</strong> ' + escapeHtml(bcStandard || '—') + '<br><strong>Impact adjustment:</strong> ' + escapeHtml(bcAdjustment || '—') + '<br><strong>Impact-adjusted ' + exportMath.erStar + ':</strong> ' + escapeHtml(bcErStar || '—') + '<br><strong>Verdict:</strong> ' + escapeHtml(bcVerdict || 'Not evaluated yet') + '</p></section>' +
           '<section class="report-card chart-card"><h2>Impact Shift</h2>' + bcChartSvg + '</section>' +
         '</div>' +
         '<div class="report-grid">' +
