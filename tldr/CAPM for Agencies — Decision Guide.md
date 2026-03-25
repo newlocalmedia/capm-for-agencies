@@ -16,7 +16,7 @@ Run the workflow in the decision cards:
 
 * [Layer 1 card](../index.html#layer1-card)
 * [Layer 2 card](../index.html#layer2-card)
-* [B-Corp card](../index.html#bcorp-card)
+* [B Corp card](../index.html#bcorp-card)
 
 ### Who Should Start Where
 
@@ -122,23 +122,23 @@ In the current decision-card build:
 | **Caution** | proposed margin is within 3 margin points below <em>E</em>(<em>R</em>) | reprice, reduce risk, or change structure |
 | **Stop** | proposed margin is more than 3 points below <em>E</em>(<em>R</em>) | decline or materially renegotiate |
 
-Also check the **minimum deal price** implied by the hurdle. That gives you a concrete repricing number.
+Also check the **price floor needed to clear the hurdle**. That gives you a concrete repricing number, but it is only a margin-clearing floor, not proof that the deal carries enough absolute gross profit dollars to be worth doing.
 
-## Step 7 — Use The B-Corp Overlay When It Matters
+## Step 7 — Use The B Corp Overlay When It Matters
 
-If you are using the [B-Corp card](../index.html#bcorp-card), do one more pass:
+If you are using the [B Corp card](../index.html#bcorp-card), do one more pass:
 
-* score the B-Corp portfolio factors
-* score the B-Corp engagement factors
+* score the B Corp portfolio factors
+* score the B Corp engagement factors
 * review the **impact adjustment**
 * compare the proposed margin against **impact-adjusted** <em>E</em>(<em>R</em>*)
 
-In the current decision-card build, the B-Corp card keeps the standard hurdle visible, then shows how mission discount or harm premium shifts it up or down.
+In the current decision-card build, the B Corp card keeps the standard hurdle visible, then shows how mission discount or harm premium shifts it up or down.
 
 The current calibration is intentionally moderate:
 
-* the B-Corp portfolio score is neutral at its midpoint and only widens or narrows the adjustment around that center
-* each B-Corp engagement point away from the midpoint is worth about one margin point before the portfolio modifier is applied
+* the B Corp portfolio score is neutral at its midpoint and only widens or narrows the adjustment around that center
+* each B Corp engagement point away from the midpoint is worth about one margin point before the portfolio modifier is applied
 
 If you want the implementation details and sanity-test scenarios, read the [calibration notes](./calibration-notes.html).
 
@@ -175,8 +175,8 @@ The real win is not mathematical precision. It is forcing sales, solutions, deli
 Every evaluated deal should leave with:
 
 * a required margin
-* an impact-adjusted margin if the B-Corp overlay is in play
+* an impact-adjusted margin if the B Corp overlay is in play
 * a proposed margin
 * a margin gap
-* a minimum deal price
+* a price floor to clear the hurdle
 * a documented go, caution, or stop decision

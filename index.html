@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CAPM for Agencies — Decision Cards</title>
-<meta name="description" content="Interactive decision cards for agency deal evaluation: score portfolio and engagement risk, compare proposed margin to the hurdle, and apply a B-Corp impact overlay.">
+<meta name="description" content="Interactive decision cards for agency deal evaluation: score portfolio and engagement risk, compare proposed margin to the hurdle, and apply a B Corp impact overlay.">
 <link rel="canonical" href="https://newlocalmedia.github.io/capm-for-agencies/index.html">
 <meta property="og:site_name" content="CAPM for Agencies">
 <meta property="og:type" content="website">
 <meta property="og:title" content="CAPM for Agencies — Decision Cards">
-<meta property="og:description" content="Interactive decision cards for agency deal evaluation: score portfolio and engagement risk, compare proposed margin to the hurdle, and apply a B-Corp impact overlay.">
+<meta property="og:description" content="Interactive decision cards for agency deal evaluation: score portfolio and engagement risk, compare proposed margin to the hurdle, and apply a B Corp impact overlay.">
 <meta property="og:url" content="https://newlocalmedia.github.io/capm-for-agencies/index.html">
 <meta property="og:image" content="https://newlocalmedia.github.io/capm-for-agencies/theory/figures/capm-comparison.png">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CAPM for Agencies — Decision Cards">
-<meta name="twitter:description" content="Interactive decision cards for agency deal evaluation: score portfolio and engagement risk, compare proposed margin to the hurdle, and apply a B-Corp impact overlay.">
+<meta name="twitter:description" content="Interactive decision cards for agency deal evaluation: score portfolio and engagement risk, compare proposed margin to the hurdle, and apply a B Corp impact overlay.">
 <meta name="twitter:image" content="https://newlocalmedia.github.io/capm-for-agencies/theory/figures/capm-comparison.png">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@500;700&display=swap');
@@ -1019,7 +1019,7 @@
     <a class="header-link" href="theory/index.html">Understand the Theory</a>
   </div>
   <h1>CAPM for Agencies — Decision Cards</h1>
-  <p>Two-layer risk assessment with scoring and calculators, plus a B-Corp impact overlay.</p>
+  <p>Two-layer risk assessment with scoring and calculators, plus a B Corp impact overlay.</p>
 </div>
 
 <div class="primer">
@@ -1039,7 +1039,7 @@
         <span>Begin with Layer 2 for the practical go/no-go workflow, then refine it with Layer 1 when needed.</span>
       </a>
       <a class="start-chip layer3-start" href="#bcorp-card">
-        <strong>B-Corp / Mission-Driven Agency</strong>
+        <strong>B Corp / Mission-Driven Agency</strong>
         <span>Work through Layer 1 and Layer 2 first, then use Layer 3 for the impact-adjusted decision.</span>
       </a>
     </div>
@@ -1414,14 +1414,14 @@
           <span class="result-sub" id="l2-gap-sub">proposed - required</span>
         </div>
         <div class="result-item">
-          <span class="result-label">Min. Deal Price
+          <span class="result-label">Price Floor
             <details class="info-tip">
-              <summary aria-label="Minimum deal price help">?</summary>
-              <div class="tooltip-text">The minimum quoted deal price needed to reach the current required margin, given the estimated delivery cost.</div>
+              <summary aria-label="Price floor help">?</summary>
+              <div class="tooltip-text">The minimum quoted deal price needed to reach the current required margin, given the estimated delivery cost. It is a percentage-margin floor only, not proof that the deal has enough absolute gross profit dollars to be worth doing.</div>
             </details>
           </span>
           <span class="result-value accent" id="l2-min-price">—</span>
-          <span class="result-sub" id="l2-min-price-sub">needed to clear <em>E</em>(<em>R</em>)</span>
+          <span class="result-sub" id="l2-min-price-sub">margin floor only</span>
         </div>
       </div>
       <div id="l2-verdict" role="status" aria-live="polite"></div>
@@ -1448,16 +1448,16 @@
 <!-- B-CORP CARD -->
 <div class="card" id="bcorp-card">
   <div class="card-header bcorp">
-    <span class="layer-badge">B-Corp</span>
+    <span class="layer-badge">B Corp</span>
     <h2>Impact-Adjusted CAPM</h2>
     <span class="cadence">Stakeholder governance overlay</span>
   </div>
   <div class="card-body">
     <p class="card-intro">
-      <strong>For B-Corp and mission-driven agencies.</strong> This card extends Layers 1 and 2 with B Lab-aligned impact dimensions — portfolio mission fit, customer stewardship, environmental readiness, stakeholder governance, human rights, and mission drift — then computes an impact-adjusted minimum margin. Scores from the standard cards flow in automatically.
+      <strong>For B Corp and mission-driven agencies.</strong> This card extends Layers 1 and 2 with B Lab-aligned impact dimensions — portfolio mission fit, customer stewardship, environmental readiness, stakeholder governance, human rights, and mission drift — then computes an impact-adjusted minimum margin. Scores from the standard cards flow in automatically.
     </p>
 
-    <span class="section-label">B-Corp Systematic Risk (extends Layer 1)</span>
+    <span class="section-label">B Corp Systematic Risk (extends Layer 1)</span>
     <table class="score-table" id="bcorp-l1-table" data-layer="bcorp_l1">
       <thead>
         <tr>
@@ -1495,7 +1495,7 @@
         <tr data-factor="environmental_readiness">
           <td>
             <div class="factor-name">Environmental Stewardship Readiness</div>
-            <div class="factor-desc">ESC policies and client screening</div>
+            <div class="factor-desc">Environmental stewardship policies and client screening</div>
           </td>
           <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l1')">1</button><div class="score-label">Embedded</div></td>
           <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l1')">2</button></td>
@@ -1506,7 +1506,7 @@
         <tr data-factor="stakeholder_governance">
           <td>
             <div class="factor-name">Stakeholder Governance Readiness</div>
-            <div class="factor-desc">PSG policies, accountability, and oversight</div>
+            <div class="factor-desc">Stakeholder-governance policies, accountability, and oversight</div>
           </td>
           <td class="score-cell"><button class="score-btn" data-val="1" onclick="score(this,'bcorp_l1')">1</button><div class="score-label">Embedded</div></td>
           <td class="score-cell"><button class="score-btn" data-val="2" onclick="score(this,'bcorp_l1')">2</button></td>
@@ -1538,9 +1538,9 @@
         </tr>
       </tbody>
     </table>
-    <div class="mobile-score-list" id="bcorp-l1-mobile-scores" role="group" aria-label="B-Corp Layer 1 mobile scoring"></div>
+    <div class="mobile-score-list" id="bcorp-l1-mobile-scores" role="group" aria-label="B Corp Layer 1 mobile scoring"></div>
 
-    <span class="section-label">B-Corp Engagement Factors (extends Layer 2)</span>
+    <span class="section-label">B Corp Engagement Factors (extends Layer 2)</span>
     <table class="score-table" id="bcorp-l2-table" data-layer="bcorp_l2">
       <thead>
         <tr>
@@ -1599,7 +1599,7 @@
         </tr>
       </tbody>
     </table>
-    <div class="mobile-score-list" id="bcorp-l2-mobile-scores" role="group" aria-label="B-Corp Layer 2 mobile scoring"></div>
+    <div class="mobile-score-list" id="bcorp-l2-mobile-scores" role="group" aria-label="B Corp Layer 2 mobile scoring"></div>
 
     <span class="section-label">Impact-Adjusted CAPM Calculator</span>
     <div class="calc-panel">
@@ -1617,7 +1617,7 @@
           <label for="bc-impact-adj">Impact Adjustment (±%)
             <details class="info-tip">
               <summary aria-label="Impact adjustment help">?</summary>
-              <div class="tooltip-text">The B-Corp overlay’s mission discount or harm premium. Negative lowers the hurdle for mission-aligned work; positive raises it for higher-impact-risk work. In the current calibration, each engagement point away from midpoint is worth about one margin point before the portfolio modifier is applied.</div>
+              <div class="tooltip-text">The B Corp overlay’s mission discount or harm premium. Negative lowers the hurdle for mission-aligned work; positive raises it for higher-impact-risk work. In the current calibration, each engagement point away from midpoint is worth about one margin point before the portfolio modifier is applied.</div>
             </details>
           </label>
           <div><input type="text" id="bc-impact-adj" value="—" readonly style="background:var(--gray100);color:var(--gray400);width:80px;"></div>
@@ -1626,7 +1626,7 @@
           <label for="bc-manual-adj">Manual Override
             <details class="info-tip">
               <summary aria-label="Manual override help">?</summary>
-              <div class="tooltip-text">Use this to set a documented impact adjustment directly when leadership wants to override the automatic B-Corp scoring output.</div>
+              <div class="tooltip-text">Use this to set a documented impact adjustment directly when leadership wants to override the automatic B Corp scoring output.</div>
             </details>
           </label>
           <div><input type="number" id="bc-manual-adj" value="" step="0.5" placeholder="±%" style="width:80px;" oninput="calcBcorp(); markExportDirty()"><span class="unit">%</span></div>
@@ -1634,7 +1634,7 @@
       </div>
 
       <div class="formula-bar" id="bc-formula">
-        <strong>B-Corp:</strong> <em>E</em>(<em>R</em>*) = <em>E</em>(<em>R</em>) + Impact Adjustment — score all factors to calculate
+        <strong>B Corp:</strong> <em>E</em>(<em>R</em>*) = <em>E</em>(<em>R</em>) + Impact Adjustment — score all factors to calculate
       </div>
 
       <div class="result-box">
@@ -1642,7 +1642,7 @@
           <span class="result-label">Portfolio Impact Score
             <details class="info-tip">
               <summary aria-label="Portfolio impact score help">?</summary>
-              <div class="tooltip-text">The total score from the B-Corp portfolio factors. It widens or narrows the range of possible discounts and premiums.</div>
+              <div class="tooltip-text">The total score from the B Corp portfolio factors. It widens or narrows the range of possible discounts and premiums.</div>
             </details>
           </span>
           <span class="result-value green" id="bc-l1-score">—</span>
@@ -1652,7 +1652,7 @@
           <span class="result-label">Engagement Impact Score
             <details class="info-tip">
               <summary aria-label="Engagement impact score help">?</summary>
-              <div class="tooltip-text">The total score from the B-Corp engagement factors. It drives the mission discount or harm premium for the specific deal.</div>
+              <div class="tooltip-text">The total score from the B Corp engagement factors. It drives the mission discount or harm premium for the specific deal.</div>
             </details>
           </span>
           <span class="result-value green" id="bc-l2-score">—</span>
@@ -1662,7 +1662,7 @@
           <span class="result-label">Impact Adjustment
             <details class="info-tip">
               <summary aria-label="Impact adjustment result help">?</summary>
-              <div class="tooltip-text">The net adjustment applied to the standard hurdle after combining the B-Corp portfolio and engagement scores.</div>
+              <div class="tooltip-text">The net adjustment applied to the standard hurdle after combining the B Corp portfolio and engagement scores.</div>
             </details>
           </span>
           <span class="result-value green" id="bc-adj-display">—</span>
@@ -1672,7 +1672,7 @@
           <span class="result-label"><em>E</em>(<em>R</em>*) Min. Margin
             <details class="info-tip">
               <summary aria-label="Impact-adjusted minimum margin help">?</summary>
-              <div class="tooltip-text">The final B-Corp hurdle rate after applying the impact adjustment to the standard financial hurdle.</div>
+              <div class="tooltip-text">The final B Corp hurdle rate after applying the impact adjustment to the standard financial hurdle.</div>
             </details>
           </span>
           <span class="result-value green" id="bc-er-star">—</span>
@@ -1684,14 +1684,14 @@
       <div class="chart-panel">
         <div class="chart-header">Impact Shift</div>
         <svg id="bc-chart" class="capm-chart" viewBox="0 0 640 320" role="img" aria-labelledby="bc-chart-title bc-chart-desc">
-          <title id="bc-chart-title">B-Corp impact-adjusted chart</title>
-          <desc id="bc-chart-desc">Shows the shift from the standard CAPM hurdle to the B-Corp impact-adjusted hurdle for the current engagement.</desc>
+          <title id="bc-chart-title">B Corp impact-adjusted chart</title>
+          <desc id="bc-chart-desc">Shows the shift from the standard CAPM hurdle to the B Corp impact-adjusted hurdle for the current engagement.</desc>
         </svg>
-        <div class="chart-note" id="bc-chart-note">Score the B-Corp factors to show how the impact adjustment shifts the hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).</div>
+        <div class="chart-note" id="bc-chart-note">Score the B Corp factors to show how the impact adjustment shifts the hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).</div>
       </div>
 
       <div class="approach-note">
-        <strong>How the impact adjustment works:</strong> B-Corp engagement scores below the midpoint (mission-aligned, low-harm, transparent work) produce a negative adjustment — a "mission discount" that lowers the financial margin threshold. Scores above the midpoint (mission tension, elevated human-rights or environmental risk, misleading claims) produce a positive adjustment — a "harm premium" that raises the hurdle rate. The B-Corp portfolio score widens or narrows that effect around a neutral midpoint instead of amplifying it by default. In the current calibration, each engagement point away from the midpoint is worth about one margin point before the portfolio modifier is applied. Use the manual override to set a conscious, documented impact adjustment for board-level decisions.
+        <strong>How the impact adjustment works:</strong> B Corp engagement scores below the midpoint (mission-aligned, low-harm, transparent work) produce a negative adjustment — a "mission discount" that lowers the financial margin threshold. Scores above the midpoint (mission tension, elevated human-rights or environmental risk, misleading claims) produce a positive adjustment — a "harm premium" that raises the hurdle rate. The B Corp portfolio score widens or narrows that effect around a neutral midpoint instead of amplifying it by default. In the current calibration, each engagement point away from the midpoint is worth about one margin point before the portfolio modifier is applied. Use the manual override to set a conscious, documented impact adjustment for board-level decisions.
       </div>
     </div>
   </div>
@@ -1703,7 +1703,7 @@
     <a href="pdf/capm-decision-cards.pdf" class="dl-btn blue-dl">Standard Cards (PDF)</a>
     <a href="pdf/capm-layer1-systematic-risk.pdf" class="dl-btn blue-dl">Layer 1 Only</a>
     <a href="pdf/capm-layer2-engagement-risk.pdf" class="dl-btn accent-dl">Layer 2 Only</a>
-    <a href="pdf/capm-b-corp-engagement-risk.pdf" class="dl-btn green-dl">B-Corp Only</a>
+    <a href="pdf/capm-b-corp-engagement-risk.pdf" class="dl-btn green-dl">B Corp Only</a>
   </div>
   <p class="print-note">Scores are interactive in the browser. PDFs are printable reference cards.</p>
 </div>
@@ -2430,7 +2430,7 @@
         '<div class="metric"><span class="metric-label">Verdict</span><span class="metric-value" style="font-size:1rem;">' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</span><span class="metric-sub">Decision-card output</span></div>' +
       '</div></section>' +
       '<div class="report-grid">' +
-        '<section class="report-card"><h2>Commercial Inputs</h2><p><strong>Layer 1 factor input:</strong> ' + escapeHtml(isNaN(l1Input) ? '—' : l1Input.toFixed(2)) + '<br><strong>Deal price:</strong> ' + escapeHtml(deal ? formatMoney(deal.price) : '—') + '<br><strong>Estimated delivery cost:</strong> ' + escapeHtml(deal ? formatMoney(deal.cost) : '—') + '<br><strong>Minimum deal price:</strong> ' + escapeHtml(minPrice || '—') + '</p></section>' +
+        '<section class="report-card"><h2>Commercial Inputs</h2><p><strong>Layer 1 factor input:</strong> ' + escapeHtml(isNaN(l1Input) ? '—' : l1Input.toFixed(2)) + '<br><strong>Deal price:</strong> ' + escapeHtml(deal ? formatMoney(deal.price) : '—') + '<br><strong>Estimated delivery cost:</strong> ' + escapeHtml(deal ? formatMoney(deal.cost) : '—') + '<br><strong>Price floor to clear margin:</strong> ' + escapeHtml(minPrice || '—') + '</p></section>' +
         '<section class="report-card"><h2>Layer 2 Summary</h2><p><strong>Engagement score:</strong> ' + escapeHtml(l2Score || '—') + '<br><strong>Engagement ' + exportMath.beta + ':</strong> ' + escapeHtml(l2Beta || '—') + '<br><strong>Blended ' + exportMath.beta + ':</strong> ' + escapeHtml(blended || '—') + '<br><strong>Verdict:</strong> <span class="verdict">' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</span></p>' + (layer2Warnings.length ? '<p><strong>⚠️ Engagement Warnings:</strong></p><ul class="report-warning-list">' + layer2Warnings.map((warning) => '<li>' + formatWarningMarkup(warning) + '</li>').join('') + '</ul>' : '') + '</section>' +
       '</div>' +
       '<div class="report-grid full">' +
@@ -2444,12 +2444,12 @@
     const hasBcorpScores = Object.keys(state.bcorp_l1).length || Object.keys(state.bcorp_l2).length || bcVerdict;
     const bcorpSection = hasBcorpScores
       ? '<div class="report-grid">' +
-          '<section class="report-card"><h2>B-Corp Overlay</h2><p><strong>Standard ' + exportMath.er + ':</strong> ' + escapeHtml(bcStandard || '—') + '<br><strong>Impact adjustment:</strong> ' + escapeHtml(bcAdjustment || '—') + '<br><strong>Impact-adjusted ' + exportMath.erStar + ':</strong> ' + escapeHtml(bcErStar || '—') + '<br><strong>Verdict:</strong> ' + escapeHtml(bcVerdict || 'Not evaluated yet') + '</p></section>' +
+          '<section class="report-card"><h2>B Corp Overlay</h2><p><strong>Standard ' + exportMath.er + ':</strong> ' + escapeHtml(bcStandard || '—') + '<br><strong>Impact adjustment:</strong> ' + escapeHtml(bcAdjustment || '—') + '<br><strong>Impact-adjusted ' + exportMath.erStar + ':</strong> ' + escapeHtml(bcErStar || '—') + '<br><strong>Verdict:</strong> ' + escapeHtml(bcVerdict || 'Not evaluated yet') + '</p></section>' +
           '<section class="report-card chart-card"><h2>Impact Shift</h2>' + bcChartSvg + '</section>' +
         '</div>' +
         '<div class="report-grid">' +
-          renderExportTable('B-Corp Portfolio Factors', bcorpL1Data) +
-          renderExportTable('B-Corp Engagement Factors', bcorpL2Data) +
+          renderExportTable('B Corp Portfolio Factors', bcorpL1Data) +
+          renderExportTable('B Corp Engagement Factors', bcorpL2Data) +
         '</div>'
       : '';
 
@@ -2504,6 +2504,22 @@
         '<rect x="' + left + '" y="' + top + '" width="' + pillWidth + '" height="' + pillHeight + '" rx="12" fill="' + (opts.fill || 'rgba(247,245,240,0.96)') + '" stroke="' + (opts.stroke || 'rgba(26,26,46,0.10)') + '" stroke-width="1.2"></rect>' +
         '<text x="' + (left + pillWidth / 2) + '" y="' + (top + 16) + '" text-anchor="middle" fill="' + (opts.color || '#1a1a2e') + '" font-size="' + (opts.fontSize || 12) + '" font-weight="' + (opts.weight || 700) + '">' + (opts.textMarkup || escapeHtml(opts.text)) + '</text>'
     };
+  }
+
+  function buildExpectedReturnPill(prefix, value, opts) {
+    const suffix = typeof value === 'number' ? ' ' + value.toFixed(1) + '%' : '';
+    const plainText = prefix + suffix;
+    const markup =
+      escapeHtml(prefix.split('E(')[0]) +
+      'E(<tspan font-style="italic">R</tspan>' +
+      (prefix.includes('R*)') ? '*' : '') +
+      ')' +
+      (suffix ? '<tspan font-style="normal">' + escapeHtml(suffix) + '</tspan>' : '');
+
+    return buildChartPill(Object.assign({}, opts, {
+      text: plainText,
+      textMarkup: markup
+    }));
   }
 
   function buildAxesMarkup(opts) {
@@ -2660,10 +2676,9 @@
       requiredLabelTop = requiredY - 30;
     }
 
-    markup += buildChartPill({
+    markup += buildExpectedReturnPill('Required E(R)', data.er, {
       x: labelX,
       y: requiredLabelTop,
-      text: 'Required E(R) ' + data.er.toFixed(1) + '%',
       color: '#cb8922',
       stroke: 'rgba(203,137,34,0.22)',
       anchor: labelAnchor,
@@ -2720,8 +2735,8 @@
       const markerX = xScale(1.1);
       const markerY = yScale(lineY(1.1));
 
-      const descText = 'Placeholder B-Corp impact chart showing where the standard hurdle and the impact-adjusted hurdle will appear for the current engagement once the B-Corp factors are scored.';
-      setAccessibleChartMarkup(svg, 'bc-chart-title', 'B-Corp impact-adjusted chart', 'bc-chart-desc', descText,
+      const descText = 'Placeholder B Corp impact chart showing where the standard hurdle and the impact-adjusted hurdle will appear for the current engagement once the B Corp factors are scored.';
+      setAccessibleChartMarkup(svg, 'bc-chart-title', 'B Corp impact-adjusted chart', 'bc-chart-desc', descText,
         '<rect x="0" y="0" width="' + width + '" height="' + height + '" rx="10" fill="rgba(255,255,255,0.6)"></rect>' +
         buildAxesMarkup({ width, height, margin, xMax, yMax, xScaleFn: xScale, yScaleFn: yScale }) +
         '<line x1="' + xScale(0) + '" y1="' + yScale(10) + '" x2="' + xScale(xMax) + '" y2="' + yScale(lineY(xMax)) + '" stroke="rgba(43,76,126,0.45)" stroke-width="4"></line>' +
@@ -2736,7 +2751,7 @@
           chartHeight: height
         }).markup
       );
-      note.innerHTML = 'Score the B-Corp factors to show how the impact adjustment shifts the hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).';
+      note.innerHTML = 'Score the B Corp factors to show how the impact adjustment shifts the hurdle from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).';
       return;
     }
 
@@ -2757,8 +2772,8 @@
 
     const entries = [
       { key: 'proposed', text: data.hasDeal ? 'Proposed ' + data.proposedMargin.toFixed(1) + '%' : '', y: proposedY !== null ? proposedY - 38 : null, color: '#426347', stroke: 'rgba(58,125,92,0.20)' },
-      { key: 'adjusted', text: 'Impact-adjusted E(R*) ' + data.adjustedEr.toFixed(1) + '%', y: adjustedY - 12, color: directionColor, stroke: directionStroke },
-      { key: 'standard', text: 'Standard E(R) ' + data.standardEr.toFixed(1) + '%', y: standardY - 12, color: '#cb8922', stroke: 'rgba(203,137,34,0.22)' }
+      { key: 'adjusted', text: 'Impact-adjusted E(R*) ' + data.adjustedEr.toFixed(1) + '%', y: adjustedY - 12, color: directionColor, stroke: directionStroke, prefix: 'Impact-adjusted E(R*)', value: data.adjustedEr },
+      { key: 'standard', text: 'Standard E(R) ' + data.standardEr.toFixed(1) + '%', y: standardY - 12, color: '#cb8922', stroke: 'rgba(203,137,34,0.22)', prefix: 'Standard E(R)', value: data.standardEr }
     ].filter((entry) => entry.y !== null);
 
     entries.sort((a, b) => a.y - b.y);
@@ -2788,10 +2803,9 @@
     }
 
     entries.forEach((entry) => {
-      markup += buildChartPill({
+      markup += buildExpectedReturnPill(entry.prefix, entry.value, {
         x: labelX,
         y: entry.y,
-        text: entry.text,
         color: entry.color,
         stroke: entry.stroke,
         anchor,
@@ -2801,15 +2815,15 @@
     });
 
     const adjustmentLabel = (data.adjustment >= 0 ? '+' : '') + data.adjustment.toFixed(1) + ' pts';
-    note.innerHTML = 'At <strong>' + data.blended.toFixed(2) + '</strong> blended <em>β</em>, the B-Corp adjustment shifts the hurdle by <strong>' + adjustmentLabel + '</strong> from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).';
+    note.innerHTML = 'At <strong>' + data.blended.toFixed(2) + '</strong> blended <em>β</em>, the B Corp adjustment shifts the hurdle by <strong>' + adjustmentLabel + '</strong> from <em>E</em>(<em>R</em>) to <em>E</em>(<em>R</em>*).';
     const descText =
-      'B-Corp impact chart. At blended beta ' + data.blended.toFixed(2) + ', the standard hurdle is ' +
+      'B Corp impact chart. At blended beta ' + data.blended.toFixed(2) + ', the standard hurdle is ' +
       data.standardEr.toFixed(1) + ' percent and the impact-adjusted hurdle is ' + data.adjustedEr.toFixed(1) +
       ' percent, a shift of ' + adjustmentLabel + '. ' +
       (data.hasDeal
         ? 'The proposed margin is ' + data.proposedMargin.toFixed(1) + ' percent.'
         : 'A proposed margin is not plotted yet because deal price and estimated delivery cost are missing.');
-    setAccessibleChartMarkup(svg, 'bc-chart-title', 'B-Corp impact-adjusted chart', 'bc-chart-desc', descText, markup);
+    setAccessibleChartMarkup(svg, 'bc-chart-title', 'B Corp impact-adjusted chart', 'bc-chart-desc', descText, markup);
   }
 
   function calcLayer2() {
@@ -2840,7 +2854,7 @@
     document.getElementById('l2-gap').textContent = '—';
     document.getElementById('l2-gap-sub').textContent = 'proposed - required';
     document.getElementById('l2-min-price').textContent = '—';
-    document.getElementById('l2-min-price-sub').innerHTML = 'needed to clear <em>E</em>(<em>R</em>)';
+    document.getElementById('l2-min-price-sub').textContent = 'margin floor only';
     renderLayer2Warnings(interactionWarnings);
 
     if (count > 0) {
@@ -2891,7 +2905,7 @@
             if (er < 100) {
               const minPrice = Calc.minimumDealPrice(deal.cost, er);
               document.getElementById('l2-min-price').textContent = formatMoney(minPrice);
-              document.getElementById('l2-min-price-sub').textContent = 'at ' + er.toFixed(1) + '% required margin';
+              document.getElementById('l2-min-price-sub').textContent = 'clears ' + er.toFixed(1) + '% margin hurdle only';
             } else {
               document.getElementById('l2-min-price').textContent = 'n/a';
               document.getElementById('l2-min-price-sub').textContent = 'required margin exceeds 100%';
@@ -2963,7 +2977,7 @@
     document.getElementById('bc-er-sub').textContent = 'impact-adjusted';
     document.getElementById('bc-verdict').innerHTML = '';
     document.getElementById('bc-formula').innerHTML =
-      '<strong>B-Corp:</strong> <em>E</em>(<em>R</em>*) = <em>E</em>(<em>R</em>) + Impact Adjustment — score all factors to calculate';
+      '<strong>B Corp:</strong> <em>E</em>(<em>R</em>*) = <em>E</em>(<em>R</em>) + Impact Adjustment — score all factors to calculate';
 
     // Get standard E(R) from Layer 2
     const stdErText = document.getElementById('l2-er').textContent;
@@ -3006,7 +3020,7 @@
         };
 
         document.getElementById('bc-formula').innerHTML =
-          '<strong>B-Corp:</strong> <em>E</em>(<em>R</em>*) = <span class="hl">' + stdEr.toFixed(1) + '%</span> + <span class="hl3">' + manualAdj.toFixed(1) + '%</span> = <strong>' + erStar.toFixed(1) + '%</strong> (manual)';
+          '<strong>B Corp:</strong> <em>E</em>(<em>R</em>*) = <span class="hl">' + stdEr.toFixed(1) + '%</span> + <span class="hl3">' + manualAdj.toFixed(1) + '%</span> = <strong>' + erStar.toFixed(1) + '%</strong> (manual)';
 
         setBcorpVerdict(erStar, manualAdj);
       }
@@ -3014,9 +3028,9 @@
       return;
     }
 
-    // Auto-calculate from B-Corp scores
+    // Auto-calculate from B Corp scores
     if (bl1Count === 6 && bl2Count === 4 && !isNaN(stdEr)) {
-      // B-Corp L1: 6-30 range. Midpoint=18 is neutral.
+      // B Corp L1: 6-30 range. Midpoint=18 is neutral.
       // High L1 widens discounts/premiums, low L1 narrows them.
       const impactAdj = Calc.bcorpImpactAdjustment(bl1Sum, bl2Sum);
 
@@ -3041,7 +3055,7 @@
       };
 
       document.getElementById('bc-formula').innerHTML =
-        '<strong>B-Corp:</strong> <em>E</em>(<em>R</em>*) = <span class="hl">' + stdEr.toFixed(1) + '%</span> + <span class="hl3">' + impactAdj.toFixed(1) + '%</span> = <strong>' + erStar.toFixed(1) + '%</strong>';
+        '<strong>B Corp:</strong> <em>E</em>(<em>R</em>*) = <span class="hl">' + stdEr.toFixed(1) + '%</span> + <span class="hl3">' + impactAdj.toFixed(1) + '%</span> = <strong>' + erStar.toFixed(1) + '%</strong>';
 
       setBcorpVerdict(erStar, impactAdj);
     }

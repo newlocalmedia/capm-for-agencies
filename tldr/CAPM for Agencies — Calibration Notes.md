@@ -8,7 +8,7 @@ Run the current implementation here:
 
 * [Layer 1 card](../index.html#layer1-card)
 * [Layer 2 card](../index.html#layer2-card)
-* [B-Corp card](../index.html#bcorp-card)
+* [B Corp card](../index.html#bcorp-card)
 
 ## What Changed
 
@@ -22,10 +22,10 @@ Two calibration changes matter in the current build:
 
    This makes the midpoint score behave like a real normal environment instead of quietly pushing the hybrid hurdle upward.
 
-2. **The B-Corp overlay is now less aggressive by default.**
-   * the B-Corp portfolio score is neutral at its midpoint
+2. **The B Corp overlay is now less aggressive by default.**
+   * the B Corp portfolio score is neutral at its midpoint
    * the portfolio modifier now ranges from `0.8` to `1.2`
-   * each B-Corp engagement point away from its midpoint is worth about `1.0` margin point before that modifier is applied
+   * each B Corp engagement point away from its midpoint is worth about `1.0` margin point before that modifier is applied
 
    This keeps the overlay useful as governance without turning it into a large automatic pricing swing.
 
@@ -60,25 +60,25 @@ The decision thresholds are:
 * **Caution**: proposed margin is within `3` margin points below <em>E</em>(<em>R</em>)
 * **Stop**: proposed margin is more than `3` points below <em>E</em>(<em>R</em>)
 
-### B-Corp Overlay
+### B Corp Overlay
 
-The current B-Corp implementation uses:
+The current B Corp implementation uses:
 
 * **Standard hurdle**: <em>E</em>(<em>R</em>) from Layer 2
 * **Impact-adjusted hurdle**: <em>E</em>(<em>R</em>*) = <em>E</em>(<em>R</em>) + Impact Adjustment
 
 Where:
 
-* B-Corp Layer 1 midpoint is neutral
-* B-Corp Layer 1 modifies scale from `0.8` to `1.2`
-* B-Corp Layer 2 midpoint is neutral
-* each B-Corp Layer 2 point away from midpoint is worth about `1.0` point before that portfolio modifier is applied
+* B Corp Layer 1 midpoint is neutral
+* B Corp Layer 1 modifies scale from `0.8` to `1.2`
+* B Corp Layer 2 midpoint is neutral
+* each B Corp Layer 2 point away from midpoint is worth about `1.0` point before that portfolio modifier is applied
 
 So the current automatic adjustment is:
 
-* `Impact Adjustment = (B-Corp L2 score - 12) × 1.0 × portfolio modifier`
+* `Impact Adjustment = (B Corp L2 score - 12) × 1.0 × portfolio modifier`
 
-This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium. It is also midpoint-anchored by design: neutral B-Corp impact maps to no mission discount or harm premium, while more strongly aligned or more harmful work moves the hurdle down or up from that center.
+This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium. It is also midpoint-anchored by design: neutral B Corp impact maps to no mission discount or harm premium, while more strongly aligned or more harmful work moves the hurdle down or up from that center.
 
 ## Sanity-Test Scenarios
 
@@ -136,18 +136,18 @@ Observed result:
 
 This also makes sense. The deal is not absurdly underwater, but it still fails the stated threshold.
 
-### Scenario 3 — Mission-Aligned B-Corp Work
+### Scenario 3 — Mission-Aligned B Corp Work
 
 Inputs:
 
 * same financial inputs as Scenario 1
-* B-Corp Layer 1 scores: all `2`
-* B-Corp Layer 2 scores: `1, 1, 2, 2`
+* B Corp Layer 1 scores: all `2`
+* B Corp Layer 2 scores: `1, 1, 2, 2`
 
 Observed result:
 
 * Standard hurdle: `17.4%`
-* B-Corp impact adjustment: `-5.4%`
+* B Corp impact adjustment: `-5.4%`
 * Impact-adjusted hurdle: `12.0%`
 * Verdict: **Mission-aligned**
 
@@ -163,18 +163,18 @@ Inputs:
 * Layer 2 scores: all `3`
 * Deal price: `$210,000`
 * Estimated cost: `$150,000`
-* B-Corp Layer 1 scores: all `4`
-* B-Corp Layer 2 scores: `5, 4, 4, 4`
+* B Corp Layer 1 scores: all `4`
+* B Corp Layer 2 scores: `5, 4, 4, 4`
 
 Observed result:
 
 * Standard hurdle: `22.0%`
-* B-Corp impact adjustment: `+5.5%`
+* B Corp impact adjustment: `+5.5%`
 * Impact-adjusted hurdle: `27.5%`
 * Proposed margin: `28.6%`
 * Verdict: **Harm premium cleared financially — review mission trade-offs explicitly**
 
-This is a good example of the B-Corp overlay doing what it should: making the mission cost visible without automatically forcing every bad-fit deal into a stop.
+This is a good example of the B Corp overlay doing what it should: making the mission cost visible without automatically forcing every bad-fit deal into a stop.
 
 ## What To Watch For
 
@@ -188,7 +188,7 @@ It is weakest when:
 
 * users treat the numbers as statistically discovered truths
 * the portfolio baselines are guessed rather than observed
-* the B-Corp overlay is mistaken for an official B Lab formula
+* the B Corp overlay is mistaken for an official B Lab formula
 
 ## Recommended Use
 

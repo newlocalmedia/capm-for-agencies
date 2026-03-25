@@ -16,7 +16,7 @@ and this project uses a lightweight, date-free changelog for now.
 
 ### Changed
 - Re-centered the Layer 1 systematic adjustment factor so the midpoint score now maps to `1.00`, with the current range set to `0.85` through `1.15`.
-- Softened the B-Corp overlay so the portfolio midpoint is neutral and the automatic impact adjustment is more moderate.
+- Softened the B Corp overlay so the portfolio midpoint is neutral and the automatic impact adjustment is more moderate.
 - Renamed user-facing navigation away from `manuscript` toward `Understand the Theory` and `Theory and Background`.
 - Added a plain-language CAPM introduction across the app, overview page, TL;DR, and theory pages.
 - Improved the overview and reader pages so the reading path between TL;DR, Decision Guide, and theory is clearer.
@@ -24,7 +24,7 @@ and this project uses a lightweight, date-free changelog for now.
 ### Fixed
 - Corrected the main decision logic so verdicts compare actual proposed margin to the hurdle rather than comparing the hurdle to `R_m`.
 - Fixed several formula-label and typography inconsistencies, including `R_f`, `R_m`, `E(R)`, and `E(R*)`.
-- Fixed stale B-Corp overlay state so clearing scores no longer leaves old impact adjustments and verdicts on screen.
+- Fixed stale B Corp overlay state so clearing scores no longer leaves old impact adjustments and verdicts on screen.
 - Fixed tooltip behavior so only one small info tip stays open at a time, including for keyboard users.
 - Fixed tooltip clipping at card edges.
 - Improved accessibility with explicit labels, better focus handling, improved disclosures, and contrast corrections that now produce a clean Lighthouse accessibility score.

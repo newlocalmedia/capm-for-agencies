@@ -603,7 +603,7 @@
       <div class="masthead-grid">
         <div>
           <h1>How the Current Decision Cards Are Calibrated</h1>
-          <p class="deck">Implementation detail for data nerds: the current score mappings, the moderation changes to the B-Corp overlay, and a few sanity-test scenarios run against the live calculator.</p>
+          <p class="deck">Implementation detail for data nerds: the current score mappings, the moderation changes to the B Corp overlay, and a few sanity-test scenarios run against the live calculator.</p>
         </div>
         <div class="meta">
           <div class="meta-copy">Use this when you want to inspect the current decision-card math and calibration choices rather than just use the workflow.</div>
@@ -628,11 +628,11 @@
 <a class="level-2" href="#current-formula-choices">Current Formula Choices</a>
 <a class="level-3" href="#layer-1">Layer 1</a>
 <a class="level-3" href="#layer-2">Layer 2</a>
-<a class="level-3" href="#b-corp-overlay">B-Corp Overlay</a>
+<a class="level-3" href="#b-corp-overlay">B Corp Overlay</a>
 <a class="level-2" href="#sanity-test-scenarios">Sanity-Test Scenarios</a>
 <a class="level-3" href="#scenario-1--calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</a>
 <a class="level-3" href="#scenario-2--elevated-risk-market-ugly-fixed-price-build">Scenario 2 — Elevated-Risk Market, Ugly Fixed-Price Build</a>
-<a class="level-3" href="#scenario-3--mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B-Corp Work</a>
+<a class="level-3" href="#scenario-3--mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B Corp Work</a>
 <a class="level-3" href="#scenario-4--harmful-but-financially-attractive-work">Scenario 4 — Harmful but Financially Attractive Work</a>
 <a class="level-2" href="#what-to-watch-for">What To Watch For</a>
 <a class="level-2" href="#recommended-use">Recommended Use</a>
@@ -650,7 +650,7 @@
 <ul>
 <li><a href="../index.html#layer1-card">Layer 1 card</a></li>
 <li><a href="../index.html#layer2-card">Layer 2 card</a></li>
-<li><a href="../index.html#bcorp-card">B-Corp card</a></li>
+<li><a href="../index.html#bcorp-card">B Corp card</a></li>
 </ul>
 <h2 id="what-changed">What Changed</h2>
 <p>Two calibration changes matter in the current build:</p>
@@ -672,12 +672,12 @@ The systematic adjustment factor now maps:</p>
 <p>This makes the midpoint score behave like a real normal environment instead of quietly pushing the hybrid hurdle upward.</p>
 </li>
 <li>
-<p><strong>The B-Corp overlay is now less aggressive by default.</strong></p>
+<p><strong>The B Corp overlay is now less aggressive by default.</strong></p>
 <ul>
-<li>the B-Corp portfolio score is neutral at its midpoint</li>
+<li>the B Corp portfolio score is neutral at its midpoint</li>
 <li>the portfolio modifier now ranges from <code>0.8</code> to <code>1.2</code>
 </li>
-<li>each B-Corp engagement point away from its midpoint is worth about <code>1.0</code> margin point before that modifier is applied</li>
+<li>each B Corp engagement point away from its midpoint is worth about <code>1.0</code> margin point before that modifier is applied</li>
 </ul>
 <p>This keeps the overlay useful as governance without turning it into a large automatic pricing swing.</p>
 </li>
@@ -720,8 +720,8 @@ The systematic adjustment factor now maps:</p>
 <li>
 <strong>Stop</strong>: proposed margin is more than <code>3</code> points below <em>E</em>(<em>R</em>)</li>
 </ul>
-<h3 id="b-corp-overlay">B-Corp Overlay</h3>
-<p>The current B-Corp implementation uses:</p>
+<h3 id="b-corp-overlay">B Corp Overlay</h3>
+<p>The current B Corp implementation uses:</p>
 <ul>
 <li>
 <strong>Standard hurdle</strong>: <em>E</em>(<em>R</em>) from Layer 2</li>
@@ -730,17 +730,17 @@ The systematic adjustment factor now maps:</p>
 </ul>
 <p>Where:</p>
 <ul>
-<li>B-Corp Layer 1 midpoint is neutral</li>
-<li>B-Corp Layer 1 modifies scale from <code>0.8</code> to <code>1.2</code>
+<li>B Corp Layer 1 midpoint is neutral</li>
+<li>B Corp Layer 1 modifies scale from <code>0.8</code> to <code>1.2</code>
 </li>
-<li>B-Corp Layer 2 midpoint is neutral</li>
-<li>each B-Corp Layer 2 point away from midpoint is worth about <code>1.0</code> point before that portfolio modifier is applied</li>
+<li>B Corp Layer 2 midpoint is neutral</li>
+<li>each B Corp Layer 2 point away from midpoint is worth about <code>1.0</code> point before that portfolio modifier is applied</li>
 </ul>
 <p>So the current automatic adjustment is:</p>
 <ul>
-<li><code>Impact Adjustment = (B-Corp L2 score - 12) × 1.0 × portfolio modifier</code></li>
+<li><code>Impact Adjustment = (B Corp L2 score - 12) × 1.0 × portfolio modifier</code></li>
 </ul>
-<p>This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium. It is also midpoint-anchored by design: neutral B-Corp impact maps to no mission discount or harm premium, while more strongly aligned or more harmful work moves the hurdle down or up from that center.</p>
+<p>This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium. It is also midpoint-anchored by design: neutral B Corp impact maps to no mission discount or harm premium, while more strongly aligned or more harmful work moves the hurdle down or up from that center.</p>
 <h2 id="sanity-test-scenarios">Sanity-Test Scenarios</h2>
 <p>The scenarios below were run against the live form and checked against the displayed outputs.</p>
 <h3 id="scenario-1--calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</h3>
@@ -821,20 +821,20 @@ The systematic adjustment factor now maps:</p>
 </li>
 </ul>
 <p>This also makes sense. The deal is not absurdly underwater, but it still fails the stated threshold.</p>
-<h3 id="scenario-3--mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B-Corp Work</h3>
+<h3 id="scenario-3--mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B Corp Work</h3>
 <p>Inputs:</p>
 <ul>
 <li>same financial inputs as Scenario 1</li>
-<li>B-Corp Layer 1 scores: all <code>2</code>
+<li>B Corp Layer 1 scores: all <code>2</code>
 </li>
-<li>B-Corp Layer 2 scores: <code>1, 1, 2, 2</code>
+<li>B Corp Layer 2 scores: <code>1, 1, 2, 2</code>
 </li>
 </ul>
 <p>Observed result:</p>
 <ul>
 <li>Standard hurdle: <code>17.4%</code>
 </li>
-<li>B-Corp impact adjustment: <code>-5.4%</code>
+<li>B Corp impact adjustment: <code>-5.4%</code>
 </li>
 <li>Impact-adjusted hurdle: <code>12.0%</code>
 </li>
@@ -859,16 +859,16 @@ The systematic adjustment factor now maps:</p>
 </li>
 <li>Estimated cost: <code>$150,000</code>
 </li>
-<li>B-Corp Layer 1 scores: all <code>4</code>
+<li>B Corp Layer 1 scores: all <code>4</code>
 </li>
-<li>B-Corp Layer 2 scores: <code>5, 4, 4, 4</code>
+<li>B Corp Layer 2 scores: <code>5, 4, 4, 4</code>
 </li>
 </ul>
 <p>Observed result:</p>
 <ul>
 <li>Standard hurdle: <code>22.0%</code>
 </li>
-<li>B-Corp impact adjustment: <code>+5.5%</code>
+<li>B Corp impact adjustment: <code>+5.5%</code>
 </li>
 <li>Impact-adjusted hurdle: <code>27.5%</code>
 </li>
@@ -877,7 +877,7 @@ The systematic adjustment factor now maps:</p>
 <li>Verdict: <strong>Harm premium cleared financially — review mission trade-offs explicitly</strong>
 </li>
 </ul>
-<p>This is a good example of the B-Corp overlay doing what it should: making the mission cost visible without automatically forcing every bad-fit deal into a stop.</p>
+<p>This is a good example of the B Corp overlay doing what it should: making the mission cost visible without automatically forcing every bad-fit deal into a stop.</p>
 <h2 id="what-to-watch-for">What To Watch For</h2>
 <p>The current Decision Cards build is strongest when:</p>
 <ul>
@@ -889,7 +889,7 @@ The systematic adjustment factor now maps:</p>
 <ul>
 <li>users treat the numbers as statistically discovered truths</li>
 <li>the portfolio baselines are guessed rather than observed</li>
-<li>the B-Corp overlay is mistaken for an official B Lab formula</li>
+<li>the B Corp overlay is mistaken for an official B Lab formula</li>
 </ul>
 <h2 id="recommended-use">Recommended Use</h2>
 <p>Treat these calibrations as defaults, not doctrine.</p>

@@ -21,7 +21,7 @@ By adapting the **Capital Asset Pricing Model (CAPM)** from financial economics,
 ### Strategic Benefits
 1. **Disciplined Go/No-Go Decisions:** Provides the math to say "no" to high-risk, low-margin "money pits" with data-backed confidence.  
 2. **Cross-Functional Alignment:** Engages solutions, technical, and sales teams in a shared language for risk translation before a contract is signed.  
-3. **[B-Corp Integration](../index.html#bcorp-card):** For impact-driven agencies, the model allows for a "conscious mission discount" on high-impact work while penalizing mission-inconsistent projects with higher margin requirements.
+3. **[B Corp Integration](../index.html#bcorp-card):** For impact-driven agencies, the model allows for a "conscious mission discount" on high-impact work while penalizing mission-inconsistent projects with higher margin requirements.
 
 ## Overview
 Most small to mid-sized agencies (and even more large ones than want to admit it) price risk through gut-feel contingency percentages, hourly padding, or by shifting uncertainty onto clients via retainer models — none of which distinguish between the kinds of risk that matter most when they’re realized in events. These are the systematic risks that can’t be controlled. 
@@ -39,7 +39,7 @@ Because of its roots in high finance, the CAPM formula translates most directly 
 
 The clearest audience split is this: **enterprise and international agencies** will usually find the pure approach easier to justify because their risk exposure genuinely tracks macro-level forces across a diversified portfolio. **Small and mid-sized agencies** will usually get more practical value from the hybrid approach, because a single engagement can still act like a portfolio-level event when the active book is small.
 
-CAPM is classically capitalistic: hyper-risk-averse, relentlessly focused on a single bottom line, and blind to externalities. If an extended or triple-bottom-line is your jam, or you’re one of the growing number of agencies organized as a cooperative or B-Corps, you’re still in the same ballpark where impact joins risk and profit. There’s a whole section at the end of this book for you that adapts CAPM for agencies that account for stakeholder governance, externalities, and multi-capital returns.
+CAPM is classically capitalistic: hyper-risk-averse, relentlessly focused on a single bottom line, and blind to externalities. If an extended or triple-bottom-line is your jam, or you’re one of the growing number of agencies organized as a cooperative or B Corps, you’re still in the same ballpark where impact joins risk and profit. There’s a whole section at the end of this book for you that adapts CAPM for agencies that account for stakeholder governance, externalities, and multi-capital returns.
 
 ## Contents
 
@@ -78,14 +78,14 @@ CAPM is classically capitalistic: hyper-risk-averse, relentlessly focused on a s
 13. [Limitations and Caveats](#limitations-and-caveats)
    1. [Addressing the Economists](#addressing-the-economists)
 14. [Conclusion: Pricing the Work Before You Plan It](#conclusion-pricing-the-work-before-you-plan-it)
-15. [CAPM for B-Corp Agencies](#capm-for-b-corp-agencies)
+15. [CAPM for B Corp Agencies](#capm-for-b-corp-agencies)
    1. [The Core Tension](#the-core-tension)
    2. [What the Academic Literature Says](#what-the-academic-literature-says)
    3. [How This Maps to Agency CAPM](#how-this-maps-to-agency-capm)
-   4. [The B-Corp CAPM Formula](#the-b-corp-capm-formula)
+   4. [The B Corp CAPM Formula](#the-b-corp-capm-formula)
    5. [Addressing the B Impact Assessment Gap](#addressing-the-b-impact-assessment-gap)
    6. [The Triple Bottom Line as Triple Risk](#the-triple-bottom-line-as-triple-risk)
-   7. [Practical Implications for B-Corp Agencies](#practical-implications-for-b-corp-agencies)
+   7. [Practical Implications for B Corp Agencies](#practical-implications-for-b-corp-agencies)
 16. [Glossary](#glossary)
    1. [Suggested Reading](#suggested-reading)
 
@@ -281,7 +281,7 @@ PESTLE adds LE — legal and environmental.
 ### How This Applies to Small Agencies Too
 These categories might seem far too macro-level in concern for a small agency rather than a big global corporation. That’s somewhat true — PEST/LE will be more immediately relevant to large agencies with Fortune 500 \- Fortune 5000 clients. They are still broadly relevant to any entrepreneurial risk calculation. We’ll consider smaller agencies in the next sub-section, but keep in mind that the macro affects the micro level, and it does that hard and fast in a crisis. In a changing global marketplace, solopreneurs and small to mid-sized enterprises — especially ones whose teams and clients are distributed across borders — are equally impacted by changing national and international policies. 
 
-Additionally, you might sense there is a traditional, anti-regulatory, single-bottom-line bias behind PEST/LE. How does risk vs. return look from a triple-bottom-line (TBL) perspective, in the context of Environmental, Social, and Governance (ESG) frameworks, or B-Corps? If that’s you, read on or skip ahead — there’s a whole separate section at the end for you.
+Additionally, you might sense there is a traditional, anti-regulatory, single-bottom-line bias behind PEST/LE. How does risk vs. return look from a triple-bottom-line (TBL) perspective, in the context of Environmental, Social, and Governance (ESG) frameworks, or B Corps? If that’s you, read on or skip ahead — there’s a whole separate section at the end for you.
 
 ### PESTLE
 **Political** — Government procurement policy shifts, sanctions, regulatory crackdowns, and conflicts that affect *who you can hire or work with*. If your agency serves public sector or international clients, a change in data sovereignty rules or foreign contracting policy doesn't just hit one project — it reprices your entire pipeline in that segment. Also think platform-level politics: if a major host or vendor gets sanctioned or banned in a market you serve, that's systematic.
@@ -490,13 +490,13 @@ For agency practitioners, the financial CAPM fills a gap that the PMBOK does not
 
 And the solutions team, sitting at the intersection of sales and delivery, is the natural hub for translating between portfolio-level systematic risk and engagement-level project risk — bridging strategic awareness and practical assessment before the team commits. The practical win is not the math alone. It is forcing sales, solutions, delivery, and leadership to name risk in a shared language before anyone signs the work. That is not just good risk management. It is ***the job.***
 
-## CAPM for B-Corp Agencies
+## CAPM for B Corp Agencies
 *Adapting the Capital Asset Pricing Model for Stakeholder Governance, Externalities, and Multi-Capital Returns*
 
 *A Companion to **CAPM for Agencies***
 
 ### The Core Tension
-Standard CAPM asks a single question: *Does the financial return justify the financial risk?* The entire model is built on the assumption that investors care only about expected returns and volatility of returns — that is literally one of its foundational axioms. A B-Corp agency, by legal commitment, has expanded its fiduciary duty beyond shareholders to include workers, communities, the environment, and customers. The "return" side of the equation is multi-dimensional, and the "risk" side has to account for externalities that standard CAPM treats as someone else's problem.
+Standard CAPM asks a single question: *Does the financial return justify the financial risk?* The entire model is built on the assumption that investors care only about expected returns and volatility of returns — that is literally one of its foundational axioms. A B Corp agency, by legal commitment, has expanded its fiduciary duty beyond shareholders to include workers, communities, the environment, and customers. The "return" side of the equation is multi-dimensional, and the "risk" side has to account for externalities that standard CAPM treats as someone else's problem.
 
 This is not a minor adjustment. It is a fundamental reframing of what "risk" and "return" mean. And recent academic work in financial economics has begun to formalize exactly this reframing.
 
@@ -504,46 +504,46 @@ This is not a minor adjustment. It is a fundamental reframing of what "risk" and
 #### The ESG-Adjusted CAPM
 The most influential theoretical work on sustainable investing within the CAPM framework is Pástor, Stambaugh, and Taylor's 2021 equilibrium model, published in the *Journal of Financial Economics*. In their model, firms differ in sustainability: "green" firms generate positive externalities for society, "brown" firms impose negative externalities, and there are different shades of green and brown. Agents care about firms' aggregate social impact in addition to financial wealth. The key finding: in equilibrium, green assets have negative CAPM alphas — meaning they deliver *lower* expected financial returns — because investors derive non-pecuniary utility from holding them and because green assets hedge climate risk.
 
-This is directly relevant to a B-Corp agency. The model shows that green assets' negative alphas stem from investors' preference for green holdings and from their ability to hedge against adverse climate and regulatory shifts. Translated to agency terms: a B-Corp might rationally accept a lower financial margin on an engagement that generates positive social or environmental impact, because the non-financial return is part of the value proposition. That is not irrational — it is a different utility function.
+This is directly relevant to a B Corp agency. The model shows that green assets' negative alphas stem from investors' preference for green holdings and from their ability to hedge against adverse climate and regulatory shifts. Translated to agency terms: a B Corp might rationally accept a lower financial margin on an engagement that generates positive social or environmental impact, because the non-financial return is part of the value proposition. That is not irrational — it is a different utility function.
 
-Crucially, the model also shows that green assets can *outperform* when positive shocks hit the ESG factor — shifts in customers' tastes for green products and investors' tastes for green holdings. For a B-Corp agency, this means mission-aligned work is a *hedge* against market shifts toward sustainability. As regulatory and consumer pressure increase, the agency that already has this capability and reputation is positioned to capture demand that conventional agencies cannot.
+Crucially, the model also shows that green assets can *outperform* when positive shocks hit the ESG factor — shifts in customers' tastes for green products and investors' tastes for green holdings. For a B Corp agency, this means mission-aligned work is a *hedge* against market shifts toward sustainability. As regulatory and consumer pressure increase, the agency that already has this capability and reputation is positioned to capture demand that conventional agencies cannot.
 
 **Source:** Pástor, Ľ., Stambaugh, R. F., & Taylor, L. A. (2021). Sustainable investing in equilibrium. *Journal of Financial Economics*, 142(2), 550–571. [https://corpgov.law.harvard.edu/2021/04/09/sustainable-investing-in-equilibrium/](https://corpgov.law.harvard.edu/2021/04/09/sustainable-investing-in-equilibrium/)
 
 #### Zero-Beta Risks and ESG
 A 2025 paper by Johnstone in *Financial Management* demonstrates that even "zero-beta" idiosyncratic risks — such as ESG-related litigation, reputational damage, or regulatory sanctions — can alter a firm's cost of capital under CAPM, contrary to the simplified textbook view that idiosyncratic risks are not priced. Drawing on Lintner's original CAPM proofs, Johnstone shows that a reduced expected payoff with no change in market covariance still leaves the firm with a higher effective beta and higher required returns.
 
-For a B-Corp agency, this cuts both ways. *Not* managing social and environmental externalities creates reputational and regulatory risk that increases your effective beta even if it appears project-specific. Conversely, *proactively* managing these externalities — through accessible design, sustainable hosting, and ethical supply chains — reduces latent risks that would otherwise quietly inflate your cost of doing business across the entire portfolio.
+For a B Corp agency, this cuts both ways. *Not* managing social and environmental externalities creates reputational and regulatory risk that increases your effective beta even if it appears project-specific. Conversely, *proactively* managing these externalities — through accessible design, sustainable hosting, and ethical supply chains — reduces latent risks that would otherwise quietly inflate your cost of doing business across the entire portfolio.
 
 **Source:** Johnstone, D. (2025). Zero-beta risks and required returns: ESG and CAPM. *Financial Management*. [https://onlinelibrary.wiley.com/doi/full/10.1111/fima.12475](https://onlinelibrary.wiley.com/doi/full/10.1111/fima.12475)
 
 #### ESG Factors Within Traditional Beta
-Research on the S\&P 500 has found that the traditional CAPM beta already carries environmental and governance risks, even when those risks are not explicitly modeled. Social risk, meanwhile, negatively impacts excess returns for both S\&P 500 and Nasdaq 100 stocks. The implication: systematic risk is already partly composed of ESG factors, whether or not a pricing model acknowledges them. A B-Corp agency that makes these factors explicit in its risk model is not adding artificial complexity — it is surfacing risk that conventional models leave unpriced.
+Research on the S\&P 500 has found that the traditional CAPM beta already carries environmental and governance risks, even when those risks are not explicitly modeled. Social risk, meanwhile, negatively impacts excess returns for both S\&P 500 and Nasdaq 100 stocks. The implication: systematic risk is already partly composed of ESG factors, whether or not a pricing model acknowledges them. A B Corp agency that makes these factors explicit in its risk model is not adding artificial complexity — it is surfacing risk that conventional models leave unpriced.
 
 **Source:** *Review of Quantitative Finance and Accounting* (2023). The impact of ESG risks on corporate value. [https://link.springer.com/article/10.1007/s11156-023-01135-6](https://link.springer.com/article/10.1007/s11156-023-01135-6)
 
 #### Modeling Sustainable Investing in CAPM
 A 2024 paper in *Annals of Operations Research* uses a parsimonious CAPM to model sustainable investing directly. It finds that investments with poor ESG characteristics must earn higher returns to compensate investors, and that heterogeneity in ESG ratings increases required returns. Sustainable investing affects a firm's production through two channels: a *growth channel* (green firms attract capital and talent) and a *reform channel* (firms improve ESG practices to reduce their cost of capital).
 
-For agencies, this maps cleanly: B-Corp certification and mission alignment can function as a growth channel (attracting mission-aligned clients, talent, and partners) while also functioning as a reform channel (the discipline of maintaining certification drives operational improvements that reduce cost and risk).
+For agencies, this maps cleanly: B Corp certification and mission alignment can function as a growth channel (attracting mission-aligned clients, talent, and partners) while also functioning as a reform channel (the discipline of maintaining certification drives operational improvements that reduce cost and risk).
 
 **Source:** *Annals of Operations Research* (2024). Modelling sustainable investing in the CAPM. [https://link.springer.com/article/10.1007/s10479-024-06110-5](https://link.springer.com/article/10.1007/s10479-024-06110-5)
 
 ### How This Maps to Agency CAPM
 #### 1. Redefine Return as Multi-Capital Return
-Standard agency CAPM measures financial margin. A B-Corp agency needs a composite return metric that weights financial margin alongside measurable impact outcomes — worker wellbeing, environmental footprint reduction, community benefit, and client ecosystem health. The B Impact Assessment already provides a scoring framework for this. Your E(R) becomes E(R\*), where R\* is a blended financial-and-impact return.
+Standard agency CAPM measures financial margin. A B Corp agency needs a composite return metric that weights financial margin alongside measurable impact outcomes — worker wellbeing, environmental footprint reduction, community benefit, and client ecosystem health. The B Impact Assessment already provides a scoring framework for this. Your E(R) becomes E(R\*), where R\* is a blended financial-and-impact return.
 
-This is not soft thinking — it is what the equilibrium models predict. If a B-Corp agency's stakeholders (clients, employees, communities) derive utility from impact outcomes, those outcomes are real returns that affect willingness to engage, retention, and long-term revenue stability. Ignoring them understates the actual return on mission-aligned work.
+This is not soft thinking — it is what the equilibrium models predict. If a B Corp agency's stakeholders (clients, employees, communities) derive utility from impact outcomes, those outcomes are real returns that affect willingness to engage, retention, and long-term revenue stability. Ignoring them understates the actual return on mission-aligned work.
 
 #### 2. Add an Externality Risk Layer
-B Lab's stakeholder governance framework is explicit: the corporate and financial sectors externalize costs onto workers, communities, and the environment, and B-Corps commit to governance that requires considering all stakeholders in decision-making. In CAPM terms, this means risks that a conventional agency treats as external — environmental impact from hosting infrastructure, accessibility barriers in deliverables, exploitative labor practices in supply chains — become *internal* to the B-Corp's risk model. They belong in the Layer One systematic risk review because they affect the agency's certification, reputation, and legal standing across the entire portfolio.
+B Lab's stakeholder governance framework is explicit: the corporate and financial sectors externalize costs onto workers, communities, and the environment, and B Corps commit to governance that requires considering all stakeholders in decision-making. In CAPM terms, this means risks that a conventional agency treats as external — environmental impact from hosting infrastructure, accessibility barriers in deliverables, exploitative labor practices in supply chains — become *internal* to the B Corp's risk model. They belong in the Layer One systematic risk review because they affect the agency's certification, reputation, and legal standing across the entire portfolio.
 
 **Source:** B Lab. Stakeholder Governance. [https://www.bcorporation.net/en-us/movement/stakeholder-governance/](https://www.bcorporation.net/en-us/movement/stakeholder-governance/)
 
 #### 3. Expand the Systematic Risk Table
-The Layer One systematic risk review in the base CAPM for Agencies framework covers platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure. A B-Corp version adds dimensions closer to current B Lab concepts and to the agency systems that shape the whole portfolio:
+The Layer One systematic risk review in the base CAPM for Agencies framework covers platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure. A B Corp version adds dimensions closer to current B Lab concepts and to the agency systems that shape the whole portfolio:
 
-| B-Corp Systematic Factor | What It Measures | 1 | 3 | 5 |
+| B Corp Systematic Factor | What It Measures | 1 | 3 | 5 |
 | ----- | ----- | ----- | ----- | ----- |
 | **Client Portfolio Alignment** | How aligned is the agency's client mix with its stated purpose? | Portfolio is mostly mission-aligned | Mixed book with manageable tension | Misaligned client mix undermines purpose |
 | **Customer Stewardship Readiness** | How mature are the systems for privacy, security, quality, and customer feedback? | Embedded and consistently applied | Partial and uneven | Weak or largely reactive |
@@ -552,35 +552,35 @@ The Layer One systematic risk review in the base CAPM for Agencies framework cov
 | **Human Rights Due Diligence** | How well does the agency identify and manage human-rights risk across operations and value chains? | Mature and documented | Partial and improving | Major gaps or weak controls |
 | **Purpose Drift Pressure** | Is financial pressure pushing you to take work that compromises your stated purpose? | Mission fully funded by aligned work | Some compromise necessary | Survival requires significant mission-inconsistent work |
 
-These factors are genuinely systematic for a B-Corp agency because they describe portfolio composition and agency-wide operating readiness, not one project. A weak customer-stewardship system, poor stakeholder governance, or mounting purpose drift changes the risk profile of the whole book of business at once. They are non-diversifiable within the B-Corp model.
+These factors are genuinely systematic for a B Corp agency because they describe portfolio composition and agency-wide operating readiness, not one project. A weak customer-stewardship system, poor stakeholder governance, or mounting purpose drift changes the risk profile of the whole book of business at once. They are non-diversifiable within the B Corp model.
 
 #### 4. Add Mission Alignment to Engagement Scoring
-The Layer Two engagement risk scoring in the base framework evaluates project-specific factors like scope clarity, client track record, and technical complexity. A B-Corp agency adds engagement-level factors that capture impact risk in B Lab-adjacent terms:
+The Layer Two engagement risk scoring in the base framework evaluates project-specific factors like scope clarity, client track record, and technical complexity. A B Corp agency adds engagement-level factors that capture impact risk in B Lab-adjacent terms:
 
-| B-Corp Engagement Factor | 1 | 2 | 3 | 4 | 5 |
+| B Corp Engagement Factor | 1 | 2 | 3 | 4 | 5 |
 | ----- | ----- | ----- | ----- | ----- | ----- |
 | **Mission Alignment** | Core to purpose | Strongly aligned | Neutral | Tension with purpose | Contradicts mission |
 | **Human Rights Risk** | Low and well-managed | Some exposure, controlled | Neutral or unclear | Elevated harm risk | Severe harm risk |
 | **Environmental Impact & Circularity** | Regenerative or clearly positive | Light footprint | Neutral | Heavy footprint | Extractive or wasteful |
 | **Responsible Marketing & Transparency** | Clear and evidence-based | Sound with minor caveats | Neutral | Aggressive or overstated | Misleading or non-transparent |
 
-In the hybrid approach, these factors fold into the blended beta alongside the standard engagement risk factors. An engagement that scores poorly on mission alignment, human-rights risk, environmental footprint, or transparency gets a *higher* effective beta — meaning it requires a higher financial margin to justify the risk — even if its scope is clear and the client is well-known. This is because mission-inconsistent or harmful work threatens the non-financial assets (reputation, certification, team morale, stakeholder trust) that the B-Corp depends on across its entire portfolio.
+In the hybrid approach, these factors fold into the blended beta alongside the standard engagement risk factors. An engagement that scores poorly on mission alignment, human-rights risk, environmental footprint, or transparency gets a *higher* effective beta — meaning it requires a higher financial margin to justify the risk — even if its scope is clear and the client is well-known. This is because mission-inconsistent or harmful work threatens the non-financial assets (reputation, certification, team morale, stakeholder trust) that the B Corp depends on across its entire portfolio.
 
 #### 5. Reframe the Go/No-Go Decision
-In a standard agency CAPM, you walk away when the financial margin cannot clear the hurdle rate. A B-Corp agency has a more complex decision matrix:
+In a standard agency CAPM, you walk away when the financial margin cannot clear the hurdle rate. A B Corp agency has a more complex decision matrix:
 
-**High financial return, negative impact:** An engagement that clears the financial hurdle but fails the impact test — for example, a high-margin project that increases surveillance, greenwashes impact claims, or creates material human-rights or environmental harm. Standard CAPM says go. B-Corp CAPM may say stop, because the engagement increases harm exposure and mission drift pressure across the portfolio.
+**High financial return, negative impact:** An engagement that clears the financial hurdle but fails the impact test — for example, a high-margin project that increases surveillance, greenwashes impact claims, or creates material human-rights or environmental harm. Standard CAPM says go. B Corp CAPM may say stop, because the engagement increases harm exposure and mission drift pressure across the portfolio.
 
-**Low financial return, high impact:** An engagement that sits below the financial hurdle but generates enough positive impact to justify the investment — accessible technology for underserved communities, sustainability infrastructure, or projects that reduce environmental footprint at scale. Standard CAPM says walk away. B-Corp CAPM says go, with a conscious and documented "mission discount" — the difference between the financial hurdle and the actual margin, explicitly priced and tracked rather than absorbed invisibly.
+**Low financial return, high impact:** An engagement that sits below the financial hurdle but generates enough positive impact to justify the investment — accessible technology for underserved communities, sustainability infrastructure, or projects that reduce environmental footprint at scale. Standard CAPM says walk away. B Corp CAPM says go, with a conscious and documented "mission discount" — the difference between the financial hurdle and the actual margin, explicitly priced and tracked rather than absorbed invisibly.
 
-**The conscious greenium:** Research on sustainable investing within CAPM models finds that investments with strong ESG characteristics may carry a financial return discount — a "greenium" — compensated by non-pecuniary utility. For a B-Corp agency, this means being honest that mission-aligned work may carry a financial margin discount and pricing that discount explicitly. If the blended beta on a mission-aligned engagement produces a minimum margin of 25%, and the agency is willing to accept 20% because the impact return makes up the difference, that is a conscious strategic decision documented in the model — not a vague feeling about "doing good."
+**The conscious greenium:** Research on sustainable investing within CAPM models finds that investments with strong ESG characteristics may carry a financial return discount — a "greenium" — compensated by non-pecuniary utility. For a B Corp agency, this means being honest that mission-aligned work may carry a financial margin discount and pricing that discount explicitly. If the blended beta on a mission-aligned engagement produces a minimum margin of 25%, and the agency is willing to accept 20% because the impact return makes up the difference, that is a conscious strategic decision documented in the model — not a vague feeling about "doing good."
 
-### The B-Corp CAPM Formula
+### The B Corp CAPM Formula
 The base formula remains:
 
 **E(R) \= Rf \+ β × (Rm − Rf)**
 
-The B-Corp adaptation can be expressed in two ways:
+The B Corp adaptation can be expressed in two ways:
 
 #### Option A: Impact-Adjusted Return
 *E(R) \= Rf \+ β × (Rm − Rf) \+ Impact Adjustment*
@@ -588,19 +588,19 @@ The B-Corp adaptation can be expressed in two ways:
 Where the Impact Adjustment is negative for projects that advance mission and build long-term brand and capability (allowing a lower financial margin threshold) and positive for projects that compromise mission (requiring a higher financial margin to compensate for the non-financial risk). This keeps the financial CAPM calculation clean and makes the impact trade-off visible as a separate, explicit line item.
 
 #### Option B: Impact-Integrated Beta
-Fold impact factors into the beta itself by including the B-Corp engagement factors (mission alignment, human-rights risk, environmental impact and circularity, responsible marketing and transparency) in the Layer Two scoring table alongside the standard engagement risk factors. This produces a single blended beta that captures both financial and impact risk in one number. Simpler to calculate but harder to decompose when you need to explain decisions to stakeholders with different priorities.
+Fold impact factors into the beta itself by including the B Corp engagement factors (mission alignment, human-rights risk, environmental impact and circularity, responsible marketing and transparency) in the Layer Two scoring table alongside the standard engagement risk factors. This produces a single blended beta that captures both financial and impact risk in one number. Simpler to calculate but harder to decompose when you need to explain decisions to stakeholders with different priorities.
 
-**Recommendation:** Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical. The current Decision Cards build presents this as an [impact-adjusted B-Corp card](../index.html#bcorp-card) that keeps the standard hurdle visible while showing the shift to `E(R*)`.
+**Recommendation:** Use Option A for strategic planning and board-level reporting, where the financial and impact dimensions need to be visible separately. Use Option B for presales and go/no-go conversations, where a single number is more practical. The current Decision Cards build presents this as an [impact-adjusted B Corp card](../index.html#bcorp-card) that keeps the standard hurdle visible while showing the shift to `E(R*)`.
 
-In the current Decision Cards implementation, the B-Corp calibration is intentionally moderate rather than aggressive. The portfolio-level B-Corp score is neutral at its midpoint and only widens or narrows the adjustment around that center. The engagement-level B-Corp score then moves the hurdle by about one margin point per point of deviation from its midpoint before that portfolio modifier is applied. This is also a deliberate midpoint-anchored choice: neutral B-Corp impact maps to no mission discount or harm premium, while more strongly aligned or harmful work moves the hurdle downward or upward from that center. For the exact current implementation and worked sanity checks, see the [calibration notes](../tldr/calibration-notes.html).
+In the current Decision Cards implementation, the B Corp calibration is intentionally moderate rather than aggressive. The portfolio-level B Corp score is neutral at its midpoint and only widens or narrows the adjustment around that center. The engagement-level B Corp score then moves the hurdle by about one margin point per point of deviation from its midpoint before that portfolio modifier is applied. This is also a deliberate midpoint-anchored choice: neutral B Corp impact maps to no mission discount or harm premium, while more strongly aligned or harmful work moves the hurdle downward or upward from that center. For the exact current implementation and worked sanity checks, see the [calibration notes](../tldr/calibration-notes.html).
 
-![B-Corp impact-adjusted return illustration showing how mission-aligned work can move below the standard financial hurdle while harmful work must clear a higher one.](./figures/bcorp-impact-adjusted-return.png)
+![B Corp impact-adjusted return illustration showing how mission-aligned work can move below the standard financial hurdle while harmful work must clear a higher one.](./figures/bcorp-impact-adjusted-return.png)
 
-*Figure 4. B-Corp impact-adjusted return illustration. [PDF version](./figures/bcorp-impact-adjusted-return.pdf).*
+*Figure 4. B Corp impact-adjusted return illustration. [PDF version](./figures/bcorp-impact-adjusted-return.pdf).*
 
-![Comparison illustration showing standard CAPM, layered agency CAPM, and B-Corp CAPM with impact-adjusted movement above or below the financial hurdle.](./figures/capm-comparison.png)
+![Comparison illustration showing standard CAPM, layered agency CAPM, and B Corp CAPM with impact-adjusted movement above or below the financial hurdle.](./figures/capm-comparison.png)
 
-*Figure 5. Standard, layered, and B-Corp CAPM comparison illustration. [PDF version](./figures/capm-comparison.pdf).*
+*Figure 5. Standard, layered, and B Corp CAPM comparison illustration. [PDF version](./figures/capm-comparison.pdf).*
 
 Reviewing the diagram above, refer back to the original CAPM model and our two agency adaptations to see how they differ but are fundamentally related.
 
@@ -610,36 +610,36 @@ The **standard CAPM** from finance economics establishes the principle: *higher 
 
 **Layer Two** plots actual engagements along the line using their blended beta, producing concrete go/renegotiate/walk-away decisions. 
 
-And the **B-Corp version** adds the vertical dimension that standard CAPM lacks entirely — the impact adjustment that lets mission-aligned work clear a lower financial hurdle (because the non-financial return is real) while forcing mission-inconsistent work to clear a *higher* one (because it threatens the non-financial assets the B-Corp depends on).
+And the **B Corp version** adds the vertical dimension that standard CAPM lacks entirely — the impact adjustment that lets mission-aligned work clear a lower financial hurdle (because the non-financial return is real) while forcing mission-inconsistent work to clear a *higher* one (because it threatens the non-financial assets the B Corp depends on).
 
-The ghost dots on the B-Corp diagram represent where each engagement *would* sit on the standard SML. The solid dots show where the impact adjustment moves them. That vertical distance is the "greenium" — visible, documented, and defensible.
+The ghost dots on the B Corp diagram represent where each engagement *would* sit on the standard SML. The solid dots show where the impact adjustment moves them. That vertical distance is the "greenium" — visible, documented, and defensible.
 
 ### Addressing the B Impact Assessment Gap
-Research on B-Corp environmental performance has found that the B Impact Assessment allows companies to score zero points for environmental factors without penalty — it only grants "positive points," meaning not adopting best environmental practices does not decrease scores. The assessment does not push companies to address their environmental impact, and it does not tailor its questionnaire to industry-specific environmental sensitivities beyond five broad sectors.
+Research on B Corp environmental performance has found that the B Impact Assessment allows companies to score zero points for environmental factors without penalty — it only grants "positive points," meaning not adopting best environmental practices does not decrease scores. The assessment does not push companies to address their environmental impact, and it does not tailor its questionnaire to industry-specific environmental sensitivities beyond five broad sectors.
 
 **Source:** Liute, A. & De Giacomo, M. R. (2022). The environmental performance of UK-based B Corp companies: An analysis based on the triple bottom line approach. *Business Strategy and the Environment*. [https://onlinelibrary.wiley.com/doi/full/10.1002/bse.2919](https://onlinelibrary.wiley.com/doi/full/10.1002/bse.2919)
 
-The CAPM adaptation addresses this gap. By making externality risk explicit in the scoring model — both at the portfolio level (Layer One) and the engagement level (Layer Two) — the framework *penalizes* engagement in harm rather than merely rewarding engagement in good. A B-Corp digital agency using this model would score a higher beta (higher required return, harder to justify) on engagements that create accessibility barriers, increase carbon footprint, enable surveillance or data extraction, or reinforce exploitative labor practices in the supply chain — regardless of how profitable those engagements might be.
+The CAPM adaptation addresses this gap. By making externality risk explicit in the scoring model — both at the portfolio level (Layer One) and the engagement level (Layer Two) — the framework *penalizes* engagement in harm rather than merely rewarding engagement in good. A B Corp digital agency using this model would score a higher beta (higher required return, harder to justify) on engagements that create accessibility barriers, increase carbon footprint, enable surveillance or data extraction, or reinforce exploitative labor practices in the supply chain — regardless of how profitable those engagements might be.
 
-This gives the B-Corp agency something even the B Impact Assessment does not currently provide: a pricing framework that makes the cost of negative externalities visible at the point of project selection, before the work begins.
+This gives the B Corp agency something even the B Impact Assessment does not currently provide: a pricing framework that makes the cost of negative externalities visible at the point of project selection, before the work begins.
 
 ### The Triple Bottom Line as Triple Risk
-John Elkington, who coined the Triple Bottom Line concept in 1994, recalled it in a 2018 *Harvard Business Review* article, arguing it had been co-opted as a trade-off mentality — treating people, planet, and profit as competing interests to be balanced rather than mutually reinforcing objectives. The B-Corp CAPM framework offers a path past that trap.
+John Elkington, who coined the Triple Bottom Line concept in 1994, recalled it in a 2018 *Harvard Business Review* article, arguing it had been co-opted as a trade-off mentality — treating people, planet, and profit as competing interests to be balanced rather than mutually reinforcing objectives. The B Corp CAPM framework offers a path past that trap.
 
-Rather than treating the three bottom lines as separate accounts that cannot be added up, the framework treats them as three dimensions of a single risk-return calculation. Each engagement generates returns (or losses) across all three dimensions, and each engagement carries risks across all three dimensions. The CAPM formula does what it has always done — it prices the risk that cannot be diversified away and demands a return that justifies taking it on. The difference is that for a B-Corp, the portfolio of risk and return is richer than financial margin alone.
+Rather than treating the three bottom lines as separate accounts that cannot be added up, the framework treats them as three dimensions of a single risk-return calculation. Each engagement generates returns (or losses) across all three dimensions, and each engagement carries risks across all three dimensions. The CAPM formula does what it has always done — it prices the risk that cannot be diversified away and demands a return that justifies taking it on. The difference is that for a B Corp, the portfolio of risk and return is richer than financial margin alone.
 
 **Source:** Elkington, J. (2018). 25 Years Ago I Coined the Phrase "Triple Bottom Line." Here's Why It's Time to Rethink It. *Harvard Business Review*. Referenced in Liute & De Giacomo (2022).
 
 **Source:** Wikipedia. Triple Bottom Line Cost–Benefit Analysis. [https://en.wikipedia.org/wiki/Triple\_bottom\_line\_cost–benefit\_analysis](https://en.wikipedia.org/wiki/Triple_bottom_line_cost%E2%80%93benefit_analysis)
 
-### Practical Implications for B-Corp Agencies
-**You can charge less for mission-aligned work — consciously.** The equilibrium models predict that "green" assets carry a financial return discount compensated by non-pecuniary utility. For a B-Corp agency, this means some engagements are worth taking at a lower margin because the impact return, the team morale return, the reputational return, and the capability-building return are real. The key is to price the discount explicitly — not to absorb it as invisible margin erosion.
+### Practical Implications for B Corp Agencies
+**You can charge less for mission-aligned work — consciously.** The equilibrium models predict that "green" assets carry a financial return discount compensated by non-pecuniary utility. For a B Corp agency, this means some engagements are worth taking at a lower margin because the impact return, the team morale return, the reputational return, and the capability-building return are real. The key is to price the discount explicitly — not to absorb it as invisible margin erosion.
 
 **You should charge more for mission-inconsistent work — or decline it.** If an engagement compromises your mission, increases your externality exposure, or threatens your certification, the effective beta is higher than the financial risk profile suggests. Either the financial margin must clear a higher bar to justify the non-financial risk, or the engagement does not make it through the go/no-go gate. This is not idealism — it is portfolio risk management applied to a multi-capital portfolio.
 
-**Your mission is a hedge.** As sustainability regulation tightens, consumer expectations shift, and ESG scrutiny increases, the B-Corp agency that already has mission alignment embedded in its operations is hedged against these systematic forces. Conventional agencies will face rising compliance costs and reputational risk; B-Corp agencies have already paid those costs and can capture the demand that shifts toward responsible providers. This is the Pástor-Stambaugh-Taylor insight applied to agency work: your "greenness" hedges the portfolio against the very systematic risks that are increasing globally.
+**Your mission is a hedge.** As sustainability regulation tightens, consumer expectations shift, and ESG scrutiny increases, the B Corp agency that already has mission alignment embedded in its operations is hedged against these systematic forces. Conventional agencies will face rising compliance costs and reputational risk; B Corp agencies have already paid those costs and can capture the demand that shifts toward responsible providers. This is the Pástor-Stambaugh-Taylor insight applied to agency work: your "greenness" hedges the portfolio against the very systematic risks that are increasing globally.
 
-**The B Impact Assessment is necessary but not sufficient.** The assessment measures impact holistically but does not provide a pricing framework. Your CAPM adaptation fills the gap: it connects impact measurement to project selection and margin requirements, giving the B-Corp agency a principled basis for every engagement decision — not just the certification review every three years.
+**The B Impact Assessment is necessary but not sufficient.** The assessment measures impact holistically but does not provide a pricing framework. Your CAPM adaptation fills the gap: it connects impact measurement to project selection and margin requirements, giving the B Corp agency a principled basis for every engagement decision — not just the certification review every three years.
 
 ## Glossary
 **Alpha**: In finance, alpha (α) is the measure of an investment's return above or below the expected return (or benchmark), after adjusting for risk. For our purposes, this is what CAPM predicts for a given beta. Alpha represents the “excess” return generated by an investment and is often used as an indicator of an active portfolio manager's skill in beating the market.
@@ -662,7 +662,7 @@ Rather than treating the three bottom lines as separate accounts that cannot be 
 
 **Expected Return, E(R)**: The minimum return or margin required for a given level of risk under the model.
 
-**Expected Return with Impact, E(R\*)**: The B-Corp adaptation of expected return, where impact considerations modify or extend the purely financial hurdle.
+**Expected Return with Impact, E(R\*)**: The B Corp adaptation of expected return, where impact considerations modify or extend the purely financial hurdle.
 
 **Greenium**: A financial-return discount investors may accept for sustainability-related benefits or non-pecuniary utility. In the agency adaptation, it maps to a conscious mission discount on mission-aligned work.
 
