@@ -46,3 +46,13 @@ test('reset control clears saved state and restores defaults', () => {
   assert.match(html, /localStorage\.removeItem\(STORAGE_KEY\)/);
   assert.match(html, /applyInputSnapshot\(\)/);
 });
+
+test('retrospective mode is available and persisted', () => {
+  assert.match(html, /id="mode-retrospective-btn"/);
+  assert.match(html, /function setWorkflowMode\(mode\)/);
+  assert.match(html, /mode:\s*currentWorkflowMode/);
+  assert.match(html, /id="retrospective-panel"/);
+  assert.match(html, /id="actual-revenue"/);
+  assert.match(html, /id="actual-cost"/);
+  assert.match(html, /function calcRetrospective\(\)/);
+});
