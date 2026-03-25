@@ -126,6 +126,7 @@ These are the highest-leverage ways to improve trust and adoption:
 - define a retrospective scoring mode for completed projects
 - capture estimated vs actual cost, margin, and outcome quality
 - use that history to refine defaults and increase trust
+- work from the current design note in [RETROSPECTIVE-MODE.md](./RETROSPECTIVE-MODE.md)
 
 **Why important:** This is the clearest path to empirical validation and internal buy-in.
 

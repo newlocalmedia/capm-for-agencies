@@ -145,6 +145,28 @@
   .primer-status strong {
     color: var(--ink);
   }
+  .calibration-chip {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 8px;
+    margin-bottom: 4px;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid rgba(35,72,106,0.16);
+    background: rgba(35,72,106,0.08);
+    color: var(--blue-dark);
+    white-space: nowrap;
+  }
+  .calibration-chip.custom {
+    background: rgba(196,93,62,0.10);
+    border-color: rgba(196,93,62,0.20);
+    color: var(--accent-dark);
+  }
   .start-map {
     display: grid;
     gap: 10px;
@@ -1883,16 +1905,38 @@
     };
   }
 
+  function usingDefaultCalibration() {
+    const defaults = defaultInputValues();
+    const inputs = getInputSnapshot();
+    const layer1Complete = Object.keys(state.layer1).length === exportLayerTargets.layer1;
+
+    return !layer1Complete
+      && inputs.rf === defaults.rf
+      && inputs.rm === defaults.rm
+      && inputs.l1Input === defaults.l1Input;
+  }
+
   function setPrimerStatus(mode) {
     const note = document.getElementById('primer-status-note');
     if (!note) return;
+    const defaultMode = usingDefaultCalibration();
+    const chipLabel = defaultMode ? 'Using default calibration' : 'Using current calibration';
+    const chipClass = defaultMode ? 'default' : 'custom';
 
+    let body = '';
     if (mode === 'restored') {
-      note.innerHTML = '<strong>Saved work restored.</strong> Scores and inputs were loaded from this browser. Changes save automatically here until you reset them.';
-      return;
+      body = defaultMode
+        ? 'Saved work restored. You are still using the first-pass defaults, so Layer 2 can be scored immediately and Layer 1 can be added later.'
+        : 'Saved work restored. The cards are now using your current baselines or completed Layer 1 scores rather than the neutral first-pass defaults.';
+    } else if (mode === 'defaults') {
+      body = 'Agency <em>R<sub>f</sub></em> is set to 10%, portfolio <em>R<sub>m</sub></em> to 22%, and the Layer 1 factor to 1.00 so you can start with Layer 2 immediately. Changes save automatically in this browser.';
+    } else {
+      body = defaultMode
+        ? 'Layer 2 can be scored immediately with the neutral defaults. Complete Layer 1 or change the baselines when you want a more tailored calibration.'
+        : 'The cards are using your current baselines or Layer 1-derived factor instead of the neutral defaults. Exports and verdicts reflect that calibration.';
     }
 
-    note.innerHTML = '<strong>First-pass defaults are loaded.</strong> Agency <em>R<sub>f</sub></em> is set to 10%, portfolio <em>R<sub>m</sub></em> to 22%, and the Layer 1 factor to 1.00 so you can start with Layer 2 immediately. Changes save automatically in this browser.';
+    note.innerHTML = '<span class="calibration-chip ' + chipClass + '" id="calibration-mode-chip">' + chipLabel + '</span>' + body;
   }
 
   function getInputSnapshot() {
@@ -2179,6 +2223,7 @@
       exportState.dirty = currentExportSignature() !== exportState.lastExportSignature;
     }
     persistState();
+    setPrimerStatus('live');
     updateExportControls();
   }
 
