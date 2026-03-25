@@ -38,6 +38,9 @@ Download reference cards from the `pdf/` directory:
 ### Text Overview
 A text-first landing page lives in `overview/index.html`.
 
+### Worked Walkthrough
+A short practical walkthrough of one realistic agency deal lives in `tldr/walkthrough.html`.
+
 ### Theory and Background
 The long-form theory text and commentary live in `theory/capm-for-agencies.md`.
 
