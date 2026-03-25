@@ -276,6 +276,18 @@
     font-weight: 300;
   }
   .card-intro strong { font-weight: 700; color: var(--ink); }
+  .card-note {
+    margin: -8px 0 24px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(43,76,126,0.12);
+    background: linear-gradient(135deg, rgba(43,76,126,0.05), rgba(196,93,62,0.03));
+    font-size: 12.5px;
+    color: var(--gray500);
+  }
+  .card-note strong {
+    color: var(--blue-dark);
+  }
 
   .section-label {
     font-family: 'JetBrains Mono', monospace;
@@ -423,6 +435,23 @@
   }
   .factor-help-body p + p {
     margin-top: 6px;
+  }
+  .factor-help-meta {
+    margin-top: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--blue-dark);
+  }
+  .factor-help-prompts {
+    margin: 8px 0 0 16px;
+    display: grid;
+    gap: 6px;
+  }
+  .factor-help-prompts li {
+    font-size: 11px;
   }
   .factor-scale {
     margin-top: 8px;
@@ -716,6 +745,31 @@
   .verdict.go { background: var(--green-light); color: var(--green); }
   .verdict.caution { background: var(--amber-light); color: var(--amber); }
   .verdict.stop { background: var(--red-light); color: var(--red); }
+  .warning-panel {
+    margin-top: 12px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(196, 139, 44, 0.24);
+    background: rgba(245, 230, 196, 0.62);
+    color: #6d5522;
+  }
+  .warning-panel strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .warning-panel ul {
+    margin: 0 0 0 18px;
+    display: grid;
+    gap: 8px;
+  }
+  .warning-panel li {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
 
   .approach-note {
     font-size: 12px;
@@ -1011,6 +1065,7 @@
       <strong>Best fit:</strong> Most natural for enterprise and international agencies using the pure approach, but still useful for any agency that wants a disciplined portfolio view.<br>
       <strong>Output:</strong> Current risk premium and systematic adjustment factor that sets the environment for all engagement-level scoring.
     </p>
+    <p class="card-note"><strong>PESTLE lens:</strong> These six factors compress macro PESTLE questions into agency-usable scoring prompts. Political and legal shifts mostly sit in regulatory exposure, technological change shows up in platform stability and rate pressure, and concentration remains the small-agency proxy for systematic exposure.</p>
 
     <span class="section-label">Systematic Risk Scoring</span>
     <table class="score-table" id="layer1-table" data-layer="layer1">
@@ -1367,6 +1422,7 @@
         </div>
       </div>
       <div id="l2-verdict" role="status" aria-live="polite"></div>
+      <div id="l2-warnings" aria-live="polite"></div>
 
       <div class="chart-panel">
         <div class="chart-header">The Line</div>
@@ -1685,12 +1741,60 @@
 
   const factorHelpQuestions = {
     layer1: {
-      platform: 'How stable are the platforms and partners your agency depends on?',
-      talent: 'How hard is it to hire and keep the people your delivery work depends on?',
-      economic: 'How healthy are budgets and buying conditions in the market you sell into?',
-      regulatory: 'How much are new rules or compliance demands changing the work you deliver?',
-      concentration: 'How exposed are you to a small number of clients, channels, or verticals?',
-      rate: 'How much downward pressure is the market putting on your rates?'
+      platform: {
+        question: 'How stable are the platforms, vendors, and ecosystem partners your agency depends on?',
+        lens: 'PESTLE lens: Technological, with some political/vendor exposure',
+        prompts: [
+          'Are roadmap, licensing, governance, or partner changes repricing work across the portfolio?',
+          'Are AI, search, hosting, or product shifts making current service lines less durable?',
+          'Would one platform move affect multiple active and future engagements at once?'
+        ]
+      },
+      talent: {
+        question: 'How hard is it to hire, retain, and replace the people your delivery work depends on?',
+        lens: 'PESTLE lens: Social and economic',
+        prompts: [
+          'Has wage inflation or scarcity changed your cost basis across most engagements?',
+          'Are burnout, remote-work shifts, or skills migration making staffing less predictable?',
+          'If key people became unavailable, would capacity risk hit the whole book rather than one project?'
+        ]
+      },
+      economic: {
+        question: 'How healthy are budgets, approvals, and buying conditions in the market you sell into?',
+        lens: 'PESTLE lens: Economic',
+        prompts: [
+          'Are clients broadly delaying approvals, shrinking scopes, or freezing discretionary work?',
+          'Are interest rates, currency shifts, or sector downturns affecting multiple opportunities at once?',
+          'Does the current market make your whole pipeline harder to close at target margins?'
+        ]
+      },
+      regulatory: {
+        question: 'How much are policy, legal, and compliance changes repricing the work you deliver?',
+        lens: 'PESTLE lens: Political and legal',
+        prompts: [
+          'Are privacy, accessibility, procurement, or data-sovereignty changes adding delivery cost across the portfolio?',
+          'Are cross-border rules, sanctions, or public-sector policy shifts changing who you can hire or serve?',
+          'Would these requirements affect many engagements simultaneously rather than one client exception?'
+        ]
+      },
+      concentration: {
+        question: 'How exposed are you to a small number of clients, channels, platforms, or verticals?',
+        lens: 'Small-agency systematic proxy: concentration and dependency',
+        prompts: [
+          'If one major client, referral source, or segment pulled back, would it reprice the whole business?',
+          'Are you diversified enough to escape a shock, or structurally dependent on a few revenue sources?',
+          'Does platform or channel dependence make outside market shifts feel portfolio-wide for your agency?'
+        ]
+      },
+      rate: {
+        question: 'How much downward pressure is the market putting on your rates and margin expectations?',
+        lens: 'PESTLE lens: Economic and technological',
+        prompts: [
+          'Are AI-assisted delivery expectations or procurement habits pushing clients to expect lower prices everywhere?',
+          'Is competition forcing discounts or tighter fixed-fee terms across multiple deals, not just one?',
+          'Are you seeing market-wide compression on the rate card rather than isolated negotiation noise?'
+        ]
+      }
     },
     layer2: {
       client: 'How confident are you in this client relationship and the client team\'s reliability?',
@@ -1749,17 +1853,31 @@
     return labels.length ? labels : ['1', '2', '3', '4', '5'];
   }
 
-  function getFactorHelpQuestion(layer, factor, fallback) {
-    return (factorHelpQuestions[layer] && factorHelpQuestions[layer][factor]) || fallback;
+  function getFactorHelp(layer, factor, fallback) {
+    const configured = factorHelpQuestions[layer] && factorHelpQuestions[layer][factor];
+    if (!configured) return { question: fallback, lens: '', prompts: [] };
+    if (typeof configured === 'string') return { question: configured, lens: '', prompts: [] };
+    return {
+      question: configured.question || fallback,
+      lens: configured.lens || '',
+      prompts: Array.isArray(configured.prompts) ? configured.prompts : []
+    };
   }
 
-  function buildFactorHelpMarkup(question, guide, factorName) {
+  function buildFactorHelpMarkup(help, guide, factorName) {
     const bodyId = 'factor-help-' + (++helpContentId);
+    const safeQuestion = escapeHtml(help.question || '');
+    const meta = help.lens ? '<div class="factor-help-meta">' + escapeHtml(help.lens) + '</div>' : '';
+    const prompts = help.prompts && help.prompts.length
+      ? '<ul class="factor-help-prompts">' + help.prompts.map((prompt) => '<li>' + escapeHtml(prompt) + '</li>').join('') + '</ul>'
+      : '';
     return (
       '<details class="factor-help">' +
         '<summary aria-controls="' + bodyId + '" aria-expanded="false">How to score this<span class="sr-only"> for ' + escapeHtml(factorName) + '</span></summary>' +
         '<div class="factor-help-body" id="' + bodyId + '">' +
-          '<p>' + escapeHtml(question) + '</p>' +
+          '<p>' + safeQuestion + '</p>' +
+          meta +
+          prompts +
           '<div class="factor-scale">' +
             guide.map((label, index) => (
               '<div><strong>' + (index + 1) + '</strong>' + escapeHtml(label) + '</div>'
@@ -1819,11 +1937,11 @@
         const desc = row.querySelector('.factor-desc')?.textContent.trim() || '';
         const factorName = row.querySelector('.factor-name')?.textContent.trim() || factor;
         const guide = getScoreGuide(layer, factor, row);
-        const question = getFactorHelpQuestion(layer, factor, desc);
+        const help = getFactorHelp(layer, factor, desc);
         const firstCell = row.querySelector('td');
 
         if (firstCell && !firstCell.querySelector('.factor-help')) {
-          firstCell.insertAdjacentHTML('beforeend', buildFactorHelpMarkup(question, guide, factorName));
+          firstCell.insertAdjacentHTML('beforeend', buildFactorHelpMarkup(help, guide, factorName));
         }
 
         syncScoreButtonAccessibility(row, layer, factor);
@@ -2023,7 +2141,7 @@
         const factor = row.dataset.factor;
         const name = row.querySelector('.factor-name')?.textContent || factor;
         const desc = row.querySelector('.factor-desc')?.textContent || '';
-        const question = getFactorHelpQuestion(layer, factor, desc);
+        const help = getFactorHelp(layer, factor, desc);
         const labels = getScoreGuide(layer, factor, row);
 
         const card = document.createElement('div');
@@ -2062,7 +2180,7 @@
             }).join('') +
           '</div>' +
           '<div class="mobile-score-anchors"><span>' + safeLeft + '</span><span>' + safeRight + '</span></div>' +
-          buildFactorHelpMarkup(question, labels, name);
+          buildFactorHelpMarkup(help, labels, name);
 
         mobileList.appendChild(card);
 
@@ -2171,6 +2289,40 @@
     });
   }
 
+  function getLayer2InteractionWarnings(scores) {
+    const warnings = [];
+    const has = (factor, threshold) => (scores[factor] || 0) >= threshold;
+
+    if (has('scope', 4) && has('contract', 4)) {
+      warnings.push('Scope clarity and contract type are both high-risk. Unclear work under tight fixed-fee terms compounds estimation error and change-order pressure. Reprice, narrow scope, or sell discovery first.');
+    }
+    if (has('scope', 4) && has('timeline', 4)) {
+      warnings.push('Scope clarity and timeline pressure are both high-risk. Vague requirements under an aggressive deadline compound planning error, rework, and delivery thrash. Reduce uncertainty or buy schedule room.');
+    }
+    if (has('tech', 4) && has('capacity', 4)) {
+      warnings.push('Technical complexity and internal capacity are both high-risk. Novel work with a stretched team compounds execution risk and leaves little recovery room. Add senior coverage, reduce commitments, or raise margin expectations.');
+    }
+    if (has('client', 4) && has('political', 4)) {
+      warnings.push('Client track record and political complexity are both high-risk. A weak client relationship inside a messy stakeholder environment compounds approval, change, and collection risk. Tighten governance and commercial protections before committing.');
+    }
+
+    return warnings;
+  }
+
+  function renderLayer2Warnings(warnings) {
+    const target = document.getElementById('l2-warnings');
+    if (!target) return;
+    if (!warnings.length) {
+      target.innerHTML = '';
+      return;
+    }
+    target.innerHTML =
+      '<div class="warning-panel">' +
+        '<strong>Interaction Warnings</strong>' +
+        '<ul>' + warnings.map((warning) => '<li>' + escapeHtml(warning) + '</li>').join('') + '</ul>' +
+      '</div>';
+  }
+
   function renderExportTable(title, rows) {
     const body = rows.map((row) => {
       return '<tr><th>' + escapeHtml(row.name) + '</th><td>' + (row.value ? (row.value + '/5') : '—') + '</td><td>' + escapeHtml(row.label || 'Not scored') + '</td></tr>';
@@ -2219,6 +2371,7 @@
 
     const layer1Data = collectFactorData('layer1', '#layer1-table tbody');
     const layer2Data = collectFactorData('layer2', '#layer2-table tbody');
+    const layer2Warnings = Object.keys(state.layer2).length === 7 ? getLayer2InteractionWarnings(state.layer2) : [];
     const bcorpL1Data = collectFactorData('bcorp_l1', '#bcorp-l1-table tbody');
     const bcorpL2Data = collectFactorData('bcorp_l2', '#bcorp-l2-table tbody');
     const l2ChartSvg = document.getElementById('l2-chart')?.outerHTML || '';
@@ -2239,6 +2392,7 @@
       '.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}.report-grid.full{grid-template-columns:1fr;}@media (max-width:760px){body{padding:18px}.hero,.report-card{padding:18px}.report-grid{grid-template-columns:1fr;}}' +
       '.report-table{width:100%;border-collapse:collapse;font-size:0.96rem;}.report-table th,.report-table td{padding:10px 8px;border-bottom:1px solid #e0ddd6;text-align:left;vertical-align:top;}.report-table thead th{font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;color:#5f5a53;}' +
       '.chart-card svg{width:100%;height:auto;display:block;background:#fcfaf7;border-radius:12px;}.verdict{display:inline-block;padding:6px 10px;border-radius:999px;font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;background:#f0d4cb;color:#8c3f2f;}' +
+      '.report-warning-list{margin:12px 0 0 18px;display:grid;gap:8px;color:#6d5522;}' +
       '.footer-note{font-size:0.92rem;color:#5f5a53;}' +
       '@media print{body{padding:0;background:#fff;}.wrap{max-width:none;}.toolbar{display:none;}.hero,.report-card{box-shadow:none;border:1px solid #d6d1c8;break-inside:avoid;}}' +
       '</style></head><body><div class="wrap">' +
@@ -2254,7 +2408,7 @@
       '</div></section>' +
       '<div class="report-grid">' +
         '<section class="report-card"><h2>Commercial Inputs</h2><p><strong>Layer 1 factor input:</strong> ' + escapeHtml(isNaN(l1Input) ? '—' : l1Input.toFixed(2)) + '<br><strong>Deal price:</strong> ' + escapeHtml(deal ? formatMoney(deal.price) : '—') + '<br><strong>Estimated delivery cost:</strong> ' + escapeHtml(deal ? formatMoney(deal.cost) : '—') + '<br><strong>Minimum deal price:</strong> ' + escapeHtml(minPrice || '—') + '</p></section>' +
-        '<section class="report-card"><h2>Layer 2 Summary</h2><p><strong>Engagement score:</strong> ' + escapeHtml(l2Score || '—') + '<br><strong>Engagement beta:</strong> ' + escapeHtml(l2Beta || '—') + '<br><strong>Blended beta:</strong> ' + escapeHtml(blended || '—') + '<br><strong>Verdict:</strong> <span class="verdict">' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</span></p></section>' +
+        '<section class="report-card"><h2>Layer 2 Summary</h2><p><strong>Engagement score:</strong> ' + escapeHtml(l2Score || '—') + '<br><strong>Engagement beta:</strong> ' + escapeHtml(l2Beta || '—') + '<br><strong>Blended beta:</strong> ' + escapeHtml(blended || '—') + '<br><strong>Verdict:</strong> <span class="verdict">' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</span></p>' + (layer2Warnings.length ? '<p><strong>Interaction warnings:</strong></p><ul class="report-warning-list">' + layer2Warnings.map((warning) => '<li>' + escapeHtml(warning) + '</li>').join('') + '</ul>' : '') + '</section>' +
       '</div>' +
       '<div class="report-grid full">' +
         '<section class="report-card chart-card"><h2>The Line</h2>' + l2ChartSvg + '<p class="footer-note">The chart is exported as rendered in the decision cards at the time of download.</p></section>' +
@@ -2640,6 +2794,7 @@
     const sum = vals.reduce((a,b) => a+b, 0);
     const count = vals.length;
     const total = 7;
+    const interactionWarnings = count === total ? getLayer2InteractionWarnings(state.layer2) : [];
 
     const rf = parseFloat(document.getElementById('rf').value) || 0;
     const rm = parseFloat(document.getElementById('rm').value) || 0;
@@ -2663,6 +2818,7 @@
     document.getElementById('l2-gap-sub').textContent = 'proposed - required';
     document.getElementById('l2-min-price').textContent = '—';
     document.getElementById('l2-min-price-sub').innerHTML = 'needed to clear <em>E</em>(<em>R</em>)';
+    renderLayer2Warnings(interactionWarnings);
 
     if (count > 0) {
       document.getElementById('l2-raw').textContent = sum;
@@ -2748,6 +2904,7 @@
         document.getElementById('l2-er').textContent = '—';
         document.getElementById('l2-er-sub').textContent = 'complete scoring first';
         document.getElementById('l2-verdict').innerHTML = '';
+        renderLayer2Warnings([]);
         chartData = { ready: false };
       }
     } else {
@@ -2759,6 +2916,7 @@
       document.getElementById('l2-er').textContent = '—';
       document.getElementById('l2-er-sub').textContent = 'required return';
       document.getElementById('l2-verdict').innerHTML = '';
+      renderLayer2Warnings([]);
       chartData = { ready: false };
     }
     renderLayer2Chart(chartData);
