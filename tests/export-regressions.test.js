@@ -29,7 +29,8 @@ test('export meaning column explains score direction and uses factor labels', ()
 
 test('first-pass defaults are explicit for new users', () => {
   assert.match(html, /id="l1-input" value="1\.00"/);
-  assert.match(html, /First-pass defaults are loaded/);
+  assert.match(html, /Using default calibration/);
+  assert.match(html, /Agency <em>R<sub>f<\/sub><\/em> is set to 10%/);
   assert.match(html, /start with Layer 2 immediately/i);
 });
 

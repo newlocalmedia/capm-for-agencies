@@ -139,6 +139,7 @@ The intent is lightweight behavioral clarity, not a formal BDD framework.
 **Outcome:** Agencies can score completed work and compare predicted vs actual results.
 
 **Tasks:**
+- use [RETROSPECTIVE-MODE.md](./RETROSPECTIVE-MODE.md) as the implementation starting point
 - define completed-project inputs
 - capture actual cost/margin outcome fields
 - compare forecast vs actual results

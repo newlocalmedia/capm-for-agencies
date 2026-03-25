@@ -47,6 +47,9 @@ The long-form theory text and commentary live in `theory/capm-for-agencies.md`.
 ### Calibration Notes
 A deeper implementation note for the current scoring ranges, scenario tests, and calibration choices lives in `tldr/calibration-notes.html`.
 
+### Retrospective Mode Design
+The current design note for postmortem scoring and calibration lives in [RETROSPECTIVE-MODE.md](./RETROSPECTIVE-MODE.md).
+
 
 ## The Formula
 

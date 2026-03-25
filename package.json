@@ -1,7 +1,7 @@
 {
   "name": "capm-for-agencies",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Static decision cards and theory pages for CAPM for Agencies.",
   "scripts": {
     "build:static": "python3 scripts/build_static_pages.py",

@@ -7,6 +7,24 @@ and this project uses a lightweight, date-free changelog for now.
 
 ## [Unreleased]
 
+## [0.1.1]
+
+### Added
+- Browser persistence for Decision Card scores and calculator inputs so work restores automatically after reload.
+- A top-level `Reset All` flow that clears saved state, restores the first-pass defaults, and disables export again.
+- A practical walkthrough in [tldr/CAPM for Agencies — Walkthrough.md](/Users/danknauss/Developer/GitHub/capm-for-agencies/tldr/CAPM%20for%20Agencies%20%E2%80%94%20Walkthrough.md) and [tldr/walkthrough.html](/Users/danknauss/Developer/GitHub/capm-for-agencies/tldr/walkthrough.html).
+- A visible calibration-state indicator in the app that distinguishes the neutral first-pass defaults from a custom current calibration.
+- A retrospective-mode design note in [RETROSPECTIVE-MODE.md](/Users/danknauss/Developer/GitHub/capm-for-agencies/RETROSPECTIVE-MODE.md) to guide postmortem scoring and calibration work.
+
+### Changed
+- Made the first-use path clearer by loading explicit neutral defaults for `R_f`, `R_m`, and the Layer 1 factor so a new user can start with Layer 2 immediately.
+- Linked the walkthrough and retrospective-mode design through the app, overview, README, roadmap, and backlog.
+
+### Fixed
+- Extended export/persistence regression coverage so the app now tests the default-calibration indicator alongside restore/reset behavior.
+
+## [0.1.0]
+
 ### Added
 - A shared calculation module at [scripts/calc-core.js](/Users/danknauss/Developer/GitHub/capm-for-agencies/scripts/calc-core.js) so the Decision Cards and automated tests use the same formula logic.
 - Regression tests for the calculator math in [tests/calculations.test.js](/Users/danknauss/Developer/GitHub/capm-for-agencies/tests/calculations.test.js).
