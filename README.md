@@ -106,6 +106,15 @@ The repo now includes a small test and verification layer:
 - `npm run check:generated` fails if the generated pages are out of sync with the committed outputs
 - `npm run ci` runs the full local verification sequence used in GitHub Actions
 
+### Claude Playwright handoff
+
+If Claude needs browser automation, Playwright testing, screenshots, or browser-only inspection for this repo, start a fresh browser-capable session with:
+
+- `/Users/danknauss/bin/claude-playwright`
+- `/Users/danknauss/bin/claude-browser-handoff`
+
+Playwright/browser mode should be explicitly user-initiated from a new session, not enabled mid-session.
+
 See [CHANGELOG.md](./CHANGELOG.md) for notable changes.
 
 ## License
