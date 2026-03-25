@@ -2,6 +2,8 @@
 
 Interactive two-layer risk assessment tools for agency project pricing, based on the Capital Asset Pricing Model (CAPM) adapted from financial economics.
 
+**Try it here:** https://newlocalmedia.github.io/capm-for-agencies/
+
 ## What is this?
 
 Most agencies price risk through gut-feel contingency percentages or hourly padding. The CAPM framework gives you a principled, portfolio-aware approach by separating **systematic risk** (forces that hit your whole book of work) from **idiosyncratic risk** (project-specific variables that wash out across engagements).
