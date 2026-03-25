@@ -98,3 +98,29 @@ test('B-Corp verdict boundaries stay stable at exact thresholds', () => {
     'Stop — proposed margin does not clear the impact-adjusted hurdle'
   );
 });
+
+test('Retrospective mode compares actual margin to the original hurdle and quote', () => {
+  const actual = Calc.realizedMargin(120000, 101500);
+  const required = 17.4;
+  const proposed = 23.3;
+
+  assert.equal(actual, 15.4);
+  assert.equal(Calc.gap(actual, required), -2.0);
+  assert.equal(Calc.gap(actual, proposed), -7.9);
+  assert.equal(
+    Calc.retrospectiveAssessment(required, proposed, actual),
+    'Too optimistic — actual margin missed the original hurdle'
+  );
+});
+
+test('Retrospective mode can identify a deal that was too conservative', () => {
+  const actual = Calc.realizedMargin(120000, 84000);
+  const required = 17.4;
+  const proposed = 23.3;
+
+  assert.equal(actual, 30.0);
+  assert.equal(
+    Calc.retrospectiveAssessment(required, proposed, actual),
+    'Too conservative — actual margin materially outperformed the quoted margin'
+  );
+});

@@ -145,6 +145,31 @@
   .primer-status strong {
     color: var(--ink);
   }
+  .mode-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--gray200);
+  }
+  .mode-help {
+    font-size: 12px;
+    color: var(--gray400);
+    line-height: 1.5;
+  }
+  .action-btn.mode-btn {
+    background: rgba(255,255,255,0.75);
+    color: var(--gray500);
+    border-color: rgba(32,29,26,0.14);
+  }
+  .action-btn.mode-btn.active,
+  .action-btn.mode-btn[aria-pressed="true"] {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
   .calibration-chip {
     display: inline-flex;
     align-items: center;
@@ -689,6 +714,28 @@
     border-color: var(--blue);
     box-shadow: 0 0 0 3px rgba(43,76,126,0.1);
   }
+  .calc-field textarea {
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 10px 12px;
+    border: 1px solid var(--gray200);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--ink);
+    width: min(100%, 520px);
+    min-height: 92px;
+    resize: vertical;
+  }
+  .calc-field textarea:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(43,76,126,0.1);
+  }
+  .calc-field.wide {
+    min-width: min(100%, 520px);
+    flex: 1 1 320px;
+  }
   .calc-field .unit {
     font-size: 11px;
     color: var(--gray400);
@@ -807,6 +854,23 @@
   }
   .warning-panel li strong {
     color: #4f3a12;
+  }
+  .retrospective-panel {
+    margin-top: 20px;
+  }
+  .retrospective-panel[hidden] {
+    display: none;
+  }
+  .retrospective-intro {
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: var(--gray500);
+  }
+  .retrospective-hint {
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--gray400);
+    line-height: 1.5;
   }
 
   .approach-note {
@@ -1090,6 +1154,12 @@
         <span>Work through Layer 1 and Layer 2 first, then use Layer 3 for the impact-adjusted decision.</span>
       </a>
     </div>
+  </div>
+  <div class="mode-row" role="group" aria-label="Workflow mode">
+    <span class="jump-label">Workflow:</span>
+    <button type="button" class="action-btn mode-btn active" id="mode-presales-btn" aria-pressed="true" onclick="setWorkflowMode('presales')">Presales</button>
+    <button type="button" class="action-btn mode-btn" id="mode-retrospective-btn" aria-pressed="false" onclick="setWorkflowMode('retrospective')">Retrospective</button>
+    <span class="mode-help" id="mode-help-note">Use retrospective mode for completed projects when you want to compare the original hurdle with the actual outcome.</span>
   </div>
   <p class="primer-status" id="primer-status-note" role="status" aria-live="polite"></p>
   <div class="export-row primer-export-row">
@@ -1490,6 +1560,66 @@
         <strong>Hybrid approach:</strong> Blended <em>β</em> = (Engagement Score / 21) × L1 Factor. This feeds directly into the CAPM formula for a per-engagement minimum margin.<br>
         <strong>Governance note:</strong> This hybrid calculator is a heuristic decision tool, not a statistically correct pricing engine. Its main value is internal alignment, presales discipline, and postmortem calibration.
       </div>
+
+      <div class="retrospective-panel" id="retrospective-panel" hidden>
+        <span class="section-label">Retrospective Comparison</span>
+        <div class="calc-panel">
+          <p class="retrospective-intro"><strong>Completed project view:</strong> Compare the original hurdle and quoted margin with what actually happened in delivery. Use this to decide whether the original pricing logic was too optimistic, too conservative, or directionally right.</p>
+          <div class="calc-row">
+            <div class="calc-field">
+              <label for="actual-revenue">Actual Revenue
+                <details class="info-tip">
+                  <summary aria-label="Actual revenue help">?</summary>
+                  <div class="tooltip-text">Recognized revenue from the completed engagement. Use the final billed amount if it differs from the original quoted deal price.</div>
+                </details>
+              </label>
+              <div><input type="number" id="actual-revenue" value="" step="100" placeholder="0" oninput="calcRetrospective(); markExportDirty()"><span class="unit">$</span></div>
+            </div>
+            <div class="calc-field">
+              <label for="actual-cost">Actual Delivery Cost
+                <details class="info-tip">
+                  <summary aria-label="Actual delivery cost help">?</summary>
+                  <div class="tooltip-text">Final internal delivery cost for the engagement. Compare this with the original estimate to see how the quoted margin held up in reality.</div>
+                </details>
+              </label>
+              <div><input type="number" id="actual-cost" value="" step="100" placeholder="0" oninput="calcRetrospective(); markExportDirty()"><span class="unit">$</span></div>
+            </div>
+          </div>
+          <div class="formula-bar" id="retro-formula">
+            <strong>Retrospective:</strong> compare the original proposed margin with the actual realized margin, then check both against the original hurdle <em>E</em>(<em>R</em>).
+          </div>
+          <div class="result-box">
+            <div class="result-item">
+              <span class="result-label">Predicted Verdict at Sale</span>
+              <span class="result-value accent" id="retro-predicted-verdict">—</span>
+              <span class="result-sub">original presales decision</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Actual Realized Margin</span>
+              <span class="result-value accent" id="retro-actual-margin">—</span>
+              <span class="result-sub" id="retro-actual-sub">enter actual revenue and cost</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Variance vs Quoted Margin</span>
+              <span class="result-value accent" id="retro-variance">—</span>
+              <span class="result-sub" id="retro-variance-sub">actual - proposed</span>
+            </div>
+            <div class="result-item">
+              <span class="result-label">Actual vs Hurdle</span>
+              <span class="result-value accent" id="retro-hurdle-gap">—</span>
+              <span class="result-sub" id="retro-hurdle-gap-sub">actual - required</span>
+            </div>
+          </div>
+          <div id="retro-verdict" role="status" aria-live="polite"></div>
+          <div class="calc-row">
+            <div class="calc-field wide">
+              <label for="retro-notes">Postmortem Notes</label>
+              <textarea id="retro-notes" placeholder="What changed? Was discovery the better sale? What would you score differently next time?" oninput="markExportDirty()"></textarea>
+            </div>
+          </div>
+          <div class="retrospective-hint" id="retro-hint">Use this mode after delivery to compare the actual result with the original pricing logic and capture one calibration note for next time.</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -1880,6 +2010,7 @@
     bcorp_l2: {}
   };
   const STORAGE_KEY = 'capm-for-agencies-state-v1';
+  let currentWorkflowMode = 'presales';
 
   const exportLayerTargets = {
     layer1: 6,
@@ -1902,6 +2033,14 @@
       price: '',
       cost: '',
       bcManual: ''
+    };
+  }
+
+  function defaultRetrospectiveValues() {
+    return {
+      actualRevenue: '',
+      actualCost: '',
+      notes: ''
     };
   }
 
@@ -1939,6 +2078,41 @@
     note.innerHTML = '<span class="calibration-chip ' + chipClass + '" id="calibration-mode-chip">' + chipLabel + '</span>' + body;
   }
 
+  function updateWorkflowModeUi() {
+    document.body.dataset.workflowMode = currentWorkflowMode;
+
+    const presalesBtn = document.getElementById('mode-presales-btn');
+    const retrospectiveBtn = document.getElementById('mode-retrospective-btn');
+    const note = document.getElementById('mode-help-note');
+    const panel = document.getElementById('retrospective-panel');
+
+    if (presalesBtn) {
+      const active = currentWorkflowMode === 'presales';
+      presalesBtn.classList.toggle('active', active);
+      presalesBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+    if (retrospectiveBtn) {
+      const active = currentWorkflowMode === 'retrospective';
+      retrospectiveBtn.classList.toggle('active', active);
+      retrospectiveBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    }
+    if (note) {
+      note.textContent = currentWorkflowMode === 'retrospective'
+        ? 'Completed-project mode is active. Enter actual revenue and delivery cost below Layer 2 to compare the original pricing logic with the actual result.'
+        : 'Use retrospective mode for completed projects when you want to compare the original hurdle with the actual outcome.';
+    }
+    if (panel) {
+      panel.hidden = currentWorkflowMode !== 'retrospective';
+    }
+  }
+
+  function setWorkflowMode(mode) {
+    currentWorkflowMode = mode === 'retrospective' ? 'retrospective' : 'presales';
+    updateWorkflowModeUi();
+    calcRetrospective();
+    markExportDirty();
+  }
+
   function getInputSnapshot() {
     return {
       rf: document.getElementById('rf')?.value || '',
@@ -1967,6 +2141,28 @@
     });
   }
 
+  function getRetrospectiveSnapshot() {
+    return {
+      actualRevenue: document.getElementById('actual-revenue')?.value || '',
+      actualCost: document.getElementById('actual-cost')?.value || '',
+      notes: document.getElementById('retro-notes')?.value || ''
+    };
+  }
+
+  function applyRetrospectiveSnapshot(snapshot) {
+    const values = Object.assign(defaultRetrospectiveValues(), snapshot || {});
+    const mapping = {
+      actualRevenue: 'actual-revenue',
+      actualCost: 'actual-cost',
+      notes: 'retro-notes'
+    };
+
+    Object.entries(mapping).forEach(([key, id]) => {
+      const field = document.getElementById(id);
+      if (field) field.value = values[key] ?? '';
+    });
+  }
+
   function sanitizeLayerState(rawLayer) {
     const sanitized = {};
     if (!rawLayer || typeof rawLayer !== 'object') return sanitized;
@@ -1985,8 +2181,10 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({
         version: 1,
+        mode: currentWorkflowMode,
         state,
-        inputs: getInputSnapshot()
+        inputs: getInputSnapshot(),
+        retrospective: getRetrospectiveSnapshot()
       }));
     } catch (error) {
       // Ignore browsers or contexts where storage is unavailable.
@@ -2006,10 +2204,14 @@
       state.layer2 = sanitizeLayerState(parsed?.state?.layer2);
       state.bcorp_l1 = sanitizeLayerState(parsed?.state?.bcorp_l1);
       state.bcorp_l2 = sanitizeLayerState(parsed?.state?.bcorp_l2);
+      currentWorkflowMode = parsed?.mode === 'retrospective' ? 'retrospective' : 'presales';
       applyInputSnapshot(parsed?.inputs);
+      applyRetrospectiveSnapshot(parsed?.retrospective);
       return true;
     } catch (error) {
       applyInputSnapshot();
+      applyRetrospectiveSnapshot();
+      currentWorkflowMode = 'presales';
       return false;
     }
   }
@@ -2183,13 +2385,17 @@
 
   function currentExportSignature() {
     return JSON.stringify({
+      mode: currentWorkflowMode,
       state,
       rf: document.getElementById('rf')?.value || '',
       rm: document.getElementById('rm')?.value || '',
       l1Input: document.getElementById('l1-input')?.value || '',
       price: document.getElementById('deal-price')?.value || '',
       cost: document.getElementById('deal-cost')?.value || '',
-      bcManual: document.getElementById('bc-manual-adj')?.value || ''
+      bcManual: document.getElementById('bc-manual-adj')?.value || '',
+      actualRevenue: document.getElementById('actual-revenue')?.value || '',
+      actualCost: document.getElementById('actual-cost')?.value || '',
+      retroNotes: document.getElementById('retro-notes')?.value || ''
     });
   }
 
@@ -2337,16 +2543,20 @@
     state.layer2 = {};
     state.bcorp_l1 = {};
     state.bcorp_l2 = {};
+    currentWorkflowMode = 'presales';
     applyInputSnapshot();
+    applyRetrospectiveSnapshot();
     clearPersistedState();
     syncAllScoreSelections();
     createMobileScorecards();
     initInfoTips();
+    updateWorkflowModeUi();
     exportState.dirty = true;
     exportState.lastExportSignature = null;
     calcLayer1();
     calcLayer2();
     calcBcorp();
+    calcRetrospective();
     updateExportControls();
     setPrimerStatus('defaults');
   }
@@ -2617,6 +2827,8 @@
     const bcAdjustment = document.getElementById('bc-impact-adj').value.trim();
     const bcErStar = document.getElementById('bc-er-star').textContent.trim();
     const bcVerdict = document.getElementById('bc-verdict').textContent.trim();
+    const retrospective = getActualDealMetrics();
+    const retrospectiveNotes = document.getElementById('retro-notes')?.value.trim() || '';
 
     const layer1Data = collectFactorData('layer1', '#layer1-table tbody');
     const layer2Data = collectFactorData('layer2', '#layer2-table tbody');
@@ -2632,6 +2844,18 @@
       erStar: '<span class="math-inline"><em>E</em>(<em>R</em>*)</span>',
       beta: '<span class="math-inline"><em>β</em></span>'
     };
+    const requiredMarginNumber = parseFloat(requiredMargin);
+    const actualMarginNumber = retrospective ? Calc.round(retrospective.actualMargin, 1) : null;
+    const proposedMarginNumber = deal ? Calc.round(deal.proposedMargin, 1) : null;
+    const retrospectiveVariance = (retrospective && deal)
+      ? Calc.gap(actualMarginNumber, proposedMarginNumber)
+      : null;
+    const retrospectiveHurdleGap = (retrospective && !isNaN(requiredMarginNumber))
+      ? Calc.gap(actualMarginNumber, requiredMarginNumber)
+      : null;
+    const retrospectiveReading = (retrospective && deal && !isNaN(requiredMarginNumber))
+      ? Calc.retrospectiveAssessment(requiredMarginNumber, proposedMarginNumber, actualMarginNumber)
+      : '';
 
     const reportHtml = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CAPM Decision Summary</title><style>' +
       'body{margin:0;padding:32px;background:#f0ede8;color:#1a1a2e;font-family:Georgia,serif;line-height:1.6;}' +
@@ -2656,6 +2880,7 @@
       '<div class="toolbar"><button type="button" class="toolbar-btn" onclick="window.print()">Print / Save as PDF</button></div>' +
       '<section class="hero"><div class="kicker">CAPM for Agencies</div><h1>Decision Summary</h1><p>Generated from the interactive decision cards on ' + escapeHtml(now.toLocaleString()) + '.</p>' +
       '<div class="metrics">' +
+        '<div class="metric"><span class="metric-label">Workflow</span><span class="metric-value" style="font-size:1rem;">' + escapeHtml(currentWorkflowMode === 'retrospective' ? 'Retrospective' : 'Presales') + '</span><span class="metric-sub">Current Decision Cards mode</span></div>' +
         '<div class="metric"><span class="metric-label">Agency ' + exportMath.rf + '</span><span class="metric-value">' + escapeHtml(formatPercentValue(rf)) + '</span><span class="metric-sub">Base margin from lowest-risk work</span></div>' +
         '<div class="metric"><span class="metric-label">Portfolio ' + exportMath.rm + '</span><span class="metric-value">' + escapeHtml(formatPercentValue(rm)) + '</span><span class="metric-sub">Average project margin</span></div>' +
         '<div class="metric"><span class="metric-label">Required ' + exportMath.er + '</span><span class="metric-value">' + escapeHtml(requiredMargin || '—') + '</span><span class="metric-sub">Hybrid hurdle rate</span></div>' +
@@ -2670,6 +2895,11 @@
       '<div class="report-grid full">' +
         '<section class="report-card chart-card"><h2>The Line</h2>' + l2ChartSvg + '<p class="footer-note">The chart is exported as rendered in the decision cards at the time of download.</p></section>' +
       '</div>' +
+      (currentWorkflowMode === 'retrospective'
+        ? '<div class="report-grid full">' +
+            '<section class="report-card"><h2>Retrospective Comparison</h2><p><strong>Predicted verdict at sale:</strong> ' + escapeHtml(l2Verdict || 'Not evaluated yet') + '<br><strong>Actual realized margin:</strong> ' + escapeHtml(retrospective ? formatPercentValue(actualMarginNumber) : '—') + '<br><strong>Variance vs quoted margin:</strong> ' + escapeHtml(retrospectiveVariance === null ? '—' : ((retrospectiveVariance >= 0 ? '+' : '') + retrospectiveVariance.toFixed(1) + '%')) + '<br><strong>Actual vs hurdle:</strong> ' + escapeHtml(retrospectiveHurdleGap === null ? '—' : ((retrospectiveHurdleGap >= 0 ? '+' : '') + retrospectiveHurdleGap.toFixed(1) + '%')) + '<br><strong>Reading:</strong> ' + escapeHtml(retrospectiveReading || 'Enter actual revenue and cost to compare the completed project with the original hurdle.') + '</p>' + (retrospectiveNotes ? '<p><strong>Postmortem notes:</strong><br>' + escapeHtml(retrospectiveNotes).replace(/\n/g, '<br>') + '</p>' : '') + '</section>' +
+          '</div>'
+        : '') +
       '<div class="report-grid">' +
         renderExportTable('Layer 1 — Systematic Risk Calibration', layer1Data) +
         renderExportTable('Layer 2 — Engagement Risk Scoring', layer2Data) +
@@ -2804,6 +3034,86 @@
       cost,
       proposedMargin: Calc.proposedMargin(price, cost)
     };
+  }
+
+  function getActualDealMetrics() {
+    const revenue = parseFloat(document.getElementById('actual-revenue').value);
+    const cost = parseFloat(document.getElementById('actual-cost').value);
+
+    if (isNaN(revenue) || revenue <= 0 || isNaN(cost) || cost < 0) return null;
+
+    return {
+      revenue,
+      cost,
+      actualMargin: Calc.realizedMargin(revenue, cost)
+    };
+  }
+
+  function calcRetrospective() {
+    const predictedVerdictNode = document.getElementById('retro-predicted-verdict');
+    const actualMarginNode = document.getElementById('retro-actual-margin');
+    const actualSubNode = document.getElementById('retro-actual-sub');
+    const varianceNode = document.getElementById('retro-variance');
+    const varianceSubNode = document.getElementById('retro-variance-sub');
+    const hurdleGapNode = document.getElementById('retro-hurdle-gap');
+    const hurdleGapSubNode = document.getElementById('retro-hurdle-gap-sub');
+    const verdictNode = document.getElementById('retro-verdict');
+    const hintNode = document.getElementById('retro-hint');
+    const formulaNode = document.getElementById('retro-formula');
+
+    if (!predictedVerdictNode) return;
+
+    const requiredMargin = parseFloat(document.getElementById('l2-er').textContent);
+    const deal = getDealMetrics();
+    const actual = getActualDealMetrics();
+    const predictedVerdict = document.getElementById('l2-verdict').textContent.trim();
+
+    predictedVerdictNode.textContent = predictedVerdict || '—';
+    actualMarginNode.textContent = '—';
+    actualSubNode.textContent = 'enter actual revenue and cost';
+    varianceNode.textContent = '—';
+    varianceSubNode.textContent = 'actual - proposed';
+    hurdleGapNode.textContent = '—';
+    hurdleGapSubNode.textContent = 'actual - required';
+    verdictNode.innerHTML = '';
+    formulaNode.innerHTML = '<strong>Retrospective:</strong> compare the original proposed margin with the actual realized margin, then check both against the original hurdle <em>E</em>(<em>R</em>).';
+    hintNode.textContent = currentWorkflowMode === 'retrospective'
+      ? 'Use this mode after delivery to compare the actual result with the original pricing logic and capture one calibration note for next time.'
+      : 'Switch to retrospective mode to compare the original pricing logic with the actual result once the project is complete.';
+
+    if (!actual) return;
+
+    const actualMargin = Calc.round(actual.actualMargin, 1);
+    actualMarginNode.textContent = actualMargin.toFixed(1) + '%';
+    actualSubNode.textContent = formatMoney(actual.revenue) + ' - ' + formatMoney(actual.cost) + ' over ' + formatMoney(actual.revenue);
+
+    if (!deal || isNaN(requiredMargin)) {
+      verdictNode.innerHTML = '<span class="verdict caution">Complete the original Layer 2 pricing inputs before using retrospective mode</span>';
+      return;
+    }
+
+    const proposedMargin = Calc.round(deal.proposedMargin, 1);
+    const variance = Calc.gap(actualMargin, proposedMargin);
+    const hurdleGap = Calc.gap(actualMargin, requiredMargin);
+    const assessment = Calc.retrospectiveAssessment(requiredMargin, proposedMargin, actualMargin);
+
+    varianceNode.textContent = (variance >= 0 ? '+' : '') + variance.toFixed(1) + '%';
+    varianceSubNode.textContent = actualMargin.toFixed(1) + '% - ' + proposedMargin.toFixed(1) + '%';
+    hurdleGapNode.textContent = (hurdleGap >= 0 ? '+' : '') + hurdleGap.toFixed(1) + '%';
+    hurdleGapSubNode.textContent = actualMargin.toFixed(1) + '% - ' + requiredMargin.toFixed(1) + '%';
+    formulaNode.innerHTML =
+      '<strong>Retrospective:</strong> actual margin <span class="hl2">' + actualMargin.toFixed(1) + '%</span> versus quoted margin <span class="hl">' + proposedMargin.toFixed(1) + '%</span> and hurdle <span class="hl">' + requiredMargin.toFixed(1) + '%</span>.';
+
+    if (assessment.startsWith('Too optimistic')) {
+      verdictNode.innerHTML = '<span class="verdict stop">' + assessment + '</span>';
+      hintNode.textContent = 'The actual margin missed the original hurdle. Capture what changed and whether discovery, scope reduction, or a higher margin would have been the better call.';
+    } else if (assessment.startsWith('Too conservative')) {
+      verdictNode.innerHTML = '<span class="verdict caution">' + assessment + '</span>';
+      hintNode.textContent = 'The actual outcome outperformed the original quote. Note whether the score was too harsh or whether execution simply went unusually well.';
+    } else {
+      verdictNode.innerHTML = '<span class="verdict go">' + assessment + '</span>';
+      hintNode.textContent = 'The actual result stayed broadly in line with the original hurdle. Note any specific scoring adjustments you would still make next time.';
+    }
   }
 
   function renderLayer2Chart(data) {
@@ -3192,6 +3502,7 @@
     }
     renderLayer2Chart(chartData);
     calcBcorp();
+    calcRetrospective();
   }
 
   function calcBcorp() {
@@ -3329,9 +3640,11 @@
   syncAllScoreSelections();
   createMobileScorecards();
   initInfoTips();
+  updateWorkflowModeUi();
   calcLayer1();
   calcLayer2();
   calcBcorp();
+  calcRetrospective();
   updateExportControls();
   setPrimerStatus(restoredFromStorage ? 'restored' : 'defaults');
 </script>
