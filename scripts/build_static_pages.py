@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import html
+import json
 import re
 from pathlib import Path
 from urllib import request
@@ -628,6 +629,7 @@ PAGES = [
             ("TL;DR", "../tldr/price-the-work-before-you-plan-it.html", "secondary"),
             ("Walkthrough", "../tldr/walkthrough.html", "secondary"),
             ("Decision Guide", "../tldr/decision-guide.html", "secondary"),
+            ("Systems Thinking", "../essays/systems-thinking-for-web-development-agencies.html", "secondary"),
             ("Calibration Notes", "../tldr/calibration-notes.html", "secondary"),
         ],
         "toc_min": 2,
@@ -653,6 +655,7 @@ PAGES = [
             ("Walkthrough", "./walkthrough.html", "secondary"),
             ("Decision Guide", "./decision-guide.html", "secondary"),
             ("Calibration Notes", "./calibration-notes.html", "secondary"),
+            ("Systems Thinking", "../essays/systems-thinking-for-web-development-agencies.html", "secondary"),
             ("Understand the Theory", "../theory/index.html", "secondary"),
         ],
         "toc_min": 2,
@@ -662,10 +665,10 @@ PAGES = [
     {
         "source": ROOT / "tldr" / "CAPM for Agencies — Walkthrough.md",
         "output": ROOT / "tldr" / "walkthrough.html",
-        "title": "CAPM for Agencies — Worked Walkthrough",
+        "title": "CAPM for Agencies — Walkthrough",
         "description": "A concrete example of how to use the Decision Cards: start with the defaults, score one realistic agency deal, compare the proposed margin to the hurdle, and make the call.",
         "social_image": "/theory/figures/layer2-blended-beta.png",
-        "eyebrow": "Worked Walkthrough",
+        "eyebrow": "Walkthrough",
         "heading": "One Deal, Start to Finish",
         "article_kicker": "CAPM for Agencies",
         "toc_skip_first_heading": True,
@@ -677,6 +680,7 @@ PAGES = [
             ("TL;DR", "./price-the-work-before-you-plan-it.html", "secondary"),
             ("Decision Guide", "./decision-guide.html", "secondary"),
             ("Calibration Notes", "./calibration-notes.html", "secondary"),
+            ("Systems Thinking", "../essays/systems-thinking-for-web-development-agencies.html", "secondary"),
             ("Understand the Theory", "../theory/index.html", "secondary"),
         ],
         "toc_min": 2,
@@ -700,6 +704,7 @@ PAGES = [
             ("TL;DR", "./price-the-work-before-you-plan-it.html", "secondary"),
             ("Walkthrough", "./walkthrough.html", "secondary"),
             ("Calibration Notes", "./calibration-notes.html", "secondary"),
+            ("Systems Thinking", "../essays/systems-thinking-for-web-development-agencies.html", "secondary"),
             ("Understand the Theory", "../theory/index.html", "secondary"),
         ],
         "toc_min": 2,
@@ -724,7 +729,29 @@ PAGES = [
             ("Decision Guide", "./decision-guide.html", "secondary"),
             ("Walkthrough", "./walkthrough.html", "secondary"),
             ("Calibration Notes", "./calibration-notes.html", "secondary"),
+            ("Systems Thinking", "../essays/systems-thinking-for-web-development-agencies.html", "secondary"),
             ("Understand the Theory", "../theory/index.html", "secondary"),
+        ],
+        "toc_min": 2,
+        "toc_max": 3,
+        "lead": False,
+    },
+    {
+        "source": ROOT / "essays" / "Systems Thinking for Web Development Agencies.md",
+        "output": ROOT / "essays" / "systems-thinking-for-web-development-agencies.html",
+        "title": "Systems Thinking for Web Development Agencies",
+        "description": "A companion essay on why discovery, migration, caching, and implementation need to be framed as systems problems rather than isolated technical tasks.",
+        "social_image": "/theory/figures/capm-comparison.png",
+        "eyebrow": "Companion Essay",
+        "heading": "Systems Thinking for Web Development Agencies",
+        "deck": "A broader discovery and delivery essay for agencies: why migration, caching, and implementation decisions go wrong when they are framed as narrow technical tasks instead of connected systems problems.",
+        "meta": "Use this when you want the upstream discovery argument behind better pricing, scoping, and delivery decisions — and then jump back into the Decision Cards.",
+        "actions": [
+            ("Open the Decision Cards", "../index.html", "primary"),
+            ("Walkthrough", "../tldr/walkthrough.html", "secondary"),
+            ("Decision Guide", "../tldr/decision-guide.html", "secondary"),
+            ("Understand the Theory", "../theory/index.html", "secondary"),
+            ("Overview", "../overview/index.html", "secondary"),
         ],
         "toc_min": 2,
         "toc_max": 3,
@@ -829,12 +856,13 @@ def build_social_meta(page: dict) -> str:
     page_url = absolute_page_url(page["output"])
     image_url = absolute_asset_url(page.get("social_image", "/theory/figures/capm-comparison.png"))
     title = page["title"]
+    og_type = page.get("og_type", "article")
 
     return "\n".join([
         f'<meta name="description" content="{html.escape(description)}">',
         f'<link rel="canonical" href="{html.escape(page_url)}">',
         f'<meta property="og:site_name" content="CAPM for Agencies">',
-        f'<meta property="og:type" content="website">',
+        f'<meta property="og:type" content="{html.escape(og_type)}">',
         f'<meta property="og:title" content="{html.escape(title)}">',
         f'<meta property="og:description" content="{html.escape(description)}">',
         f'<meta property="og:url" content="{html.escape(page_url)}">',
@@ -845,6 +873,36 @@ def build_social_meta(page: dict) -> str:
         f'<meta name="twitter:description" content="{html.escape(description)}">',
         f'<meta name="twitter:image" content="{html.escape(image_url)}">',
     ])
+
+
+def build_structured_data(page: dict) -> str:
+    description = page.get("description") or strip_tags(page.get("deck", ""))
+    page_url = absolute_page_url(page["output"])
+    image_url = absolute_asset_url(page.get("social_image", "/theory/figures/capm-comparison.png"))
+    data = {
+        "@context": "https://schema.org",
+        "@type": page.get("schema_type", "Article"),
+        "headline": page["title"],
+        "description": description,
+        "url": page_url,
+        "image": [image_url],
+        "author": {
+            "@type": "Person",
+            "name": "Dan Knauss",
+            "url": "https://dan.knauss.ca/",
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "New Local Media",
+            "url": "https://newlocalmedia.com/",
+        },
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "CAPM for Agencies",
+            "url": SITE_URL + "/",
+        },
+    }
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
 
 
 def build_actions(actions) -> str:
@@ -952,6 +1010,7 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{html.escape(page["title"])}</title>
 {build_social_meta(page)}
+{build_structured_data(page)}
 <style>
 {PAGE_STYLE}
 </style>
