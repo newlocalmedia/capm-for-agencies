@@ -3,7 +3,7 @@
 
 ## Executive Summary
 
-The goal of CAPM for Agencies is to **price the work before you plan it**. More precisely: price the work before *delivery planning* is committed, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether the thing being sold should be implementation or discovery. It ensures that the agency is always compensated fairly for the uncertainty it accepts, protecting long-term profitability and sustainability.
+The goal of CAPM for Agencies is to **price the work before you plan it**. More precisely: price the work before *delivery planning* is committed, not before technical and delivery leads have done enough assessment to assess complexity, challenges unique to the client, and whether the next level of engagement should be a deeper discovery process or a faster track to implementation. It ensures that the agency is always compensated fairly for the uncertainty it accepts, protecting long-term profitability and sustainability.
 
 ### The Problem: "Gut-Feel" Pricing
 Most agencies price project risk using arbitrary contingency percentages or hourly padding. These methods fail to distinguish between **systematic risks** (market-wide forces you cannot control) and **idiosyncratic risks** (project-specific variables that should wash out across a healthy portfolio).
