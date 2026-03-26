@@ -178,6 +178,8 @@ This is a good example of the B Corp overlay doing what it should: making the mi
 
 ## What To Watch For
 
+One practical calibration note: agency-wide **net margin** benchmarks and project-level **portfolio margin** benchmarks are not the same thing. Industry averages may sit in the mid-teens, while a usable project-margin benchmark for pricing decisions may reasonably be higher.
+
 The current Decision Cards build is strongest when:
 
 * the team agrees on what the score anchors mean
