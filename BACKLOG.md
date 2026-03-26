@@ -56,7 +56,7 @@ The intent is lightweight behavioral clarity, not a formal BDD framework.
 
 **Tasks:**
 - allow Layer 2-only evaluation with explicit default values
-- clearly mark defaults as provisional
+- revisit calibration optionality only when there is a real user-facing alternative such as `Use defaults` versus `Customize calibration`
 - add a “start simple” path in the UI or overview
 - avoid forcing full Layer 1 understanding on first use
 
@@ -146,6 +146,20 @@ The intent is lightweight behavioral clarity, not a formal BDD framework.
 - use the mode as a confidence-building and calibration tool
 
 **Estimate:** 5–8 hours
+
+### [P2] Add a true two-mode workflow for presales vs retrospective
+
+**Outcome:** Presales and retrospective work feel like distinct workflows instead of one shared state model.
+
+**Tasks:**
+- keep the original presales snapshot stable across both modes
+- make retrospective-only fields separate and clearly scoped to completed projects
+- decide which original inputs are read-only in retrospective mode by default
+- add an explicit `Edit original presales inputs` path instead of silently mutating the presales record
+- explore a later `Retrospective re-score` path for “what we would score differently now”
+- add regression coverage for mode switching, persistence, and export behavior
+
+**Estimate:** 6–10 hours
 
 ### [P2] Add lightweight integration surfaces
 

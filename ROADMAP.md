@@ -130,6 +130,92 @@ These are the highest-leverage ways to improve trust and adoption:
 
 **Why important:** This is the clearest path to empirical validation and internal buy-in.
 
+### 5B. Two-Mode Workflow: Presales vs Retrospective
+
+**Goal:** Make presales and retrospective feel like intentionally different workflows, not just the same controls with a few extra fields attached.
+
+**Problem this solves:**
+- shared state across both modes is conceptually muddy
+- editing scores in retrospective mode can accidentally rewrite the original presales record
+- users need to distinguish between:
+  1. the original pricing decision
+  2. the actual completed-project outcome
+  3. a possible “what we would score differently now” reflection
+
+**Design principle:**
+Treat the original presales snapshot as the baseline record, and layer retrospective analysis on top of it rather than letting the two workflows overwrite each other silently.
+
+#### First slice
+
+**Goal:** Make the original presales record visible and stable in retrospective mode.
+
+**Scope:**
+- preserve the original presales scores, quoted price, estimated cost, and hurdle
+- keep retrospective-only fields separate:
+  - actual revenue
+  - actual cost
+  - postmortem notes
+- show the original presales verdict and margin alongside the actual outcome
+- make original presales inputs read-only in retrospective mode by default
+- add one explicit affordance:
+  - `Edit original presales inputs`
+
+**Acceptance criteria:**
+- Given a scored presales deal, when a user switches to retrospective mode, then the original scores and quoted economics are still shown as the baseline
+- Given retrospective mode is active, when a user enters actual cost and revenue, then only retrospective fields change by default
+- Given retrospective mode is active, when a user wants to revise the original presales record, then they must choose an explicit edit action
+
+#### Second slice
+
+**Goal:** Add a reflective re-score path without corrupting the original record.
+
+**Scope:**
+- add an optional `Retrospective re-score`
+- compare:
+  - original presales score
+  - retrospective re-score
+  - actual project outcome
+- keep the original presales record immutable unless explicitly edited
+
+**Acceptance criteria:**
+- Given a completed project, when a user performs a retrospective re-score, then the app can show what was underestimated or overestimated without losing the original score
+- Given both original and retrospective scores exist, when the user exports, then the report clearly labels which is which
+
+#### Third slice
+
+**Goal:** Turn retrospective mode into a real calibration loop rather than a single-project note field.
+
+**Scope:**
+- save completed-project snapshots locally or exportably
+- compare multiple completed projects over time
+- identify repeated misses:
+  - scope too soft
+  - timeline too soft
+  - contract risk too soft
+- use patterns to revisit defaults and caution thresholds
+
+**Acceptance criteria:**
+- Given multiple completed-project reviews, when a user looks back across them, then recurring miss patterns are visible
+- Given repeated retrospective misses, when a team adjusts its defaults or scoring habits, then the system supports that as a conscious governance decision
+
+#### Implementation notes
+
+- keep this work on a dedicated branch until the workflow is clean enough to merge without confusing `main`
+- use BDD-style user stories for each slice
+- use TDD for:
+  - persistence shape
+  - mode switching rules
+  - export labeling
+  - original-vs-retrospective state boundaries
+
+#### Suggested sequence
+
+1. separate presales snapshot from retrospective fields in persisted state
+2. make original presales inputs read-only in retrospective mode
+3. add explicit `Edit original presales inputs`
+4. add retrospective re-score
+5. add multi-project retrospective history later
+
 ## Phase 3 — Positioning and Presentation
 
 ### 6. Softer Front-End Branding
