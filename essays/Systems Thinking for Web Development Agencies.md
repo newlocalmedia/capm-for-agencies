@@ -1,6 +1,6 @@
 ## Why discovery sometimes has to come first
 
-Agencies usually underprice work when they treat discovery, migration, caching, or implementation as isolated technical tasks. The problem is not just technical uncertainty. It is that the real work often sits inside a larger system of content, workflows, stakeholder alignment, trust, product decisions, and organizational constraints.
+Agencies underprice work when they move too quickly into the weeds of isolated technical tasks and implementation details. The problem is not just technical uncertainty. It is that the real work often sits inside a larger system of content, workflows, stakeholder alignment, trust, product decisions, and organizational constraints.
 
 That matters for pricing as much as it matters for delivery. If you frame a migration, caching strategy, or rebuild as a narrow implementation exercise, you will usually underestimate the work, undersell the risk, and miss the deeper business problem the client is actually paying you to solve.
 
