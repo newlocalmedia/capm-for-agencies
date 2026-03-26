@@ -29,9 +29,9 @@ test('export meaning column explains score direction and uses factor labels', ()
 
 test('first-pass defaults are explicit for new users', () => {
   assert.match(html, /id="l1-input" value="1\.00"/);
-  assert.match(html, /Using default calibration/);
-  assert.match(html, /Agency <em>R<sub>f<\/sub><\/em> is set to 10%/);
-  assert.match(html, /start with Layer 2 immediately/i);
+  assert.match(html, /id="rf" value="10"/);
+  assert.match(html, /id="rm" value="22"/);
+  assert.match(html, /Begin with Layer 2 for the practical go\/no-go workflow/i);
 });
 
 test('app persists calculator state in localStorage', () => {
