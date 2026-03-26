@@ -122,7 +122,7 @@ Mullins defends CAPM as a useful model for *disciplined thinking about risk*, sp
 
 **Expected Return \= Risk-Free Rate \+ β × (Market Premium)**
 
-<table class="formula-components">
+<table>
   <colgroup>
     <col style="width: 28%;">
     <col style="width: 72%;">
