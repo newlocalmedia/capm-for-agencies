@@ -55,3 +55,9 @@ test('layer 2 calculator clamps baseline inputs and explains when price floor ex
   assert.match(html, /if \(rm < rf\) rm = rf;/);
   assert.match(html, /above current quote by/);
 });
+
+test('b corp manual override is bounded to a sane range', () => {
+  assert.match(html, /id="bc-manual-adj"[^>]*min="-15"[^>]*max="15"/);
+  assert.match(html, /function sanitizeManualImpactAdjustment\(\)/);
+  assert.match(html, /value = clampNumber\(value, -15, 15\);/);
+});
