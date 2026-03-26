@@ -39,10 +39,6 @@
     return round(((price - cost) / price) * 100, 1);
   }
 
-  function realizedMargin(revenue, cost) {
-    return proposedMargin(revenue, cost);
-  }
-
   function minimumDealPrice(cost, requiredMargin) {
     if (requiredMargin >= 100) return null;
     return cost / (1 - (requiredMargin / 100));
@@ -89,19 +85,6 @@
     return 'Stop — proposed margin does not clear the impact-adjusted hurdle';
   }
 
-  function retrospectiveAssessment(requiredMargin, proposedMarginValue, actualMargin) {
-    const hurdleGap = gap(actualMargin, requiredMargin);
-    const quoteVariance = gap(actualMargin, proposedMarginValue);
-
-    if (hurdleGap < 0) {
-      return 'Too optimistic — actual margin missed the original hurdle';
-    }
-    if (quoteVariance >= 3) {
-      return 'Too conservative — actual margin materially outperformed the quoted margin';
-    }
-    return 'Priced correctly — actual margin was directionally in line with the original hurdle';
-  }
-
   return {
     round,
     layer1FactorFromScore,
@@ -110,13 +93,11 @@
     blendedBeta,
     requiredReturn,
     proposedMargin,
-    realizedMargin,
     minimumDealPrice,
     gap,
     layer2Verdict,
     bcorpPortfolioModifier,
     bcorpImpactAdjustment,
-    bcorpVerdict,
-    retrospectiveAssessment
+    bcorpVerdict
   };
 }));
