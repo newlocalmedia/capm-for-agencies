@@ -629,14 +629,7 @@
   }
   .calc-row:last-child { margin-bottom: 0; }
 
-  .calc-field {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .calc-field label {
-    display: block;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.5px;
@@ -743,12 +736,6 @@
     min-width: min(100%, 520px);
     flex: 1 1 320px;
   }
-  .notes-field {
-    margin-top: 12px;
-  }
-  .notes-field .calc-field {
-    width: 100%;
-  }
   .calc-field .unit {
     font-size: 11px;
     color: var(--gray400);
@@ -820,8 +807,7 @@
     border-radius: var(--radius);
     padding: 10px 14px;
     margin-bottom: 16px;
-    word-break: normal;
-    overflow-wrap: break-word;
+    word-break: break-all;
   }
   .formula-bar .hl { color: var(--blue); font-weight: 700; }
   .formula-bar .hl2 { color: var(--accent-dark); font-weight: 700; }
@@ -1625,13 +1611,13 @@
             </div>
           </div>
           <div id="retro-verdict" role="status" aria-live="polite"></div>
-          <div class="retrospective-hint" id="retro-hint">Use this mode after delivery to compare the actual result with the original pricing logic and capture one calibration note for next time.</div>
-          <div class="notes-field">
+          <div class="calc-row">
             <div class="calc-field wide">
               <label for="retro-notes">Postmortem Notes</label>
               <textarea id="retro-notes" placeholder="What changed? Was discovery the better sale? What would you score differently next time?" oninput="markExportDirty()"></textarea>
             </div>
           </div>
+          <div class="retrospective-hint" id="retro-hint">Use this mode after delivery to compare the actual result with the original pricing logic and capture one calibration note for next time.</div>
         </div>
       </div>
     </div>
