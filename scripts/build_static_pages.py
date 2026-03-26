@@ -438,20 +438,20 @@ PAGE_STYLE = """
     vertical-align: top;
   }
 
-  .prose table.formula-components thead,
-  .prose table.formula-components tbody,
-  .prose table.formula-components tr {
+  .prose h2#the-formula + p + p + table thead,
+  .prose h2#the-formula + p + p + table tbody,
+  .prose h2#the-formula + p + p + table tr {
     table-layout: auto;
   }
 
-  .prose table.formula-components th:first-child,
-  .prose table.formula-components td:first-child {
+  .prose h2#the-formula + p + p + table th:first-child,
+  .prose h2#the-formula + p + p + table td:first-child {
     width: 28%;
     white-space: nowrap;
   }
 
-  .prose table.formula-components th:last-child,
-  .prose table.formula-components td:last-child {
+  .prose h2#the-formula + p + p + table th:last-child,
+  .prose h2#the-formula + p + p + table td:last-child {
     width: 72%;
   }
 
