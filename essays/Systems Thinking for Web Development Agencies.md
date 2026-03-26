@@ -1,12 +1,20 @@
-## Web projects fail when treated as technical problems instead of systems problems.
+## Why discovery sometimes has to come first
 
-Migration is not just data transfer. Caching is not just infrastructure. Discovery is not just requirements. In agency work, these are all systems problems: they sit at the intersection of technology, content, workflow, trust, stakeholder alignment, and business value.
+Agencies usually underprice work when they treat discovery, migration, caching, or implementation as isolated technical tasks. The problem is not just technical uncertainty. It is that the real work often sits inside a larger system of content, workflows, stakeholder alignment, trust, product decisions, and organizational constraints.
 
-That matters for pricing as much as it matters for delivery. If you frame a migration, caching strategy, or rebuild as a narrow technical task, you will usually underestimate the work, undersell the risk, and miss the deeper business problem the client is actually paying you to solve.
+That matters for pricing as much as it matters for delivery. If you frame a migration, caching strategy, or rebuild as a narrow implementation exercise, you will usually underestimate the work, undersell the risk, and miss the deeper business problem the client is actually paying you to solve.
 
-This companion essay sits next to the [Decision Cards](../index.html). It is not another explanation of CAPM. It is a broader argument for why upstream thinking matters in agency work, and why a discovery phase is often the right next step before implementation is priced or committed.
+This companion essay sits next to the [Decision Cards](../index.html). It is not another explanation of CAPM. It is the deeper rationale behind one of the model’s most important practical conclusions: sometimes the next thing to sell is not implementation. It is a discovery phase.
 
-## Discovery is where you decide what problem you are actually solving.
+## How this connects to the Decision Cards
+
+The [Decision Cards](../index.html) are trying to stop a familiar agency mistake: selling implementation before the problem has been defined well enough to price responsibly.
+
+When Layer 2 starts surfacing unclear scope, client-specific complexity, organizational friction, or unusually high delivery uncertainty, the model is not just telling you to raise the price. Sometimes it is telling you that the wrong engagement is being priced.
+
+That is where this essay fits. It explains why a discovery phase is often the right next level of engagement, and why upstream systems thinking belongs in pricing conversations before delivery planning is committed.
+
+## Discovery is where you decide what problem you are actually solving
 
 Discovery is the most important phase of a project because it is where strategy, design, and technology begin to line up with reality.
 
@@ -35,7 +43,23 @@ Bad discovery tends to show up later as:
 
 Good discovery blends UX research, technical feasibility, and the way the client organization actually works.
 
-## Migration is a content design exercise disguised as a technical task.
+## A quick example: when implementation is the wrong thing to quote
+
+A client asks for a website migration. On paper, it looks like technical implementation work: move content, rebuild templates, map fields, go live.
+
+But once you look closer, the real problem is usually bigger:
+
+- content ownership is unclear
+- the old information architecture no longer matches the organization
+- editorial workflows are inconsistent
+- stakeholders disagree about what should survive the move
+- performance and publishing expectations conflict with the current stack
+
+That is not just an implementation quote waiting to be written. It is a discovery problem first.
+
+This is exactly the kind of situation where the [Walkthrough](../tldr/walkthrough.html), the [Decision Guide](../tldr/decision-guide.html), and the theory behind the model are trying to improve judgment. The right answer may be a faster track to implementation. But it may also be a discovery phase first — or no engagement at all.
+
+## Migration is a content design exercise disguised as a technical task
 
 Migration is not simply a technical problem. It is a content, editorial, business, and workflow problem first.
 
@@ -53,7 +77,7 @@ This is why migration planning should not be left to developers alone. Project m
 
 Treat migration like a lift-and-shift exercise and you usually get clutter, broken UX, poor SEO, and a cheaper-looking project than the client actually needs.
 
-## Migration success depends on feedback loops, not perfect plans.
+## Migration success depends on feedback loops, not perfect plans
 
 Real migrations are messy. The systems are inconsistent. The content is uneven. Requirements move. Data models refuse to line up neatly.
 
@@ -68,7 +92,7 @@ The hardest part is usually not tooling. It is mapping one system of assumptions
 
 That is another reason discovery and migration planning should be treated as valuable work in their own right.
 
-## Caching is a product, UX, and SEO concern — not just an ops concern.
+## Caching is a product, UX, and SEO concern — not just an ops concern
 
 Caching is often treated as a backend implementation detail. In practice, it changes user experience, publishing workflows, performance, SEO, and sometimes even the client’s understanding of how their site behaves.
 
@@ -83,13 +107,11 @@ Caching decisions affect:
 
 Because caching operates across browser, CDN, and application layers, it is never purely an infrastructure question. It is a cross-team product decision with technical constraints.
 
-## Systems thinking changes pricing, not just delivery.
-
-This is where the essay connects back to the [Decision Cards](../index.html).
+## Systems thinking changes pricing, not just delivery
 
 If discovery, migration, and performance work are really systems problems, then pricing them as if they were isolated technical tasks will usually understate the risk. The result is familiar: implementation gets sold too early, planning gets smuggled into delivery, and the agency absorbs complexity that should have been surfaced before the quote was finalized.
 
-The [Walkthrough](../tldr/walkthrough.html) and [Decision Guide](../tldr/decision-guide.html) are both trying to prevent that mistake. So is the theory behind the model. The point is not to replace judgment. It is to make judgment discussable before the work is committed.
+The point is not to replace judgment. It is to make judgment discussable before the work is committed.
 
 Sometimes the right next move is a faster track to implementation. Sometimes it is a discovery phase. Sometimes it is walking away. Systems thinking helps you tell the difference earlier.
 

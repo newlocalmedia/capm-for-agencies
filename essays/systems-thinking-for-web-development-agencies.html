@@ -3,21 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Systems Thinking for Web Development Agencies</title>
+<title>Why Discovery Comes First — Systems Thinking for Web Development Agencies</title>
 <meta name="description" content="A companion essay on why discovery, migration, caching, and implementation need to be framed as systems problems rather than isolated technical tasks.">
 <link rel="canonical" href="https://newlocalmedia.github.io/capm-for-agencies/essays/systems-thinking-for-web-development-agencies.html">
 <meta property="og:site_name" content="CAPM for Agencies">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Systems Thinking for Web Development Agencies">
+<meta property="og:title" content="Why Discovery Comes First — Systems Thinking for Web Development Agencies">
 <meta property="og:description" content="A companion essay on why discovery, migration, caching, and implementation need to be framed as systems problems rather than isolated technical tasks.">
 <meta property="og:url" content="https://newlocalmedia.github.io/capm-for-agencies/essays/systems-thinking-for-web-development-agencies.html">
 <meta property="og:image" content="https://newlocalmedia.github.io/capm-for-agencies/theory/figures/capm-comparison.png">
 <meta property="og:image:type" content="image/png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Systems Thinking for Web Development Agencies">
+<meta name="twitter:title" content="Why Discovery Comes First — Systems Thinking for Web Development Agencies">
 <meta name="twitter:description" content="A companion essay on why discovery, migration, caching, and implementation need to be framed as systems problems rather than isolated technical tasks.">
 <meta name="twitter:image" content="https://newlocalmedia.github.io/capm-for-agencies/theory/figures/capm-comparison.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Systems Thinking for Web Development Agencies", "description": "A companion essay on why discovery, migration, caching, and implementation need to be framed as systems problems rather than isolated technical tasks.", "url": "https://newlocalmedia.github.io/capm-for-agencies/essays/systems-thinking-for-web-development-agencies.html", "image": ["https://newlocalmedia.github.io/capm-for-agencies/theory/figures/capm-comparison.png"], "author": {"@type": "Person", "name": "Dan Knauss", "url": "https://dan.knauss.ca/"}, "publisher": {"@type": "Organization", "name": "New Local Media", "url": "https://newlocalmedia.com/"}, "isPartOf": {"@type": "WebSite", "name": "CAPM for Agencies", "url": "https://newlocalmedia.github.io/capm-for-agencies/"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Why Discovery Comes First — Systems Thinking for Web Development Agencies", "description": "A companion essay on why discovery, migration, caching, and implementation need to be framed as systems problems rather than isolated technical tasks.", "url": "https://newlocalmedia.github.io/capm-for-agencies/essays/systems-thinking-for-web-development-agencies.html", "image": ["https://newlocalmedia.github.io/capm-for-agencies/theory/figures/capm-comparison.png"], "author": {"@type": "Person", "name": "Dan Knauss", "url": "https://dan.knauss.ca/"}, "publisher": {"@type": "Organization", "name": "New Local Media", "url": "https://newlocalmedia.com/"}, "isPartOf": {"@type": "WebSite", "name": "CAPM for Agencies", "url": "https://newlocalmedia.github.io/capm-for-agencies/"}}</script>
 <style>
 
   :root {
@@ -620,8 +620,8 @@
       <div class="eyebrow">Companion Essay</div>
       <div class="masthead-grid">
         <div>
-          <h1>Systems Thinking for Web Development Agencies</h1>
-          <p class="deck">A broader discovery and delivery essay for agencies: why migration, caching, and implementation decisions go wrong when they are framed as narrow technical tasks instead of connected systems problems.</p>
+          <h1>Why Discovery Comes First</h1>
+          <p class="deck">A companion essay on why some agency work should begin with a discovery phase: migration, caching, and implementation decisions often go wrong when they are framed as narrow technical tasks instead of connected systems problems.</p>
         </div>
         <div class="meta">
           <div class="meta-copy">Use this when you want the upstream discovery argument behind better pricing, scoping, and delivery decisions — and then jump back into the Decision Cards.</div>
@@ -640,12 +640,14 @@
       <aside class="toc-card">
         <h2 class="toc-title">On This Page</h2>
         <nav class="toc">
-          <a class="level-2" href="#web-projects-fail-when-treated-as-technical-problems-instead-of-systems-problems">Web projects fail when treated as technical problems instead of systems problems.</a>
-<a class="level-2" href="#discovery-is-where-you-decide-what-problem-you-are-actually-solving">Discovery is where you decide what problem you are actually solving.</a>
-<a class="level-2" href="#migration-is-a-content-design-exercise-disguised-as-a-technical-task">Migration is a content design exercise disguised as a technical task.</a>
-<a class="level-2" href="#migration-success-depends-on-feedback-loops-not-perfect-plans">Migration success depends on feedback loops, not perfect plans.</a>
-<a class="level-2" href="#caching-is-a-product-ux-and-seo-concern--not-just-an-ops-concern">Caching is a product, UX, and SEO concern — not just an ops concern.</a>
-<a class="level-2" href="#systems-thinking-changes-pricing-not-just-delivery">Systems thinking changes pricing, not just delivery.</a>
+          <a class="level-2" href="#why-discovery-sometimes-has-to-come-first">Why discovery sometimes has to come first</a>
+<a class="level-2" href="#how-this-connects-to-the-decision-cards">How this connects to the Decision Cards</a>
+<a class="level-2" href="#discovery-is-where-you-decide-what-problem-you-are-actually-solving">Discovery is where you decide what problem you are actually solving</a>
+<a class="level-2" href="#a-quick-example-when-implementation-is-the-wrong-thing-to-quote">A quick example: when implementation is the wrong thing to quote</a>
+<a class="level-2" href="#migration-is-a-content-design-exercise-disguised-as-a-technical-task">Migration is a content design exercise disguised as a technical task</a>
+<a class="level-2" href="#migration-success-depends-on-feedback-loops-not-perfect-plans">Migration success depends on feedback loops, not perfect plans</a>
+<a class="level-2" href="#caching-is-a-product-ux-and-seo-concern--not-just-an-ops-concern">Caching is a product, UX, and SEO concern — not just an ops concern</a>
+<a class="level-2" href="#systems-thinking-changes-pricing-not-just-delivery">Systems thinking changes pricing, not just delivery</a>
 <a class="level-2" href="#what-this-means-for-agency-teams">What this means for agency teams</a>
 <a class="level-2" href="#try-the-decision-cards">Try the Decision Cards</a>
 <a class="level-2" href="#further-reading-on-discovery-and-systems-thinking">Further reading on discovery and systems thinking</a>
@@ -656,11 +658,15 @@
         <div class="article-frame">
           <article class="prose">
             
-            <h2 id="web-projects-fail-when-treated-as-technical-problems-instead-of-systems-problems">Web projects fail when treated as technical problems instead of systems problems.</h2>
-<p>Migration is not just data transfer. Caching is not just infrastructure. Discovery is not just requirements. In agency work, these are all systems problems: they sit at the intersection of technology, content, workflow, trust, stakeholder alignment, and business value.</p>
-<p>That matters for pricing as much as it matters for delivery. If you frame a migration, caching strategy, or rebuild as a narrow technical task, you will usually underestimate the work, undersell the risk, and miss the deeper business problem the client is actually paying you to solve.</p>
-<p>This companion essay sits next to the <a href="../index.html">Decision Cards</a>. It is not another explanation of CAPM. It is a broader argument for why upstream thinking matters in agency work, and why a discovery phase is often the right next step before implementation is priced or committed.</p>
-<h2 id="discovery-is-where-you-decide-what-problem-you-are-actually-solving">Discovery is where you decide what problem you are actually solving.</h2>
+            <h2 id="why-discovery-sometimes-has-to-come-first">Why discovery sometimes has to come first</h2>
+<p>Agencies usually underprice work when they treat discovery, migration, caching, or implementation as isolated technical tasks. The problem is not just technical uncertainty. It is that the real work often sits inside a larger system of content, workflows, stakeholder alignment, trust, product decisions, and organizational constraints.</p>
+<p>That matters for pricing as much as it matters for delivery. If you frame a migration, caching strategy, or rebuild as a narrow implementation exercise, you will usually underestimate the work, undersell the risk, and miss the deeper business problem the client is actually paying you to solve.</p>
+<p>This companion essay sits next to the <a href="../index.html">Decision Cards</a>. It is not another explanation of CAPM. It is the deeper rationale behind one of the model’s most important practical conclusions: sometimes the next thing to sell is not implementation. It is a discovery phase.</p>
+<h2 id="how-this-connects-to-the-decision-cards">How this connects to the Decision Cards</h2>
+<p>The <a href="../index.html">Decision Cards</a> are trying to stop a familiar agency mistake: selling implementation before the problem has been defined well enough to price responsibly.</p>
+<p>When Layer 2 starts surfacing unclear scope, client-specific complexity, organizational friction, or unusually high delivery uncertainty, the model is not just telling you to raise the price. Sometimes it is telling you that the wrong engagement is being priced.</p>
+<p>That is where this essay fits. It explains why a discovery phase is often the right next level of engagement, and why upstream systems thinking belongs in pricing conversations before delivery planning is committed.</p>
+<h2 id="discovery-is-where-you-decide-what-problem-you-are-actually-solving">Discovery is where you decide what problem you are actually solving</h2>
 <p>Discovery is the most important phase of a project because it is where strategy, design, and technology begin to line up with reality.</p>
 <p>A good discovery phase defines:</p>
 <ul>
@@ -686,7 +692,19 @@
 <li>delivery friction that was priced too cheaply because it was understood too narrowly</li>
 </ul>
 <p>Good discovery blends UX research, technical feasibility, and the way the client organization actually works.</p>
-<h2 id="migration-is-a-content-design-exercise-disguised-as-a-technical-task">Migration is a content design exercise disguised as a technical task.</h2>
+<h2 id="a-quick-example-when-implementation-is-the-wrong-thing-to-quote">A quick example: when implementation is the wrong thing to quote</h2>
+<p>A client asks for a website migration. On paper, it looks like technical implementation work: move content, rebuild templates, map fields, go live.</p>
+<p>But once you look closer, the real problem is usually bigger:</p>
+<ul>
+<li>content ownership is unclear</li>
+<li>the old information architecture no longer matches the organization</li>
+<li>editorial workflows are inconsistent</li>
+<li>stakeholders disagree about what should survive the move</li>
+<li>performance and publishing expectations conflict with the current stack</li>
+</ul>
+<p>That is not just an implementation quote waiting to be written. It is a discovery problem first.</p>
+<p>This is exactly the kind of situation where the <a href="../tldr/walkthrough.html">Walkthrough</a>, the <a href="../tldr/decision-guide.html">Decision Guide</a>, and the theory behind the model are trying to improve judgment. The right answer may be a faster track to implementation. But it may also be a discovery phase first — or no engagement at all.</p>
+<h2 id="migration-is-a-content-design-exercise-disguised-as-a-technical-task">Migration is a content design exercise disguised as a technical task</h2>
 <p>Migration is not simply a technical problem. It is a content, editorial, business, and workflow problem first.</p>
 <p>The real work is not just moving data. It is understanding what the content means, how it is structured, who owns it, what should be kept, what should be retired, and how the future operating model should differ from the current one.</p>
 <p>That usually means:</p>
@@ -699,7 +717,7 @@
 </ul>
 <p>This is why migration planning should not be left to developers alone. Project managers, editors, marketers, and other non-dev stakeholders are critical to deciding what content matters and what kind of change the migration is actually supposed to produce.</p>
 <p>Treat migration like a lift-and-shift exercise and you usually get clutter, broken UX, poor SEO, and a cheaper-looking project than the client actually needs.</p>
-<h2 id="migration-success-depends-on-feedback-loops-not-perfect-plans">Migration success depends on feedback loops, not perfect plans.</h2>
+<h2 id="migration-success-depends-on-feedback-loops-not-perfect-plans">Migration success depends on feedback loops, not perfect plans</h2>
 <p>Real migrations are messy. The systems are inconsistent. The content is uneven. Requirements move. Data models refuse to line up neatly.</p>
 <p>What tends to work is:</p>
 <ul>
@@ -710,7 +728,7 @@
 </ul>
 <p>The hardest part is usually not tooling. It is mapping one system of assumptions into another while the client is still clarifying what the destination should be.</p>
 <p>That is another reason discovery and migration planning should be treated as valuable work in their own right.</p>
-<h2 id="caching-is-a-product-ux-and-seo-concern--not-just-an-ops-concern">Caching is a product, UX, and SEO concern — not just an ops concern.</h2>
+<h2 id="caching-is-a-product-ux-and-seo-concern--not-just-an-ops-concern">Caching is a product, UX, and SEO concern — not just an ops concern</h2>
 <p>Caching is often treated as a backend implementation detail. In practice, it changes user experience, publishing workflows, performance, SEO, and sometimes even the client’s understanding of how their site behaves.</p>
 <p>Caching decisions affect:</p>
 <ul>
@@ -722,10 +740,9 @@
 <li>personalization versus cacheability</li>
 </ul>
 <p>Because caching operates across browser, CDN, and application layers, it is never purely an infrastructure question. It is a cross-team product decision with technical constraints.</p>
-<h2 id="systems-thinking-changes-pricing-not-just-delivery">Systems thinking changes pricing, not just delivery.</h2>
-<p>This is where the essay connects back to the <a href="../index.html">Decision Cards</a>.</p>
+<h2 id="systems-thinking-changes-pricing-not-just-delivery">Systems thinking changes pricing, not just delivery</h2>
 <p>If discovery, migration, and performance work are really systems problems, then pricing them as if they were isolated technical tasks will usually understate the risk. The result is familiar: implementation gets sold too early, planning gets smuggled into delivery, and the agency absorbs complexity that should have been surfaced before the quote was finalized.</p>
-<p>The <a href="../tldr/walkthrough.html">Walkthrough</a> and <a href="../tldr/decision-guide.html">Decision Guide</a> are both trying to prevent that mistake. So is the theory behind the model. The point is not to replace judgment. It is to make judgment discussable before the work is committed.</p>
+<p>The point is not to replace judgment. It is to make judgment discussable before the work is committed.</p>
 <p>Sometimes the right next move is a faster track to implementation. Sometimes it is a discovery phase. Sometimes it is walking away. Systems thinking helps you tell the difference earlier.</p>
 <h2 id="what-this-means-for-agency-teams">What this means for agency teams</h2>
 <p>A systems-thinking posture usually implies a few practical habits:</p>
