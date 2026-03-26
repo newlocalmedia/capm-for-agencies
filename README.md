@@ -38,8 +38,11 @@ Download reference cards from the `pdf/` directory:
 ### Text Overview
 A text-first landing page lives in `overview/index.html`.
 
-### Worked Walkthrough
+### Walkthrough
 A short practical walkthrough of one realistic agency deal lives in `tldr/walkthrough.html`.
+
+### Companion Essay
+A systems-thinking companion essay on discovery, migration, caching, and upstream problem framing lives in `essays/systems-thinking-for-web-development-agencies.html`.
 
 ### Theory and Background
 The long-form theory text and commentary live in `theory/capm-for-agencies.md`.
