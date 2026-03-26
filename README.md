@@ -42,7 +42,7 @@ A text-first landing page lives in `overview/index.html`.
 A short practical walkthrough of one realistic agency deal lives in `tldr/walkthrough.html`.
 
 ### Companion Essay
-A systems-thinking companion essay on discovery, migration, caching, and upstream problem framing lives in `essays/systems-thinking-for-web-development-agencies.html`.
+A companion essay on why some work should begin with discovery rather than premature implementation lives in `essays/systems-thinking-for-web-development-agencies.html`.
 
 ### Theory and Background
 The long-form theory text and commentary live in `theory/capm-for-agencies.md`.
