@@ -46,3 +46,12 @@ test('reset control clears saved state and restores defaults', () => {
   assert.match(html, /localStorage\.removeItem\(STORAGE_KEY\)/);
   assert.match(html, /applyInputSnapshot\(\)/);
 });
+
+test('layer 2 calculator clamps baseline inputs and explains when price floor exceeds the quote', () => {
+  assert.match(html, /id="rf"[^>]*min="0"[^>]*max="40"/);
+  assert.match(html, /id="rm"[^>]*min="0"[^>]*max="60"/);
+  assert.match(html, /id="l1-input"[^>]*min="0\.5"[^>]*max="2\.0"/);
+  assert.match(html, /function sanitizeLayer2Inputs\(\)/);
+  assert.match(html, /if \(rm < rf\) rm = rf;/);
+  assert.match(html, /above current quote by/);
+});

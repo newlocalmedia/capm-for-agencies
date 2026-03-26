@@ -1335,7 +1335,7 @@
               <div class="tooltip-text">Your agency equivalent of the risk-free rate: the typical margin from your lowest-risk, most predictable revenue, such as retainers, maintenance, or other stable contracted work.</div>
             </details>
           </label>
-          <div><input type="number" id="rf" value="10" step="0.1" oninput="calcLayer2(); markExportDirty()"><span class="unit">%</span></div>
+          <div><input type="number" id="rf" value="10" step="0.1" min="0" max="40" oninput="calcLayer2(); markExportDirty()"><span class="unit">%</span></div>
         </div>
         <div class="calc-field">
           <label for="rm">Portfolio Margin / <em>R<sub>m</sub></em>
@@ -1344,7 +1344,7 @@
               <div class="tooltip-text">Your agency equivalent of the market return: the average margin across project work in your portfolio, or the best benchmark you have for typical project profitability.</div>
             </details>
           </label>
-          <div><input type="number" id="rm" value="22" step="0.1" oninput="calcLayer2(); markExportDirty()"><span class="unit">%</span></div>
+          <div><input type="number" id="rm" value="22" step="0.1" min="0" max="60" oninput="calcLayer2(); markExportDirty()"><span class="unit">%</span></div>
         </div>
         <div class="calc-field">
           <label for="l1-input">L1 Adj. Factor
@@ -1353,7 +1353,7 @@
               <div class="tooltip-text">Auto-filled from Layer 1 when all systematic factors are scored. You can override it manually for scenario testing.</div>
             </details>
           </label>
-          <div><input type="number" id="l1-input" value="1.00" step="0.01" placeholder="—" oninput="calcLayer2(); markExportDirty()"></div>
+          <div><input type="number" id="l1-input" value="1.00" step="0.01" min="0.5" max="2.0" placeholder="—" oninput="calcLayer2(); markExportDirty()"></div>
         </div>
         <div class="calc-field key-input">
           <label for="deal-price">Deal Price
@@ -2451,6 +2451,36 @@
     return isNaN(value) ? '—' : value.toFixed(digits) + '%';
   }
 
+  function clampNumber(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function sanitizeLayer2Inputs() {
+    const rfField = document.getElementById('rf');
+    const rmField = document.getElementById('rm');
+    const l1Field = document.getElementById('l1-input');
+
+    let rf = parseFloat(rfField.value);
+    let rm = parseFloat(rmField.value);
+    let l1f = parseFloat(l1Field.value);
+
+    if (isNaN(rf)) rf = 0;
+    if (isNaN(rm)) rm = 0;
+    if (isNaN(l1f)) l1f = 1.00;
+
+    rf = clampNumber(rf, 0, 40);
+    rm = clampNumber(rm, 0, 60);
+    l1f = clampNumber(l1f, 0.5, 2.0);
+
+    if (rm < rf) rm = rf;
+
+    rfField.value = rf.toFixed(1).replace(/\.0$/, '');
+    rmField.value = rm.toFixed(1).replace(/\.0$/, '');
+    l1Field.value = l1f.toFixed(2);
+
+    return { rf, rm, l1f };
+  }
+
   function getScoreLabel(layer, factor, value) {
     const configured = scoreGuides[layer] && scoreGuides[layer][factor];
     if (!configured || !configured[value - 1]) return String(value);
@@ -3009,9 +3039,10 @@
     const total = 7;
     const interactionWarnings = count === total ? getLayer2InteractionWarnings(state.layer2) : [];
 
-    const rf = parseFloat(document.getElementById('rf').value) || 0;
-    const rm = parseFloat(document.getElementById('rm').value) || 0;
-    const l1f = parseFloat(document.getElementById('l1-input').value);
+    const sanitized = sanitizeLayer2Inputs();
+    const rf = sanitized.rf;
+    const rm = sanitized.rm;
+    const l1f = sanitized.l1f;
     const premium = rm - rf;
     const deal = getDealMetrics();
     let chartData = { ready: false };
@@ -3081,7 +3112,11 @@
             if (er < 100) {
               const minPrice = Calc.minimumDealPrice(deal.cost, er);
               document.getElementById('l2-min-price').textContent = formatMoney(minPrice);
-              document.getElementById('l2-min-price-sub').textContent = 'clears ' + er.toFixed(1) + '% margin hurdle only';
+              if (minPrice > deal.price) {
+                document.getElementById('l2-min-price-sub').textContent = 'above current quote by ' + formatMoney(minPrice - deal.price) + ' to clear ' + er.toFixed(1) + '%';
+              } else {
+                document.getElementById('l2-min-price-sub').textContent = 'clears ' + er.toFixed(1) + '% margin hurdle only';
+              }
             } else {
               document.getElementById('l2-min-price').textContent = 'n/a';
               document.getElementById('l2-min-price-sub').textContent = 'required margin exceeds 100%';
