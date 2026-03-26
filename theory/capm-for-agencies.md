@@ -3,7 +3,7 @@
 
 ## Executive Summary
 
-The goal of CAPM for Agencies is to **price the work before you plan it**. More precisely: price the work before *delivery planning* is committed, not before technical and delivery leads have done enough assessment to assess complexity, challenges unique to the client, and whether the next level of engagement should be a deeper discovery process or a faster track to implementation. It ensures that the agency is always compensated fairly for the uncertainty it accepts, protecting long-term profitability and sustainability.
+The goal of CAPM for Agencies is to **price the work before you plan it**. More precisely: price the work before *delivery planning* is committed, not before technical and delivery leads have done enough assessment to assess complexity, challenges unique to the client, and whether the next level of engagement should be a deeper discovery process, a faster track to implementation, or no engagement at all. It ensures that the agency is always compensated fairly for the uncertainty it accepts, protecting long-term profitability and sustainability.
 
 ### The Problem: "Gut-Feel" Pricing
 Most agencies price project risk using arbitrary contingency percentages or hourly padding. These methods fail to distinguish between **systematic risks** (market-wide forces you cannot control) and **idiosyncratic risks** (project-specific variables that should wash out across a healthy portfolio).
@@ -26,7 +26,7 @@ By adapting the **Capital Asset Pricing Model (CAPM)** from financial economics,
 ## The Core Idea
 Most small to mid-sized agencies (and even more large ones than want to admit it) price risk through gut-feel contingency percentages, hourly padding, or by shifting uncertainty onto clients via retainer models — none of which distinguish between the kinds of risk that matter most when they’re realized in events. These are the systematic risks that can’t be controlled. 
 
-This agency-side diagnosis is not coming out of nowhere. Promethean Research's digital-agency pricing studies report that shops typically use multiple pricing methods at once, and that value-based pricing remains a minority practice rather than the norm. That helps explain why risk so often gets handled through padding, contingency, or deal-by-deal improvisation instead of through an explicit pricing model. See [Pricing Digital Services – Rates and Methods](https://prometheanresearch.com/pricing-digital-services-rates-and-methods/) and [Repeatable Revenue Generation for Digital Agencies](https://prometheanresearch.com/repeatable-revenue-generation-for-digital-agencies/).
+This agency-side diagnosis is not coming out of nowhere. Promethean Research's digital-agency pricing studies report that most shops use multiple pricing methods at once, and that value-based pricing remains a minority practice rather than the norm. That helps explain why risk so often gets handled through padding, contingency, or deal-by-deal improvisation instead of through an explicit pricing model. See [Pricing Digital Services – Rates and Methods](https://prometheanresearch.com/pricing-digital-services-rates-and-methods/) and [Repeatable Revenue Generation for Digital Agencies](https://prometheanresearch.com/repeatable-revenue-generation-for-digital-agencies/).
 
 For readers coming from outside finance, CAPM begins with a simple question: what return should be demanded for taking on a given level of risk? In investing, it is used to estimate required return, cost of equity, and hurdle rates. In agency work, the same logic helps separate market-wide risk from deal-specific risk, set a minimum acceptable margin, and decide whether a project is worth taking on at all.
 
@@ -109,26 +109,53 @@ I vaguely knew about the Capital Asset Pricing Model (CAPM) from financial econo
 
 But then I asked, Why not? Hasn’t anyone made this connection? The answer turned out to be “nope” again.
 
-I didn’t see any strong reasons why CAPM wouldn’t be helpful in an agency context, so I started talking to Claude (AI) and human colleagues about it. This led to further research, reading, writing, and revision — and a website. This is the result — a CAPM-inspired agency risk-based pricing assessment model. It is closest to finance theory when used as a hurdle-rate framework at the portfolio level, and more heuristic when translated into per-engagement scoring for day-to-day agency work.
+I didn’t see any strong reasons why CAPM wouldn’t be helpful in an agency context, so I started talking to Claude (AI) and (human) colleagues about it. This led to further research, reading, writing, and revision — and a simple website with a form-based decision guide. This is the result — a CAPM-inspired agency risk-based pricing assessment model. It is closest to finance theory when used as a hurdle-rate framework at the portfolio level, and more heuristic when translated into per-engagement scoring for day-to-day agency work.
 
 If CAPM (the financial model) is unfamiliar to you, you can get some good background on it in its original context from “[Does the Capital Asset Pricing Model Work?](https://hbr.org/1982/01/does-the-capital-asset-pricing-model-work)” (HBR, 1982). The author, David W. Mullins, Jr., a future Fed Vice Chairman, was then a Harvard Business faculty member and expert on financial crises. He was responding to the heaviest criticism CAPM has ever received, in the late 1970s. 
 
 Mullins defends CAPM as a useful model for *disciplined thinking about risk*, specifically systematic risk (i.e., beta) —  the things you cannot control and are not responsible for. He recommends CAPM as a practical, primary benchmark for evaluating risk-adjusted returns — exactly what agencies need for project selection.
 
-*Dan Knauss*
+<p style="text-align: right;"><em>Dan Knauss</em></p>
 
 ## The Formula
 **E(R) \= Rf \+ β × (Rm − Rf)**
 
 **Expected Return \= Risk-Free Rate \+ β × (Market Premium)**
 
-| Component | Definition |
-| :---- | :---- |
-| **E(R)** | **Expected Return** — the return you should expect (or demand) from the investment, given its risk. |
-| **Rf** | **Risk-Free Rate** — the return you would earn on a zero-risk investment. In finance, this is typically the yield on US government treasury bonds. |
-| **β (Beta)** | **Beta** — a measure of systematic risk. Beta \= 1.0 means the investment moves with the market. Beta \> 1.0 means more volatile (riskier); Beta \< 1.0 means less volatile (safer). |
-| **Rm** | **Market Return** — the average return of the overall market. |
-| **Rm − Rf** | **Market Risk Premium** — the extra return investors demand for taking on market risk instead of the risk-free alternative. |
+<table>
+  <colgroup>
+    <col style="width: 28%;">
+    <col style="width: 72%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>E(R)</strong></td>
+      <td><strong>Expected Return</strong> — the return you should expect (or demand) from the investment, given its risk.</td>
+    </tr>
+    <tr>
+      <td><strong>Rf</strong></td>
+      <td><strong>Risk-Free Rate</strong> — the return you would earn on a zero-risk investment. In finance, this is typically the yield on US government treasury bonds.</td>
+    </tr>
+    <tr>
+      <td><strong>β (Beta)</strong></td>
+      <td><strong>Beta</strong> — a measure of systematic risk. Beta = 1.0 means the investment moves with the market. Beta &gt; 1.0 means more volatile (riskier); Beta &lt; 1.0 means less volatile (safer).</td>
+    </tr>
+    <tr>
+      <td><strong>Rm</strong></td>
+      <td><strong>Market Return</strong> — the average return of the overall market.</td>
+    </tr>
+    <tr>
+      <td><strong>Rm − Rf</strong></td>
+      <td><strong>Market Risk Premium</strong> — the extra return investors demand for taking on market risk instead of the risk-free alternative.</td>
+    </tr>
+  </tbody>
+</table>
 
 The core insight: you should never accept a return lower than the risk-free rate, and the more risk you take on, the higher the return you should demand.
 
