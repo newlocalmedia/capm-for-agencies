@@ -23,7 +23,7 @@ By adapting the **Capital Asset Pricing Model (CAPM)** from financial economics,
 2. **Cross-Functional Alignment:** Engages solutions, technical, and sales teams in a shared language for risk translation before a contract is signed.  
 3. **[B Corp Integration](../index.html#bcorp-card):** For impact-driven agencies, the model allows for a "conscious mission discount" on high-impact work while penalizing mission-inconsistent projects with higher margin requirements.
 
-## Overview
+## The Core Idea
 Most small to mid-sized agencies (and even more large ones than want to admit it) price risk through gut-feel contingency percentages, hourly padding, or by shifting uncertainty onto clients via retainer models — none of which distinguish between the kinds of risk that matter most when they’re realized in events. These are the systematic risks that can’t be controlled. 
 
 This agency-side diagnosis is not coming out of nowhere. Promethean Research's digital-agency pricing studies report that shops typically use multiple pricing methods at once, and that value-based pricing remains a minority practice rather than the norm. That helps explain why risk so often gets handled through padding, contingency, or deal-by-deal improvisation instead of through an explicit pricing model. See [Pricing Digital Services – Rates and Methods](https://prometheanresearch.com/pricing-digital-services-rates-and-methods/) and [Repeatable Revenue Generation for Digital Agencies](https://prometheanresearch.com/repeatable-revenue-generation-for-digital-agencies/).
