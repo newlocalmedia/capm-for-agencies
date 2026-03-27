@@ -769,21 +769,21 @@ PAGES = [
     <div class="walkthrough-facts">
       <div class="walkthrough-fact"><span class="walkthrough-fact-label">Pure model</span><span class="walkthrough-fact-value">Set a portfolio-level hurdle.</span><span class="walkthrough-fact-note">Closest to finance theory.</span></div>
       <div class="walkthrough-fact"><span class="walkthrough-fact-label">Hybrid model</span><span class="walkthrough-fact-value">Use scored pricing governance.</span><span class="walkthrough-fact-note">Best fit for agency deal decisions.</span></div>
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Core idea</span><span class="walkthrough-fact-value">Price before planning.</span><span class="walkthrough-fact-note">Name risk before delivery is imagined.</span></div>
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Decision outputs</span><span class="walkthrough-fact-value">Go, reprice, or sell discovery.</span><span class="walkthrough-fact-note">Decline the work when needed.</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Core idea</span><span class="walkthrough-fact-value">Price before planning.</span><span class="walkthrough-fact-note">Name risk before imagining delivery.</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Decision outputs</span><span class="walkthrough-fact-value">Go, reprice, or sell discovery.</span><span class="walkthrough-fact-note">Decline the work you shouldn't take.</span></div>
     </div>
     <div class="summary-strip">
       <div class="summary-step">
         <p class="summary-step-title"><strong>The problem</strong></p>
-        <p class="summary-step-copy">Agencies often scope toward delivery too early, then price risk backwards.</p>
+        <p class="summary-step-copy">Agencies often price risk backwards.</p>
       </div>
       <div class="summary-step">
         <p class="summary-step-title"><strong>The borrowing</strong></p>
-        <p class="summary-step-copy">CAPM contributes hurdle-rate logic; the hybrid model adapts it into practical scoring governance.</p>
+        <p class="summary-step-copy">CAPM supplies the hurdle-rate logic.</p>
       </div>
       <div class="summary-step">
         <p class="summary-step-title"><strong>The next step</strong></p>
-        <p class="summary-step-copy">Read the argument here, then use the cards, walkthrough, or decision guide.</p>
+        <p class="summary-step-copy">Read this, then use the cards.</p>
       </div>
     </div>
   </div>
