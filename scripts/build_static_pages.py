@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import re
 from pathlib import Path
 from urllib import request
@@ -1159,15 +1160,20 @@ TOKEN_REPLACEMENTS = {
 
 
 def render_markdown(markdown_text: str) -> str:
+    headers = {
+        "Content-Type": "text/plain",
+        "User-Agent": USER_AGENT,
+        "Accept": "text/html",
+    }
+    github_token = os.environ.get("GITHUB_TOKEN")
+    if github_token:
+        headers["Authorization"] = f"Bearer {github_token}"
+
     req = request.Request(
         GITHUB_MARKDOWN_API,
         data=markdown_text.encode("utf-8"),
         method="POST",
-        headers={
-            "Content-Type": "text/plain",
-            "User-Agent": USER_AGENT,
-            "Accept": "text/html",
-        },
+        headers=headers,
     )
     with request.urlopen(req, timeout=30) as response:
         return response.read().decode("utf-8")
