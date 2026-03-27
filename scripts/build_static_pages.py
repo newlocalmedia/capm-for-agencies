@@ -902,15 +902,15 @@ PAGES = [
     </div>
     <div class="summary-strip">
       <div class="summary-step">
-        <p class="summary-step-title">1. Set the baseline</p>
+        <p class="summary-step-title"><strong>1. Set the baseline</strong></p>
         <p class="summary-step-copy">Use the current defaults or your own margin benchmarks.</p>
       </div>
       <div class="summary-step">
-        <p class="summary-step-title">2. Score what is real</p>
+        <p class="summary-step-title"><strong>2. Score what is real</strong></p>
         <p class="summary-step-copy">Name the portfolio and engagement risks before the team imagines delivery.</p>
       </div>
       <div class="summary-step">
-        <p class="summary-step-title">3. Make the call</p>
+        <p class="summary-step-title"><strong>3. Make the call</strong></p>
         <p class="summary-step-copy">If the hurdle is not clear, reprice, sell discovery, or decline the work.</p>
       </div>
     </div>
@@ -959,19 +959,19 @@ PAGES = [
     </div>
     <div class="comparison-grid">
       <div class="comparison-card">
-        <p class="comparison-card-title"><strong>Layer 1</strong></p>
+        <p class="comparison-card-title"><strong>What changed</strong></p>
         <ul>
-          <li>6 → 0.85</li>
-          <li>18 → 1.00</li>
-          <li>30 → 1.15</li>
+          <li>Layer 1 now has a true neutral midpoint.</li>
+          <li>The B-Corp midpoint is also neutral.</li>
+          <li>Manual overrides are bounded.</li>
         </ul>
       </div>
       <div class="comparison-card">
-        <p class="comparison-card-title"><strong>Layer 3</strong></p>
+        <p class="comparison-card-title"><strong>What it means</strong></p>
         <ul>
-          <li>4–20 raw impact score</li>
-          <li>12 = neutral midpoint</li>
-          <li>manual override bounded to ±15 pts</li>
+          <li>Average cases behave more predictably.</li>
+          <li>The B-Corp overlay is less extreme.</li>
+          <li>The results are easier to trust as governance.</li>
         </ul>
       </div>
     </div>
