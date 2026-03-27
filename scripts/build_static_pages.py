@@ -767,23 +767,23 @@ PAGES = [
   <p class="walkthrough-preview-title">Theory in one glance</p>
   <div class="walkthrough-preview-grid">
     <div class="walkthrough-facts">
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Pure model</span><span class="walkthrough-fact-value">Portfolio hurdle</span><span class="walkthrough-fact-note">closest to finance theory</span></div>
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Hybrid model</span><span class="walkthrough-fact-value">Scored governance</span><span class="walkthrough-fact-note">best fit for agency deal decisions</span></div>
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Core move</span><span class="walkthrough-fact-value">Price before planning</span><span class="walkthrough-fact-note">name risk before delivery is imagined</span></div>
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Decision outputs</span><span class="walkthrough-fact-value">Go / Reprice / Discovery</span><span class="walkthrough-fact-note">or decline the work</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Pure model</span><span class="walkthrough-fact-value">Set a portfolio-level hurdle.</span><span class="walkthrough-fact-note">Closest to finance theory.</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Hybrid model</span><span class="walkthrough-fact-value">Use scored pricing governance.</span><span class="walkthrough-fact-note">Best fit for agency deal decisions.</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Core idea</span><span class="walkthrough-fact-value">Price before planning.</span><span class="walkthrough-fact-note">Name risk before delivery is imagined.</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Decision outputs</span><span class="walkthrough-fact-value">Go, reprice, or sell discovery.</span><span class="walkthrough-fact-note">Decline the work when needed.</span></div>
     </div>
     <div class="summary-strip">
       <div class="summary-step">
-        <p class="summary-step-title"><strong>What this argues</strong></p>
+        <p class="summary-step-title"><strong>The problem</strong></p>
         <p class="summary-step-copy">Agencies often scope toward delivery too early, then price risk backwards.</p>
       </div>
       <div class="summary-step">
-        <p class="summary-step-title"><strong>What it borrows</strong></p>
-        <p class="summary-step-copy">CAPM contributes hurdle-rate logic; the hybrid model adapts that logic into a practical scoring framework.</p>
+        <p class="summary-step-title"><strong>The borrowing</strong></p>
+        <p class="summary-step-copy">CAPM contributes hurdle-rate logic; the hybrid model adapts it into practical scoring governance.</p>
       </div>
       <div class="summary-step">
-        <p class="summary-step-title"><strong>What to do next</strong></p>
-        <p class="summary-step-copy">Read this for the argument, then use the cards, walkthrough, or decision guide for the workflow.</p>
+        <p class="summary-step-title"><strong>The next step</strong></p>
+        <p class="summary-step-copy">Read the argument here, then use the cards, walkthrough, or decision guide.</p>
       </div>
     </div>
   </div>
