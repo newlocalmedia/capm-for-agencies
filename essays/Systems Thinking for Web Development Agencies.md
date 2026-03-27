@@ -45,7 +45,7 @@ Bad discovery tends to show up later as:
 - misaligned solutions
 - wasted engineering effort
 - fragile estimates
-- delivery friction that was priced too cheaply because it was understood too narrowly
+- delivery friction in a project that was priced too cheaply because the work was understood too narrowly
 
 Good discovery blends UX research, technical feasibility, and the way the client organization actually works.
 
