@@ -219,7 +219,7 @@ test('Retrospective re-score changes the calibration view without altering the f
   document.getElementById('mode-retrospective-btn').click();
 
   const originalSummary = document.getElementById('retro-rescore-summary').textContent;
-  assert.match(originalSummary, /No factors are rescored yet/i);
+  assert.match(originalSummary, /No Layer 2 factors are rescored yet/i);
 
   const clientRescoreButton = document.querySelector('#retro-rescore-list .retro-score-btn[data-factor="client"][data-val="5"]');
   assert.ok(clientRescoreButton);
