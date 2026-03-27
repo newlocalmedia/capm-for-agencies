@@ -959,7 +959,7 @@ PAGES = [
     </div>
     <div class="comparison-grid">
       <div class="comparison-card">
-        <p class="comparison-card-title">Layer 1</p>
+        <p class="comparison-card-title"><strong>Layer 1</strong></p>
         <ul>
           <li>6 → 0.85</li>
           <li>18 → 1.00</li>
@@ -967,7 +967,7 @@ PAGES = [
         </ul>
       </div>
       <div class="comparison-card">
-        <p class="comparison-card-title">Layer 3</p>
+        <p class="comparison-card-title"><strong>Layer 3</strong></p>
         <ul>
           <li>4–20 raw impact score</li>
           <li>12 = neutral midpoint</li>
