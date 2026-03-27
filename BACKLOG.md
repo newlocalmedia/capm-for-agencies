@@ -16,29 +16,16 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 - confirm generated pages remain stable in CI without network access
 - remove any no-longer-needed auth assumptions from the build
 
-### [P1] Keep doc navigation coherent as the page set grows
+### [P1] Add stronger calculator integration tests
 
-**Outcome:** The docs continue to feel like one reading ladder rather than drifting back into a loose set of pages.
+**Outcome:** App wiring and DOM behavior are covered, not just pure math.
 
 **Tasks:**
-- keep the recommended order visible as new pages or examples are added
-- ensure the app and overview continue to link to all major pages that matter
-- keep companion material tied to the core pricing thesis
+- add tests for app-to-DOM calculation flows
+- cover export behavior more behaviorally where possible
+- add more edge-case tests around invalid inputs and UI state
 
 ## P2 — Next
-
-### [P3] Revisit the caution band after retrospective data exists
-
-**Outcome:** The current fixed `3`-point band can be confirmed or revised with real outcome data rather than thought experiments alone.
-
-**Current status:**
-- a review against `10%` and `12%` proportional alternatives was completed
-- the current fixed `3`-point band was kept because it is simpler and already stricter on higher-risk work
-
-**Tasks:**
-- compare actual presales calls against realized outcomes once retrospective data exists
-- check whether the caution band should vary by risk level in practice, not just in theory
-- update docs and tests if a new rule proves better
 
 ### [P2] Reduce false precision in the main UI
 
@@ -53,14 +40,14 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 - keep internal calculations precise enough for stable comparisons
 - document any rounding choices explicitly
 
-### [P2] Add stronger calculator integration tests
+### [P2] Keep doc navigation coherent as the page set grows
 
-**Outcome:** App wiring and DOM behavior are covered, not just pure math.
+**Outcome:** The docs continue to feel like one reading ladder rather than drifting back into a loose set of pages.
 
 **Tasks:**
-- add tests for app-to-DOM calculation flows
-- cover export behavior more behaviorally where possible
-- add more edge-case tests around invalid inputs and UI state
+- keep the recommended order visible as new pages or examples are added
+- ensure the app and overview continue to link to all major pages that matter
+- keep companion material tied to the core pricing thesis
 
 ## P3 — Later
 
@@ -81,6 +68,19 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 - decide between last-change undo, per-card reset, or both
 - keep the behavior simple enough for live presales use
 
+### [P3] Revisit the caution band after retrospective data exists
+
+**Outcome:** The current fixed `3`-point band can be confirmed or revised with real outcome data rather than thought experiments alone.
+
+**Current status:**
+- a review against `10%` and `12%` proportional alternatives was completed
+- the current fixed `3`-point band was kept because it is simpler and already stricter on higher-risk work
+
+**Tasks:**
+- compare actual presales calls against realized outcomes once retrospective data exists
+- check whether the caution band should vary by risk level in practice, not just in theory
+- update docs and tests if a new rule proves better
+
 ### [P3] Resume two-mode presales vs retrospective workflow
 
 **Outcome:** Retrospective analysis can return without muddying the presales workflow.
@@ -95,13 +95,13 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 These items are no longer active backlog work:
 
 - persistence and reset
+- first-use defaults
+- walkthrough, decision guide, calibration notes, and discovery essay pages
+- export flow
 - card dependency cues and chart explanation
+- specific Layer 2 / Layer 3 missing-input guidance
 - B-Corp midpoint constants clarified in code and docs
 - initial caution-band review completed; fixed `3`-point band retained for now
-- first-use defaults
-- walkthrough page
-- decision guide and calibration notes
-- export flow
 - initial CI setup and authenticated build fix
 - social sharing / sitemap / robots / structured data
 - initial accessibility pass and keyboard semantics improvements

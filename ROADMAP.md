@@ -9,9 +9,10 @@ CAPM for Agencies is now a usable public beta with:
 - practical walkthrough, decision guide, theory, calibration notes, and discovery essay pages
 - export, accessibility improvements, and core calculator tests
 - clearer reading-order guidance across the app and reader pages
+- more specific Layer 2 / Layer 3 commercial-input guidance
 - CI that now authenticates static-page Markdown rendering with `GITHUB_TOKEN`
 
-The next phase is no longer basic usability. It is **coherence, hardening, and contributor clarity**.
+The next phase is no longer basic usability. It is **hardening, maintainability, and evidence-building**.
 
 ## Archived / completed foundation work
 
@@ -28,6 +29,8 @@ These are complete enough to move out of the active roadmap:
 - accessibility-first pass and keyboard semantics improvements
 - initial CI and regression-test setup
 - first retrospective-mode exploration and branch split (`codex/two-mode`)
+- initial caution-band review and fixed-band decision
+- app dependency cues, chart help, and precision framing
 
 ## Delivery method
 
@@ -39,9 +42,37 @@ Continue to use:
 
 ## Active roadmap
 
-### Phase 1 — Documentation and navigation coherence
+### Phase 1 — Build and architecture hardening
 
-**Goal:** Keep the reading path obvious as the docs set evolves.
+**Goal:** Make the repo easier to maintain and less dependent on fragile infrastructure.
+
+**Problems to solve:**
+- static page generation still depends on GitHub’s Markdown API at build time
+- `index.html` remains a very large single-file app
+- current tests are strong on calculator math but still light on UI integration behavior
+
+**Scope:**
+- replace the GitHub Markdown API dependency with a local renderer
+- evaluate safe extraction of inline app logic into smaller modules
+- add DOM-level or browser-level integration coverage for critical app flows
+
+### Phase 2 — Precision, presentation, and trust
+
+**Goal:** Keep the live calculator responsive without overstating certainty.
+
+**Current status:**
+- the app keeps one-decimal outputs so small changes remain visible
+- the UI now frames those outputs as directional guidance rather than exact science
+- the fixed `3`-point caution band has been reviewed against proportional alternatives and is being kept for now
+
+**Remaining scope:**
+- decide whether any outputs should move to whole-number display in specific contexts
+- revisit whether the current precision note is enough once more users have used the calculator
+- revisit the caution-band rule only when retrospective data exists
+
+### Phase 3 — Documentation coherence and evidence-building
+
+**Goal:** Keep the docs coherent and start building stronger evidence for the model’s choices.
 
 **Current status:**
 - the app, overview, and generated reader pages now surface a clearer reading order
@@ -49,54 +80,11 @@ Continue to use:
 - the discovery essay is better integrated with the core pricing thesis
 
 **Remaining scope:**
-- keep the planning docs current as features ship
 - keep the reading ladder coherent as new pages or examples are added
 - avoid letting companion material drift back into side-essay territory
+- add more retrospective or case-based evidence when the product supports it
 
-### Phase 2 — In-app clarity and decision guidance
-
-**Goal:** Keep the app understandable without adding product bloat.
-
-**Current status:**
-- Layer 1 → Layer 2 → Layer 3 dependency is now reinforced visually in the cards
-- the chart now has a plain-language explanation in the app
-- one-decimal display is now framed explicitly as visible guidance rather than exact science
-
-**Remaining scope:**
-- evaluate whether the app still needs per-card entry hints beyond the primer
-- decide whether lightweight undo or per-card clear behavior is worth the extra UI weight
-- keep an eye out for any remaining confusing formula or chart copy
-
-### Phase 3 — Model clarity and calibration decisions
-
-**Goal:** Reduce confusion around heuristic choices and tighten model presentation.
-
-**Problems to solve:**
-- the fixed `3`-point caution band has now been reviewed against proportional alternatives and is being kept for now
-- the UI still presents one-decimal output that may imply more precision than the inputs warrant
-- the current precision notes may still need a cleaner long-term presentation
-
-**Scope:**
-- document the current caution-band decision and revisit it once retrospective data exists
-- decide whether the main UI should round display values more aggressively
-- keep the theory and UI aligned on what is heuristic versus measured
-- revisit whether the current precision note is enough once more users have seen the calculator
-
-### Phase 4 — Build and architecture hardening
-
-**Goal:** Make the repo easier to maintain and less dependent on fragile infrastructure.
-
-**Problems to solve:**
-- static page generation still depends on GitHub’s Markdown API at build time
-- `index.html` remains a very large single-file app
-- current tests are strong on calculator math but light on UI integration behavior
-
-**Scope:**
-- replace the GitHub Markdown API dependency with a local renderer
-- evaluate safe extraction of inline app logic into smaller modules
-- add DOM-level or browser-level integration coverage for critical app flows
-
-### Phase 5 — Retrospective workflow, if resumed
+### Phase 4 — Retrospective workflow, if resumed
 
 **Goal:** Resume retrospective mode only when it can be cleanly separated from presales.
 
@@ -113,8 +101,7 @@ Continue to use:
 
 A next release should ideally include:
 
-- clearer doc navigation and reading-order guidance
-- at least one user-facing improvement to card dependency/chart clarity
-- a documented decision on false precision or caution-band behavior
-- either a local Markdown renderer or a clearly staged plan to replace the external dependency
-- updated roadmap/backlog notes that match the shipped state
+- a local Markdown renderer or a clearly staged implementation plan to replace the external dependency
+- stronger DOM-level or browser-level coverage for key calculator flows
+- a cleaner decision on long-term precision presentation in the live UI
+- updated roadmap/backlog notes that continue to match the shipped state

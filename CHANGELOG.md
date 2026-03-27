@@ -7,13 +7,26 @@ and this project uses a lightweight, date-free changelog for now.
 
 ## [Unreleased]
 
+### Added
+- Clearer reading-order guidance across the app, overview, and generated reader pages so the docs now behave more like a deliberate ladder than a loose set of links.
+- Page-level `Reading order` guidance in generated reader-page mastheads.
+- A documented caution-band review in the calibration notes comparing the fixed `3`-point rule against `10%` and `12%` proportional alternatives.
+
+### Changed
+- Expanded top navigation from the app to surface the TL;DR, Decision Guide, and Calibration Notes directly.
+- Improved Layer 2 and Layer 3 missing-input messages so they now refer to the specific missing commercial field(s), with Layer 3 linking back to the Layer 2 inputs.
+- Tightened calculator display rounding so sanitized baseline inputs and manual B Corp overrides no longer leak floating-point noise into visible UI strings.
+
+### Fixed
+- Prevented long Layer 2 result subtext from forcing awkward wrapping in the proposed-margin area when large deal figures are displayed.
+- Hardened calculator input sanitation so baseline and manual-adjustment values are rounded consistently before reuse.
+
 ## [0.1.1]
 
 ### Added
 - Browser persistence for Decision Card scores and calculator inputs so work restores automatically after reload.
 - A top-level `Reset All` flow that clears saved state, restores the first-pass defaults, and disables export again.
 - A practical walkthrough in [tldr/CAPM for Agencies — Walkthrough.md](/Users/danknauss/Developer/GitHub/capm-for-agencies/tldr/CAPM%20for%20Agencies%20%E2%80%94%20Walkthrough.md) and [tldr/walkthrough.html](/Users/danknauss/Developer/GitHub/capm-for-agencies/tldr/walkthrough.html).
-- A visible calibration-state indicator in the app that distinguishes the neutral first-pass defaults from a custom current calibration.
 - A retrospective-mode design note in [RETROSPECTIVE-MODE.md](/Users/danknauss/Developer/GitHub/capm-for-agencies/RETROSPECTIVE-MODE.md) to guide postmortem scoring and calibration work.
 
 ### Changed
@@ -21,7 +34,7 @@ and this project uses a lightweight, date-free changelog for now.
 - Linked the walkthrough and retrospective-mode design through the app, overview, README, roadmap, and backlog.
 
 ### Fixed
-- Extended export/persistence regression coverage so the app now tests the default-calibration indicator alongside restore/reset behavior.
+- Extended export/persistence regression coverage so the app now tests restore/reset behavior and commercial-input handling more thoroughly.
 
 ## [0.1.0]
 
