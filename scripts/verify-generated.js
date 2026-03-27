@@ -7,8 +7,10 @@ const root = path.resolve(__dirname, '..');
 const generatedFiles = [
   'theory/index.html',
   'tldr/price-the-work-before-you-plan-it.html',
+  'tldr/walkthrough.html',
   'tldr/decision-guide.html',
-  'tldr/calibration-notes.html'
+  'tldr/calibration-notes.html',
+  'essays/systems-thinking-for-web-development-agencies.html'
 ];
 
 try {

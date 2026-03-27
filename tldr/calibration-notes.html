@@ -956,10 +956,10 @@
 <a class="level-3" href="#caution-band-review">Caution Band Review</a>
 <a class="level-3" href="#b-corp-overlay">B Corp Overlay</a>
 <a class="level-2" href="#sanity-test-scenarios">Sanity-Test Scenarios</a>
-<a class="level-3" href="#scenario-1--calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</a>
-<a class="level-3" href="#scenario-2--elevated-risk-market-ugly-fixed-price-build">Scenario 2 — Elevated-Risk Market, Ugly Fixed-Price Build</a>
-<a class="level-3" href="#scenario-3--mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B Corp Work</a>
-<a class="level-3" href="#scenario-4--harmful-but-financially-attractive-work">Scenario 4 — Harmful but Financially Attractive Work</a>
+<a class="level-3" href="#scenario-1-calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</a>
+<a class="level-3" href="#scenario-2-elevated-risk-market-ugly-fixed-price-build">Scenario 2 — Elevated-Risk Market, Ugly Fixed-Price Build</a>
+<a class="level-3" href="#scenario-3-mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B Corp Work</a>
+<a class="level-3" href="#scenario-4-harmful-but-financially-attractive-work">Scenario 4 — Harmful but Financially Attractive Work</a>
 <a class="level-2" href="#what-to-watch-for">What To Watch For</a>
 <a class="level-2" href="#recommended-use">Recommended Use</a>
         </nav>
@@ -969,7 +969,7 @@
         <div class="article-frame">
           <article class="prose">
             
-            <h2 id="capm-for-agencies--calibration-notes">CAPM for Agencies — Calibration Notes</h2>
+            <h2 id="capm-for-agencies-calibration-notes">CAPM for Agencies — Calibration Notes</h2>
 <h3 id="purpose">Purpose</h3>
 <p>Use this if you want the implementation details behind the current Decision Cards build: the score mappings, the current calibration choices, and a few sanity-test scenarios run against the live calculator.</p>
 <p>Run the current implementation here:</p>
@@ -981,43 +981,27 @@
 <h2 id="what-changed">What Changed</h2>
 <p>Two calibration changes matter in the current build:</p>
 <ol>
-<li>
-<p><strong>Layer 1 is now truly neutral at the midpoint.</strong>
-The systematic adjustment factor now maps:</p>
-<ul>
-<li>
-<code>6</code> to <code>0.85</code>
-</li>
-<li>
-<code>18</code> to <code>1.00</code>
-</li>
-<li>
-<code>30</code> to <code>1.15</code>
-</li>
-</ul>
-<p>This makes the midpoint score behave like a real normal environment instead of quietly pushing the hybrid hurdle upward.</p>
-</li>
-<li>
-<p><strong>The B Corp overlay is now less aggressive by default.</strong></p>
-<ul>
-<li>the B Corp portfolio score is neutral at its midpoint</li>
-<li>the portfolio modifier now ranges from <code>0.8</code> to <code>1.2</code>
-</li>
-<li>each B Corp engagement point away from its midpoint is worth about <code>1.0</code> margin point before that modifier is applied</li>
-</ul>
-<p>This keeps the overlay useful as governance without turning it into a large automatic pricing swing.</p>
-</li>
+<li><strong>Layer 1 is now truly neutral at the midpoint.</strong>
+   The systematic adjustment factor now maps:
+   * <code>6</code> to <code>0.85</code>
+   * <code>18</code> to <code>1.00</code>
+   * <code>30</code> to <code>1.15</code></li>
 </ol>
+<p>This makes the midpoint score behave like a real normal environment instead of quietly pushing the hybrid hurdle upward.</p>
+<ol start="2">
+<li><strong>The B Corp overlay is now less aggressive by default.</strong>
+   * the B Corp portfolio score is neutral at its midpoint
+   * the portfolio modifier now ranges from <code>0.8</code> to <code>1.2</code>
+   * each B Corp engagement point away from its midpoint is worth about <code>1.0</code> margin point before that modifier is applied</li>
+</ol>
+<p>This keeps the overlay useful as governance without turning it into a large automatic pricing swing.</p>
 <h2 id="current-formula-choices">Current Formula Choices</h2>
 <h3 id="layer-1">Layer 1</h3>
 <p>The Layer 1 composite score is mapped into a <strong>systematic adjustment factor</strong>. In the current build, the range is intentionally moderate:</p>
 <ul>
-<li>lowest environment: <code>0.85</code>
-</li>
-<li>midpoint environment: <code>1.00</code>
-</li>
-<li>highest environment: <code>1.15</code>
-</li>
+<li>lowest environment: <code>0.85</code></li>
+<li>midpoint environment: <code>1.00</code></li>
+<li>highest environment: <code>1.15</code></li>
 </ul>
 <p>That factor is then used in two ways:</p>
 <ul>
@@ -1027,24 +1011,16 @@ The systematic adjustment factor now maps:</p>
 <h3 id="layer-2">Layer 2</h3>
 <p>The current hybrid implementation is:</p>
 <ul>
-<li>
-<strong>Engagement</strong> <code>β = Score / 21</code>
-</li>
-<li>
-<strong>Blended</strong> <code>β = (Engagement Score / 21) × Layer 1 factor</code>
-</li>
-<li>
-<strong>Required Margin</strong> <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Blended <em>β</em> × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)</li>
+<li><strong>Engagement</strong> <code>β = Score / 21</code></li>
+<li><strong>Blended</strong> <code>β = (Engagement Score / 21) × Layer 1 factor</code></li>
+<li><strong>Required Margin</strong> <em>E</em>(<em>R</em>) = <em>R<sub>f</sub></em> + Blended <em>β</em> × (<em>R<sub>m</sub></em> - <em>R<sub>f</sub></em>)</li>
 </ul>
 <p>This is a midpoint-anchored calibration, not an endpoint-anchored one. A neutral Layer 2 engagement score maps to market-like <code>β = 1.0</code>. The low end does not collapse to <code>β = 0</code>, which intentionally prevents zero-risk pricing while preserving more headroom for difficult deals.</p>
 <p>The decision thresholds are:</p>
 <ul>
-<li>
-<strong>Go</strong>: proposed margin is at or above <em>E</em>(<em>R</em>)</li>
-<li>
-<strong>Caution</strong>: proposed margin is within <code>3</code> margin points below <em>E</em>(<em>R</em>)</li>
-<li>
-<strong>Stop</strong>: proposed margin is more than <code>3</code> points below <em>E</em>(<em>R</em>)</li>
+<li><strong>Go</strong>: proposed margin is at or above <em>E</em>(<em>R</em>)</li>
+<li><strong>Caution</strong>: proposed margin is within <code>3</code> margin points below <em>E</em>(<em>R</em>)</li>
+<li><strong>Stop</strong>: proposed margin is more than <code>3</code> points below <em>E</em>(<em>R</em>)</li>
 </ul>
 <h3 id="caution-band-review">Caution Band Review</h3>
 <p>Using the current defaults (<code>R_f = 10%</code>, <code>R_m = 22%</code>), a low-risk deal at blended <code>β = 0.50</code> clears at <code>16.0%</code>, while a high-risk deal at blended <code>β = 1.50</code> clears at <code>28.0%</code>.</p>
@@ -1052,7 +1028,7 @@ The systematic adjustment factor now maps:</p>
 <thead>
 <tr>
 <th>Case</th>
-<th align="right">Hurdle E(R)</th>
+<th style="text-align: right;">Hurdle E(R)</th>
 <th>Fixed 3-point band</th>
 <th>10% proportional band</th>
 <th>12% proportional band</th>
@@ -1061,31 +1037,24 @@ The systematic adjustment factor now maps:</p>
 <tbody>
 <tr>
 <td>Low risk (<code>β = 0.50</code>)</td>
-<td align="right"><code>16.0%</code></td>
-<td>caution from <code>13.0%</code> to <code>15.9%</code>
-</td>
-<td>caution from <code>14.4%</code> to <code>15.9%</code>
-</td>
-<td>caution from <code>14.1%</code> to <code>15.9%</code>
-</td>
+<td style="text-align: right;"><code>16.0%</code></td>
+<td>caution from <code>13.0%</code> to <code>15.9%</code></td>
+<td>caution from <code>14.4%</code> to <code>15.9%</code></td>
+<td>caution from <code>14.1%</code> to <code>15.9%</code></td>
 </tr>
 <tr>
 <td>High risk (<code>β = 1.50</code>)</td>
-<td align="right"><code>28.0%</code></td>
-<td>caution from <code>25.0%</code> to <code>27.9%</code>
-</td>
-<td>caution from <code>25.2%</code> to <code>27.9%</code>
-</td>
-<td>caution from <code>24.6%</code> to <code>27.9%</code>
-</td>
+<td style="text-align: right;"><code>28.0%</code></td>
+<td>caution from <code>25.0%</code> to <code>27.9%</code></td>
+<td>caution from <code>25.2%</code> to <code>27.9%</code></td>
+<td>caution from <code>24.6%</code> to <code>27.9%</code></td>
 </tr>
 </tbody>
 </table>
 <p>What this shows:</p>
 <ul>
 <li>the current fixed <code>3</code>-point band is about <code>18.8%</code> of the low-risk hurdle and <code>10.7%</code> of the high-risk hurdle</li>
-<li>so the current rule is actually <strong>more forgiving on safer work and stricter on riskier work</strong>
-</li>
+<li>so the current rule is actually <strong>more forgiving on safer work and stricter on riskier work</strong></li>
 <li>a <code>10%</code> proportional band tightens low-risk deals sharply and only slightly tightens high-risk deals</li>
 <li>a <code>12%</code> proportional band is closer to the current rule, but it starts widening caution on higher-risk work</li>
 </ul>
@@ -1099,16 +1068,13 @@ The systematic adjustment factor now maps:</p>
 <h3 id="b-corp-overlay">B Corp Overlay</h3>
 <p>The current B Corp implementation uses:</p>
 <ul>
-<li>
-<strong>Standard hurdle</strong>: <em>E</em>(<em>R</em>) from Layer 2</li>
-<li>
-<strong>Impact-adjusted hurdle</strong>: <em>E</em>(<em>R</em>*) = <em>E</em>(<em>R</em>) + Impact Adjustment</li>
+<li><strong>Standard hurdle</strong>: <em>E</em>(<em>R</em>) from Layer 2</li>
+<li><strong>Impact-adjusted hurdle</strong>: <em>E</em>(<em>R</em>*) = <em>E</em>(<em>R</em>) + Impact Adjustment</li>
 </ul>
 <p>Where:</p>
 <ul>
 <li>B Corp Layer 1 midpoint is neutral</li>
-<li>B Corp Layer 1 modifies scale from <code>0.8</code> to <code>1.2</code>
-</li>
+<li>B Corp Layer 1 modifies scale from <code>0.8</code> to <code>1.2</code></li>
 <li>B Corp Layer 2 midpoint is neutral at <code>12</code> on a <code>4–20</code> scale</li>
 <li>each B Corp Layer 2 point away from midpoint is worth about <code>1.0</code> point before that portfolio modifier is applied</li>
 </ul>
@@ -1119,23 +1085,15 @@ The systematic adjustment factor now maps:</p>
 <p>This is still heuristic. It is designed to make the trade-off visible and discussable, not to discover an objectively correct mission premium. It is also midpoint-anchored by design: neutral B Corp impact maps to no mission discount or harm premium, while more strongly aligned or more harmful work moves the hurdle down or up from that center.</p>
 <h2 id="sanity-test-scenarios">Sanity-Test Scenarios</h2>
 <p>The scenarios below were run against the live form and checked against the displayed outputs.</p>
-<h3 id="scenario-1--calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</h3>
+<h3 id="scenario-1-calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</h3>
 <p>Inputs:</p>
 <ul>
-<li>
-<em>R<sub>f</sub></em> = <code>10%</code>
-</li>
-<li>
-<em>R<sub>m</sub></em> = <code>22%</code>
-</li>
-<li>Layer 1 scores: all <code>2</code>
-</li>
-<li>Layer 2 scores: all <code>2</code>
-</li>
-<li>Deal price: <code>$120,000</code>
-</li>
-<li>Estimated cost: <code>$92,000</code>
-</li>
+<li><em>R<sub>f</sub></em> = <code>10%</code></li>
+<li><em>R<sub>m</sub></em> = <code>22%</code></li>
+<li>Layer 1 scores: all <code>2</code></li>
+<li>Layer 2 scores: all <code>2</code></li>
+<li>Deal price: <code>$120,000</code></li>
+<li>Estimated cost: <code>$92,000</code></li>
 </ul>
 <p>Expected behavior:</p>
 <ul>
@@ -1145,113 +1103,70 @@ The systematic adjustment factor now maps:</p>
 </ul>
 <p>Observed result:</p>
 <ul>
-<li>Layer 1 factor: <code>0.93</code>
-</li>
-<li>Engagement <code>β</code>: <code>0.67</code>
-</li>
-<li>Blended <code>β</code>: <code>0.62</code>
-</li>
-<li>Required margin: <code>17.4%</code>
-</li>
-<li>Proposed margin: <code>23.3%</code>
-</li>
-<li>Gap: <code>+5.9 points</code>
-</li>
-<li>Verdict: <strong>Go</strong>
-</li>
+<li>Layer 1 factor: <code>0.93</code></li>
+<li>Engagement <code>β</code>: <code>0.67</code></li>
+<li>Blended <code>β</code>: <code>0.62</code></li>
+<li>Required margin: <code>17.4%</code></li>
+<li>Proposed margin: <code>23.3%</code></li>
+<li>Gap: <code>+5.9 points</code></li>
+<li>Verdict: <strong>Go</strong></li>
 </ul>
 <p>This makes sense.</p>
-<h3 id="scenario-2--elevated-risk-market-ugly-fixed-price-build">Scenario 2 — Elevated-Risk Market, Ugly Fixed-Price Build</h3>
+<h3 id="scenario-2-elevated-risk-market-ugly-fixed-price-build">Scenario 2 — Elevated-Risk Market, Ugly Fixed-Price Build</h3>
 <p>Inputs:</p>
 <ul>
-<li>
-<em>R<sub>f</sub></em> = <code>10%</code>
-</li>
-<li>
-<em>R<sub>m</sub></em> = <code>22%</code>
-</li>
-<li>Layer 1 scores: <code>4, 4, 3, 4, 4, 4</code>
-</li>
-<li>Layer 2 scores: <code>4, 5, 4, 4, 4, 4, 5</code>
-</li>
-<li>Deal price: <code>$200,000</code>
-</li>
-<li>Estimated cost: <code>$150,000</code>
-</li>
+<li><em>R<sub>f</sub></em> = <code>10%</code></li>
+<li><em>R<sub>m</sub></em> = <code>22%</code></li>
+<li>Layer 1 scores: <code>4, 4, 3, 4, 4, 4</code></li>
+<li>Layer 2 scores: <code>4, 5, 4, 4, 4, 4, 5</code></li>
+<li>Deal price: <code>$200,000</code></li>
+<li>Estimated cost: <code>$150,000</code></li>
 </ul>
 <p>Observed result:</p>
 <ul>
-<li>Layer 1 factor: <code>1.06</code>
-</li>
-<li>Engagement <code>β</code>: <code>1.43</code>
-</li>
-<li>Blended <code>β</code>: <code>1.52</code>
-</li>
-<li>Required margin: <code>28.2%</code>
-</li>
-<li>Proposed margin: <code>25.0%</code>
-</li>
-<li>Gap: <code>-3.2 points</code>
-</li>
-<li>Verdict: <strong>Stop</strong>
-</li>
+<li>Layer 1 factor: <code>1.06</code></li>
+<li>Engagement <code>β</code>: <code>1.43</code></li>
+<li>Blended <code>β</code>: <code>1.52</code></li>
+<li>Required margin: <code>28.2%</code></li>
+<li>Proposed margin: <code>25.0%</code></li>
+<li>Gap: <code>-3.2 points</code></li>
+<li>Verdict: <strong>Stop</strong></li>
 </ul>
 <p>This also makes sense. The deal is not absurdly underwater, but it still fails the stated threshold.</p>
-<h3 id="scenario-3--mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B Corp Work</h3>
+<h3 id="scenario-3-mission-aligned-b-corp-work">Scenario 3 — Mission-Aligned B Corp Work</h3>
 <p>Inputs:</p>
 <ul>
 <li>same financial inputs as Scenario 1</li>
-<li>B Corp Layer 1 scores: all <code>2</code>
-</li>
-<li>B Corp Layer 2 scores: <code>1, 1, 2, 2</code>
-</li>
+<li>B Corp Layer 1 scores: all <code>2</code></li>
+<li>B Corp Layer 2 scores: <code>1, 1, 2, 2</code></li>
 </ul>
 <p>Observed result:</p>
 <ul>
-<li>Standard hurdle: <code>17.4%</code>
-</li>
-<li>B Corp impact adjustment: <code>-5.4%</code>
-</li>
-<li>Impact-adjusted hurdle: <code>12.0%</code>
-</li>
-<li>Verdict: <strong>Mission-aligned</strong>
-</li>
+<li>Standard hurdle: <code>17.4%</code></li>
+<li>B Corp impact adjustment: <code>-5.4%</code></li>
+<li>Impact-adjusted hurdle: <code>12.0%</code></li>
+<li>Verdict: <strong>Mission-aligned</strong></li>
 </ul>
 <p>This is still a meaningful mission discount, but it is more defensible than the earlier, much larger automatic swing.</p>
-<h3 id="scenario-4--harmful-but-financially-attractive-work">Scenario 4 — Harmful but Financially Attractive Work</h3>
+<h3 id="scenario-4-harmful-but-financially-attractive-work">Scenario 4 — Harmful but Financially Attractive Work</h3>
 <p>Inputs:</p>
 <ul>
-<li>
-<em>R<sub>f</sub></em> = <code>10%</code>
-</li>
-<li>
-<em>R<sub>m</sub></em> = <code>22%</code>
-</li>
-<li>Layer 1 scores: all <code>3</code>
-</li>
-<li>Layer 2 scores: all <code>3</code>
-</li>
-<li>Deal price: <code>$210,000</code>
-</li>
-<li>Estimated cost: <code>$150,000</code>
-</li>
-<li>B Corp Layer 1 scores: all <code>4</code>
-</li>
-<li>B Corp Layer 2 scores: <code>5, 4, 4, 4</code>
-</li>
+<li><em>R<sub>f</sub></em> = <code>10%</code></li>
+<li><em>R<sub>m</sub></em> = <code>22%</code></li>
+<li>Layer 1 scores: all <code>3</code></li>
+<li>Layer 2 scores: all <code>3</code></li>
+<li>Deal price: <code>$210,000</code></li>
+<li>Estimated cost: <code>$150,000</code></li>
+<li>B Corp Layer 1 scores: all <code>4</code></li>
+<li>B Corp Layer 2 scores: <code>5, 4, 4, 4</code></li>
 </ul>
 <p>Observed result:</p>
 <ul>
-<li>Standard hurdle: <code>22.0%</code>
-</li>
-<li>B Corp impact adjustment: <code>+5.5%</code>
-</li>
-<li>Impact-adjusted hurdle: <code>27.5%</code>
-</li>
-<li>Proposed margin: <code>28.6%</code>
-</li>
-<li>Verdict: <strong>Harm premium cleared financially — review mission trade-offs explicitly</strong>
-</li>
+<li>Standard hurdle: <code>22.0%</code></li>
+<li>B Corp impact adjustment: <code>+5.5%</code></li>
+<li>Impact-adjusted hurdle: <code>27.5%</code></li>
+<li>Proposed margin: <code>28.6%</code></li>
+<li>Verdict: <strong>Harm premium cleared financially — review mission trade-offs explicitly</strong></li>
 </ul>
 <p>This is a good example of the B Corp overlay doing what it should: making the mission cost visible without automatically forcing every bad-fit deal into a stop.</p>
 <h2 id="what-to-watch-for">What To Watch For</h2>
@@ -1277,7 +1192,6 @@ The systematic adjustment factor now maps:</p>
 <li>based on how often <code>Go</code>, <code>Caution</code>, and <code>Stop</code> calls proved right in retrospect</li>
 </ul>
 <p>That is the real point of the model: not numerical purity, but disciplined judgment that gets better over time.</p>
-
           </article>
           <footer class="site-footer">
             A <a href="https://newlocalmedia.com/">New Local Media</a> project · <a href="https://linkedin.com/in/danknauss">LinkedIn</a> · <a href="mailto:dan@newlocalmedia.com?subject=CAPM%20for%20Agencies%20feedback">Feedback</a> · <a href="https://github.com/newlocalmedia/capm-for-agencies/issues">Issues</a><br> This repository and its web content are licensed under the <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0)</a>. See the <a href="../LICENSE">LICENSE</a>.
