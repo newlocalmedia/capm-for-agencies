@@ -946,6 +946,18 @@ PAGES = [
         "toc_skip_first_heading": True,
         "deck": "A short introduction to the CAPM model and the problem we're trying to solve with it: <strong>most agencies price work only after they have started imagining delivery</strong>. Learn what we're borrowing from finance, why the hybrid approach is best understood as pricing governance rather than prediction, and how proposed deal economics either clear the hurdle or fail it. We also explain why enterprise agencies may lean toward the pure approach while small and mid-sized agencies often begin with the hybrid one.",
         "deck_html": True,
+        "masthead_extra": """
+<div class="masthead-extra walkthrough-preview">
+  <p class="walkthrough-preview-title">Why this page exists</p>
+  <div class="walkthrough-facts">
+    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Typical flow</span><span class="walkthrough-fact-value">Imagine delivery, then justify price.</span><span class="walkthrough-fact-note">Risk gets priced backwards.</span></div>
+    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Better flow</span><span class="walkthrough-fact-value">Name risk, set the hurdle, then price the work.</span><span class="walkthrough-fact-note">Delivery planning follows a clearer commercial threshold.</span></div>
+    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Decision result</span><span class="walkthrough-fact-value">Go, reprice, discovery, or decline.</span><span class="walkthrough-fact-note">The deal clears the hurdle or it does not.</span></div>
+    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Best next read</span><span class="walkthrough-fact-value">Walkthrough, then Decision Guide.</span><span class="walkthrough-fact-note">Use the cards after you see one example and the procedure.</span></div>
+  </div>
+</div>
+""",
+        "masthead_extra_html": True,
         "meta": "Start here if you want the thesis without the theory. This is the best first read for most people.",
         "reading_path": "Best first read for most people. Then go to Walkthrough → Decision Guide → Decision Cards. Use Calibration Notes for implementation detail and Theory for the full argument.",
         "actions": [
