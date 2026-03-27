@@ -705,6 +705,10 @@
       grid-template-columns: 1fr;
     }
 
+    .comparison-grid {
+      grid-template-columns: 1fr;
+    }
+
     .walkthrough-facts {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -759,6 +763,41 @@
           <h1>How the Current Decision Cards Are Calibrated</h1>
           <p class="deck">Implementation detail for data nerds: the current score mappings, the moderation changes to the B-Corp overlay, and a few sanity-test scenarios run against the live calculator.</p>
           
+<div class="masthead-extra walkthrough-preview">
+  <p class="walkthrough-preview-title">Current calibration in one glance</p>
+  <div class="walkthrough-preview-grid">
+    <div class="walkthrough-chart">
+      <div class="walkthrough-chart-row">
+        <div class="walkthrough-chart-meta"><span>Layer 1 midpoint</span><span>18 → 1.00</span></div>
+        <div class="walkthrough-chart-track"><div class="walkthrough-chart-fill required" style="width: 66.7%;"></div></div>
+      </div>
+      <div class="walkthrough-chart-row">
+        <div class="walkthrough-chart-meta"><span>B-Corp midpoint</span><span>12 → neutral</span></div>
+        <div class="walkthrough-chart-track"><div class="walkthrough-chart-fill proposed" style="width: 60%;"></div></div>
+      </div>
+      <p class="walkthrough-chart-note">Midpoints are intentional: neutral engagement risk maps to market-like beta, and neutral impact maps to no adjustment.</p>
+    </div>
+    <div class="comparison-grid">
+      <div class="comparison-card">
+        <p class="comparison-card-title">Layer 1</p>
+        <ul>
+          <li>6 → 0.85</li>
+          <li>18 → 1.00</li>
+          <li>30 → 1.15</li>
+        </ul>
+      </div>
+      <div class="comparison-card">
+        <p class="comparison-card-title">Layer 3</p>
+        <ul>
+          <li>4–20 raw impact score</li>
+          <li>12 = neutral midpoint</li>
+          <li>manual override bounded to ±15 pts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
         </div>
         <div class="meta">
           <div class="meta-copy">Use this when you want to inspect the current decision-card math and calibration choices rather than just use the workflow.</div>

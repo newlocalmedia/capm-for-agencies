@@ -701,6 +701,10 @@ PAGE_STYLE = """
       grid-template-columns: 1fr;
     }
 
+    .comparison-grid {
+      grid-template-columns: 1fr;
+    }
+
     .walkthrough-facts {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -758,6 +762,34 @@ PAGES = [
         "deck": "This is the theory behind the decision cards: the deeper argument, its assumptions, the math, some cool line charts, and a little economics history. There's also a section explaining how CAPM is adapted to \u24b7 Lab Standards and the \u24b7 Impact Assessment (BIA).",
         "deck_link_text": "the decision cards",
         "deck_link_href": "../index.html",
+        "masthead_extra": """
+<div class="masthead-extra walkthrough-preview">
+  <p class="walkthrough-preview-title">Theory in one glance</p>
+  <div class="walkthrough-preview-grid">
+    <div class="walkthrough-facts">
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Pure model</span><span class="walkthrough-fact-value">Portfolio hurdle</span><span class="walkthrough-fact-note">closest to finance theory</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Hybrid model</span><span class="walkthrough-fact-value">Scored governance</span><span class="walkthrough-fact-note">best fit for agency deal decisions</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Core move</span><span class="walkthrough-fact-value">Price before planning</span><span class="walkthrough-fact-note">name risk before delivery is imagined</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Decision outputs</span><span class="walkthrough-fact-value">Go / Reprice / Discovery</span><span class="walkthrough-fact-note">or decline the work</span></div>
+    </div>
+    <div class="summary-strip">
+      <div class="summary-step">
+        <p class="summary-step-title">What this argues</p>
+        <p class="summary-step-copy">Agencies often scope toward delivery too early, then price risk backwards.</p>
+      </div>
+      <div class="summary-step">
+        <p class="summary-step-title">What it borrows</p>
+        <p class="summary-step-copy">CAPM contributes hurdle-rate logic; the hybrid model adapts that logic into a practical scoring framework.</p>
+      </div>
+      <div class="summary-step">
+        <p class="summary-step-title">What to do next</p>
+        <p class="summary-step-copy">Read this for the argument, then use the cards, walkthrough, or decision guide for the workflow.</p>
+      </div>
+    </div>
+  </div>
+</div>
+""",
+        "masthead_extra_html": True,
         "meta": "Use this version when you want the full argument, not just the calculator. The hybrid layer is presented here as pricing governance rather than a literal asset-pricing engine.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
@@ -858,6 +890,34 @@ PAGES = [
         "heading": "CAPM for Agencies — Decision Guide",
         "toc_skip_first_heading": True,
         "deck": "A practical presales guide for running the CAPM model: set baselines, score the current environment and the deal, compare proposed margin to the hurdle, then decide whether to proceed, reprice, or sell discovery first.",
+        "masthead_extra": """
+<div class="masthead-extra walkthrough-preview">
+  <p class="walkthrough-preview-title">Quick route through the cards</p>
+  <div class="walkthrough-preview-grid">
+    <div class="walkthrough-facts">
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Enterprise / global agency</span><span class="walkthrough-fact-value">Start with Layer 1</span><span class="walkthrough-fact-note">portfolio and macro conditions first</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Small / mid-sized agency</span><span class="walkthrough-fact-value">Start with Layer 2</span><span class="walkthrough-fact-note">score the deal before delivery planning</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Mission-driven / B-Corp</span><span class="walkthrough-fact-value">Add Layer 3</span><span class="walkthrough-fact-note">after the financial hurdle is clear</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Decision rule</span><span class="walkthrough-fact-value">Go / Reprice / Discovery</span><span class="walkthrough-fact-note">or walk away when the risk stays wrong</span></div>
+    </div>
+    <div class="summary-strip">
+      <div class="summary-step">
+        <p class="summary-step-title">1. Set the baseline</p>
+        <p class="summary-step-copy">Use the current defaults or your own margin benchmarks.</p>
+      </div>
+      <div class="summary-step">
+        <p class="summary-step-title">2. Score what is real</p>
+        <p class="summary-step-copy">Name the portfolio and engagement risks before the team imagines delivery.</p>
+      </div>
+      <div class="summary-step">
+        <p class="summary-step-title">3. Make the call</p>
+        <p class="summary-step-copy">If the hurdle is not clear, reprice, sell discovery, or decline the work.</p>
+      </div>
+    </div>
+  </div>
+</div>
+""",
+        "masthead_extra_html": True,
         "meta": "Use this when you want the procedure rather than the theory. It tracks the current decision logic in the decision cards.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
@@ -882,6 +942,43 @@ PAGES = [
         "heading": "How the Current Decision Cards Are Calibrated",
         "toc_skip_first_heading": True,
         "deck": "Implementation detail for data nerds: the current score mappings, the moderation changes to the B-Corp overlay, and a few sanity-test scenarios run against the live calculator.",
+        "masthead_extra": """
+<div class="masthead-extra walkthrough-preview">
+  <p class="walkthrough-preview-title">Current calibration in one glance</p>
+  <div class="walkthrough-preview-grid">
+    <div class="walkthrough-chart">
+      <div class="walkthrough-chart-row">
+        <div class="walkthrough-chart-meta"><span>Layer 1 midpoint</span><span>18 → 1.00</span></div>
+        <div class="walkthrough-chart-track"><div class="walkthrough-chart-fill required" style="width: 66.7%;"></div></div>
+      </div>
+      <div class="walkthrough-chart-row">
+        <div class="walkthrough-chart-meta"><span>B-Corp midpoint</span><span>12 → neutral</span></div>
+        <div class="walkthrough-chart-track"><div class="walkthrough-chart-fill proposed" style="width: 60%;"></div></div>
+      </div>
+      <p class="walkthrough-chart-note">Midpoints are intentional: neutral engagement risk maps to market-like beta, and neutral impact maps to no adjustment.</p>
+    </div>
+    <div class="comparison-grid">
+      <div class="comparison-card">
+        <p class="comparison-card-title">Layer 1</p>
+        <ul>
+          <li>6 → 0.85</li>
+          <li>18 → 1.00</li>
+          <li>30 → 1.15</li>
+        </ul>
+      </div>
+      <div class="comparison-card">
+        <p class="comparison-card-title">Layer 3</p>
+        <ul>
+          <li>4–20 raw impact score</li>
+          <li>12 = neutral midpoint</li>
+          <li>manual override bounded to ±15 pts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+""",
+        "masthead_extra_html": True,
         "meta": "Use this when you want to inspect the current decision-card math and calibration choices rather than just use the workflow.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
