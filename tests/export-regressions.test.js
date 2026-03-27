@@ -72,3 +72,25 @@ test('b corp manual override is bounded to a sane range', () => {
   assert.match(html, /function sanitizeManualImpactAdjustment\(\)/);
   assert.match(html, /value = Calc\.round\(clampNumber\(value, -15, 15\), 1\);/);
 });
+
+test('retrospective mode is available and persisted', () => {
+  assert.match(html, /id="mode-retrospective-btn"/);
+  assert.match(html, /function setWorkflowMode\(mode\)/);
+  assert.match(html, /mode:\s*currentWorkflowMode/);
+  assert.match(html, /id="retrospective-panel"/);
+  assert.match(html, /id="retro-deal-name"/);
+  assert.match(html, /id="retro-presales-date"/);
+  assert.match(html, /id="retro-date"/);
+  assert.match(html, /id="retro-unlock-btn"/);
+  assert.match(html, /id="retro-refreeze-btn"/);
+  assert.match(html, /function captureRetrospectiveSnapshot\(force = false\)/);
+  assert.match(html, /function refreshRetrospectiveSnapshot\(\)/);
+  assert.match(html, /function togglePresalesUnlock\(\)/);
+  assert.match(html, /id="retro-rescore-list"/);
+  assert.match(html, /id="retro-rescore-summary"/);
+  assert.match(html, /function renderRetrospectiveRescore\(\)/);
+  assert.match(html, /function applyRetrospectiveRescore\(factor, value\)/);
+  assert.match(html, /id="actual-revenue"/);
+  assert.match(html, /id="actual-cost"/);
+  assert.match(html, /function calcRetrospective\(\)/);
+});

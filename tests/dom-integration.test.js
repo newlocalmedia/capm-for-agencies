@@ -164,3 +164,75 @@ test('Persisted state restores score selections and calculator outputs on reload
 
   dom.window.close();
 });
+
+test('Retrospective mode requires a complete presales snapshot before it activates', () => {
+  const { dom, document } = bootApp();
+
+  document.getElementById('mode-retrospective-btn').click();
+
+  assert.equal(document.body.dataset.workflowMode, 'presales');
+  assert.match(document.getElementById('mode-help-note').textContent, /Complete Layer 2 scoring and the commercial inputs/i);
+  assert.equal(document.getElementById('retrospective-panel').hidden, true);
+
+  dom.window.close();
+});
+
+test('Retrospective mode freezes a presales snapshot until the user explicitly refreshes it', () => {
+  const { dom, document, window } = bootApp();
+
+  scoreLayer(document, 'layer2', 3);
+  setInput(window, 'deal-price', '120000');
+  setInput(window, 'deal-cost', '92000');
+  document.getElementById('retro-deal-name').value = 'Example deal';
+  document.getElementById('retro-deal-name').dispatchEvent(new window.Event('input', { bubbles: true }));
+
+  document.getElementById('mode-retrospective-btn').click();
+
+  assert.equal(document.body.dataset.workflowMode, 'retrospective');
+  assert.equal(document.body.dataset.presalesLocked, 'true');
+  assert.equal(document.getElementById('retrospective-panel').hidden, false);
+  assert.equal(document.getElementById('retro-snapshot-price').textContent.trim(), '$120,000');
+  assert.equal(document.getElementById('retro-snapshot-cost').textContent.trim(), '$92,000');
+  assert.equal(document.getElementById('retro-snapshot-required').textContent.trim(), '22.0%');
+  assert.equal(document.getElementById('retro-snapshot-proposed').textContent.trim(), '23.3%');
+  assert.equal(document.getElementById('deal-price').disabled, true);
+
+  document.getElementById('retro-unlock-btn').click();
+  assert.equal(document.body.dataset.presalesLocked, 'false');
+  assert.equal(document.getElementById('deal-price').disabled, false);
+
+  setInput(window, 'deal-price', '150000');
+  assert.equal(document.getElementById('retro-snapshot-price').textContent.trim(), '$120,000');
+
+  document.getElementById('retro-refreeze-btn').click();
+  assert.equal(document.getElementById('retro-snapshot-price').textContent.trim(), '$150,000');
+
+  dom.window.close();
+});
+
+test('Retrospective re-score changes the calibration view without altering the frozen original scores', () => {
+  const { dom, document, window } = bootApp();
+
+  scoreLayer(document, 'layer2', 3);
+  setInput(window, 'deal-price', '120000');
+  setInput(window, 'deal-cost', '92000');
+  document.getElementById('mode-retrospective-btn').click();
+
+  const originalSummary = document.getElementById('retro-rescore-summary').textContent;
+  assert.match(originalSummary, /No Layer 2 factors are rescored yet/i);
+
+  const clientRescoreButton = document.querySelector('#retro-rescore-list .retro-score-btn[data-factor="client"][data-val="5"]');
+  assert.ok(clientRescoreButton);
+  clientRescoreButton.click();
+
+  const updatedSummary = document.getElementById('retro-rescore-summary').textContent;
+  assert.match(updatedSummary, /1 factor changed/i);
+  assert.match(updatedSummary, /hurdle would have been/i);
+  assert.equal(document.getElementById('retro-snapshot-required').textContent.trim(), '22.0%');
+  assert.equal(
+    document.querySelector('.score-table[data-layer="layer2"] tr[data-factor="client"] .score-btn.selected-3')?.textContent.trim(),
+    '3'
+  );
+
+  dom.window.close();
+});
