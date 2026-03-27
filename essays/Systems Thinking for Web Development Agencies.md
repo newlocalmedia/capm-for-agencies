@@ -98,11 +98,11 @@ The hardest part is usually not tooling. It is mapping one system of assumptions
 
 That is another reason discovery and migration planning should be treated as valuable work in their own right.
 
-## Caching is a product, UX, and SEO concern — not just an ops concern
+## Performance is a cross-team concern, not just an engineering concern
 
-Caching is often treated as a backend implementation detail. In practice, it changes user experience, publishing workflows, performance, SEO, and sometimes even the client’s understanding of how their site behaves.
+Performance is often reduced to implementation details like caching, image compression, or server tuning. Those things matter, but the real question is larger: what kind of experience is the site supposed to deliver, how fresh does content need to be, what publishing workflows need to be supported, and where do speed, personalization, and reliability pull against each other?
 
-Caching decisions affect:
+Caching is part of that bigger system. It affects:
 
 - Core Web Vitals and SEO
 - user satisfaction
@@ -111,7 +111,20 @@ Caching decisions affect:
 - freshness versus speed
 - personalization versus cacheability
 
-Because caching operates across browser, CDN, and application layers, it is never purely an infrastructure question. It is a cross-team product decision with technical constraints.
+Because performance operates across browser, CDN, application, and editorial layers, it is never purely an infrastructure question. It is a cross-team product decision with technical constraints.
+
+## SEO is not just optimization work
+
+SEO is often reduced to keywords, metadata, and technical fixes. In practice, it is also shaped by information architecture, content quality, internal linking, performance, publishing governance, and the business priorities that determine what a site is actually trying to be visible for.
+
+That makes SEO another systems problem in disguise. Treat it as a narrow technical checklist and you usually miss the bigger questions:
+
+- what content deserves to exist
+- how the site should be structured
+- who owns ongoing optimization
+- how search visibility connects to conversion and business value
+
+In other words, SEO is not just a finishing pass on implementation. It is part of the larger system that should be understood before the work is priced too narrowly.
 
 ## Systems thinking changes pricing, not just delivery
 
