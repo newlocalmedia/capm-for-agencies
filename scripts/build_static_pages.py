@@ -154,6 +154,10 @@ PAGE_STYLE = """
     gap: 10px;
   }
 
+  .walkthrough-facts-fourup {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .walkthrough-fact {
     padding: 10px 12px;
     border-radius: 14px;
@@ -799,6 +803,10 @@ PAGE_STYLE = """
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .walkthrough-facts-fourup {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .masthead-grid,
     .layout {
       grid-template-columns: 1fr;
@@ -817,6 +825,10 @@ PAGE_STYLE = """
 
   @media (max-width: 640px) {
     .walkthrough-facts {
+      grid-template-columns: 1fr;
+    }
+
+    .walkthrough-facts-fourup {
       grid-template-columns: 1fr;
     }
 
@@ -1096,23 +1108,11 @@ PAGES = [
         "masthead_extra": """
 <div class="masthead-extra walkthrough-preview">
   <p class="walkthrough-preview-title">Why this matters in practice</p>
-  <div class="walkthrough-preview-grid">
-    <div class="walkthrough-facts">
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Discovery</span><span class="walkthrough-fact-value">Problem definition and alignment.</span><span class="walkthrough-fact-note">Not just requirements gathering.</span></div>
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Migration</span><span class="walkthrough-fact-value">Content, ownership, and governance.</span><span class="walkthrough-fact-note">Not just moving fields and files.</span></div>
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Performance / SEO</span><span class="walkthrough-fact-value">Visibility, workflows, and business outcomes.</span><span class="walkthrough-fact-note">Not just tuning technical settings.</span></div>
-      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Core point</span><span class="walkthrough-fact-value">Implementation gets priced too early.</span><span class="walkthrough-fact-note">The real system has not been surfaced yet.</span></div>
-    </div>
-    <div class="summary-strip summary-strip-lower">
-      <div class="summary-step">
-        <p class="summary-step-title"><strong>What this page does</strong></p>
-        <p class="summary-step-copy">It shows why upstream systems thinking belongs in pricing conversations before delivery planning is committed.</p>
-      </div>
-      <div class="summary-step">
-        <p class="summary-step-title"><strong>What it helps you see</strong></p>
-        <p class="summary-step-copy">When the next thing to sell should be deeper discovery rather than premature implementation pricing.</p>
-      </div>
-    </div>
+  <div class="walkthrough-facts walkthrough-facts-fourup">
+    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Discovery</span><span class="walkthrough-fact-value">Problem definition and alignment.</span><span class="walkthrough-fact-note">Not just requirements gathering.</span></div>
+    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Migration</span><span class="walkthrough-fact-value">Content, ownership, and governance.</span><span class="walkthrough-fact-note">Not just moving fields and files.</span></div>
+    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Performance / SEO</span><span class="walkthrough-fact-value">Visibility, workflows, and business outcomes.</span><span class="walkthrough-fact-note">Not just tuning technical details.</span></div>
+    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Key insight</span><span class="walkthrough-fact-value">Implementation gets priced too early.</span><span class="walkthrough-fact-note">The real problem has not been surfaced yet.</span></div>
   </div>
 </div>
 """,
