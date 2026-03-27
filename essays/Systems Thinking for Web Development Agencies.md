@@ -14,7 +14,11 @@ The [Decision Cards](../index.html) are trying to stop a familiar agency mistake
 
 When Layer 2 starts surfacing unclear scope, client-specific complexity, organizational friction, or unusually high delivery uncertainty, the model is not just telling you to raise the price. Sometimes it is telling you that the wrong engagement is being priced.
 
-That is where this essay fits. It explains why a discovery phase is often the right next level of engagement, and why upstream systems thinking belongs in pricing conversations before delivery planning is committed.
+This is why upstream systems thinking belongs in pricing conversations before delivery planning is committed: it helps teams see when the next step should be discovery rather than premature implementation pricing.
+
+This is not a case for heavyweight waterfall planning. Agile is right to welcome important changes, even late ones, when they genuinely improve the customer’s outcome or competitive advantage. But that does not remove the need for enough early cross-team discovery to price the work responsibly. The goal is not rigid certainty. It is adequate scope, risk, stakeholder alignment, and delivery understanding before implementation is sold.
+
+Agile also assumes close collaboration between business and technical people. In practice, many agencies fall well short of that ideal, especially in presales and pricing. The point here is not to pretend that perfect collaboration already exists. It is to argue that pricing gets better when technical, delivery, and business perspectives are brought together early enough to surface real risk before implementation is sold.
 
 ## Discovery is where you decide what problem you are actually solving
 
