@@ -1093,6 +1093,30 @@ PAGES = [
         "eyebrow": "Companion Essay",
         "heading": "Why Discovery Comes First",
         "deck": "A companion essay on why every serious web project benefits from discovery, why migration and implementation decisions go wrong when framed as isolated technical tasks, and why extended discovery should be priced into proposals or treated as its own engagement.",
+        "masthead_extra": """
+<div class="masthead-extra walkthrough-preview">
+  <p class="walkthrough-preview-title">Why this matters in practice</p>
+  <div class="walkthrough-preview-grid">
+    <div class="walkthrough-facts">
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Discovery</span><span class="walkthrough-fact-value">Problem definition and alignment.</span><span class="walkthrough-fact-note">Not just requirements gathering.</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Migration</span><span class="walkthrough-fact-value">Content, ownership, and governance.</span><span class="walkthrough-fact-note">Not just moving fields and files.</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Performance / SEO</span><span class="walkthrough-fact-value">Visibility, workflows, and business outcomes.</span><span class="walkthrough-fact-note">Not just tuning technical settings.</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Core point</span><span class="walkthrough-fact-value">Implementation gets priced too early.</span><span class="walkthrough-fact-note">The real system has not been surfaced yet.</span></div>
+    </div>
+    <div class="summary-strip summary-strip-lower">
+      <div class="summary-step">
+        <p class="summary-step-title"><strong>What this page does</strong></p>
+        <p class="summary-step-copy">It shows why upstream systems thinking belongs in pricing conversations before delivery planning is committed.</p>
+      </div>
+      <div class="summary-step">
+        <p class="summary-step-title"><strong>What it helps you see</strong></p>
+        <p class="summary-step-copy">When the next thing to sell should be deeper discovery rather than premature implementation pricing.</p>
+      </div>
+    </div>
+  </div>
+</div>
+""",
+        "masthead_extra_html": True,
         "meta": "Use this when you want the upstream discovery argument behind better pricing, scoping, and delivery decisions — especially when the next thing to sell may be a larger paid discovery phase before implementation.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
