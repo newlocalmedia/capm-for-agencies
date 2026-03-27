@@ -1,5 +1,7 @@
 # Retrospective Mode
 
+> **Status:** The first snapshot-first retrospective workflow described here is now shipped on `main`. This document remains a planning/reference note for later refinement, evidence-building, and saved-history work.
+
 ## Purpose
 
 Retrospective mode is the next credibility feature for the Decision Cards.

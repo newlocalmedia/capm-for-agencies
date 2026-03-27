@@ -13,17 +13,27 @@ and this project uses a lightweight, date-free changelog for now.
 - A documented caution-band review in the calibration notes comparing the fixed `3`-point rule against `10%` and `12%` proportional alternatives.
 - A local Markdown renderer for static page generation, plus `requirements.txt` and CI installation for the Python build dependency.
 - A jsdom-based DOM integration test layer covering live Layer 2 calculator updates, missing-input warnings, reset behavior, and persistence/restore flows.
+- A snapshot-first retrospective workflow on the main app page with:
+  - Presales / Retrospective mode switching
+  - frozen presales snapshots
+  - deal metadata and actual outcome fields
+  - Layer 2 retrospective re-scoring
+  - retrospective export/report output
+- Draft-PR and CI coverage for the retrospective branch, including Node dependency installation in GitHub Actions.
 
 ### Changed
 - Expanded top navigation from the app to surface the TL;DR, Decision Guide, and Calibration Notes directly.
 - Improved Layer 2 and Layer 3 missing-input messages so they now refer to the specific missing commercial field(s), with Layer 3 linking back to the Layer 2 inputs.
 - Tightened calculator display rounding so sanitized baseline inputs and manual B Corp overrides no longer leak floating-point noise into visible UI strings.
 - Switched static page generation from GitHub’s Markdown API to a local renderer and expanded generated-file verification to cover the walkthrough and discovery essay pages.
+- Promoted retrospective comparison into the primary visual review area while keeping original presales inputs visible as a secondary reference.
+- Improved retrospective review language with clearer section labels, changed-factor hierarchy, recommendation copy, and a stronger refresh-frozen-snapshot hint.
 
 ### Fixed
 - Prevented long Layer 2 result subtext from forcing awkward wrapping in the proposed-margin area when large deal figures are displayed.
 - Hardened calculator input sanitation so baseline and manual-adjustment values are rounded consistently before reuse.
 - Closed the biggest test-gap between pure calculator math and the live app by exercising real DOM state changes instead of only parsing HTML structure.
+- Fixed CI for DOM integration coverage by installing Node dependencies before running the test suite.
 
 ## [0.1.1]
 

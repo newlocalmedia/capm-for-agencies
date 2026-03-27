@@ -12,6 +12,7 @@ CAPM for Agencies is now a usable public beta with:
 - more specific Layer 2 / Layer 3 commercial-input guidance
 - CI that now installs a local Markdown renderer for static page generation
 - DOM integration tests for key Layer 2, warning, reset, and persistence flows
+- a snapshot-first retrospective workflow with frozen presales baselines, actual-outcome comparison, Layer 2 re-score, and retrospective export
 
 The next phase is no longer basic usability. It is **hardening, maintainability, and evidence-building**.
 
@@ -34,6 +35,7 @@ These are complete enough to move out of the active roadmap:
 - app dependency cues, chart help, and precision framing
 - local Markdown renderer for static page generation
 - first jsdom-based DOM integration test layer
+- snapshot-first retrospective workflow on `main`
 
 ## Delivery method
 
@@ -86,20 +88,26 @@ Continue to use:
 **Remaining scope:**
 - keep the reading ladder coherent as new pages or examples are added
 - avoid letting companion material drift back into side-essay territory
-- add more retrospective or case-based evidence when the product supports it
+- add more retrospective or case-based evidence now that the workflow exists on `main`
 
-### Phase 4 — Retrospective workflow, if resumed
+### Phase 4 — Retrospective evidence and refinement
 
-**Goal:** Resume retrospective mode only when it can be cleanly separated from presales.
+**Goal:** Turn the shipped retrospective workflow into a stronger calibration and postmortem tool.
 
 **Current status:**
-- exploratory work exists on `codex/two-mode`
-- `main` intentionally keeps the simpler presales-first workflow
+- `main` now includes:
+  - snapshot-first retrospective entry
+  - frozen presales baselines
+  - actual revenue / actual cost comparison
+  - Layer 2 retrospective re-score
+  - retrospective HTML export
+- the core UX direction is now proven and test-covered
 
 **Scope:**
-- freeze presales state into an explicit baseline snapshot before retrospective entry
-- promote retrospective comparison to the primary view, with original cards secondary
-- include deal metadata, export, and side-by-side re-score in the first meaningful version
+- refine the recommendation/takeaway logic with real usage feedback
+- decide whether the original presales baseline should stay always visible or become optionally collapsible later
+- add stronger evidence loops, example postmortems, or saved-history support if needed
+- revisit the caution band and other calibration choices when actual retrospective data accumulates
 
 ## Definition of done for the next meaningful release
 
@@ -109,4 +117,5 @@ A next release should ideally include:
 - or a conscious decision that the current jsdom layer is enough for this static app
 - a cleaner decision on long-term precision presentation in the live UI
 - a clearer staged plan for safely shrinking the main app architecture
+- retrospective workflow polish informed by real review/export use
 - updated roadmap/backlog notes that continue to match the shipped state

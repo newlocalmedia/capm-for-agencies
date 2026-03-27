@@ -20,6 +20,20 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 - add only the smallest useful browser layer if it materially improves confidence
 - keep the test setup light enough for a static-site repo
 
+### [P1] Refine retrospective workflow from real use
+
+**Outcome:** The shipped retrospective flow becomes easier to use in real team reviews and postmortems.
+
+**Current status:**
+- snapshot-first retrospective mode is now on `main`
+- original presales inputs stay visible as secondary reference
+- export already supports retrospective comparison, changed factors, and recommendations
+
+**Tasks:**
+- gather real usage feedback on the recommendation/takeaway block
+- decide whether the original presales baseline should remain always visible or become optionally collapsible later
+- tighten any rough edges in export readability or changed-factor presentation if they show up in practice
+
 ## P2 — Next
 
 ### [P2] Reduce false precision in the main UI
@@ -76,15 +90,6 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 - check whether the caution band should vary by risk level in practice, not just in theory
 - update docs and tests if a new rule proves better
 
-### [P3] Resume two-mode presales vs retrospective workflow
-
-**Outcome:** Retrospective analysis can return without muddying the presales workflow.
-
-**Tasks:**
-- continue work from `codex/two-mode`
-- treat the mode switch as a snapshot/lock transition, not a casual tab change
-- include deal metadata, export, and side-by-side re-score in the first useful version
-
 ## Archived / completed
 
 These items are no longer active backlog work:
@@ -100,6 +105,7 @@ These items are no longer active backlog work:
 - initial CI setup and authenticated build fix
 - local Markdown renderer and expanded generated-page verification
 - jsdom-based DOM integration coverage for key calculator flows
+- snapshot-first retrospective workflow with frozen baselines, actuals, Layer 2 re-score, and export
 - social sharing / sitemap / robots / structured data
 - initial accessibility pass and keyboard semantics improvements
 - major copy cleanup across app, overview, theory, and companion essay
