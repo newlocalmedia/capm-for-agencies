@@ -950,11 +950,61 @@
     font-size: 13px;
     color: var(--gray500);
   }
+  .retrospective-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    margin: 0 0 14px;
+  }
+  .retrospective-lock-note {
+    font-size: 12px;
+    color: var(--gray400);
+    line-height: 1.5;
+  }
+  .snapshot-card {
+    margin-bottom: 14px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid rgba(196,93,62,0.16);
+    background: rgba(240,212,203,0.18);
+  }
+  .snapshot-card-title {
+    margin-bottom: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+  }
+  .compact-result-box {
+    gap: 10px;
+  }
+  .compact-result-box .result-item {
+    min-height: auto;
+    padding: 12px 14px;
+  }
   .retrospective-hint {
     margin-top: 12px;
     font-size: 12px;
     color: var(--gray400);
     line-height: 1.5;
+  }
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer1-card .score-btn,
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer2-card .score-btn,
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer1-mobile-scores .mobile-score-strip,
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer2-mobile-scores .mobile-score-strip,
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #rf,
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #rm,
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #l1-input,
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #deal-price,
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #deal-cost {
+    opacity: 0.65;
+  }
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer1-mobile-scores .mobile-score-strip,
+  body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer2-mobile-scores .mobile-score-strip {
+    pointer-events: none;
   }
 
   .approach-note {
@@ -1689,7 +1739,51 @@
       <div class="retrospective-panel" id="retrospective-panel" hidden>
         <span class="section-label">Retrospective Comparison</span>
         <div class="calc-panel">
-          <p class="retrospective-intro"><strong>Completed project view:</strong> Compare the original hurdle and quoted margin with what actually happened in delivery. Use this to decide whether the original pricing logic was too optimistic, too conservative, or directionally right.</p>
+          <p class="retrospective-intro"><strong>Completed project view:</strong> Retrospective mode freezes the original presales snapshot, then compares that frozen decision with what actually happened in delivery.</p>
+          <div class="calc-row">
+            <div class="calc-field">
+              <label for="retro-deal-name">Deal Name</label>
+              <div><input type="text" id="retro-deal-name" value="" placeholder="Client / project name" oninput="markExportDirty()"></div>
+            </div>
+            <div class="calc-field">
+              <label for="retro-presales-date">Presales Snapshot Date</label>
+              <div><input type="date" id="retro-presales-date" value="" readonly></div>
+            </div>
+            <div class="calc-field">
+              <label for="retro-date">Retrospective Date</label>
+              <div><input type="date" id="retro-date" value="" oninput="markExportDirty()"></div>
+            </div>
+          </div>
+          <div class="retrospective-toolbar">
+            <span class="retrospective-lock-note" id="retro-lock-note">Presales inputs are frozen while retrospective mode is active.</span>
+            <button type="button" class="action-btn mode-btn" id="retro-unlock-btn" onclick="togglePresalesUnlock()">Unlock original presales inputs</button>
+            <button type="button" class="action-btn mode-btn" id="retro-refreeze-btn" onclick="refreshRetrospectiveSnapshot()">Refresh frozen snapshot</button>
+          </div>
+          <div class="snapshot-card">
+            <div class="snapshot-card-title">Frozen presales snapshot</div>
+            <div class="result-box compact-result-box">
+              <div class="result-item">
+                <span class="result-label">Quoted Price</span>
+                <span class="result-value accent" id="retro-snapshot-price">—</span>
+                <span class="result-sub" id="retro-snapshot-price-sub">frozen at sale</span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Estimated Cost</span>
+                <span class="result-value accent" id="retro-snapshot-cost">—</span>
+                <span class="result-sub" id="retro-snapshot-cost-sub">frozen at sale</span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Predicted <em>E</em>(<em>R</em>)</span>
+                <span class="result-value accent" id="retro-snapshot-required">—</span>
+                <span class="result-sub" id="retro-snapshot-required-sub">required margin at sale</span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Quoted Margin</span>
+                <span class="result-value accent" id="retro-snapshot-proposed">—</span>
+                <span class="result-sub" id="retro-snapshot-proposed-sub">proposed margin at sale</span>
+              </div>
+            </div>
+          </div>
           <div class="calc-row">
             <div class="calc-field">
               <label for="actual-revenue">Actual Revenue
@@ -1711,7 +1805,7 @@
             </div>
           </div>
           <div class="formula-bar" id="retro-formula">
-            <strong>Retrospective:</strong> compare the original proposed margin with the actual realized margin, then check both against the original hurdle <em>E</em>(<em>R</em>).
+            <strong>Retrospective:</strong> compare the frozen quoted margin with the actual realized margin, then check both against the frozen hurdle <em>E</em>(<em>R</em>).
           </div>
           <div class="result-box">
             <div class="result-item">
@@ -2160,7 +2254,15 @@
     dirty: true,
     lastExportSignature: null
   };
+  const retrospectiveState = {
+    snapshot: null,
+    presalesUnlocked: false
+  };
   let helpContentId = 0;
+
+  function todayDateString() {
+    return new Date().toISOString().slice(0, 10);
+  }
 
   function defaultInputValues() {
     return {
@@ -2175,19 +2277,85 @@
 
   function defaultRetrospectiveValues() {
     return {
+      dealName: '',
+      presalesDate: '',
+      retrospectiveDate: todayDateString(),
       actualRevenue: '',
       actualCost: '',
-      notes: ''
+      notes: '',
+      snapshot: null,
+      presalesUnlocked: false
     };
   }
 
-  function updateWorkflowModeUi() {
+  function getPresalesLockTargets() {
+    return [
+      ...document.querySelectorAll('#layer1-card .score-btn'),
+      ...document.querySelectorAll('#layer2-table .score-btn'),
+      ...document.querySelectorAll('#layer1-mobile-scores .mobile-score-option'),
+      ...document.querySelectorAll('#layer2-mobile-scores .mobile-score-option'),
+      document.getElementById('rf'),
+      document.getElementById('rm'),
+      document.getElementById('l1-input'),
+      document.getElementById('deal-price'),
+      document.getElementById('deal-cost')
+    ].filter(Boolean);
+  }
+
+  function setPresalesControlsLocked(locked) {
+    getPresalesLockTargets().forEach((control) => {
+      control.disabled = locked;
+      if (control.tagName === 'INPUT') {
+        control.readOnly = locked;
+      }
+    });
+  }
+
+  function updateRetrospectiveSnapshotUi() {
+    const snapshot = retrospectiveState.snapshot;
+    const priceNode = document.getElementById('retro-snapshot-price');
+    const costNode = document.getElementById('retro-snapshot-cost');
+    const requiredNode = document.getElementById('retro-snapshot-required');
+    const proposedNode = document.getElementById('retro-snapshot-proposed');
+    const priceSub = document.getElementById('retro-snapshot-price-sub');
+    const costSub = document.getElementById('retro-snapshot-cost-sub');
+    const requiredSub = document.getElementById('retro-snapshot-required-sub');
+    const proposedSub = document.getElementById('retro-snapshot-proposed-sub');
+
+    if (!snapshot) {
+      priceNode.textContent = '—';
+      costNode.textContent = '—';
+      requiredNode.textContent = '—';
+      proposedNode.textContent = '—';
+      priceSub.textContent = 'freeze presales first';
+      costSub.textContent = 'freeze presales first';
+      requiredSub.textContent = 'freeze presales first';
+      proposedSub.textContent = 'freeze presales first';
+      return;
+    }
+
+    priceNode.textContent = formatMoney(parseFloat(snapshot.inputs.price));
+    costNode.textContent = formatMoney(parseFloat(snapshot.inputs.cost));
+    requiredNode.textContent = snapshot.outputs.requiredMargin.toFixed(1) + '%';
+    proposedNode.textContent = snapshot.outputs.proposedMargin.toFixed(1) + '%';
+    priceSub.textContent = snapshot.outputs.verdict;
+    costSub.textContent = 'estimated at sale';
+    requiredSub.textContent = 'required margin at sale';
+    proposedSub.textContent = 'quoted margin at sale';
+  }
+
+  function updateWorkflowModeUi(statusMessage) {
     document.body.dataset.workflowMode = currentWorkflowMode;
+    const presalesLocked = currentWorkflowMode === 'retrospective' && !retrospectiveState.presalesUnlocked;
+    document.body.dataset.presalesLocked = presalesLocked ? 'true' : 'false';
 
     const presalesBtn = document.getElementById('mode-presales-btn');
     const retrospectiveBtn = document.getElementById('mode-retrospective-btn');
     const note = document.getElementById('mode-help-note');
     const panel = document.getElementById('retrospective-panel');
+    const unlockBtn = document.getElementById('retro-unlock-btn');
+    const refreezeBtn = document.getElementById('retro-refreeze-btn');
+    const lockNote = document.getElementById('retro-lock-note');
 
     if (presalesBtn) {
       const active = currentWorkflowMode === 'presales';
@@ -2199,18 +2367,119 @@
       retrospectiveBtn.classList.toggle('active', active);
       retrospectiveBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
     }
+    setPresalesControlsLocked(presalesLocked);
     if (note) {
-      note.textContent = currentWorkflowMode === 'retrospective'
-        ? 'Completed-project mode is active. Enter actual revenue and delivery cost below Layer 2 to compare the original pricing logic with the actual result.'
-        : 'Use retrospective mode for completed projects when you want to compare the original hurdle with the actual outcome.';
+      note.textContent = statusMessage || (currentWorkflowMode === 'retrospective'
+        ? 'Completed-project mode is active. The original presales inputs are frozen unless you explicitly unlock them.'
+        : 'Use retrospective mode for completed projects when you want to freeze the original hurdle and compare it with the actual outcome.');
     }
     if (panel) {
       panel.hidden = currentWorkflowMode !== 'retrospective';
     }
+    if (unlockBtn) {
+      unlockBtn.textContent = retrospectiveState.presalesUnlocked
+        ? 'Lock original presales inputs'
+        : 'Unlock original presales inputs';
+      unlockBtn.classList.toggle('active', retrospectiveState.presalesUnlocked);
+      unlockBtn.setAttribute('aria-pressed', retrospectiveState.presalesUnlocked ? 'true' : 'false');
+    }
+    if (refreezeBtn) {
+      refreezeBtn.disabled = !retrospectiveState.presalesUnlocked;
+      refreezeBtn.setAttribute('aria-disabled', retrospectiveState.presalesUnlocked ? 'false' : 'true');
+    }
+    if (lockNote) {
+      lockNote.textContent = presalesLocked
+        ? 'Presales inputs are frozen while retrospective mode is active.'
+        : 'Presales inputs are unlocked. Refresh the frozen snapshot when you want retrospective mode to use the new baseline.';
+    }
+    updateRetrospectiveSnapshotUi();
+  }
+
+  function buildPresalesSnapshot() {
+    const deal = getDealMetrics();
+    const requiredMargin = parseFloat(document.getElementById('l2-er').textContent);
+    const blended = parseFloat(document.getElementById('l2-blended').textContent);
+    const engagementBeta = parseFloat(document.getElementById('l2-beta').textContent);
+    const verdict = document.getElementById('l2-verdict').textContent.trim();
+
+    if (Object.keys(state.layer2).length !== exportLayerTargets.layer2 || !deal || isNaN(requiredMargin)) {
+      return null;
+    }
+
+    return {
+      createdAt: new Date().toISOString(),
+      state: JSON.parse(JSON.stringify(state)),
+      inputs: Object.assign({}, getInputSnapshot()),
+      outputs: {
+        engagementScore: Object.values(state.layer2).reduce((total, value) => total + value, 0),
+        engagementBeta: isNaN(engagementBeta) ? null : engagementBeta,
+        blendedBeta: isNaN(blended) ? null : blended,
+        requiredMargin,
+        proposedMargin: Calc.round(deal.proposedMargin, 1),
+        verdict
+      }
+    };
+  }
+
+  function captureRetrospectiveSnapshot(force = false) {
+    if (retrospectiveState.snapshot && !force) return retrospectiveState.snapshot;
+
+    const snapshot = buildPresalesSnapshot();
+    if (!snapshot) return null;
+
+    retrospectiveState.snapshot = snapshot;
+    retrospectiveState.presalesUnlocked = false;
+
+    const presalesDateField = document.getElementById('retro-presales-date');
+    if (presalesDateField && !presalesDateField.value) {
+      presalesDateField.value = snapshot.createdAt.slice(0, 10);
+    }
+
+    const retrospectiveDateField = document.getElementById('retro-date');
+    if (retrospectiveDateField && !retrospectiveDateField.value) {
+      retrospectiveDateField.value = todayDateString();
+    }
+
+    updateRetrospectiveSnapshotUi();
+    return snapshot;
+  }
+
+  function refreshRetrospectiveSnapshot() {
+    const snapshot = captureRetrospectiveSnapshot(true);
+    if (!snapshot) {
+      updateWorkflowModeUi('Complete Layer 2 scoring and the commercial inputs before refreshing the frozen retrospective snapshot.');
+      return;
+    }
+    updateWorkflowModeUi('Frozen presales snapshot refreshed from the currently unlocked presales inputs.');
+    calcRetrospective();
+    markExportDirty();
+  }
+
+  function togglePresalesUnlock() {
+    if (currentWorkflowMode !== 'retrospective' || !retrospectiveState.snapshot) return;
+    retrospectiveState.presalesUnlocked = !retrospectiveState.presalesUnlocked;
+    updateWorkflowModeUi();
+    markExportDirty();
   }
 
   function setWorkflowMode(mode) {
-    currentWorkflowMode = mode === 'retrospective' ? 'retrospective' : 'presales';
+    if (mode === 'retrospective') {
+      const snapshot = captureRetrospectiveSnapshot();
+      if (!snapshot) {
+        currentWorkflowMode = 'presales';
+        updateWorkflowModeUi('Complete Layer 2 scoring and the commercial inputs before freezing a retrospective snapshot.');
+        calcRetrospective();
+        return;
+      }
+      currentWorkflowMode = 'retrospective';
+      updateWorkflowModeUi();
+      calcRetrospective();
+      markExportDirty();
+      return;
+    }
+
+    currentWorkflowMode = 'presales';
+    retrospectiveState.presalesUnlocked = false;
     updateWorkflowModeUi();
     calcRetrospective();
     markExportDirty();
@@ -2245,15 +2514,25 @@
 
   function getRetrospectiveSnapshot() {
     return {
+      dealName: document.getElementById('retro-deal-name')?.value || '',
+      presalesDate: document.getElementById('retro-presales-date')?.value || '',
+      retrospectiveDate: document.getElementById('retro-date')?.value || '',
       actualRevenue: document.getElementById('actual-revenue')?.value || '',
       actualCost: document.getElementById('actual-cost')?.value || '',
-      notes: document.getElementById('retro-notes')?.value || ''
+      notes: document.getElementById('retro-notes')?.value || '',
+      snapshot: retrospectiveState.snapshot,
+      presalesUnlocked: retrospectiveState.presalesUnlocked
     };
   }
 
   function applyRetrospectiveSnapshot(snapshot) {
     const values = Object.assign(defaultRetrospectiveValues(), snapshot || {});
+    retrospectiveState.snapshot = values.snapshot || null;
+    retrospectiveState.presalesUnlocked = !!values.presalesUnlocked;
     const mapping = {
+      dealName: 'retro-deal-name',
+      presalesDate: 'retro-presales-date',
+      retrospectiveDate: 'retro-date',
       actualRevenue: 'actual-revenue',
       actualCost: 'actual-cost',
       notes: 'retro-notes'
@@ -2298,6 +2577,7 @@
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) {
         applyInputSnapshot();
+        applyRetrospectiveSnapshot();
         return false;
       }
 
@@ -2489,12 +2769,16 @@
     return JSON.stringify({
       mode: currentWorkflowMode,
       state,
+      retrospectiveState,
       rf: document.getElementById('rf')?.value || '',
       rm: document.getElementById('rm')?.value || '',
       l1Input: document.getElementById('l1-input')?.value || '',
       price: document.getElementById('deal-price')?.value || '',
       cost: document.getElementById('deal-cost')?.value || '',
       bcManual: document.getElementById('bc-manual-adj')?.value || '',
+      retroDealName: document.getElementById('retro-deal-name')?.value || '',
+      retroPresalesDate: document.getElementById('retro-presales-date')?.value || '',
+      retroDate: document.getElementById('retro-date')?.value || '',
       actualRevenue: document.getElementById('actual-revenue')?.value || '',
       actualCost: document.getElementById('actual-cost')?.value || '',
       retroNotes: document.getElementById('retro-notes')?.value || ''
@@ -2661,6 +2945,8 @@
     state.bcorp_l1 = {};
     state.bcorp_l2 = {};
     currentWorkflowMode = 'presales';
+    retrospectiveState.snapshot = null;
+    retrospectiveState.presalesUnlocked = false;
     applyInputSnapshot();
     applyRetrospectiveSnapshot();
     clearPersistedState();
@@ -2969,6 +3255,8 @@
     }
 
     const now = new Date();
+    const retrospectiveData = getRetrospectiveSnapshot();
+    const frozenSnapshot = retrospectiveState.snapshot;
     const rf = parseFloat(document.getElementById('rf').value);
     const rm = parseFloat(document.getElementById('rm').value);
     const l1Input = parseFloat(document.getElementById('l1-input').value);
@@ -2981,7 +3269,9 @@
     const proposedMargin = document.getElementById('l2-proposed').textContent.trim();
     const marginGap = document.getElementById('l2-gap').textContent.trim();
     const minPrice = document.getElementById('l2-min-price').textContent.trim();
-    const l2Verdict = document.getElementById('l2-verdict').textContent.trim() || 'Not evaluated yet';
+    const l2Verdict = (currentWorkflowMode === 'retrospective' && frozenSnapshot?.outputs?.verdict)
+      ? frozenSnapshot.outputs.verdict
+      : (document.getElementById('l2-verdict').textContent.trim() || 'Not evaluated yet');
     const deal = getDealMetrics();
 
     const bcStandard = document.getElementById('bc-std-er').value.trim();
@@ -2989,7 +3279,7 @@
     const bcErStar = document.getElementById('bc-er-star').textContent.trim();
     const bcVerdict = document.getElementById('bc-verdict').textContent.trim();
     const retrospective = getActualDealMetrics();
-    const retrospectiveNotes = document.getElementById('retro-notes')?.value.trim() || '';
+    const retrospectiveNotes = retrospectiveData.notes.trim() || '';
 
     const layer1Data = collectFactorData('layer1', '#layer1-table tbody');
     const layer2Data = collectFactorData('layer2', '#layer2-table tbody');
@@ -3005,9 +3295,13 @@
       erStar: '<span class="math-inline"><em>E</em>(<em>R</em>*)</span>',
       beta: '<span class="math-inline"><em>β</em></span>'
     };
-    const requiredMarginNumber = parseFloat(requiredMargin);
+    const requiredMarginNumber = currentWorkflowMode === 'retrospective' && frozenSnapshot?.outputs
+      ? frozenSnapshot.outputs.requiredMargin
+      : parseFloat(requiredMargin);
     const actualMarginNumber = retrospective ? Calc.round(retrospective.actualMargin, 1) : null;
-    const proposedMarginNumber = deal ? Calc.round(deal.proposedMargin, 1) : null;
+    const proposedMarginNumber = currentWorkflowMode === 'retrospective' && frozenSnapshot?.outputs
+      ? frozenSnapshot.outputs.proposedMargin
+      : (deal ? Calc.round(deal.proposedMargin, 1) : null);
     const retrospectiveVariance = (retrospective && deal)
       ? Calc.gap(actualMarginNumber, proposedMarginNumber)
       : null;
@@ -3058,7 +3352,7 @@
       '</div>' +
       (currentWorkflowMode === 'retrospective'
         ? '<div class="report-grid full">' +
-            '<section class="report-card"><h2>Retrospective Comparison</h2><p><strong>Predicted verdict at sale:</strong> ' + escapeHtml(l2Verdict || 'Not evaluated yet') + '<br><strong>Actual realized margin:</strong> ' + escapeHtml(retrospective ? formatPercentValue(actualMarginNumber) : '—') + '<br><strong>Variance vs quoted margin:</strong> ' + escapeHtml(retrospectiveVariance === null ? '—' : ((retrospectiveVariance >= 0 ? '+' : '') + retrospectiveVariance.toFixed(1) + '%')) + '<br><strong>Actual vs hurdle:</strong> ' + escapeHtml(retrospectiveHurdleGap === null ? '—' : ((retrospectiveHurdleGap >= 0 ? '+' : '') + retrospectiveHurdleGap.toFixed(1) + '%')) + '<br><strong>Reading:</strong> ' + escapeHtml(retrospectiveReading || 'Enter actual revenue and cost to compare the completed project with the original hurdle.') + '</p>' + (retrospectiveNotes ? '<p><strong>Postmortem notes:</strong><br>' + escapeHtml(retrospectiveNotes).replace(/\n/g, '<br>') + '</p>' : '') + '</section>' +
+            '<section class="report-card"><h2>Retrospective Comparison</h2><p><strong>Deal name:</strong> ' + escapeHtml(retrospectiveData.dealName || '—') + '<br><strong>Presales snapshot date:</strong> ' + escapeHtml(retrospectiveData.presalesDate || '—') + '<br><strong>Retrospective date:</strong> ' + escapeHtml(retrospectiveData.retrospectiveDate || '—') + '<br><strong>Predicted verdict at sale:</strong> ' + escapeHtml(l2Verdict || 'Not evaluated yet') + '<br><strong>Actual realized margin:</strong> ' + escapeHtml(retrospective ? formatPercentValue(actualMarginNumber) : '—') + '<br><strong>Variance vs quoted margin:</strong> ' + escapeHtml(retrospectiveVariance === null ? '—' : ((retrospectiveVariance >= 0 ? '+' : '') + retrospectiveVariance.toFixed(1) + '%')) + '<br><strong>Actual vs hurdle:</strong> ' + escapeHtml(retrospectiveHurdleGap === null ? '—' : ((retrospectiveHurdleGap >= 0 ? '+' : '') + retrospectiveHurdleGap.toFixed(1) + '%')) + '<br><strong>Reading:</strong> ' + escapeHtml(retrospectiveReading || 'Enter actual revenue and cost to compare the completed project with the original hurdle.') + '</p>' + (retrospectiveNotes ? '<p><strong>Postmortem notes:</strong><br>' + escapeHtml(retrospectiveNotes).replace(/\n/g, '<br>') + '</p>' : '') + '</section>' +
           '</div>'
         : '') +
       '<div class="report-grid">' +
@@ -3263,10 +3557,11 @@
 
     if (!predictedVerdictNode) return;
 
-    const requiredMargin = parseFloat(document.getElementById('l2-er').textContent);
-    const deal = getDealMetrics();
+    const snapshot = retrospectiveState.snapshot;
     const actual = getActualDealMetrics();
-    const predictedVerdict = document.getElementById('l2-verdict').textContent.trim();
+    const requiredMargin = snapshot?.outputs?.requiredMargin;
+    const proposedMargin = snapshot?.outputs?.proposedMargin;
+    const predictedVerdict = snapshot?.outputs?.verdict || '';
 
     predictedVerdictNode.textContent = predictedVerdict || '—';
     actualMarginNode.textContent = '—';
@@ -3276,10 +3571,17 @@
     hurdleGapNode.textContent = '—';
     hurdleGapSubNode.textContent = 'actual - required';
     verdictNode.innerHTML = '';
-    formulaNode.innerHTML = '<strong>Retrospective:</strong> compare the original proposed margin with the actual realized margin, then check both against the original hurdle <em>E</em>(<em>R</em>).';
+    formulaNode.innerHTML = '<strong>Retrospective:</strong> compare the frozen quoted margin with the actual realized margin, then check both against the frozen hurdle <em>E</em>(<em>R</em>).';
     hintNode.textContent = currentWorkflowMode === 'retrospective'
-      ? 'Use this mode after delivery to compare the actual result with the original pricing logic and capture one calibration note for next time.'
-      : 'Switch to retrospective mode to compare the original pricing logic with the actual result once the project is complete.';
+      ? 'Use this mode after delivery to compare the frozen presales decision with the actual result and capture one calibration note for next time.'
+      : 'Switch to retrospective mode to freeze the presales decision and compare it with the actual result once the project is complete.';
+
+    if (!snapshot) {
+      hintNode.textContent = currentWorkflowMode === 'retrospective'
+        ? 'Complete Layer 2 scoring and the commercial inputs before freezing a retrospective snapshot.'
+        : hintNode.textContent;
+      return;
+    }
 
     if (!actual) return;
 
@@ -3287,12 +3589,11 @@
     actualMarginNode.textContent = actualMargin.toFixed(1) + '%';
     actualSubNode.textContent = formatMoney(actual.revenue) + ' - ' + formatMoney(actual.cost) + ' over ' + formatMoney(actual.revenue);
 
-    if (!deal || isNaN(requiredMargin)) {
-      verdictNode.innerHTML = '<span class="verdict caution">Complete the original Layer 2 pricing inputs before using retrospective mode</span>';
+    if (typeof proposedMargin !== 'number' || typeof requiredMargin !== 'number' || isNaN(requiredMargin)) {
+      verdictNode.innerHTML = '<span class="verdict caution">Freeze a complete presales snapshot before using retrospective mode</span>';
       return;
     }
 
-    const proposedMargin = Calc.round(deal.proposedMargin, 1);
     const variance = Calc.gap(actualMargin, proposedMargin);
     const hurdleGap = Calc.gap(actualMargin, requiredMargin);
     const assessment = Calc.retrospectiveAssessment(requiredMargin, proposedMargin, actualMargin);
