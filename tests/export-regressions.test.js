@@ -86,6 +86,10 @@ test('retrospective mode is available and persisted', () => {
   assert.match(html, /function captureRetrospectiveSnapshot\(force = false\)/);
   assert.match(html, /function refreshRetrospectiveSnapshot\(\)/);
   assert.match(html, /function togglePresalesUnlock\(\)/);
+  assert.match(html, /id="retro-rescore-list"/);
+  assert.match(html, /id="retro-rescore-summary"/);
+  assert.match(html, /function renderRetrospectiveRescore\(\)/);
+  assert.match(html, /function applyRetrospectiveRescore\(factor, value\)/);
   assert.match(html, /id="actual-revenue"/);
   assert.match(html, /id="actual-cost"/);
   assert.match(html, /function calcRetrospective\(\)/);

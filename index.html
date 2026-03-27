@@ -985,6 +985,95 @@
     min-height: auto;
     padding: 12px 14px;
   }
+  .retrospective-rescore {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--gray200);
+  }
+  .retrospective-rescore-head {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .retrospective-rescore-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray500);
+  }
+  .retrospective-rescore-copy {
+    font-size: 12px;
+    color: var(--gray400);
+    line-height: 1.5;
+  }
+  .retrospective-rescore-list {
+    display: grid;
+    gap: 10px;
+  }
+  .retro-rescore-row {
+    display: grid;
+    grid-template-columns: minmax(180px, 1.1fr) minmax(120px, 0.65fr) minmax(220px, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid var(--gray200);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.56);
+  }
+  .retro-rescore-factor {
+    display: grid;
+    gap: 2px;
+  }
+  .retro-rescore-factor-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .retro-rescore-factor-desc {
+    font-size: 12px;
+    color: var(--gray400);
+  }
+  .retro-original-score {
+    font-size: 12px;
+    color: var(--gray500);
+  }
+  .retro-original-score strong {
+    color: var(--ink);
+  }
+  .retro-rescore-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .retro-score-btn {
+    min-width: 34px;
+    min-height: 34px;
+    border: 1px solid var(--gray200);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.88);
+    color: var(--gray500);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .retro-score-btn.active {
+    border-color: rgba(196,93,62,0.28);
+    background: rgba(240,212,203,0.9);
+    color: var(--accent-dark);
+  }
+  .retro-rescore-summary {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.62);
+    border: 1px solid var(--gray200);
+    font-size: 12px;
+    color: var(--gray500);
+    line-height: 1.55;
+  }
   .retrospective-hint {
     margin-top: 12px;
     font-size: 12px;
@@ -1837,6 +1926,14 @@
               <textarea id="retro-notes" placeholder="What changed? Was discovery the better sale? What would you score differently next time?" oninput="markExportDirty()"></textarea>
             </div>
           </div>
+          <div class="retrospective-rescore">
+            <div class="retrospective-rescore-head">
+              <div class="retrospective-rescore-title">Layer 2 re-score</div>
+              <div class="retrospective-rescore-copy">If you would score any Layer 2 factor differently now, re-score it here without changing the frozen presales record.</div>
+            </div>
+            <div class="retrospective-rescore-list" id="retro-rescore-list"></div>
+            <div class="retrospective-rescore-summary" id="retro-rescore-summary">Freeze a presales snapshot to compare original and retrospective scoring.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2256,7 +2353,8 @@
   };
   const retrospectiveState = {
     snapshot: null,
-    presalesUnlocked: false
+    presalesUnlocked: false,
+    layer2Rescore: {}
   };
   let helpContentId = 0;
 
@@ -2284,7 +2382,8 @@
       actualCost: '',
       notes: '',
       snapshot: null,
-      presalesUnlocked: false
+      presalesUnlocked: false,
+      layer2Rescore: {}
     };
   }
 
@@ -2344,6 +2443,84 @@
     proposedSub.textContent = 'quoted margin at sale';
   }
 
+  function getLayer2FactorMeta() {
+    return [...document.querySelectorAll('#layer2-table tr[data-factor]')].map((row) => ({
+      factor: row.dataset.factor,
+      name: row.querySelector('.factor-name')?.textContent.trim() || row.dataset.factor,
+      desc: row.querySelector('.factor-desc')?.textContent.trim() || '',
+      labels: getScoreGuide('layer2', row.dataset.factor, row)
+    }));
+  }
+
+  function renderRetrospectiveRescore() {
+    const list = document.getElementById('retro-rescore-list');
+    const summary = document.getElementById('retro-rescore-summary');
+    if (!list || !summary) return;
+
+    const snapshot = retrospectiveState.snapshot;
+    if (!snapshot || !snapshot.state?.layer2) {
+      list.innerHTML = '';
+      summary.textContent = 'Freeze a presales snapshot to compare original and retrospective scoring.';
+      return;
+    }
+
+    const meta = getLayer2FactorMeta();
+    const changed = [];
+    list.innerHTML = meta.map(({ factor, name, desc, labels }) => {
+      const original = snapshot.state.layer2[factor];
+      const rescored = retrospectiveState.layer2Rescore[factor] || original;
+      if (rescored !== original) {
+        changed.push({ factor, name, original, rescored, labels });
+      }
+      return (
+        '<div class="retro-rescore-row">' +
+          '<div class="retro-rescore-factor">' +
+            '<div class="retro-rescore-factor-name">' + escapeHtml(name) + '</div>' +
+            '<div class="retro-rescore-factor-desc">' + escapeHtml(desc) + '</div>' +
+          '</div>' +
+          '<div class="retro-original-score"><strong>Original:</strong> ' + original + '/5 (' + escapeHtml(labels[original - 1]) + ')</div>' +
+          '<div class="retro-rescore-options" role="group" aria-label="' + escapeHtml(name) + ' retrospective re-score">' +
+            [1, 2, 3, 4, 5].map((value) => (
+              '<button type="button" class="retro-score-btn' + (rescored === value ? ' active' : '') + '" data-factor="' + factor + '" data-val="' + value + '">' + value + '</button>'
+            )).join('') +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+
+    list.querySelectorAll('.retro-score-btn').forEach((button) => {
+      button.addEventListener('click', () => {
+        applyRetrospectiveRescore(button.dataset.factor, parseInt(button.dataset.val, 10));
+      });
+    });
+
+    const rescoredScores = meta.map(({ factor }) => retrospectiveState.layer2Rescore[factor] || snapshot.state.layer2[factor]);
+    const rescoredSum = rescoredScores.reduce((total, value) => total + value, 0);
+    const rescoredBeta = Calc.engagementBetaFromScore(rescoredSum);
+    const l1Factor = parseFloat(snapshot.inputs.l1Input);
+    const rf = parseFloat(snapshot.inputs.rf);
+    const rm = parseFloat(snapshot.inputs.rm);
+    const rescoredBlended = Calc.blendedBeta(rescoredBeta, l1Factor);
+    const rescoredRequired = Calc.requiredReturn(rf, rm, rescoredBlended);
+
+    if (!changed.length) {
+      summary.innerHTML = 'No factors are rescored yet. The frozen original hurdle remains <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong>.';
+      return;
+    }
+
+    summary.innerHTML =
+      '<strong>Re-scored view:</strong> ' + changed.length + ' factor' + (changed.length === 1 ? '' : 's') + ' changed. ' +
+      'The re-scored engagement beta is <strong>' + rescoredBeta.toFixed(2) + '</strong>, blended beta is <strong>' + rescoredBlended.toFixed(2) + '</strong>, ' +
+      'and the hurdle would have been <strong>' + rescoredRequired.toFixed(1) + '%</strong> instead of <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong>.';
+  }
+
+  function applyRetrospectiveRescore(factor, value) {
+    if (!retrospectiveState.snapshot?.state?.layer2?.[factor]) return;
+    retrospectiveState.layer2Rescore[factor] = value;
+    renderRetrospectiveRescore();
+    markExportDirty();
+  }
+
   function updateWorkflowModeUi(statusMessage) {
     document.body.dataset.workflowMode = currentWorkflowMode;
     const presalesLocked = currentWorkflowMode === 'retrospective' && !retrospectiveState.presalesUnlocked;
@@ -2393,6 +2570,7 @@
         : 'Presales inputs are unlocked. Refresh the frozen snapshot when you want retrospective mode to use the new baseline.';
     }
     updateRetrospectiveSnapshotUi();
+    renderRetrospectiveRescore();
   }
 
   function buildPresalesSnapshot() {
@@ -2429,6 +2607,7 @@
 
     retrospectiveState.snapshot = snapshot;
     retrospectiveState.presalesUnlocked = false;
+    retrospectiveState.layer2Rescore = Object.assign({}, snapshot.state.layer2);
 
     const presalesDateField = document.getElementById('retro-presales-date');
     if (presalesDateField && !presalesDateField.value) {
@@ -2521,7 +2700,8 @@
       actualCost: document.getElementById('actual-cost')?.value || '',
       notes: document.getElementById('retro-notes')?.value || '',
       snapshot: retrospectiveState.snapshot,
-      presalesUnlocked: retrospectiveState.presalesUnlocked
+      presalesUnlocked: retrospectiveState.presalesUnlocked,
+      layer2Rescore: retrospectiveState.layer2Rescore
     };
   }
 
@@ -2529,6 +2709,7 @@
     const values = Object.assign(defaultRetrospectiveValues(), snapshot || {});
     retrospectiveState.snapshot = values.snapshot || null;
     retrospectiveState.presalesUnlocked = !!values.presalesUnlocked;
+    retrospectiveState.layer2Rescore = values.layer2Rescore || {};
     const mapping = {
       dealName: 'retro-deal-name',
       presalesDate: 'retro-presales-date',
@@ -2781,7 +2962,8 @@
       retroDate: document.getElementById('retro-date')?.value || '',
       actualRevenue: document.getElementById('actual-revenue')?.value || '',
       actualCost: document.getElementById('actual-cost')?.value || '',
-      retroNotes: document.getElementById('retro-notes')?.value || ''
+      retroNotes: document.getElementById('retro-notes')?.value || '',
+      retroRescore: retrospectiveState.layer2Rescore
     });
   }
 
@@ -2947,6 +3129,7 @@
     currentWorkflowMode = 'presales';
     retrospectiveState.snapshot = null;
     retrospectiveState.presalesUnlocked = false;
+    retrospectiveState.layer2Rescore = {};
     applyInputSnapshot();
     applyRetrospectiveSnapshot();
     clearPersistedState();
@@ -3311,6 +3494,24 @@
     const retrospectiveReading = (retrospective && deal && !isNaN(requiredMarginNumber))
       ? Calc.retrospectiveAssessment(requiredMarginNumber, proposedMarginNumber, actualMarginNumber)
       : '';
+    const rescoredFactors = frozenSnapshot?.state?.layer2
+      ? getLayer2FactorMeta().map(({ factor, name, labels }) => {
+          const original = frozenSnapshot.state.layer2[factor];
+          const rescored = retrospectiveState.layer2Rescore[factor] || original;
+          if (rescored === original) return null;
+          return name + ': ' + original + '/5 (' + labels[original - 1] + ') → ' + rescored + '/5 (' + labels[rescored - 1] + ')';
+        }).filter(Boolean)
+      : [];
+    const rescoredSummary = (() => {
+      if (!frozenSnapshot?.state?.layer2 || !rescoredFactors.length) return '';
+      const rescoredScores = Object.keys(frozenSnapshot.state.layer2).map((factor) => retrospectiveState.layer2Rescore[factor] || frozenSnapshot.state.layer2[factor]);
+      const rescoredSum = rescoredScores.reduce((total, value) => total + value, 0);
+      const rescoredBeta = Calc.engagementBetaFromScore(rescoredSum);
+      const rescoredBlended = Calc.blendedBeta(rescoredBeta, parseFloat(frozenSnapshot.inputs.l1Input));
+      const rescoredRequired = Calc.requiredReturn(parseFloat(frozenSnapshot.inputs.rf), parseFloat(frozenSnapshot.inputs.rm), rescoredBlended);
+      return '<br><strong>Re-scored hurdle now:</strong> ' + escapeHtml(rescoredRequired.toFixed(1) + '%') +
+        '<br><strong>Changed factors:</strong><br>' + rescoredFactors.map((line) => escapeHtml(line)).join('<br>');
+    })();
 
     const reportHtml = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CAPM Decision Summary</title><style>' +
       'body{margin:0;padding:32px;background:#f0ede8;color:#1a1a2e;font-family:Georgia,serif;line-height:1.6;}' +
@@ -3352,7 +3553,7 @@
       '</div>' +
       (currentWorkflowMode === 'retrospective'
         ? '<div class="report-grid full">' +
-            '<section class="report-card"><h2>Retrospective Comparison</h2><p><strong>Deal name:</strong> ' + escapeHtml(retrospectiveData.dealName || '—') + '<br><strong>Presales snapshot date:</strong> ' + escapeHtml(retrospectiveData.presalesDate || '—') + '<br><strong>Retrospective date:</strong> ' + escapeHtml(retrospectiveData.retrospectiveDate || '—') + '<br><strong>Predicted verdict at sale:</strong> ' + escapeHtml(l2Verdict || 'Not evaluated yet') + '<br><strong>Actual realized margin:</strong> ' + escapeHtml(retrospective ? formatPercentValue(actualMarginNumber) : '—') + '<br><strong>Variance vs quoted margin:</strong> ' + escapeHtml(retrospectiveVariance === null ? '—' : ((retrospectiveVariance >= 0 ? '+' : '') + retrospectiveVariance.toFixed(1) + '%')) + '<br><strong>Actual vs hurdle:</strong> ' + escapeHtml(retrospectiveHurdleGap === null ? '—' : ((retrospectiveHurdleGap >= 0 ? '+' : '') + retrospectiveHurdleGap.toFixed(1) + '%')) + '<br><strong>Reading:</strong> ' + escapeHtml(retrospectiveReading || 'Enter actual revenue and cost to compare the completed project with the original hurdle.') + '</p>' + (retrospectiveNotes ? '<p><strong>Postmortem notes:</strong><br>' + escapeHtml(retrospectiveNotes).replace(/\n/g, '<br>') + '</p>' : '') + '</section>' +
+            '<section class="report-card"><h2>Retrospective Comparison</h2><p><strong>Deal name:</strong> ' + escapeHtml(retrospectiveData.dealName || '—') + '<br><strong>Presales snapshot date:</strong> ' + escapeHtml(retrospectiveData.presalesDate || '—') + '<br><strong>Retrospective date:</strong> ' + escapeHtml(retrospectiveData.retrospectiveDate || '—') + '<br><strong>Predicted verdict at sale:</strong> ' + escapeHtml(l2Verdict || 'Not evaluated yet') + '<br><strong>Actual realized margin:</strong> ' + escapeHtml(retrospective ? formatPercentValue(actualMarginNumber) : '—') + '<br><strong>Variance vs quoted margin:</strong> ' + escapeHtml(retrospectiveVariance === null ? '—' : ((retrospectiveVariance >= 0 ? '+' : '') + retrospectiveVariance.toFixed(1) + '%')) + '<br><strong>Actual vs hurdle:</strong> ' + escapeHtml(retrospectiveHurdleGap === null ? '—' : ((retrospectiveHurdleGap >= 0 ? '+' : '') + retrospectiveHurdleGap.toFixed(1) + '%')) + '<br><strong>Reading:</strong> ' + escapeHtml(retrospectiveReading || 'Enter actual revenue and cost to compare the completed project with the original hurdle.') + rescoredSummary + '</p>' + (retrospectiveNotes ? '<p><strong>Postmortem notes:</strong><br>' + escapeHtml(retrospectiveNotes).replace(/\n/g, '<br>') + '</p>' : '') + '</section>' +
           '</div>'
         : '') +
       '<div class="report-grid">' +
