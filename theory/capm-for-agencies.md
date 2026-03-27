@@ -707,7 +707,7 @@ Rather than treating the three bottom lines as separate accounts that cannot be 
 
 **PESTLE**: An expanded version of PEST that adds legal and environmental factors.
 
-**Project Management Institute (PMI)**: The professional body associated with standards and certifications such as CAPM and PMBOK.
+**Project Management Institute (PMI)**: The professional body associated with standards and certifications such as CAPM (Certified Associate in Project Management, not Capital Asset Pricing Model) and PMBOK.
 
 **Risk-Free Rate, Rf**: In finance, the return on a near-zero-risk asset. In this adaptation, it is the margin from the agency’s lowest-risk, most predictable work.
 
