@@ -744,8 +744,8 @@ PAGES = [
         "social_image": "/theory/figures/capm-comparison.png",
         "eyebrow": "Companion Essay",
         "heading": "Why Discovery Comes First",
-        "deck": "A companion essay on why some agency work should begin with a discovery phase: migration, caching, and implementation decisions often go wrong when they are framed as narrow technical tasks instead of connected systems problems.",
-        "meta": "Use this when you want the upstream discovery argument behind better pricing, scoping, and delivery decisions — and then jump back into the Decision Cards.",
+        "deck": "A companion essay on why every serious web project benefits from discovery, why migration and implementation decisions go wrong when framed as isolated technical tasks, and why extended discovery should be paid for instead of buried inside implementation pricing.",
+        "meta": "Use this when you want the upstream discovery argument behind better pricing, scoping, and delivery decisions — especially when the next thing to sell may be a larger paid discovery phase before implementation.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
             ("Walkthrough", "../tldr/walkthrough.html", "secondary"),
