@@ -117,6 +117,130 @@ PAGE_STYLE = """
     color: var(--muted);
   }
 
+  .masthead-extra {
+    margin-top: 18px;
+  }
+
+  .walkthrough-preview {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+    padding: 18px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(255, 255, 255, 0.46);
+  }
+
+  .walkthrough-preview-title {
+    margin: 0;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .walkthrough-preview-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(220px, 0.95fr);
+    gap: 18px;
+    align-items: start;
+  }
+
+  .walkthrough-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .walkthrough-fact {
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(248, 242, 232, 0.9);
+    border: 1px solid rgba(32, 29, 26, 0.08);
+  }
+
+  .walkthrough-fact-label {
+    display: block;
+    margin-bottom: 4px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .walkthrough-fact-value {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.15;
+    color: #241d17;
+  }
+
+  .walkthrough-fact-note {
+    display: block;
+    margin-top: 2px;
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .walkthrough-chart {
+    display: grid;
+    gap: 10px;
+  }
+
+  .walkthrough-chart-row {
+    display: grid;
+    gap: 6px;
+  }
+
+  .walkthrough-chart-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .walkthrough-chart-track {
+    position: relative;
+    height: 14px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(32, 29, 26, 0.08);
+  }
+
+  .walkthrough-chart-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    border-radius: 999px;
+  }
+
+  .walkthrough-chart-fill.required {
+    background: rgba(35, 72, 106, 0.8);
+  }
+
+  .walkthrough-chart-fill.proposed {
+    background: rgba(140, 63, 47, 0.84);
+  }
+
+  .walkthrough-chart-note {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #38322d;
+  }
+
+  .walkthrough-verdict {
+    color: var(--accent);
+    font-weight: 700;
+  }
+
   .actions {
     display: flex;
     flex-wrap: wrap;
@@ -573,6 +697,14 @@ PAGE_STYLE = """
   }
 
   @media (max-width: 980px) {
+    .walkthrough-preview-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .walkthrough-facts {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .masthead-grid,
     .layout {
       grid-template-columns: 1fr;
@@ -590,6 +722,10 @@ PAGE_STYLE = """
   }
 
   @media (max-width: 640px) {
+    .walkthrough-facts {
+      grid-template-columns: 1fr;
+    }
+
     .shell {
       padding: 18px 14px 48px;
     }
@@ -673,6 +809,31 @@ PAGES = [
         "article_kicker": "CAPM for Agencies",
         "toc_skip_first_heading": True,
         "deck": "A concrete example of how the Decision Cards are meant to be used: start with the default calibration, score one realistic engagement, compare the proposed margin to the hurdle, and decide whether to proceed, reprice, or sell discovery first.",
+        "masthead_extra": """
+<div class="masthead-extra walkthrough-preview">
+  <p class="walkthrough-preview-title">Example snapshot</p>
+  <div class="walkthrough-preview-grid">
+    <div class="walkthrough-facts">
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Quoted price</span><span class="walkthrough-fact-value">$120k</span><span class="walkthrough-fact-note">CMS redesign + rebuild</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Estimated cost</span><span class="walkthrough-fact-value">$92k</span><span class="walkthrough-fact-note">repeat client, fixed fee</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Required margin</span><span class="walkthrough-fact-value">21.4%</span><span class="walkthrough-fact-note">from Layer 2 scoring</span></div>
+      <div class="walkthrough-fact"><span class="walkthrough-fact-label">Verdict</span><span class="walkthrough-fact-value walkthrough-verdict">Go</span><span class="walkthrough-fact-note">clears the hurdle by +1.9 pts</span></div>
+    </div>
+    <div class="walkthrough-chart">
+      <div class="walkthrough-chart-row">
+        <div class="walkthrough-chart-meta"><span>Required margin</span><span>21.4%</span></div>
+        <div class="walkthrough-chart-track"><div class="walkthrough-chart-fill required" style="width: 71.3%;"></div></div>
+      </div>
+      <div class="walkthrough-chart-row">
+        <div class="walkthrough-chart-meta"><span>Proposed margin</span><span>23.3%</span></div>
+        <div class="walkthrough-chart-track"><div class="walkthrough-chart-fill proposed" style="width: 77.7%;"></div></div>
+      </div>
+      <p class="walkthrough-chart-note">One realistic deal, one visible hurdle, one clearer decision before delivery planning starts.</p>
+    </div>
+  </div>
+</div>
+""",
+        "masthead_extra_html": True,
         "meta": "Use this when you want one realistic agency example before running the cards yourself.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
@@ -1023,6 +1184,7 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
         <div>
           <h1>{html.escape(page["heading"])}</h1>
           <p class="deck">{build_deck(page)}</p>
+          {page.get("masthead_extra") if page.get("masthead_extra_html") else html.escape(page.get("masthead_extra", ""))}
         </div>
         <div class="meta">
           <div class="meta-copy">{html.escape(page["meta"])}</div>
