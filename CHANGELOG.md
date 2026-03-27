@@ -12,6 +12,7 @@ and this project uses a lightweight, date-free changelog for now.
 - Page-level `Reading order` guidance in generated reader-page mastheads.
 - A documented caution-band review in the calibration notes comparing the fixed `3`-point rule against `10%` and `12%` proportional alternatives.
 - A local Markdown renderer for static page generation, plus `requirements.txt` and CI installation for the Python build dependency.
+- A jsdom-based DOM integration test layer covering live Layer 2 calculator updates, missing-input warnings, reset behavior, and persistence/restore flows.
 
 ### Changed
 - Expanded top navigation from the app to surface the TL;DR, Decision Guide, and Calibration Notes directly.
@@ -22,6 +23,7 @@ and this project uses a lightweight, date-free changelog for now.
 ### Fixed
 - Prevented long Layer 2 result subtext from forcing awkward wrapping in the proposed-margin area when large deal figures are displayed.
 - Hardened calculator input sanitation so baseline and manual-adjustment values are rounded consistently before reuse.
+- Closed the biggest test-gap between pure calculator math and the live app by exercising real DOM state changes instead of only parsing HTML structure.
 
 ## [0.1.1]
 

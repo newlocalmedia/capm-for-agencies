@@ -9,5 +9,8 @@
     "check:generated": "node scripts/verify-generated.js",
     "test": "node --test",
     "ci": "npm run check:app && npm test && npm run build:static && npm run check:generated"
+  },
+  "devDependencies": {
+    "jsdom": "^26.1.0"
   }
 }
