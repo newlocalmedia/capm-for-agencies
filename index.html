@@ -940,13 +940,23 @@
     color: #4f3a12;
   }
   .retrospective-panel {
-    margin-top: 20px;
+    margin: 8px 0 20px;
   }
   .retrospective-panel[hidden] {
     display: none;
   }
+  .retrospective-grid {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.95fr) minmax(320px, 1.05fr);
+    gap: 16px;
+    align-items: start;
+  }
+  .retrospective-main {
+    display: grid;
+    gap: 14px;
+  }
   .retrospective-intro {
-    margin-bottom: 14px;
+    margin: 0;
     font-size: 13px;
     color: var(--gray500);
   }
@@ -1022,6 +1032,10 @@
     border-radius: 10px;
     background: rgba(255,255,255,0.56);
   }
+  .retro-rescore-row.changed {
+    border-color: rgba(196,93,62,0.28);
+    background: rgba(240,212,203,0.22);
+  }
   .retro-rescore-factor {
     display: grid;
     gap: 2px;
@@ -1041,6 +1055,10 @@
   }
   .retro-original-score strong {
     color: var(--ink);
+  }
+  .retro-original-score.changed strong,
+  .retro-original-score.changed {
+    color: var(--accent-dark);
   }
   .retro-rescore-options {
     display: flex;
@@ -1080,6 +1098,39 @@
     color: var(--gray400);
     line-height: 1.5;
   }
+  .presales-reference {
+    display: grid;
+    gap: 0;
+  }
+  .presales-reference-note {
+    display: none;
+    margin: 0 0 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px dashed var(--gray200);
+    background: rgba(255,255,255,0.55);
+    font-size: 12px;
+    color: var(--gray500);
+    line-height: 1.55;
+  }
+  body[data-workflow-mode="retrospective"] .presales-reference-note {
+    display: block;
+  }
+  body[data-workflow-mode="retrospective"] #layer2-presales-content {
+    margin-top: 6px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--gray200);
+  }
+  body[data-workflow-mode="retrospective"] #layer2-presales-content .score-table,
+  body[data-workflow-mode="retrospective"] #layer2-presales-content .mobile-score-list,
+  body[data-workflow-mode="retrospective"] #layer2-presales-content .calc-panel,
+  body[data-workflow-mode="retrospective"] #layer2-presales-content .chart-panel,
+  body[data-workflow-mode="retrospective"] #layer2-presales-content .approach-note,
+  body[data-workflow-mode="retrospective"] #layer2-presales-content #l2-verdict,
+  body[data-workflow-mode="retrospective"] #layer2-presales-content #l2-warnings,
+  body[data-workflow-mode="retrospective"] #layer2-presales-content .precision-note {
+    opacity: 0.78;
+  }
   body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer1-card .score-btn,
   body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer2-card .score-btn,
   body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer1-mobile-scores .mobile-score-strip,
@@ -1094,6 +1145,11 @@
   body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer1-mobile-scores .mobile-score-strip,
   body[data-workflow-mode="retrospective"][data-presales-locked="true"] #layer2-mobile-scores .mobile-score-strip {
     pointer-events: none;
+  }
+  @media (max-width: 900px) {
+    .retrospective-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .approach-note {
@@ -1585,6 +1641,126 @@
       <p class="dependency-copy">This is the main deal-level decision card. Small and mid-sized agencies can start here with defaults; Layer 1 sharpens the hurdle, and Layer 3 only matters after the financial hurdle is clear.</p>
     </div>
 
+    <div class="retrospective-panel" id="retrospective-panel" hidden>
+      <span class="section-label">Retrospective Comparison</span>
+      <div class="calc-panel">
+        <div class="retrospective-grid">
+          <div class="retrospective-main">
+            <p class="retrospective-intro"><strong>Completed project view:</strong> Retrospective mode freezes the original presales snapshot, then compares that frozen decision with what actually happened in delivery.</p>
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="retro-deal-name">Deal Name</label>
+                <div><input type="text" id="retro-deal-name" value="" placeholder="Client / project name" oninput="markExportDirty()"></div>
+              </div>
+              <div class="calc-field">
+                <label for="retro-presales-date">Presales Snapshot Date</label>
+                <div><input type="date" id="retro-presales-date" value="" readonly></div>
+              </div>
+              <div class="calc-field">
+                <label for="retro-date">Retrospective Date</label>
+                <div><input type="date" id="retro-date" value="" oninput="markExportDirty()"></div>
+              </div>
+            </div>
+            <div class="retrospective-toolbar">
+              <span class="retrospective-lock-note" id="retro-lock-note">Presales inputs are frozen while retrospective mode is active.</span>
+              <button type="button" class="action-btn mode-btn" id="retro-unlock-btn" onclick="togglePresalesUnlock()">Unlock original presales inputs</button>
+              <button type="button" class="action-btn mode-btn" id="retro-refreeze-btn" onclick="refreshRetrospectiveSnapshot()">Refresh frozen snapshot</button>
+            </div>
+            <div class="snapshot-card">
+              <div class="snapshot-card-title">Frozen presales snapshot</div>
+              <div class="result-box compact-result-box">
+                <div class="result-item">
+                  <span class="result-label">Quoted Price</span>
+                  <span class="result-value accent" id="retro-snapshot-price">—</span>
+                  <span class="result-sub" id="retro-snapshot-price-sub">frozen at sale</span>
+                </div>
+                <div class="result-item">
+                  <span class="result-label">Estimated Cost</span>
+                  <span class="result-value accent" id="retro-snapshot-cost">—</span>
+                  <span class="result-sub" id="retro-snapshot-cost-sub">frozen at sale</span>
+                </div>
+                <div class="result-item">
+                  <span class="result-label">Predicted <em>E</em>(<em>R</em>)</span>
+                  <span class="result-value accent" id="retro-snapshot-required">—</span>
+                  <span class="result-sub" id="retro-snapshot-required-sub">required margin at sale</span>
+                </div>
+                <div class="result-item">
+                  <span class="result-label">Quoted Margin</span>
+                  <span class="result-value accent" id="retro-snapshot-proposed">—</span>
+                  <span class="result-sub" id="retro-snapshot-proposed-sub">proposed margin at sale</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="retrospective-main">
+            <div class="calc-row">
+              <div class="calc-field">
+                <label for="actual-revenue">Actual Revenue
+                  <details class="info-tip">
+                    <summary aria-label="Actual revenue help">?</summary>
+                    <div class="tooltip-text">Recognized revenue from the completed engagement. Use the final billed amount if it differs from the original quoted deal price.</div>
+                  </details>
+                </label>
+                <div><input type="number" id="actual-revenue" value="" step="100" placeholder="0" oninput="calcRetrospective(); markExportDirty()"><span class="unit">$</span></div>
+              </div>
+              <div class="calc-field">
+                <label for="actual-cost">Actual Delivery Cost
+                  <details class="info-tip">
+                    <summary aria-label="Actual delivery cost help">?</summary>
+                    <div class="tooltip-text">Final internal delivery cost for the engagement. Compare this with the original estimate to see how the quoted margin held up in reality.</div>
+                  </details>
+                </label>
+                <div><input type="number" id="actual-cost" value="" step="100" placeholder="0" oninput="calcRetrospective(); markExportDirty()"><span class="unit">$</span></div>
+              </div>
+            </div>
+            <div class="formula-bar" id="retro-formula">
+              <strong>Retrospective:</strong> compare the frozen quoted margin with the actual realized margin, then check both against the frozen hurdle <em>E</em>(<em>R</em>).
+            </div>
+            <div class="result-box">
+              <div class="result-item">
+                <span class="result-label">Predicted Verdict at Sale</span>
+                <span class="result-value accent" id="retro-predicted-verdict">—</span>
+                <span class="result-sub">original presales decision</span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Actual Realized Margin</span>
+                <span class="result-value accent" id="retro-actual-margin">—</span>
+                <span class="result-sub" id="retro-actual-sub">enter actual revenue and cost</span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Variance vs Quoted Margin</span>
+                <span class="result-value accent" id="retro-variance">—</span>
+                <span class="result-sub" id="retro-variance-sub">actual - proposed</span>
+              </div>
+              <div class="result-item">
+                <span class="result-label">Actual vs Hurdle</span>
+                <span class="result-value accent" id="retro-hurdle-gap">—</span>
+                <span class="result-sub" id="retro-hurdle-gap-sub">actual - required</span>
+              </div>
+            </div>
+            <div id="retro-verdict" role="status" aria-live="polite"></div>
+            <div class="retrospective-hint" id="retro-hint">Use this mode after delivery to compare the actual result with the original pricing logic and capture one calibration note for next time.</div>
+            <div class="notes-field">
+              <div class="calc-field wide">
+                <label for="retro-notes">Postmortem Notes</label>
+                <textarea id="retro-notes" placeholder="What changed? Was discovery the better sale? What would you score differently next time?" oninput="markExportDirty()"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="retrospective-rescore">
+          <div class="retrospective-rescore-head">
+            <div class="retrospective-rescore-title">Layer 2 re-score</div>
+            <div class="retrospective-rescore-copy">If you would score any Layer 2 factor differently now, re-score it here without changing the frozen presales record.</div>
+          </div>
+          <div class="retrospective-rescore-list" id="retro-rescore-list"></div>
+          <div class="retrospective-rescore-summary" id="retro-rescore-summary">Freeze a presales snapshot to compare original and retrospective scoring.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="presales-reference" id="layer2-presales-content">
+      <div class="presales-reference-note"><strong>Original presales baseline:</strong> these inputs and scores remain visible as reference. In retrospective mode they stay frozen unless you explicitly unlock them and refresh the snapshot.</div>
     <span class="section-label">Engagement Risk Scoring</span>
     <table class="score-table" id="layer2-table" data-layer="layer2">
       <thead>
@@ -1824,118 +2000,7 @@
         <strong>Hybrid approach:</strong> Blended <em>β</em> = (Engagement Score / 21) × L1 Factor. This feeds directly into the CAPM formula for a per-engagement minimum margin.<br>
         <strong>Governance note:</strong> This hybrid calculator is a heuristic decision tool, not a statistically correct pricing engine. Its main value is internal alignment, presales discipline, and postmortem calibration.
       </div>
-
-      <div class="retrospective-panel" id="retrospective-panel" hidden>
-        <span class="section-label">Retrospective Comparison</span>
-        <div class="calc-panel">
-          <p class="retrospective-intro"><strong>Completed project view:</strong> Retrospective mode freezes the original presales snapshot, then compares that frozen decision with what actually happened in delivery.</p>
-          <div class="calc-row">
-            <div class="calc-field">
-              <label for="retro-deal-name">Deal Name</label>
-              <div><input type="text" id="retro-deal-name" value="" placeholder="Client / project name" oninput="markExportDirty()"></div>
-            </div>
-            <div class="calc-field">
-              <label for="retro-presales-date">Presales Snapshot Date</label>
-              <div><input type="date" id="retro-presales-date" value="" readonly></div>
-            </div>
-            <div class="calc-field">
-              <label for="retro-date">Retrospective Date</label>
-              <div><input type="date" id="retro-date" value="" oninput="markExportDirty()"></div>
-            </div>
-          </div>
-          <div class="retrospective-toolbar">
-            <span class="retrospective-lock-note" id="retro-lock-note">Presales inputs are frozen while retrospective mode is active.</span>
-            <button type="button" class="action-btn mode-btn" id="retro-unlock-btn" onclick="togglePresalesUnlock()">Unlock original presales inputs</button>
-            <button type="button" class="action-btn mode-btn" id="retro-refreeze-btn" onclick="refreshRetrospectiveSnapshot()">Refresh frozen snapshot</button>
-          </div>
-          <div class="snapshot-card">
-            <div class="snapshot-card-title">Frozen presales snapshot</div>
-            <div class="result-box compact-result-box">
-              <div class="result-item">
-                <span class="result-label">Quoted Price</span>
-                <span class="result-value accent" id="retro-snapshot-price">—</span>
-                <span class="result-sub" id="retro-snapshot-price-sub">frozen at sale</span>
-              </div>
-              <div class="result-item">
-                <span class="result-label">Estimated Cost</span>
-                <span class="result-value accent" id="retro-snapshot-cost">—</span>
-                <span class="result-sub" id="retro-snapshot-cost-sub">frozen at sale</span>
-              </div>
-              <div class="result-item">
-                <span class="result-label">Predicted <em>E</em>(<em>R</em>)</span>
-                <span class="result-value accent" id="retro-snapshot-required">—</span>
-                <span class="result-sub" id="retro-snapshot-required-sub">required margin at sale</span>
-              </div>
-              <div class="result-item">
-                <span class="result-label">Quoted Margin</span>
-                <span class="result-value accent" id="retro-snapshot-proposed">—</span>
-                <span class="result-sub" id="retro-snapshot-proposed-sub">proposed margin at sale</span>
-              </div>
-            </div>
-          </div>
-          <div class="calc-row">
-            <div class="calc-field">
-              <label for="actual-revenue">Actual Revenue
-                <details class="info-tip">
-                  <summary aria-label="Actual revenue help">?</summary>
-                  <div class="tooltip-text">Recognized revenue from the completed engagement. Use the final billed amount if it differs from the original quoted deal price.</div>
-                </details>
-              </label>
-              <div><input type="number" id="actual-revenue" value="" step="100" placeholder="0" oninput="calcRetrospective(); markExportDirty()"><span class="unit">$</span></div>
-            </div>
-            <div class="calc-field">
-              <label for="actual-cost">Actual Delivery Cost
-                <details class="info-tip">
-                  <summary aria-label="Actual delivery cost help">?</summary>
-                  <div class="tooltip-text">Final internal delivery cost for the engagement. Compare this with the original estimate to see how the quoted margin held up in reality.</div>
-                </details>
-              </label>
-              <div><input type="number" id="actual-cost" value="" step="100" placeholder="0" oninput="calcRetrospective(); markExportDirty()"><span class="unit">$</span></div>
-            </div>
-          </div>
-          <div class="formula-bar" id="retro-formula">
-            <strong>Retrospective:</strong> compare the frozen quoted margin with the actual realized margin, then check both against the frozen hurdle <em>E</em>(<em>R</em>).
-          </div>
-          <div class="result-box">
-            <div class="result-item">
-              <span class="result-label">Predicted Verdict at Sale</span>
-              <span class="result-value accent" id="retro-predicted-verdict">—</span>
-              <span class="result-sub">original presales decision</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">Actual Realized Margin</span>
-              <span class="result-value accent" id="retro-actual-margin">—</span>
-              <span class="result-sub" id="retro-actual-sub">enter actual revenue and cost</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">Variance vs Quoted Margin</span>
-              <span class="result-value accent" id="retro-variance">—</span>
-              <span class="result-sub" id="retro-variance-sub">actual - proposed</span>
-            </div>
-            <div class="result-item">
-              <span class="result-label">Actual vs Hurdle</span>
-              <span class="result-value accent" id="retro-hurdle-gap">—</span>
-              <span class="result-sub" id="retro-hurdle-gap-sub">actual - required</span>
-            </div>
-          </div>
-          <div id="retro-verdict" role="status" aria-live="polite"></div>
-          <div class="retrospective-hint" id="retro-hint">Use this mode after delivery to compare the actual result with the original pricing logic and capture one calibration note for next time.</div>
-          <div class="notes-field">
-            <div class="calc-field wide">
-              <label for="retro-notes">Postmortem Notes</label>
-              <textarea id="retro-notes" placeholder="What changed? Was discovery the better sale? What would you score differently next time?" oninput="markExportDirty()"></textarea>
-            </div>
-          </div>
-          <div class="retrospective-rescore">
-            <div class="retrospective-rescore-head">
-              <div class="retrospective-rescore-title">Layer 2 re-score</div>
-              <div class="retrospective-rescore-copy">If you would score any Layer 2 factor differently now, re-score it here without changing the frozen presales record.</div>
-            </div>
-            <div class="retrospective-rescore-list" id="retro-rescore-list"></div>
-            <div class="retrospective-rescore-summary" id="retro-rescore-summary">Freeze a presales snapshot to compare original and retrospective scoring.</div>
-          </div>
-        </div>
-      </div>
+    </div>
     </div>
   </div>
 </div>
@@ -2466,19 +2531,18 @@
 
     const meta = getLayer2FactorMeta();
     const changed = [];
-    list.innerHTML = meta.map(({ factor, name, desc, labels }) => {
+    const rows = meta.map(({ factor, name, desc, labels }) => {
       const original = snapshot.state.layer2[factor];
       const rescored = retrospectiveState.layer2Rescore[factor] || original;
-      if (rescored !== original) {
-        changed.push({ factor, name, original, rescored, labels });
-      }
+      const isChanged = rescored !== original;
+      if (isChanged) changed.push({ factor, name, original, rescored, labels });
       return (
-        '<div class="retro-rescore-row">' +
+        '<div class="retro-rescore-row' + (isChanged ? ' changed' : '') + '" data-changed="' + (isChanged ? 'true' : 'false') + '">' +
           '<div class="retro-rescore-factor">' +
             '<div class="retro-rescore-factor-name">' + escapeHtml(name) + '</div>' +
             '<div class="retro-rescore-factor-desc">' + escapeHtml(desc) + '</div>' +
           '</div>' +
-          '<div class="retro-original-score"><strong>Original:</strong> ' + original + '/5 (' + escapeHtml(labels[original - 1]) + ')</div>' +
+          '<div class="retro-original-score' + (isChanged ? ' changed' : '') + '"><strong>' + (isChanged ? 'Changed:' : 'Original:') + '</strong> ' + original + '/5 (' + escapeHtml(labels[original - 1]) + ')' + (isChanged ? ' → ' + rescored + '/5 (' + escapeHtml(labels[rescored - 1]) + ')' : '') + '</div>' +
           '<div class="retro-rescore-options" role="group" aria-label="' + escapeHtml(name) + ' retrospective re-score">' +
             [1, 2, 3, 4, 5].map((value) => (
               '<button type="button" class="retro-score-btn' + (rescored === value ? ' active' : '') + '" data-factor="' + factor + '" data-val="' + value + '">' + value + '</button>'
@@ -2486,6 +2550,11 @@
           '</div>' +
         '</div>'
       );
+    });
+    list.innerHTML = rows.sort((a, b) => {
+      const aChanged = a.includes('data-changed="true"');
+      const bChanged = b.includes('data-changed="true"');
+      return aChanged === bChanged ? 0 : (aChanged ? -1 : 1);
     }).join('');
 
     list.querySelectorAll('.retro-score-btn').forEach((button) => {
@@ -2508,10 +2577,12 @@
       return;
     }
 
+    const delta = Calc.gap(rescoredRequired, snapshot.outputs.requiredMargin);
     summary.innerHTML =
       '<strong>Re-scored view:</strong> ' + changed.length + ' factor' + (changed.length === 1 ? '' : 's') + ' changed. ' +
-      'The re-scored engagement beta is <strong>' + rescoredBeta.toFixed(2) + '</strong>, blended beta is <strong>' + rescoredBlended.toFixed(2) + '</strong>, ' +
-      'and the hurdle would have been <strong>' + rescoredRequired.toFixed(1) + '%</strong> instead of <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong>.';
+      'The hurdle would have been <strong>' + rescoredRequired.toFixed(1) + '%</strong> instead of <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong> ' +
+      '(' + (delta >= 0 ? '+' : '') + delta.toFixed(1) + ' pts). ' +
+      'Changed first: <strong>' + changed.map((item) => item.name).join(', ') + '</strong>.';
   }
 
   function applyRetrospectiveRescore(factor, value) {
@@ -2547,7 +2618,7 @@
     setPresalesControlsLocked(presalesLocked);
     if (note) {
       note.textContent = statusMessage || (currentWorkflowMode === 'retrospective'
-        ? 'Completed-project mode is active. The original presales inputs are frozen unless you explicitly unlock them.'
+        ? 'Completed-project mode is active. Compare the outcome first; the original presales baseline remains below as reference unless you explicitly unlock and refresh it.'
         : 'Use retrospective mode for completed projects when you want to freeze the original hurdle and compare it with the actual outcome.');
     }
     if (panel) {
@@ -3494,6 +3565,23 @@
     const retrospectiveReading = (retrospective && deal && !isNaN(requiredMarginNumber))
       ? Calc.retrospectiveAssessment(requiredMarginNumber, proposedMarginNumber, actualMarginNumber)
       : '';
+    const frozenPriceText = frozenSnapshot?.inputs?.price && !isNaN(parseFloat(frozenSnapshot.inputs.price))
+      ? formatMoney(parseFloat(frozenSnapshot.inputs.price))
+      : '—';
+    const frozenCostText = frozenSnapshot?.inputs?.cost && !isNaN(parseFloat(frozenSnapshot.inputs.cost))
+      ? formatMoney(parseFloat(frozenSnapshot.inputs.cost))
+      : '—';
+    const frozenRequiredText = typeof requiredMarginNumber === 'number' && !isNaN(requiredMarginNumber)
+      ? formatPercentValue(requiredMarginNumber)
+      : '—';
+    const frozenProposedText = typeof proposedMarginNumber === 'number' && !isNaN(proposedMarginNumber)
+      ? formatPercentValue(proposedMarginNumber)
+      : '—';
+    const actualRevenueText = retrospective ? formatMoney(retrospective.revenue) : '—';
+    const actualCostText = retrospective ? formatMoney(retrospective.cost) : '—';
+    const actualMarginText = retrospective ? formatPercentValue(actualMarginNumber) : '—';
+    const retrospectiveVarianceText = retrospectiveVariance === null ? '—' : ((retrospectiveVariance >= 0 ? '+' : '') + retrospectiveVariance.toFixed(1) + '%');
+    const retrospectiveHurdleGapText = retrospectiveHurdleGap === null ? '—' : ((retrospectiveHurdleGap >= 0 ? '+' : '') + retrospectiveHurdleGap.toFixed(1) + '%');
     const rescoredFactors = frozenSnapshot?.state?.layer2
       ? getLayer2FactorMeta().map(({ factor, name, labels }) => {
           const original = frozenSnapshot.state.layer2[factor];
@@ -3502,15 +3590,17 @@
           return name + ': ' + original + '/5 (' + labels[original - 1] + ') → ' + rescored + '/5 (' + labels[rescored - 1] + ')';
         }).filter(Boolean)
       : [];
-    const rescoredSummary = (() => {
-      if (!frozenSnapshot?.state?.layer2 || !rescoredFactors.length) return '';
+    const rescoredReview = (() => {
+      if (!frozenSnapshot?.state?.layer2 || !rescoredFactors.length) return null;
       const rescoredScores = Object.keys(frozenSnapshot.state.layer2).map((factor) => retrospectiveState.layer2Rescore[factor] || frozenSnapshot.state.layer2[factor]);
       const rescoredSum = rescoredScores.reduce((total, value) => total + value, 0);
       const rescoredBeta = Calc.engagementBetaFromScore(rescoredSum);
       const rescoredBlended = Calc.blendedBeta(rescoredBeta, parseFloat(frozenSnapshot.inputs.l1Input));
       const rescoredRequired = Calc.requiredReturn(parseFloat(frozenSnapshot.inputs.rf), parseFloat(frozenSnapshot.inputs.rm), rescoredBlended);
-      return '<br><strong>Re-scored hurdle now:</strong> ' + escapeHtml(rescoredRequired.toFixed(1) + '%') +
-        '<br><strong>Changed factors:</strong><br>' + rescoredFactors.map((line) => escapeHtml(line)).join('<br>');
+      return {
+        required: rescoredRequired,
+        lines: rescoredFactors
+      };
     })();
 
     const reportHtml = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CAPM Decision Summary</title><style>' +
@@ -3530,6 +3620,7 @@
       '.report-table{width:100%;border-collapse:collapse;font-size:0.96rem;}.report-table th,.report-table td{padding:10px 8px;border-bottom:1px solid #e0ddd6;text-align:left;vertical-align:top;}.report-table thead th{font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;color:#5f5a53;}' +
       '.chart-card svg{width:100%;height:auto;display:block;background:#fcfaf7;border-radius:12px;}.verdict{display:inline-block;padding:6px 10px;border-radius:999px;font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;background:#f0d4cb;color:#8c3f2f;}' +
       '.report-warning-list{margin:12px 0 0 18px;display:grid;gap:8px;color:#6d5522;}.report-warning-list strong{color:#4f3a12;}' +
+      '.comparison-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:14px;}.comparison-card{background:#f7f5f0;border:1px solid #e0ddd6;border-radius:14px;padding:14px;}.comparison-kicker{display:block;margin-bottom:8px;font:700 11px "SFMono-Regular",Consolas,monospace;letter-spacing:0.08em;text-transform:uppercase;color:#5f5a53;}.comparison-list{list-style:none;margin:0;padding:0;display:grid;gap:8px;}.comparison-list li{color:#45413c;}.takeaway-list{margin:10px 0 0 18px;display:grid;gap:6px;color:#45413c;}' +
       '.footer-note{font-size:0.92rem;color:#5f5a53;}' +
       '@media print{body{padding:0;background:#fff;}.wrap{max-width:none;}.toolbar{display:none;}.hero,.report-card{box-shadow:none;border:1px solid #d6d1c8;break-inside:avoid;}}' +
       '</style></head><body><div class="wrap">' +
@@ -3553,7 +3644,35 @@
       '</div>' +
       (currentWorkflowMode === 'retrospective'
         ? '<div class="report-grid full">' +
-            '<section class="report-card"><h2>Retrospective Comparison</h2><p><strong>Deal name:</strong> ' + escapeHtml(retrospectiveData.dealName || '—') + '<br><strong>Presales snapshot date:</strong> ' + escapeHtml(retrospectiveData.presalesDate || '—') + '<br><strong>Retrospective date:</strong> ' + escapeHtml(retrospectiveData.retrospectiveDate || '—') + '<br><strong>Predicted verdict at sale:</strong> ' + escapeHtml(l2Verdict || 'Not evaluated yet') + '<br><strong>Actual realized margin:</strong> ' + escapeHtml(retrospective ? formatPercentValue(actualMarginNumber) : '—') + '<br><strong>Variance vs quoted margin:</strong> ' + escapeHtml(retrospectiveVariance === null ? '—' : ((retrospectiveVariance >= 0 ? '+' : '') + retrospectiveVariance.toFixed(1) + '%')) + '<br><strong>Actual vs hurdle:</strong> ' + escapeHtml(retrospectiveHurdleGap === null ? '—' : ((retrospectiveHurdleGap >= 0 ? '+' : '') + retrospectiveHurdleGap.toFixed(1) + '%')) + '<br><strong>Reading:</strong> ' + escapeHtml(retrospectiveReading || 'Enter actual revenue and cost to compare the completed project with the original hurdle.') + rescoredSummary + '</p>' + (retrospectiveNotes ? '<p><strong>Postmortem notes:</strong><br>' + escapeHtml(retrospectiveNotes).replace(/\n/g, '<br>') + '</p>' : '') + '</section>' +
+            '<section class="report-card"><h2>Retrospective Comparison</h2><p>This section freezes the original presales call, compares it with the completed outcome, and records what the team would score differently now.</p>' +
+            '<div class="comparison-grid">' +
+              '<div class="comparison-card"><span class="comparison-kicker">Original call</span><ul class="comparison-list">' +
+                '<li><strong>Deal:</strong> ' + escapeHtml(retrospectiveData.dealName || '—') + '</li>' +
+                '<li><strong>Snapshot date:</strong> ' + escapeHtml(retrospectiveData.presalesDate || '—') + '</li>' +
+                '<li><strong>Quoted price / cost:</strong> ' + escapeHtml(frozenPriceText) + ' / ' + escapeHtml(frozenCostText) + '</li>' +
+                '<li><strong>Quoted margin / hurdle:</strong> ' + escapeHtml(frozenProposedText) + ' / ' + escapeHtml(frozenRequiredText) + '</li>' +
+                '<li><strong>Predicted verdict:</strong> ' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</li>' +
+              '</ul></div>' +
+              '<div class="comparison-card"><span class="comparison-kicker">Actual outcome</span><ul class="comparison-list">' +
+                '<li><strong>Retrospective date:</strong> ' + escapeHtml(retrospectiveData.retrospectiveDate || '—') + '</li>' +
+                '<li><strong>Actual revenue / cost:</strong> ' + escapeHtml(actualRevenueText) + ' / ' + escapeHtml(actualCostText) + '</li>' +
+                '<li><strong>Actual margin:</strong> ' + escapeHtml(actualMarginText) + '</li>' +
+                '<li><strong>Variance vs quote:</strong> ' + escapeHtml(retrospectiveVarianceText) + '</li>' +
+                '<li><strong>Actual vs hurdle:</strong> ' + escapeHtml(retrospectiveHurdleGapText) + '</li>' +
+                '<li><strong>Reading:</strong> ' + escapeHtml(retrospectiveReading || 'Enter actual revenue and cost to compare the completed project with the original hurdle.') + '</li>' +
+              '</ul></div>' +
+              '<div class="comparison-card"><span class="comparison-kicker">Calibration takeaway</span><ul class="comparison-list">' +
+                '<li><strong>Re-scored hurdle:</strong> ' + escapeHtml(rescoredReview ? formatPercentValue(rescoredReview.required) : 'Not re-scored yet') + '</li>' +
+                '<li><strong>Changed factors:</strong> ' + escapeHtml(rescoredReview ? String(rescoredReview.lines.length) : '0') + '</li>' +
+                '<li><strong>Postmortem note:</strong> ' + escapeHtml(retrospectiveNotes ? 'Included below' : 'Not entered yet') + '</li>' +
+              '</ul>' +
+              (rescoredReview
+                ? '<ul class="takeaway-list">' + rescoredReview.lines.map((line) => '<li>' + escapeHtml(line) + '</li>').join('') + '</ul>'
+                : '<p class="footer-note">No Layer 2 factors are re-scored yet.</p>') +
+              '</div>' +
+            '</div>' +
+            (retrospectiveNotes ? '<p><strong>Postmortem notes:</strong><br>' + escapeHtml(retrospectiveNotes).replace(/\n/g, '<br>') + '</p>' : '') +
+            '</section>' +
           '</div>'
         : '') +
       '<div class="report-grid">' +
