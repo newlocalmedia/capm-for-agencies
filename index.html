@@ -1145,7 +1145,10 @@
 <div class="header">
   <div class="header-links">
     <a class="header-link" href="overview/index.html">Overview</a>
+    <a class="header-link" href="tldr/price-the-work-before-you-plan-it.html">TL;DR</a>
     <a class="header-link" href="tldr/walkthrough.html">Walkthrough</a>
+    <a class="header-link" href="tldr/decision-guide.html">Decision Guide</a>
+    <a class="header-link" href="tldr/calibration-notes.html">Calibration Notes</a>
     <a class="header-link" href="essays/systems-thinking-for-web-development-agencies.html">Why Discovery Comes First</a>
     <a class="header-link" href="theory/index.html">Understand the Theory</a>
   </div>
@@ -1157,6 +1160,7 @@
   <p><strong>What is CAPM?</strong> CAPM is a finance model for matching return to risk. Here it's adapted to help agencies separate portfolio risk from deal risk, set minimum margins, and make clearer go/no-go decisions.</p>
   <p><strong>Where to start:</strong> Enterprise and international agencies can often start more naturally with the pure portfolio-level approach, because their risk exposure tracks macro conditions more directly. Small and mid-sized agencies will usually start with the hybrid model, where engagement-specific risk is folded into pricing governance.</p>
   <p>These decision cards use CAPM as pricing governance, not as a statistically exact pricing engine. For a fuller plain-language explanation, start with the <a href="overview/index.html">overview</a>. If you want one concrete example first, open the <a href="tldr/walkthrough.html">walkthrough</a>.</p>
+  <p class="note"><strong>Reading order:</strong> most people should go <a href="overview/index.html">Overview</a> → <a href="tldr/price-the-work-before-you-plan-it.html">TL;DR</a> → <a href="tldr/walkthrough.html">Walkthrough</a> → <a href="tldr/decision-guide.html">Decision Guide</a> → these cards. Use <a href="tldr/calibration-notes.html">Calibration Notes</a> for implementation detail, <a href="essays/systems-thinking-for-web-development-agencies.html">Why Discovery Comes First</a> when discovery may be the thing to sell, and <a href="theory/index.html">Theory</a> for the long argument.</p>
   <p class="note"><strong><a href="overview/index.html#known-limits">Known limits:</a></strong> this is a decision tool, not an exact pricing model. The scores and thresholds are judgment-based, so treat the outputs as guidance, not science.</p>
   <div class="start-map" aria-label="Recommended starting points">
     <div class="start-map-label">Start here</div>
@@ -2937,16 +2941,55 @@
       bodyMarkup;
   }
 
-  function getDealMetrics() {
-    const price = parseFloat(document.getElementById('deal-price').value);
-    const cost = parseFloat(document.getElementById('deal-cost').value);
-
-    if (isNaN(price) || price <= 0 || isNaN(cost) || cost < 0) return null;
+  function getDealInputStatus() {
+    const priceField = document.getElementById('deal-price');
+    const costField = document.getElementById('deal-cost');
+    const priceRaw = priceField ? priceField.value.trim() : '';
+    const costRaw = costField ? costField.value.trim() : '';
+    const price = parseFloat(priceRaw);
+    const cost = parseFloat(costRaw);
+    const missingPrice = priceRaw === '' || isNaN(price) || price <= 0;
+    const missingCost = costRaw === '' || isNaN(cost) || cost < 0;
 
     return {
       price,
       cost,
-      proposedMargin: Calc.proposedMargin(price, cost)
+      missingPrice,
+      missingCost,
+      valid: !missingPrice && !missingCost
+    };
+  }
+
+  function joinReadableList(items) {
+    if (items.length <= 1) return items[0] || '';
+    if (items.length === 2) return items[0] + ' and ' + items[1];
+    return items.slice(0, -1).join(', ') + ', and ' + items[items.length - 1];
+  }
+
+  function getMissingDealFieldText() {
+    const status = getDealInputStatus();
+    return joinReadableList([
+      status.missingPrice ? 'deal price' : null,
+      status.missingCost ? 'estimated delivery cost' : null
+    ].filter(Boolean));
+  }
+
+  function getMissingDealFieldLinks() {
+    const status = getDealInputStatus();
+    return joinReadableList([
+      status.missingPrice ? '<a href="#deal-price">deal price</a>' : null,
+      status.missingCost ? '<a href="#deal-cost">estimated delivery cost</a>' : null
+    ].filter(Boolean));
+  }
+
+  function getDealMetrics() {
+    const status = getDealInputStatus();
+    if (!status.valid) return null;
+
+    return {
+      price: status.price,
+      cost: status.cost,
+      proposedMargin: Calc.proposedMargin(status.price, status.cost)
     };
   }
 
@@ -3306,7 +3349,7 @@
             document.getElementById('l2-verdict').innerHTML = verdict;
           } else {
             document.getElementById('l2-verdict').innerHTML =
-              '<span class="verdict caution">Enter deal price and estimated delivery cost to evaluate the proposal</span>';
+              '<span class="verdict caution">Enter ' + escapeHtml(getMissingDealFieldText()) + ' to evaluate the proposal.</span>';
           }
         } else {
           document.getElementById('l2-pure-er').innerHTML = '—';
@@ -3450,7 +3493,7 @@
     let verdict = '';
 
     if (!deal) {
-      verdict = '<span class="verdict caution">Enter deal price and estimated delivery cost to evaluate <em>E</em>(<em>R</em>*)</span>';
+      verdict = '<span class="verdict caution">Enter ' + getMissingDealFieldLinks() + ' in Layer 2 to evaluate <em>E</em>(<em>R</em>*).</span>';
       document.getElementById('bc-verdict').innerHTML = verdict;
       return;
     }

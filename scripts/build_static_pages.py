@@ -118,6 +118,32 @@ PAGE_STYLE = """
     color: var(--muted);
   }
 
+  .meta-reading {
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(248, 242, 232, 0.78);
+  }
+
+  .meta-reading-title {
+    margin: 0;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-reading-copy {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: #3c352f;
+  }
+
   .masthead-extra {
     margin-top: 18px;
   }
@@ -894,6 +920,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this version when you want the full argument, not just the calculator. The hybrid layer is presented here as pricing governance rather than a literal asset-pricing engine.",
+        "reading_path": "Best after the TL;DR or Walkthrough. Most readers should go Overview → Short Overview → Walkthrough → Decision Guide → Decision Cards, then come here for the long argument.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
@@ -920,6 +947,7 @@ PAGES = [
         "deck": "A short introduction to the CAPM model and the problem we're trying to solve with it: <strong>most agencies price work only after they have started imagining delivery</strong>. Learn what we're borrowing from finance, why the hybrid approach is best understood as pricing governance rather than prediction, and how proposed deal economics either clear the hurdle or fail it. We also explain why enterprise agencies may lean toward the pure approach while small and mid-sized agencies often begin with the hybrid one.",
         "deck_html": True,
         "meta": "Start here if you want the thesis without the theory. This is the best first read for most people.",
+        "reading_path": "Best first read for most people. Then go to Walkthrough → Decision Guide → Decision Cards. Use Calibration Notes for implementation detail and Theory for the full argument.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
@@ -970,6 +998,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this when you want one realistic agency example before running the cards yourself.",
+        "reading_path": "Best after the Short Overview. Then go to Decision Guide → Decision Cards. Use Calibration Notes if you want the current implementation detail behind the example.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
@@ -1022,6 +1051,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this when you want the procedure rather than the theory. It tracks the current decision logic in the decision cards.",
+        "reading_path": "Best after the Walkthrough. Then open the Decision Cards. Use Calibration Notes if you want to inspect the current math and thresholds.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
@@ -1083,6 +1113,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this when you want to inspect the current decision-card math and calibration choices rather than just use the workflow.",
+        "reading_path": "Best after the Decision Guide or the cards themselves. This is implementation detail, not the first read.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
@@ -1119,6 +1150,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this when you want the upstream discovery argument behind better pricing, scoping, and delivery decisions — especially when the next thing to sell may be a larger paid discovery phase before implementation.",
+        "reading_path": "Best after the Overview or Walkthrough, especially when the next thing to price may be discovery rather than implementation.",
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
             ("Walkthrough", "../tldr/walkthrough.html", "secondary"),
@@ -1405,6 +1437,7 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
         </div>
         <div class="meta">
           <div class="meta-copy">{html.escape(page["meta"])}</div>
+          {build_reading_path(page)}
           <div class="actions">
             {build_actions(page["actions"])}
           </div>
@@ -1445,6 +1478,13 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
 </body>
 </html>
 """
+
+
+def build_reading_path(page: dict) -> str:
+    reading_path = page.get("reading_path")
+    if not reading_path:
+        return ""
+    return f'<div class="meta-reading"><p class="meta-reading-title">Reading order</p><p class="meta-reading-copy">{html.escape(reading_path)}</p></div>'
 
 
 def generate_page(page: dict) -> None:

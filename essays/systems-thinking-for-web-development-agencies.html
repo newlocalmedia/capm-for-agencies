@@ -121,6 +121,32 @@
     color: var(--muted);
   }
 
+  .meta-reading {
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(248, 242, 232, 0.78);
+  }
+
+  .meta-reading-title {
+    margin: 0;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-reading-copy {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: #3c352f;
+  }
+
   .masthead-extra {
     margin-top: 18px;
   }
@@ -878,6 +904,7 @@
         </div>
         <div class="meta">
           <div class="meta-copy">Use this when you want the upstream discovery argument behind better pricing, scoping, and delivery decisions — especially when the next thing to sell may be a larger paid discovery phase before implementation.</div>
+          <div class="meta-reading"><p class="meta-reading-title">Reading order</p><p class="meta-reading-copy">Best after the Overview or Walkthrough, especially when the next thing to price may be discovery rather than implementation.</p></div>
           <div class="actions">
             <a class="button primary" href="../index.html">Open the Decision Cards</a>
 <a class="button secondary" href="../tldr/walkthrough.html">Walkthrough</a>

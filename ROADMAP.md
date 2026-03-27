@@ -8,6 +8,7 @@ CAPM for Agencies is now a usable public beta with:
 - persistence and reset behavior
 - practical walkthrough, decision guide, theory, calibration notes, and discovery essay pages
 - export, accessibility improvements, and core calculator tests
+- clearer reading-order guidance across the app and reader pages
 - CI that now authenticates static-page Markdown rendering with `GITHUB_TOKEN`
 
 The next phase is no longer basic usability. It is **coherence, hardening, and contributor clarity**.
@@ -40,48 +41,46 @@ Continue to use:
 
 ### Phase 1 — Documentation and navigation coherence
 
-**Goal:** Make the reading path and page relationships obvious.
+**Goal:** Keep the reading path obvious as the docs set evolves.
 
-**Problems to solve:**
-- `ROADMAP.md` and `BACKLOG.md` had drifted behind the actual product state
-- the main docs cluster is broader than the top nav suggests
-- the discovery essay still risks feeling adjacent rather than structurally tied to the `price before you plan` thesis
+**Current status:**
+- the app, overview, and generated reader pages now surface a clearer reading order
+- calibration notes, decision guide, and the discovery essay are linked more directly from the main navigation
+- the discovery essay is better integrated with the core pricing thesis
 
-**Scope:**
+**Remaining scope:**
 - keep the planning docs current as features ship
-- define and surface a clearer reading order across overview, walkthrough, decision guide, theory, calibration notes, and discovery essay
-- tighten cross-links so every major page is reachable from the app or overview
-- continue integrating the discovery essay with the core pricing thesis
+- keep the reading ladder coherent as new pages or examples are added
+- avoid letting companion material drift back into side-essay territory
 
 ### Phase 2 — In-app clarity and decision guidance
 
-**Goal:** Reduce avoidable user confusion without adding product bloat.
+**Goal:** Keep the app understandable without adding product bloat.
 
-**Problems to solve:**
-- Layer 1 → Layer 2 → Layer 3 dependency is still mostly explained in text rather than reinforced visually
-- the chart still assumes more theory context than some users will have
-- there is no lightweight undo for score changes
+**Current status:**
+- Layer 1 → Layer 2 → Layer 3 dependency is now reinforced visually in the cards
+- the chart now has a plain-language explanation in the app
+- one-decimal display is now framed explicitly as visible guidance rather than exact science
 
-**Scope:**
-- add clearer dependency cues between cards
-- explain the chart inline in plain language
-- evaluate whether the app needs per-card entry hints beyond the primer
-- consider lightweight undo or per-card clear behavior if it can be added cleanly
+**Remaining scope:**
+- evaluate whether the app still needs per-card entry hints beyond the primer
+- decide whether lightweight undo or per-card clear behavior is worth the extra UI weight
+- keep an eye out for any remaining confusing formula or chart copy
 
 ### Phase 3 — Model clarity and calibration decisions
 
 **Goal:** Reduce confusion around heuristic choices and tighten model presentation.
 
 **Problems to solve:**
-- the fixed `3`-point caution band may be proportionally too forgiving on risky deals
+- the fixed `3`-point caution band has now been reviewed against proportional alternatives and is being kept for now
 - the UI still presents one-decimal output that may imply more precision than the inputs warrant
-- B-Corp midpoint assumptions are mathematically sound but need clearer contributor-facing documentation
+- the current precision notes may still need a cleaner long-term presentation
 
 **Scope:**
-- review absolute vs relative caution-band behavior
+- document the current caution-band decision and revisit it once retrospective data exists
 - decide whether the main UI should round display values more aggressively
-- document B-Corp midpoint constants in code and docs more explicitly
 - keep the theory and UI aligned on what is heuristic versus measured
+- revisit whether the current precision note is enough once more users have seen the calculator
 
 ### Phase 4 — Build and architecture hardening
 
