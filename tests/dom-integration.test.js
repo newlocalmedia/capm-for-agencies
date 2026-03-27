@@ -209,3 +209,30 @@ test('Retrospective mode freezes a presales snapshot until the user explicitly r
 
   dom.window.close();
 });
+
+test('Retrospective re-score changes the calibration view without altering the frozen original scores', () => {
+  const { dom, document, window } = bootApp();
+
+  scoreLayer(document, 'layer2', 3);
+  setInput(window, 'deal-price', '120000');
+  setInput(window, 'deal-cost', '92000');
+  document.getElementById('mode-retrospective-btn').click();
+
+  const originalSummary = document.getElementById('retro-rescore-summary').textContent;
+  assert.match(originalSummary, /No factors are rescored yet/i);
+
+  const clientRescoreButton = document.querySelector('#retro-rescore-list .retro-score-btn[data-factor="client"][data-val="5"]');
+  assert.ok(clientRescoreButton);
+  clientRescoreButton.click();
+
+  const updatedSummary = document.getElementById('retro-rescore-summary').textContent;
+  assert.match(updatedSummary, /1 factor changed/i);
+  assert.match(updatedSummary, /hurdle would have been/i);
+  assert.equal(document.getElementById('retro-snapshot-required').textContent.trim(), '22.0%');
+  assert.equal(
+    document.querySelector('.score-table[data-layer="layer2"] tr[data-factor="client"] .score-btn.selected-3')?.textContent.trim(),
+    '3'
+  );
+
+  dom.window.close();
+});
