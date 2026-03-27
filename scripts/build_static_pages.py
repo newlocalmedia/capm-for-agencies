@@ -946,18 +946,18 @@ PAGES = [
         "deck_html": True,
         "masthead_extra": """
 <div class="masthead-extra walkthrough-preview">
-  <p class="walkthrough-preview-title">Why this page exists</p>
   <div class="walkthrough-facts">
     <div class="walkthrough-fact"><span class="walkthrough-fact-label">Typical flow</span><span class="walkthrough-fact-value">Imagine delivery, then justify price.</span><span class="walkthrough-fact-note">Risk gets priced backwards.</span></div>
     <div class="walkthrough-fact"><span class="walkthrough-fact-label">Better flow</span><span class="walkthrough-fact-value">Name risk, set the hurdle, then price the work.</span><span class="walkthrough-fact-note">Delivery planning follows a clearer commercial threshold.</span></div>
     <div class="walkthrough-fact"><span class="walkthrough-fact-label">Decision result</span><span class="walkthrough-fact-value">Go, reprice, discovery, or decline.</span><span class="walkthrough-fact-note">The deal clears the hurdle or it does not.</span></div>
-    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Best next read</span><span class="walkthrough-fact-value">Walkthrough, then Decision Guide.</span><span class="walkthrough-fact-note">Use the cards after you see one example and the procedure.</span></div>
+    <div class="walkthrough-fact"><span class="walkthrough-fact-label">Next steps</span><span class="walkthrough-fact-value">Read the Walkthrough, then the Decision Guide.</span><span class="walkthrough-fact-note">Use the cards after you see one example and the procedure.</span></div>
   </div>
 </div>
 """,
         "masthead_extra_html": True,
         "meta": "Start here if you want the thesis without the theory. This is the best first read for most people.",
-        "reading_path": "Best first read for most people. Then go to Walkthrough → Decision Guide → Decision Cards. Use Calibration Notes for implementation detail and Theory for the full argument.",
+        "reading_path": 'This TL;DR is the best first read for most people. Next read the <a href="../tldr/walkthrough.html">Walkthrough</a> → <a href="../tldr/decision-guide.html">Decision Guide</a> → <a href="../index.html">Decision Cards</a>. The <a href="../tldr/calibration-notes.html">Calibration Notes</a> and <a href="../theory/index.html">Theory</a> documents are deeper dives into CAPM and how it\'s used here.',
+        "reading_path_html": True,
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
             ("Overview", "../overview/index.html", "secondary"),
@@ -1483,7 +1483,8 @@ def build_reading_path(page: dict) -> str:
     reading_path = page.get("reading_path")
     if not reading_path:
         return ""
-    return f'<div class="meta-reading"><p class="meta-reading-title">Reading order</p><p class="meta-reading-copy">{html.escape(reading_path)}</p></div>'
+    body = reading_path if page.get("reading_path_html") else html.escape(reading_path)
+    return f'<div class="meta-reading"><p class="meta-reading-title">Reading order</p><p class="meta-reading-copy">{body}</p></div>'
 
 
 def generate_page(page: dict) -> None:
