@@ -121,6 +121,7 @@ That makes SEO another systems problem in disguise. Treat it as a narrow technic
 
 - what content deserves to exist
 - how the site should be structured
+- how content governance and publishing workflows support or weaken search visibility
 - who owns ongoing optimization
 - how search visibility connects to conversion and business value
 
