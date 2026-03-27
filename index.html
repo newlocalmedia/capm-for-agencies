@@ -765,6 +765,15 @@
     display: flex;
     flex-direction: column;
   }
+  .precision-note {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--gray400);
+  }
+  .precision-note strong {
+    color: var(--ink);
+  }
   .result-label {
     font-size: 10px;
     font-weight: 700;
@@ -1561,6 +1570,7 @@
           <span class="result-sub" id="l2-min-price-sub">margin floor only</span>
         </div>
       </div>
+      <div class="precision-note"><strong>Display note:</strong> live values use 0.1% steps so small changes stay visible. Treat them as directional thresholds for pricing governance, not as exact forecasts.</div>
       <div id="l2-verdict" role="status" aria-live="polite"></div>
       <div id="l2-warnings" aria-live="polite"></div>
 
@@ -1828,6 +1838,7 @@
           <span class="result-sub" id="bc-er-sub">impact-adjusted</span>
         </div>
       </div>
+      <div class="precision-note"><strong>Display note:</strong> these values also use 0.1% steps so mission-driven adjustments remain visible. Read them as governance guidance, not as exact science.</div>
       <div id="bc-verdict" role="status" aria-live="polite"></div>
 
       <div class="chart-panel">
