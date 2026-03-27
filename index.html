@@ -2205,6 +2205,12 @@
     });
   }
 
+  function closeFactorHelps(except) {
+    document.querySelectorAll('.factor-help[open]').forEach((help) => {
+      if (help !== except) help.removeAttribute('open');
+    });
+  }
+
   function initInfoTips() {
     document.querySelectorAll('.info-tip').forEach((tip) => {
       const summary = tip.querySelector('summary');
@@ -2245,8 +2251,14 @@
       if (help.dataset.helpBound === 'true') return;
       help.dataset.helpBound = 'true';
       const summary = help.querySelector('summary');
+      if (summary) {
+        summary.addEventListener('click', () => {
+          if (!help.open) closeFactorHelps(help);
+        });
+      }
       help.addEventListener('toggle', () => {
         if (summary) summary.setAttribute('aria-expanded', help.open ? 'true' : 'false');
+        if (help.open) closeFactorHelps(help);
       });
     });
 
@@ -2254,10 +2266,14 @@
       document.body.dataset.infoTipsBound = 'true';
       document.addEventListener('click', (event) => {
         if (!event.target.closest('.info-tip')) closeInfoTips();
+        if (!event.target.closest('.factor-help')) closeFactorHelps();
       });
 
       document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') closeInfoTips();
+        if (event.key === 'Escape') {
+          closeInfoTips();
+          closeFactorHelps();
+        }
       });
     }
   }
