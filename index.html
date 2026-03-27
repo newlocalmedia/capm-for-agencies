@@ -289,6 +289,65 @@
   .card-note strong {
     color: var(--blue-dark);
   }
+  .dependency-note {
+    display: grid;
+    gap: 10px;
+    margin: -8px 0 24px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(32,29,26,0.08);
+    background: linear-gradient(135deg, rgba(255,255,255,0.78), rgba(248,242,232,0.88));
+  }
+  .dependency-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--gray400);
+  }
+  .dependency-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  .dependency-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 10px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(32,29,26,0.08);
+    background: rgba(255,255,255,0.86);
+    color: var(--ink);
+  }
+  .dependency-pill.layer1 {
+    background: rgba(43,76,126,0.10);
+    color: var(--blue-dark);
+  }
+  .dependency-pill.layer2 {
+    background: rgba(196,93,62,0.10);
+    color: var(--accent);
+  }
+  .dependency-pill.layer3 {
+    background: rgba(43,106,87,0.10);
+    color: #1f5d4a;
+  }
+  .dependency-arrow {
+    color: var(--gray400);
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .dependency-copy {
+    margin: 0;
+    font-size: 12.5px;
+    color: var(--gray500);
+  }
 
   .section-label {
     font-family: 'JetBrains Mono', monospace;
@@ -943,6 +1002,19 @@
     line-height: 1.5;
     color: var(--gray500);
   }
+  .chart-explainer {
+    margin-top: 10px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(32,29,26,0.08);
+    background: rgba(255,255,255,0.68);
+    font-size: 12.5px;
+    color: var(--gray500);
+    line-height: 1.5;
+  }
+  .chart-explainer strong {
+    color: var(--ink);
+  }
   .chart-note em,
   .chart-note sub {
     font-style: italic;
@@ -1111,6 +1183,17 @@
       <strong>Best fit:</strong> Most natural for enterprise and international agencies using the pure approach, but still useful for any agency that wants a disciplined portfolio view.<br>
       <strong>Output:</strong> Current risk premium and systematic adjustment factor that sets the environment for all engagement-level scoring.
     </p>
+    <div class="dependency-note">
+      <div class="dependency-kicker">How this card feeds the others</div>
+      <div class="dependency-flow">
+        <span class="dependency-pill layer1">Layer 1</span>
+        <span class="dependency-arrow">→</span>
+        <span class="dependency-pill layer2">Layer 2</span>
+        <span class="dependency-arrow">→</span>
+        <span class="dependency-pill layer3">Layer 3</span>
+      </div>
+      <p class="dependency-copy">Set the current environment here first when you want a portfolio view. Its adjustment factor feeds Layer 2 and carries forward into Layer 3.</p>
+    </div>
     <p class="card-note"><strong>PESTLE lens:</strong> PESTLE stands for political, economic, social, technological, legal, and environmental factors. These six factors compress macro PESTLE questions into agency-usable scoring prompts. Political and legal shifts mostly sit in regulatory exposure, technological change shows up in platform stability and rate pressure, and concentration remains the small-agency proxy for systematic exposure.</p>
 
     <span class="section-label">Systematic Risk Scoring</span>
@@ -1246,6 +1329,17 @@
       <strong>What:</strong> Combine systematic and engagement-specific risk for heuristic pricing governance.<br>
       <strong>Output:</strong> Engagement risk index (pure) or blended β (hybrid), feeding the CAPM minimum margin and a comparison against the proposed deal margin.
     </p>
+    <div class="dependency-note">
+      <div class="dependency-kicker">Card dependency</div>
+      <div class="dependency-flow">
+        <span class="dependency-pill layer1">Layer 1 factor in</span>
+        <span class="dependency-arrow">→</span>
+        <span class="dependency-pill layer2">Layer 2 hurdle out</span>
+        <span class="dependency-arrow">→</span>
+        <span class="dependency-pill layer3">Layer 3 overlay</span>
+      </div>
+      <p class="dependency-copy">This is the main deal-level decision card. Small and mid-sized agencies can start here with defaults; Layer 1 sharpens the hurdle, and Layer 3 only matters after the financial hurdle is clear.</p>
+    </div>
 
     <span class="section-label">Engagement Risk Scoring</span>
     <table class="score-table" id="layer2-table" data-layer="layer2">
@@ -1477,6 +1571,7 @@
           <desc id="l2-chart-desc">Shows the minimum acceptable margin line and the current engagement's position against it.</desc>
         </svg>
         <div class="chart-note" id="l2-chart-note">Score all Layer 2 factors and enter the Layer 1 factor to plot the engagement against the hurdle.</div>
+        <div class="chart-explainer"><strong>How to read it:</strong> the line is the minimum acceptable margin at each level of risk. If your deal plots above that hurdle, the economics clear. If it falls below the line, reprice, reduce risk, sell discovery, or decline the work.</div>
       </div>
 
       <div class="approach-note">
@@ -1499,6 +1594,17 @@
     <p class="card-intro">
       <strong>For B Corp and mission-driven agencies.</strong> This card extends Layers 1 and 2 with B Lab-aligned impact dimensions — portfolio mission fit, customer stewardship, environmental readiness, stakeholder governance, human rights, and mission drift — then computes an impact-adjusted minimum margin. Scores from the standard cards flow in automatically.
     </p>
+    <div class="dependency-note">
+      <div class="dependency-kicker">Card dependency</div>
+      <div class="dependency-flow">
+        <span class="dependency-pill layer1">Layer 1</span>
+        <span class="dependency-arrow">+</span>
+        <span class="dependency-pill layer2">Layer 2</span>
+        <span class="dependency-arrow">→</span>
+        <span class="dependency-pill layer3">Layer 3 overlay</span>
+      </div>
+      <p class="dependency-copy">Use this only after the standard financial hurdle is clear enough to discuss. Layer 3 adjusts Layers 1 and 2 for mission alignment or harm; it does not replace them.</p>
+    </div>
 
     <span class="section-label">B Corp Systematic Risk (extends Layer 1)</span>
     <table class="score-table" id="bcorp-l1-table" data-layer="bcorp_l1">
