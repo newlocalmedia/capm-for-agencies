@@ -7,13 +7,20 @@
 }(typeof self !== 'undefined' ? self : this, function () {
   'use strict';
 
+  const LAYER1_SCORE_MIN = 6;
+  const LAYER1_SCORE_SPAN = 24;
+  const ENGAGEMENT_BETA_NEUTRAL_SCORE = 21;
+  const BCORP_PORTFOLIO_SCORE_MIN = 6;
+  const BCORP_PORTFOLIO_SCORE_SPAN = 24;
+  const BCORP_ENGAGEMENT_NEUTRAL_SCORE = 12;
+
   function round(value, digits) {
     const factor = 10 ** digits;
     return Math.round(value * factor) / factor;
   }
 
   function layer1FactorFromScore(score) {
-    return round(0.85 + (score - 6) * (0.30 / 24), 2);
+    return round(0.85 + (score - LAYER1_SCORE_MIN) * (0.30 / LAYER1_SCORE_SPAN), 2);
   }
 
   function layer1EnvironmentLabel(factor) {
@@ -24,7 +31,7 @@
   }
 
   function engagementBetaFromScore(score) {
-    return round(score / 21, 2);
+    return round(score / ENGAGEMENT_BETA_NEUTRAL_SCORE, 2);
   }
 
   function blendedBeta(engagementBeta, layer1Factor) {
@@ -36,6 +43,7 @@
   }
 
   function proposedMargin(price, cost) {
+    if (!Number.isFinite(price) || !Number.isFinite(cost) || price <= 0 || cost < 0) return null;
     return round(((price - cost) / price) * 100, 1);
   }
 
@@ -59,13 +67,13 @@
   }
 
   function bcorpPortfolioModifier(score) {
-    return 0.8 + (score - 6) * (0.4 / 24);
+    return round(0.8 + (score - BCORP_PORTFOLIO_SCORE_MIN) * (0.4 / BCORP_PORTFOLIO_SCORE_SPAN), 2);
   }
 
   function bcorpImpactAdjustment(portfolioScore, engagementScore) {
     const modifier = bcorpPortfolioModifier(portfolioScore);
-    const deviation = engagementScore - 12;
-    return round(deviation * 1.0 * modifier, 1);
+    const deviation = engagementScore - BCORP_ENGAGEMENT_NEUTRAL_SCORE;
+    return round(deviation * modifier, 1);
   }
 
   function bcorpVerdict(proposed, requiredWithImpact, impactAdjustment) {

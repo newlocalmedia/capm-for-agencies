@@ -74,7 +74,7 @@ test('Harmful B-Corp scenario raises the hurdle without forcing an automatic sto
 });
 
 test('B-Corp portfolio midpoint is neutral', () => {
-  assert.equal(Calc.round(Calc.bcorpPortfolioModifier(18), 2), 1.00);
+  assert.equal(Calc.bcorpPortfolioModifier(18), 1.00);
   assert.equal(Calc.bcorpImpactAdjustment(18, 12), 0.0);
 });
 
@@ -82,6 +82,24 @@ test('Minimum deal price returns null when required margin reaches or exceeds 10
   assert.equal(Calc.minimumDealPrice(100000, 100), null);
   assert.equal(Calc.minimumDealPrice(100000, 125), null);
   assert.equal(Math.round(Calc.minimumDealPrice(100000, 99.9)), 100000000);
+});
+
+test('Proposed margin returns null for invalid price or cost inputs', () => {
+  assert.equal(Calc.proposedMargin(0, 100), null);
+  assert.equal(Calc.proposedMargin(-100, 50), null);
+  assert.equal(Calc.proposedMargin(100, -1), null);
+  assert.equal(Calc.proposedMargin(Number.NaN, 50), null);
+});
+
+test('B-Corp portfolio modifier is rounded and stable at key points', () => {
+  assert.equal(Calc.bcorpPortfolioModifier(6), 0.8);
+  assert.equal(Calc.bcorpPortfolioModifier(18), 1.0);
+  assert.equal(Calc.bcorpPortfolioModifier(30), 1.2);
+});
+
+test('B-Corp engagement extremes behave symmetrically around the midpoint', () => {
+  assert.equal(Calc.bcorpImpactAdjustment(18, 4), -8.0);
+  assert.equal(Calc.bcorpImpactAdjustment(18, 20), 8.0);
 });
 
 test('B-Corp verdict boundaries stay stable at exact thresholds', () => {

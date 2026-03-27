@@ -1,256 +1,133 @@
 # Backlog
 
-## Working Style
+## Current priorities
 
-Backlog items in this repo should be executed with:
+This backlog tracks work that is still meaningfully open. Completed adoption basics (persistence, reset, walkthrough, initial CI, accessibility pass, export, overview/theory cleanup) have been archived out of the active list.
 
-- **GSD** for phased execution and verification
-- **BDD-style stories** for user-facing workflows
-- **TDD** for calculator and state behavior
+## P1 — Current
 
-The intent is lightweight behavioral clarity, not a formal BDD framework.
-
-## Now
-
-### [P0] Quick-win adoption bundle
-
-**Outcome:** The Decision Cards feel usable immediately for first-time presales use.
-
-**Includes:**
-- local persistence
-- `Reset all`
-- simple first-use path with explicit defaults
-
-**Estimate:** 4–6 hours
-
-**Why now:** This is the highest value-per-hour improvement available.
-
-### [P1] Add persistence to the Decision Cards
-
-**Outcome:** Scores and inputs survive reloads.
-
-**Tasks:**
-- persist all score state and calculator inputs to `localStorage`
-- restore state on load before first calculation
-- add `Reset all` action
-- add small note explaining local-only persistence
-- add tests for restore/reset behavior
-
-**Estimate:** 2–4 hours
-
-### [P1] Add `Reset all`
-
-**Outcome:** Users can clear scores and inputs safely without manual cleanup.
-
-**Tasks:**
-- add a visible reset control
-- clear stored state and in-memory state
-- restore default values where appropriate
-- add a small confirmation or explanatory note if needed
-
-**Estimate:** 20–40 minutes
-
-### [P1] Add a simple first-use path
-
-**Outcome:** A new user can score one deal with defaults and get a useful result quickly.
-
-**Tasks:**
-- allow Layer 2-only evaluation with explicit default values
-- revisit calibration optionality only when there is a real user-facing alternative such as `Use defaults` versus `Customize calibration`
-- add a “start simple” path in the UI or overview
-- avoid forcing full Layer 1 understanding on first use
-
-**Estimate:** 3–5 hours
-
-### [P1] Add CSV export
-
-**Outcome:** Teams can move score and result data into Sheets or other lightweight workflows.
-
-**Tasks:**
-- export current scores, inputs, hurdle, gap, and verdict as CSV
-- keep field names stable
-- include B Corp values when present
-
-**Estimate:** 1–2 hours
-
-### [P1] Add a walkthrough stub
-
-**Outcome:** A short practical example bridges the gap between the overview and the longer texts.
-
-**Tasks:**
-- add one short scenario page or section
-- show a realistic deal from score to verdict
-- link it from the overview
-
-**Estimate:** 1–2 hours
-
-### [P1] Add a practical walkthrough page
-
-**Outcome:** New users can see one realistic deal flow from start to finish in under two minutes.
-
-**Tasks:**
-- add a short walkthrough page under `tldr/` or `overview/`
-- show one realistic agency scenario with actual numbers
-- link it from the overview, decision guide, and app primer
-- keep it shorter and more concrete than the TL;DR
-
-**Estimate:** 3–5 hours
-
-### [P1] Clean up Layer 1 explanatory language
-
-**Outcome:** The docs consistently explain what Layer 1 does to the formula.
-
-**Tasks:**
-- standardize wording around `Layer 1 factor`
-- explain multiplication vs line-rotation metaphor clearly
-- update theory, overview, and any affected helper text
-
-**Estimate:** 1–2 hours
-
-## Next
-
-### [P2] Replace GitHub Markdown API dependency with a local renderer
+### [P1] Replace GitHub Markdown API dependency with a local renderer
 
 **Outcome:** Static page builds become deterministic and CI no longer depends on external network access or GitHub API limits.
 
 **Tasks:**
 - replace the build-time GitHub Markdown API call with a local Markdown renderer
-- preserve current heading normalization, token replacement, and generated-page output expectations
+- preserve heading normalization, token replacement, and generated-page output expectations
 - confirm generated pages remain stable in CI without network access
-- remove any no-longer-needed API auth assumptions from the build
+- remove any no-longer-needed auth assumptions from the build
 
-**Why later:** The authenticated API fix should stabilize CI quickly, but local rendering is the more reliable long-term architecture.
+### [P1] Rewrite doc navigation around a clear reading order
+
+**Outcome:** The docs feel like one intentional reading ladder rather than a loose set of pages.
+
+**Tasks:**
+- define the recommended order across Overview, Walkthrough, Decision Guide, Theory, Calibration Notes, and Discovery essay
+- ensure the app and overview link to all major pages that matter
+- make the lesser-known pages easier to discover without adding clutter
+
+### [P1] Integrate the discovery essay more directly with the core thesis
+
+**Outcome:** `Why Discovery Comes First` reads as part of `price before you plan`, not a side essay.
+
+**Tasks:**
+- tighten cross-links to the app and theory where needed
+- reinforce that discovery is pricing/governance-relevant, not separate from it
+- keep the page focused on when implementation pricing is premature
+
+## P2 — Next
+
+### [P2] Add card dependency cues in the app
+
+**Outcome:** Users can see at a glance how Layer 1, Layer 2, and Layer 3 relate.
+
+**Tasks:**
+- visually indicate that Layer 1 feeds Layer 2
+- clarify that Layer 3 is an overlay after the financial hurdle
+- reinforce entry-point guidance inside or near the cards, not just in the primer
+
+### [P2] Explain the chart inline in plain language
+
+**Outcome:** Users who skip the theory still understand what the chart is showing.
+
+**Tasks:**
+- add a compact explanation of what the line means
+- explain what it means for a point to clear or miss the hurdle
+- avoid assuming familiarity with the security market line
 
 ### [P2] Review the caution band
 
-**Outcome:** The `Caution` threshold is explicitly defended as either absolute or relative.
+**Outcome:** The `Caution` threshold is either defended as-is or replaced with a better rule.
 
 **Tasks:**
-- document current `3`-point rule in app and theory
-- compare with a proportional alternative
-- run scenario comparisons
-- decide whether to retain the absolute band
-- update tests accordingly
+- compare the current fixed `3`-point band against proportional alternatives
+- test behavior on low-risk and high-risk deals
+- update docs and tests once the rule is settled
 
-**Estimate:** 2–4 hours
+### [P2] Reduce false precision in the main UI
 
-### [P2] Add side-by-side scenario comparison
-
-**Outcome:** Teams can compare two deal structures for the same engagement.
+**Outcome:** The UI presentation better matches the heuristic nature of the model.
 
 **Tasks:**
-- duplicate score/input state into `Scenario A` / `Scenario B`
-- compare hurdle, proposed margin, gap, and verdict side by side
-- keep export/reporting coherent
-- add regression coverage for scenario switching
+- review whether the main app should display whole-number percentages instead of one-decimal outputs
+- keep internal calculations precise enough for stable comparisons
+- document any rounding choices explicitly
 
-**Estimate:** 6–10 hours
+### [P2] Document B-Corp midpoint assumptions more clearly
 
-### [P2] Add retrospective mode / postmortem calibration
-
-**Outcome:** Agencies can score completed work and compare predicted vs actual results.
+**Outcome:** Contributors can understand the B-Corp constants without reverse-engineering the math.
 
 **Tasks:**
-- use [RETROSPECTIVE-MODE.md](./RETROSPECTIVE-MODE.md) as the implementation starting point
-- define completed-project inputs
-- capture actual cost/margin outcome fields
-- compare forecast vs actual results
-- use the mode as a confidence-building and calibration tool
+- make midpoint and span constants explicit in code
+- mention the B-Corp engagement midpoint clearly in the theory/calibration docs
+- keep B-Corp terminology aligned across app, theory, and tests
 
-**Estimate:** 5–8 hours
+### [P2] Add stronger calculator integration tests
 
-### [P2] Add a true two-mode workflow for presales vs retrospective
-
-**Outcome:** Presales and retrospective work feel like distinct workflows instead of one shared state model.
+**Outcome:** App wiring and DOM behavior are covered, not just pure math.
 
 **Tasks:**
-- keep the original presales snapshot stable across both modes
-- make retrospective-only fields separate and clearly scoped to completed projects
-- decide which original inputs are read-only in retrospective mode by default
-- add an explicit `Edit original presales inputs` path instead of silently mutating the presales record
-- explore a later `Retrospective re-score` path for “what we would score differently now”
-- add regression coverage for mode switching, persistence, and export behavior
+- add tests for app-to-DOM calculation flows
+- cover export behavior more behaviorally where possible
+- add more edge-case tests around invalid inputs and UI state
 
-**Estimate:** 6–10 hours
+## P3 — Later
 
-### [P2] Add lightweight integration surfaces
+### [P3] Break up the single-file app architecture
 
-**Outcome:** The tool becomes easier to adopt without requiring full native integrations.
+**Outcome:** The main app becomes easier to review, test, and maintain.
 
 **Tasks:**
-- add CSV export for scores and outcomes
-- design a Sheets-friendly export shape
-- design a Notion-friendly template shape
-- identify minimal CRM handoff fields for later
+- identify safe extraction boundaries for inline JS and CSS
+- move more UI logic into separate files without adding unnecessary build complexity
+- preserve the simplicity of the static-site deployment model
 
-**Estimate:** 4–8 hours
+### [P3] Add lightweight undo / per-card clearing
 
-## Later
-
-### [P3] Soften front-end branding
-
-**Outcome:** The tool feels less finance-gated while keeping the project identity.
+**Outcome:** Users can recover from accidental score changes without resetting everything.
 
 **Tasks:**
-- prefer `Decision Cards`, `pricing governance`, and `deal evaluation` in high-level UI
-- keep `CAPM` strongest in theory-facing surfaces
-- review overview, app primer, and CTA copy
+- decide between last-change undo, per-card reset, or both
+- keep the behavior simple enough for live presales use
 
-**Estimate:** 2–4 hours
+### [P3] Resume two-mode presales vs retrospective workflow
 
-### [P3] Gather social proof and first case study
-
-**Outcome:** Adoption messaging includes a real usage story instead of only theoretical claims.
+**Outcome:** Retrospective analysis can return without muddying the presales workflow.
 
 **Tasks:**
-- identify one agency or internal use case
-- document one scored deal and resulting decision
-- publish a short case study or testimonial
+- continue work from `codex/two-mode`
+- preserve the original presales snapshot separately from retrospective inputs
+- add explicit edit/re-score behavior instead of silent state sharing
 
-**Estimate:** depends on real usage cycle
+## Archived / completed
 
-### [P3] Accessibility validation follow-up
+These items are no longer active backlog work:
 
-**Outcome:** Accessibility claims are supported by real assistive-technology use, not just automated audit and keyboard checks.
-
-**Tasks:**
-- run a full VoiceOver pass on macOS
-- run an NVDA pass on Windows when available
-- fix any wording, focus, or announcement issues found
-- consider rounding main UI outputs to reduce false precision
-
-**Estimate:** 2–4 hours for validation, plus any follow-up fixes
-
-### [P3] Model optionality explicitly
-
-**Outcome:** Teams can document why a marginal deal may still be strategically valuable.
-
-**Tasks:**
-- decide whether optionality belongs as override, note, or explicit adjustment
-- avoid hiding it inside beta
-- document it as a conscious exception path
-
-**Estimate:** 3–6 hours
-
-### [P3] Extend exports and integrations
-
-**Outcome:** Exports become more useful operationally.
-
-**Tasks:**
-- add CSV export of scores and calculations
-- explore shareable state URL
-- explore lightweight CRM/project handoff formats
-
-**Estimate:** 4–8 hours
-
-## Definition of Done for the next release
-
-- persistence works reliably
-- practical walkthrough is linked from the overview
-- simple first-use path exists for new users
-- Layer 1 framing is consistent across docs
-- caution-band rule is explicitly documented
-- a retrospective mode exists or is clearly specified for the next milestone
-- accessibility validation has been rerun after major UI changes
-- accessibility and regression checks still pass
-- generated HTML stays in sync with source Markdown
+- persistence and reset
+- first-use defaults
+- walkthrough page
+- decision guide and calibration notes
+- export flow
+- initial CI setup and authenticated build fix
+- social sharing / sitemap / robots / structured data
+- initial accessibility pass and keyboard semantics improvements
+- major copy cleanup across app, overview, theory, and companion essay
