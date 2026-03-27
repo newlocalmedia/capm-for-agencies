@@ -71,7 +71,7 @@ Where:
 
 * B Corp Layer 1 midpoint is neutral
 * B Corp Layer 1 modifies scale from `0.8` to `1.2`
-* B Corp Layer 2 midpoint is neutral
+* B Corp Layer 2 midpoint is neutral at `12` on a `4–20` scale
 * each B Corp Layer 2 point away from midpoint is worth about `1.0` point before that portfolio modifier is applied
 
 So the current automatic adjustment is:

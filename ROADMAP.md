@@ -1,327 +1,121 @@
 # Roadmap
 
-## Purpose
+## Current state
 
-This roadmap tracks the next practical steps for turning the Decision Cards from a strong first public beta into a more durable presales tool.
+CAPM for Agencies is now a usable public beta with:
 
-The current priorities are:
+- Decision Cards on the main app page
+- persistence and reset behavior
+- practical walkthrough, decision guide, theory, calibration notes, and discovery essay pages
+- export, accessibility improvements, and core calculator tests
+- CI that now authenticates static-page Markdown rendering with `GITHUB_TOKEN`
 
-1. make the tool more usable in real agency workflows
-2. make the model’s limits more legible
-3. improve adoption with clearer walkthroughs and softer front-end branding
+The next phase is no longer basic usability. It is **coherence, hardening, and contributor clarity**.
 
-## Delivery Method
+## Archived / completed foundation work
 
-The next execution phase should use:
+These are complete enough to move out of the active roadmap:
 
-- **GSD** for phase structure, sequencing, and verification
-- **BDD-style acceptance criteria** for user-facing behavior
-- **TDD** for calculator logic, state behavior, and regression coverage
+- first public beta and follow-up patch releases
+- persistence and `Reset all`
+- first-use defaults
+- walkthrough page
+- decision guide and calibration notes
+- social metadata / sitemap / robots / structured data
+- app export flow
+- major copy and IA cleanup across app + docs
+- accessibility-first pass and keyboard semantics improvements
+- initial CI and regression-test setup
+- first retrospective-mode exploration and branch split (`codex/two-mode`)
 
-This does **not** require a heavy Gherkin or Cucumber setup right now. The value of BDD here is in writing behavior clearly before implementation, not in adding a large tooling layer.
+## Delivery method
 
-### Practical interpretation
+Continue to use:
 
-- define each backlog item in terms of `Given / When / Then` behavior
-- implement or extend tests before changing calculator logic or state flows
-- verify each phase against explicit user-facing acceptance criteria before moving on
+- **GSD** for phase structure and verification
+- **BDD-style acceptance criteria** for user-facing flows
+- **TDD** for calculator logic and regression coverage
 
-## Adoption Constraints
+## Active roadmap
 
-These are the main non-technical reasons the model may struggle to spread:
+### Phase 1 — Documentation and navigation coherence
 
-- **Cultural resistance to quantification:** many agencies will still override the framework with relationship logic or founder instinct unless leadership commits to using it.
-- **Calibration effort:** `R_f`, `R_m`, and Layer 1 defaults require margin history many agencies do not currently track.
-- **No integration story yet:** a standalone static tool is harder to adopt inside existing sales and delivery workflows.
-- **CAPM branding friction:** the finance framing signals rigor to some audiences and irrelevance to others.
-- **No empirical case studies yet:** the framework still needs visible examples of real agencies using it successfully.
+**Goal:** Make the reading path and page relationships obvious.
 
-## Adoption Accelerators
-
-These are the highest-leverage ways to improve trust and adoption:
-
-- **Retrospective mode:** let agencies score finished work and compare predicted vs actual outcomes.
-- **Simpler first-use path:** let new users try one deal with defaults before understanding the whole model.
-- **Integration surfaces:** templates, exports, and lightweight workflow handoffs into tools agencies already use.
-- **Social proof:** one credible public adopter matters more than more theory copy.
-- **Postmortem calibration loop:** let the tool improve from actual outcomes rather than staying purely static.
-
-## Phase 1 — Practical Adoption
-
-### 1. Persistence
-
-**Goal:** Prevent score loss on reload and make the cards usable in live presales conversations.
+**Problems to solve:**
+- `ROADMAP.md` and `BACKLOG.md` had drifted behind the actual product state
+- the main docs cluster is broader than the top nav suggests
+- the discovery essay still risks feeling adjacent rather than structurally tied to the `price before you plan` thesis
 
 **Scope:**
-- save form state to `localStorage`
-- restore state on load
-- add a `Reset` action
-- make persistence behavior explicit to users
+- keep the planning docs current as features ship
+- define and surface a clearer reading order across overview, walkthrough, decision guide, theory, calibration notes, and discovery essay
+- tighten cross-links so every major page is reachable from the app or overview
+- continue integrating the discovery essay with the core pricing thesis
 
-**Why first:** This is the most obvious product gap.
+### Phase 2 — In-app clarity and decision guidance
 
-### 1A. Simple First-Use Path
+**Goal:** Reduce avoidable user confusion without adding product bloat.
 
-**Goal:** Let a new user score one deal quickly without understanding the full model first.
-
-**Scope:**
-- allow Layer 2 scoring with sane defaults when Layer 1 is incomplete
-- present default baseline values explicitly as defaults, not truths
-- keep the full two-layer model available for deeper use
-
-**Why early:** Cold-start friction is one of the biggest adoption barriers.
-
-### 2. Practical Walkthrough
-
-**Goal:** Add a short, concrete “what this looks like in practice” artifact between the overview and the long theory.
+**Problems to solve:**
+- Layer 1 → Layer 2 → Layer 3 dependency is still mostly explained in text rather than reinforced visually
+- the chart still assumes more theory context than some users will have
+- there is no lightweight undo for score changes
 
 **Scope:**
-- create a short walkthrough page using one realistic deal
-- show Layer 1, Layer 2, proposed margin, hurdle, and verdict
-- link it from the overview and decision guide
+- add clearer dependency cues between cards
+- explain the chart inline in plain language
+- evaluate whether the app needs per-card entry hints beyond the primer
+- consider lightweight undo or per-card clear behavior if it can be added cleanly
 
-**Why second:** It helps adoption more immediately than more theory.
+### Phase 3 — Model clarity and calibration decisions
 
-### 3. Layer 1 Framing Cleanup
+**Goal:** Reduce confusion around heuristic choices and tighten model presentation.
 
-**Goal:** Reconcile the explanation of Layer 1 so the docs consistently describe what it does.
-
-**Scope:**
-- make the docs explain clearly that the current implementation multiplies the engagement beta by the Layer 1 factor
-- explain that this is equivalent to widening or narrowing the effective premium
-- remove mixed metaphors where they confuse more than they help
-
-**Why third:** This is a clarity issue, not a product blocker.
-
-## Phase 2 — Calibration and Comparison
-
-### 4. Caution Band Review
-
-**Goal:** Revisit whether the current fixed `3`-point caution band should remain absolute or become relative to the hurdle.
+**Problems to solve:**
+- the fixed `3`-point caution band may be proportionally too forgiving on risky deals
+- the UI still presents one-decimal output that may imply more precision than the inputs warrant
+- B-Corp midpoint assumptions are mathematically sound but need clearer contributor-facing documentation
 
 **Scope:**
-- document the current rule clearly
-- compare absolute and relative alternatives
-- test a few scenarios against both approaches
-- keep the simpler rule unless the alternative is clearly better
+- review absolute vs relative caution-band behavior
+- decide whether the main UI should round display values more aggressively
+- document B-Corp midpoint constants in code and docs more explicitly
+- keep the theory and UI aligned on what is heuristic versus measured
 
-**Why fourth:** This is a calibration decision, not an immediate usability gap.
+### Phase 4 — Build and architecture hardening
 
-### 5. Multi-Scenario Comparison
+**Goal:** Make the repo easier to maintain and less dependent on fragile infrastructure.
 
-**Goal:** Let teams compare alternate deal structures without losing the current scenario.
-
-**Scope:**
-- support `Scenario A` and `Scenario B`
-- compare price, cost, hurdle, gap, and verdict side by side
-- keep the UI lightweight enough for live presales use
-
-**Why fifth:** High value, but more complex than persistence or documentation.
-
-### 5A. Retrospective and Calibration Loop
-
-**Goal:** Let agencies compare predicted outcomes against actual completed work.
+**Problems to solve:**
+- static page generation still depends on GitHub’s Markdown API at build time
+- `index.html` remains a very large single-file app
+- current tests are strong on calculator math but light on UI integration behavior
 
 **Scope:**
-- define a retrospective scoring mode for completed projects
-- capture estimated vs actual cost, margin, and outcome quality
-- use that history to refine defaults and increase trust
-- work from the current design note in [RETROSPECTIVE-MODE.md](./RETROSPECTIVE-MODE.md)
+- replace the GitHub Markdown API dependency with a local renderer
+- evaluate safe extraction of inline app logic into smaller modules
+- add DOM-level or browser-level integration coverage for critical app flows
 
-**Why important:** This is the clearest path to empirical validation and internal buy-in.
+### Phase 5 — Retrospective workflow, if resumed
 
-### 5B. Two-Mode Workflow: Presales vs Retrospective
+**Goal:** Resume retrospective mode only when it can be cleanly separated from presales.
 
-**Goal:** Make presales and retrospective feel like intentionally different workflows, not just the same controls with a few extra fields attached.
-
-**Problem this solves:**
-- shared state across both modes is conceptually muddy
-- editing scores in retrospective mode can accidentally rewrite the original presales record
-- users need to distinguish between:
-  1. the original pricing decision
-  2. the actual completed-project outcome
-  3. a possible “what we would score differently now” reflection
-
-**Design principle:**
-Treat the original presales snapshot as the baseline record, and layer retrospective analysis on top of it rather than letting the two workflows overwrite each other silently.
-
-#### First slice
-
-**Goal:** Make the original presales record visible and stable in retrospective mode.
+**Current status:**
+- exploratory work exists on `codex/two-mode`
+- `main` intentionally keeps the simpler presales-first workflow
 
 **Scope:**
-- preserve the original presales scores, quoted price, estimated cost, and hurdle
-- keep retrospective-only fields separate:
-  - actual revenue
-  - actual cost
-  - postmortem notes
-- show the original presales verdict and margin alongside the actual outcome
-- make original presales inputs read-only in retrospective mode by default
-- add one explicit affordance:
-  - `Edit original presales inputs`
+- preserve original presales state as a baseline record
+- keep retrospective data separate
+- support explicit re-score / calibration reflection later
 
-**Acceptance criteria:**
-- Given a scored presales deal, when a user switches to retrospective mode, then the original scores and quoted economics are still shown as the baseline
-- Given retrospective mode is active, when a user enters actual cost and revenue, then only retrospective fields change by default
-- Given retrospective mode is active, when a user wants to revise the original presales record, then they must choose an explicit edit action
+## Definition of done for the next meaningful release
 
-#### Second slice
+A next release should ideally include:
 
-**Goal:** Add a reflective re-score path without corrupting the original record.
-
-**Scope:**
-- add an optional `Retrospective re-score`
-- compare:
-  - original presales score
-  - retrospective re-score
-  - actual project outcome
-- keep the original presales record immutable unless explicitly edited
-
-**Acceptance criteria:**
-- Given a completed project, when a user performs a retrospective re-score, then the app can show what was underestimated or overestimated without losing the original score
-- Given both original and retrospective scores exist, when the user exports, then the report clearly labels which is which
-
-#### Third slice
-
-**Goal:** Turn retrospective mode into a real calibration loop rather than a single-project note field.
-
-**Scope:**
-- save completed-project snapshots locally or exportably
-- compare multiple completed projects over time
-- identify repeated misses:
-  - scope too soft
-  - timeline too soft
-  - contract risk too soft
-- use patterns to revisit defaults and caution thresholds
-
-**Acceptance criteria:**
-- Given multiple completed-project reviews, when a user looks back across them, then recurring miss patterns are visible
-- Given repeated retrospective misses, when a team adjusts its defaults or scoring habits, then the system supports that as a conscious governance decision
-
-#### Implementation notes
-
-- keep this work on a dedicated branch until the workflow is clean enough to merge without confusing `main`
-- use BDD-style user stories for each slice
-- use TDD for:
-  - persistence shape
-  - mode switching rules
-  - export labeling
-  - original-vs-retrospective state boundaries
-
-#### Suggested sequence
-
-1. separate presales snapshot from retrospective fields in persisted state
-2. make original presales inputs read-only in retrospective mode
-3. add explicit `Edit original presales inputs`
-4. add retrospective re-score
-5. add multi-project retrospective history later
-
-## Phase 3 — Positioning and Presentation
-
-### 6. Softer Front-End Branding
-
-**Goal:** Keep `CAPM for Agencies` as the project name while reducing the sense that the tool is “for finance people only.”
-
-**Scope:**
-- lead more often with `Decision Cards`, `pricing governance`, and `deal evaluation`
-- keep `CAPM` more visible in theory pages than in first-contact UI copy
-- reduce unnecessary finance jargon in introductory surfaces
-
-**Why sixth:** Important for adoption, but less urgent than workflow improvements.
-
-### 6A. Adoption Surfaces and Integration
-
-**Goal:** Meet agencies where they already work.
-
-**Scope:**
-- add a simple template/export path for Sheets or Notion
-- explore lightweight CRM handoff formats before full integrations
-- make exports useful in presales review and postmortems
-
-**Why later:** High value, but easier once the core workflow is stable.
-
-### 6B. Social Proof and Case Studies
-
-**Goal:** Replace purely theoretical credibility with demonstrated use.
-
-**Scope:**
-- capture at least one internal or partner agency usage story
-- document one before/after pricing or go/no-go example
-- feature that example in overview or walkthrough materials
-
-**Why later:** This depends on actual use, not just product work.
-
-## Suggested Delivery Sequence
-
-### Fastest credible sequence
-
-1. persistence
-2. simple first-use path
-3. Layer 1 framing cleanup
-4. softer branding
-5. practical walkthrough
-6. caution-band review
-7. multi-scenario comparison
-8. retrospective mode
-9. integration surfaces
-10. social proof
-
-## Quick Wins
-
-If the goal is to improve adoption quickly without opening a large design cycle, the best short bundle is:
-
-1. **Local persistence**
-2. **Reset all**
-3. **Simple first-use path with explicit defaults**
-
-This gives the biggest usability gain for the least implementation effort.
-
-### Optional add-ons
-
-- **CSV export** for spreadsheet-oriented teams
-- **Short walkthrough stub** linked from the overview
-
-## Accessibility Follow-Up
-
-Accessibility is in a much better state than before, but the remaining work is mostly validation rather than structural redesign.
-
-### Next accessibility checks
-
-- run a real **VoiceOver** pass on macOS
-- run a real **NVDA** pass on Windows when available
-- tighten wording or focus behavior based on actual screen-reader use
-- review whether the main UI should show rounded whole-number outputs to reduce false precision
-
-### Priority
-
-These checks should happen alongside the next release cycle, but they do not need to block quick adoption improvements like persistence and first-use simplification.
-
-### Why this order
-
-- `Persistence` has the biggest practical payoff
-- `Layer 1 framing cleanup` and `branding` are quick wins
-- the `walkthrough` improves adoption before bigger feature work
-- `caution band` is a policy choice best handled after the docs are clearer
-- `multi-scenario comparison` is the heaviest UI change
-
-## Rough Timing
-
-For one focused engineer working in this repo:
-
-- `1. Persistence`: 2–4 hours
-- `Reset all`: 20–40 minutes
-- `Simple first-use path`: 1.5–3 hours
-- `2. Practical walkthrough`: 3–5 hours
-- `3. Layer 1 framing cleanup`: 1–2 hours
-- `4. Caution band review`: 2–4 hours
-- `5. Multi-scenario comparison`: 6–10 hours
-- `6. Softer front-end branding`: 2–4 hours
-- `CSV export`: 1–2 hours
-- `Walkthrough stub`: 1–2 hours
-
-## Total
-
-- **Fastest reasonable pass on 1–6:** about 2 focused working days
-- **More careful pass with testing and copy review:** about 3–4 working days
-- **Best quick-win bundle (persistence + reset + first-use path):** about 4–6 hours
-- **Quick-win bundle plus CSV export and walkthrough stub:** about 6–9 hours
+- clearer doc navigation and reading-order guidance
+- at least one user-facing improvement to card dependency/chart clarity
+- a documented decision on false precision or caution-band behavior
+- either a local Markdown renderer or a clearly staged plan to replace the external dependency
+- updated roadmap/backlog notes that match the shipped state
