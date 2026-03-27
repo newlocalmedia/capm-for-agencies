@@ -245,6 +245,41 @@
     font-weight: 700;
   }
 
+  .summary-strip {
+    display: grid;
+    gap: 8px;
+    align-content: start;
+    align-self: start;
+    margin-top: -14px;
+  }
+
+  .summary-step {
+    display: grid;
+    gap: 3px;
+    padding: 8px 10px;
+    border-radius: 14px;
+    background: rgba(248, 242, 232, 0.9);
+    border: 1px solid rgba(32, 29, 26, 0.08);
+  }
+
+  .summary-step-title {
+    margin: 0 0 1px;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    line-height: 1.15;
+  }
+
+  .summary-step-copy {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #2c241d;
+    line-height: 1.3;
+  }
+
   .actions {
     display: flex;
     flex-wrap: wrap;
