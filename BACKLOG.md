@@ -6,14 +6,19 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 
 ## P1 — Current
 
-### [P1] Add stronger calculator integration tests
+### [P1] Decide whether a browser-smoke layer is still needed
 
-**Outcome:** App wiring and DOM behavior are covered, not just pure math.
+**Outcome:** The test pyramid matches the actual remaining risk after the new jsdom integration coverage.
+
+**Current status:**
+- jsdom tests now cover live Layer 2 calculation updates
+- reset and persistence/restore flows are exercised in a real DOM
+- missing-input warnings are verified behaviorally for Layer 2 and Layer 3
 
 **Tasks:**
-- add tests for app-to-DOM calculation flows
-- cover export behavior more behaviorally where possible
-- add more edge-case tests around invalid inputs and UI state
+- decide whether one or two browser-level smoke tests would still catch risks jsdom cannot
+- add only the smallest useful browser layer if it materially improves confidence
+- keep the test setup light enough for a static-site repo
 
 ## P2 — Next
 
@@ -94,6 +99,7 @@ These items are no longer active backlog work:
 - initial caution-band review completed; fixed `3`-point band retained for now
 - initial CI setup and authenticated build fix
 - local Markdown renderer and expanded generated-page verification
+- jsdom-based DOM integration coverage for key calculator flows
 - social sharing / sitemap / robots / structured data
 - initial accessibility pass and keyboard semantics improvements
 - major copy cleanup across app, overview, theory, and companion essay

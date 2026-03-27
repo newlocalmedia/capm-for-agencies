@@ -11,6 +11,7 @@ CAPM for Agencies is now a usable public beta with:
 - clearer reading-order guidance across the app and reader pages
 - more specific Layer 2 / Layer 3 commercial-input guidance
 - CI that now installs a local Markdown renderer for static page generation
+- DOM integration tests for key Layer 2, warning, reset, and persistence flows
 
 The next phase is no longer basic usability. It is **hardening, maintainability, and evidence-building**.
 
@@ -32,6 +33,7 @@ These are complete enough to move out of the active roadmap:
 - initial caution-band review and fixed-band decision
 - app dependency cues, chart help, and precision framing
 - local Markdown renderer for static page generation
+- first jsdom-based DOM integration test layer
 
 ## Delivery method
 
@@ -50,11 +52,12 @@ Continue to use:
 **Current status:**
 - static page generation now uses a local Markdown renderer instead of GitHub’s API
 - generated-page verification now covers the walkthrough and discovery essay pages too
+- key calculator flows now have DOM-level integration coverage in jsdom
 - `index.html` is still a very large single-file app
 
 **Remaining scope:**
 - evaluate safe extraction of inline app logic into smaller modules
-- add DOM-level or browser-level integration coverage for critical app flows
+- add a smaller browser-smoke layer if jsdom leaves important behavior unverified
 - keep generated-page output stable as the local renderer evolves
 
 ### Phase 2 — Precision, presentation, and trust
@@ -103,6 +106,7 @@ Continue to use:
 A next release should ideally include:
 
 - stronger DOM-level or browser-level coverage for key calculator flows
+- or a conscious decision that the current jsdom layer is enough for this static app
 - a cleaner decision on long-term precision presentation in the live UI
 - a clearer staged plan for safely shrinking the main app architecture
 - updated roadmap/backlog notes that continue to match the shipped state
