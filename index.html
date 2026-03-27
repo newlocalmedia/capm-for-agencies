@@ -390,6 +390,8 @@
     border: 0;
   }
   .factor-help {
+    position: relative;
+    display: block;
     margin-top: 8px;
     font-size: 11px;
     color: var(--gray500);
@@ -427,11 +429,17 @@
     content: '−';
   }
   .factor-help-body {
-    margin-top: 8px;
+    position: absolute;
+    left: 0;
+    top: calc(100% + 8px);
+    z-index: 20;
+    width: min(720px, calc(100vw - 56px));
+    max-width: min(720px, calc(100vw - 56px));
     padding: 10px 12px;
     border-radius: 8px;
     border: 1px solid var(--gray200);
-    background: rgba(255,255,255,0.62);
+    background: rgba(255,255,255,0.98);
+    box-shadow: 0 8px 24px rgba(26,26,46,0.12);
     line-height: 1.5;
   }
   .factor-help-body p + p {
@@ -453,6 +461,12 @@
   }
   .factor-help-prompts li {
     font-size: 11px;
+  }
+  @media (max-width: 700px) {
+    .factor-help-body {
+      width: calc(100vw - 32px);
+      max-width: calc(100vw - 32px);
+    }
   }
   .factor-scale {
     margin-top: 8px;
