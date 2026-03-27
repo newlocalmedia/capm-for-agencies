@@ -11,11 +11,13 @@ and this project uses a lightweight, date-free changelog for now.
 - Clearer reading-order guidance across the app, overview, and generated reader pages so the docs now behave more like a deliberate ladder than a loose set of links.
 - Page-level `Reading order` guidance in generated reader-page mastheads.
 - A documented caution-band review in the calibration notes comparing the fixed `3`-point rule against `10%` and `12%` proportional alternatives.
+- A local Markdown renderer for static page generation, plus `requirements.txt` and CI installation for the Python build dependency.
 
 ### Changed
 - Expanded top navigation from the app to surface the TL;DR, Decision Guide, and Calibration Notes directly.
 - Improved Layer 2 and Layer 3 missing-input messages so they now refer to the specific missing commercial field(s), with Layer 3 linking back to the Layer 2 inputs.
 - Tightened calculator display rounding so sanitized baseline inputs and manual B Corp overrides no longer leak floating-point noise into visible UI strings.
+- Switched static page generation from GitHub’s Markdown API to a local renderer and expanded generated-file verification to cover the walkthrough and discovery essay pages.
 
 ### Fixed
 - Prevented long Layer 2 result subtext from forcing awkward wrapping in the proposed-margin area when large deal figures are displayed.

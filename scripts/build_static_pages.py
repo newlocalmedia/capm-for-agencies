@@ -4,15 +4,13 @@ from __future__ import annotations
 
 import html
 import json
-import os
 import re
 from pathlib import Path
-from urllib import request
+
+import markdown
 
 
 ROOT = Path(__file__).resolve().parents[1]
-GITHUB_MARKDOWN_API = "https://api.github.com/markdown/raw"
-USER_AGENT = "capm-for-agencies-static-builder"
 SITE_URL = "https://newlocalmedia.github.io/capm-for-agencies"
 
 
@@ -1177,10 +1175,6 @@ PAGES = [
 ]
 
 
-HEADING_RE = re.compile(
-    r'<div class="markdown-heading"><h([1-6]) class="heading-element">(.*?)</h\1><a id="user-content-([^"]+)" class="anchor"[^>]*>.*?</a></div>',
-    re.DOTALL,
-)
 TAG_RE = re.compile(r"<[^>]+>")
 
 TOKEN_REPLACEMENTS = {
@@ -1203,24 +1197,19 @@ TOKEN_REPLACEMENTS = {
 }
 
 
-def render_markdown(markdown_text: str) -> str:
-    headers = {
-        "Content-Type": "text/plain",
-        "User-Agent": USER_AGENT,
-        "Accept": "text/html",
-    }
-    github_token = os.environ.get("GITHUB_TOKEN")
-    if github_token:
-        headers["Authorization"] = f"Bearer {github_token}"
-
-    req = request.Request(
-        GITHUB_MARKDOWN_API,
-        data=markdown_text.encode("utf-8"),
-        method="POST",
-        headers=headers,
+def render_markdown(markdown_text: str):
+    renderer = markdown.Markdown(
+        extensions=["extra", "toc", "md_in_html", "sane_lists"],
+        extension_configs={
+            "toc": {
+                "permalink": False,
+                "anchorlink": False,
+            }
+        },
+        output_format="html5",
     )
-    with request.urlopen(req, timeout=30) as response:
-        return response.read().decode("utf-8")
+    rendered_html = renderer.convert(markdown_text)
+    return rendered_html, renderer.toc_tokens
 
 
 def strip_tags(value: str) -> str:
@@ -1236,19 +1225,17 @@ def replace_tokens(rendered_html: str) -> str:
     return updated
 
 
-def normalize_headings(rendered_html: str):
-    toc_entries = []
-
-    def replace_heading(match: re.Match[str]) -> str:
-        level = int(match.group(1))
-        inner_html = match.group(2)
-        slug = match.group(3)
-        text = re.sub(r"\s+", " ", strip_tags(inner_html))
-        toc_entries.append((level, slug, text))
-        return f'<h{level} id="{html.escape(slug)}">{inner_html}</h{level}>'
-
-    normalized = HEADING_RE.sub(replace_heading, rendered_html)
-    return normalized, toc_entries
+def flatten_toc_tokens(tokens, entries=None):
+    if entries is None:
+        entries = []
+    for token in tokens:
+        level = int(token.get("level", 0))
+        slug = token.get("id", "")
+        name = token.get("name", "")
+        if level and slug and name:
+            entries.append((level, slug, strip_tags(name)))
+        flatten_toc_tokens(token.get("children", []), entries)
+    return entries
 
 
 def build_toc(entries, level_min: int, level_max: int, skip_first_heading: bool = False) -> str:
@@ -1501,16 +1488,16 @@ def build_reading_path(page: dict) -> str:
 
 def generate_page(page: dict) -> None:
     markdown_text = page["source"].read_text(encoding="utf-8")
-    rendered_html = render_markdown(markdown_text)
+    rendered_html, toc_tokens = render_markdown(markdown_text)
     rendered_html = replace_tokens(rendered_html)
-    normalized_html, toc_entries = normalize_headings(rendered_html)
+    toc_entries = flatten_toc_tokens(toc_tokens)
     toc_html = build_toc(
         toc_entries,
         page["toc_min"],
         page["toc_max"],
         page.get("toc_skip_first_heading", False),
     )
-    output_html = build_html(page, normalized_html, toc_html)
+    output_html = build_html(page, rendered_html, toc_html)
     page["output"].write_text(output_html, encoding="utf-8")
 
 
