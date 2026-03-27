@@ -961,17 +961,17 @@ PAGES = [
       <div class="comparison-card">
         <p class="comparison-card-title"><strong>What changed</strong></p>
         <ul>
-          <li>Layer 1 now has a true neutral midpoint.</li>
-          <li>The B-Corp midpoint is also neutral.</li>
-          <li>Manual overrides are bounded.</li>
+          <li>Layer 1 midpoint is neutral.</li>
+          <li>B-Corp midpoint is neutral.</li>
+          <li>Override inputs are bounded.</li>
         </ul>
       </div>
       <div class="comparison-card">
         <p class="comparison-card-title"><strong>What it means</strong></p>
         <ul>
           <li>Average cases behave more predictably.</li>
-          <li>The B-Corp overlay is less extreme.</li>
-          <li>The results are easier to trust as governance.</li>
+          <li>The overlay is less extreme.</li>
+          <li>Results are easier to trust as governance.</li>
         </ul>
       </div>
     </div>
