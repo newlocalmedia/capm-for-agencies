@@ -227,6 +227,8 @@ test('Retrospective re-score changes the calibration view without altering the f
 
   const updatedSummary = document.getElementById('retro-rescore-summary').textContent;
   assert.match(updatedSummary, /1 factor changed/i);
+  assert.match(updatedSummary, /Original total/i);
+  assert.match(updatedSummary, /re-scored total/i);
   assert.match(updatedSummary, /hurdle would have been/i);
   assert.equal(document.getElementById('retro-snapshot-required').textContent.trim(), '22.0%');
   assert.equal(

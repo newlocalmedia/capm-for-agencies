@@ -953,19 +953,47 @@
   }
   .retrospective-main {
     display: grid;
-    gap: 14px;
+    gap: 12px;
   }
   .retrospective-intro {
     margin: 0;
-    font-size: 13px;
+    font-size: 12.5px;
     color: var(--gray500);
+  }
+  .retrospective-meta-row {
+    display: grid;
+    grid-template-columns: minmax(220px, 1.2fr) repeat(2, minmax(150px, 0.8fr));
+    gap: 10px 12px;
+    align-items: end;
+    margin: 10px 0 12px;
+  }
+  .retrospective-meta-field {
+    display: grid;
+    gap: 4px;
+  }
+  .retrospective-meta-field label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray500);
+  }
+  .retrospective-meta-field input {
+    min-height: 42px;
   }
   .retrospective-toolbar {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 10px 12px;
-    margin: 0 0 14px;
+    margin: 0 0 10px;
+  }
+  .retrospective-actions {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    gap: 8px;
+    margin-left: auto;
   }
   .retrospective-lock-note {
     font-size: 12px;
@@ -973,29 +1001,31 @@
     line-height: 1.5;
   }
   .retrospective-section-title {
-    margin-bottom: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    margin-bottom: 10px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gray500);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
+  }
+  .retrospective-section-title.align-lower {
+    margin-top: 8px;
+    padding-top: 1px;
   }
   .snapshot-card {
-    margin-bottom: 14px;
-    padding: 14px 16px;
+    margin-bottom: 0;
+    padding: 12px 14px;
     border-radius: 10px;
     border: 1px solid rgba(196,93,62,0.16);
     background: rgba(240,212,203,0.18);
   }
   .snapshot-card-title {
-    margin-bottom: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    margin: 0 0 10px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-dark);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
   }
   .compact-result-box {
     gap: 10px;
@@ -1015,12 +1045,11 @@
     margin-bottom: 12px;
   }
   .retrospective-rescore-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gray500);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
   }
   .retrospective-rescore-copy {
     font-size: 12px;
@@ -1092,14 +1121,22 @@
     color: var(--accent-dark);
   }
   .retro-rescore-summary {
-    margin-top: 18px;
-    padding: 12px 14px;
+    display: block;
+    margin-top: 12px;
+    padding: 18px 14px 12px;
     border-radius: 10px;
     background: rgba(255,255,255,0.72);
     border: 1px solid rgba(196,93,62,0.12);
+    border-top: 2px solid rgba(196,93,62,0.18);
     font-size: 12px;
     color: var(--gray500);
     line-height: 1.55;
+    position: relative;
+  }
+  .retro-rescore-status-title {
+    margin-top: 30px;
+    padding-top: 18px;
+    border-top: 1px dashed rgba(95,90,83,0.24);
   }
   .retro-takeaway {
     margin-top: 12px;
@@ -1110,12 +1147,11 @@
   }
   .retro-takeaway-title {
     margin-bottom: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--accent-dark);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
   }
   .retro-takeaway-copy {
     font-size: 12.5px;
@@ -1135,17 +1171,20 @@
   .presales-reference-note {
     display: none;
     margin: 0 0 12px;
-    padding: 12px 14px;
-    border-radius: 10px;
-    border: 1px dashed var(--gray200);
-    background: rgba(255,255,255,0.55);
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  .presales-reference-note .section-label {
+    display: inline-block;
+    margin-bottom: 8px;
+  }
+  .presales-reference-copy {
     font-size: 12px;
     color: var(--gray500);
     line-height: 1.55;
   }
-  body[data-workflow-mode="retrospective"] .presales-reference-note {
-    display: block;
-  }
+  body[data-workflow-mode="retrospective"] .presales-reference-note { display: block; }
   body[data-workflow-mode="retrospective"] #layer2-presales-content {
     margin-top: 6px;
     padding-top: 18px;
@@ -1179,6 +1218,14 @@
   @media (max-width: 900px) {
     .retrospective-grid {
       grid-template-columns: 1fr;
+    }
+    .retrospective-meta-row {
+      grid-template-columns: 1fr;
+    }
+    .retrospective-actions {
+      width: 100%;
+      margin-left: 0;
+      flex-wrap: wrap;
     }
   }
 
@@ -1674,28 +1721,30 @@
     <div class="retrospective-panel" id="retrospective-panel" hidden>
       <span class="section-label">Retrospective Comparison</span>
       <div class="calc-panel">
+        <p class="retrospective-intro"><strong>Completed project view:</strong> freeze the original presales call, compare it with the delivered outcome, then note what you would score differently next time.</p>
+        <div class="retrospective-meta-row">
+          <div class="retrospective-meta-field">
+            <label for="retro-deal-name">Deal Name</label>
+            <input type="text" id="retro-deal-name" value="" placeholder="Client / project name" oninput="markExportDirty()">
+          </div>
+          <div class="retrospective-meta-field">
+            <label for="retro-presales-date">Snapshot Date</label>
+            <input type="date" id="retro-presales-date" value="" readonly>
+          </div>
+          <div class="retrospective-meta-field">
+            <label for="retro-date">Review Date</label>
+            <input type="date" id="retro-date" value="" oninput="markExportDirty()">
+          </div>
+        </div>
+        <div class="retrospective-toolbar">
+          <span class="retrospective-lock-note" id="retro-lock-note">Presales inputs are frozen while retrospective mode is active.</span>
+          <div class="retrospective-actions">
+            <button type="button" class="action-btn mode-btn" id="retro-unlock-btn" onclick="togglePresalesUnlock()">Unlock inputs</button>
+            <button type="button" class="action-btn mode-btn" id="retro-refreeze-btn" onclick="refreshRetrospectiveSnapshot()">Refresh snapshot</button>
+          </div>
+        </div>
         <div class="retrospective-grid">
           <div class="retrospective-main">
-            <p class="retrospective-intro"><strong>Completed project view:</strong> Retrospective mode freezes the original presales snapshot, then compares that frozen decision with what actually happened in delivery.</p>
-            <div class="calc-row">
-              <div class="calc-field">
-                <label for="retro-deal-name">Deal Name</label>
-                <div><input type="text" id="retro-deal-name" value="" placeholder="Client / project name" oninput="markExportDirty()"></div>
-              </div>
-              <div class="calc-field">
-                <label for="retro-presales-date">Presales Snapshot Date</label>
-                <div><input type="date" id="retro-presales-date" value="" readonly></div>
-              </div>
-              <div class="calc-field">
-                <label for="retro-date">Retrospective Date</label>
-                <div><input type="date" id="retro-date" value="" oninput="markExportDirty()"></div>
-              </div>
-            </div>
-            <div class="retrospective-toolbar">
-              <span class="retrospective-lock-note" id="retro-lock-note">Presales inputs are frozen while retrospective mode is active.</span>
-              <button type="button" class="action-btn mode-btn" id="retro-unlock-btn" onclick="togglePresalesUnlock()">Unlock original presales inputs</button>
-              <button type="button" class="action-btn mode-btn" id="retro-refreeze-btn" onclick="refreshRetrospectiveSnapshot()">Refresh frozen snapshot</button>
-            </div>
             <div class="snapshot-card">
               <div class="snapshot-card-title">1. Original presales call</div>
               <div class="result-box compact-result-box">
@@ -1723,7 +1772,7 @@
             </div>
           </div>
           <div class="retrospective-main">
-            <div class="retrospective-section-title">2. Actual outcome</div>
+            <div class="retrospective-section-title align-lower">2. Actual outcome</div>
             <div class="calc-row">
               <div class="calc-field">
                 <label for="actual-revenue">Actual Revenue
@@ -1785,6 +1834,7 @@
             <div class="retrospective-rescore-copy">If you would score any Layer 2 factor differently now, re-score it here without changing the frozen presales record.</div>
           </div>
           <div class="retrospective-rescore-list" id="retro-rescore-list"></div>
+          <div class="retrospective-section-title retro-rescore-status-title">Re-score status</div>
           <div class="retrospective-rescore-summary" id="retro-rescore-summary">Freeze a presales snapshot to compare original and retrospective scoring.</div>
           <div class="retro-takeaway" id="retro-takeaway">
             <div class="retro-takeaway-title">4. Recommended takeaway</div>
@@ -1795,8 +1845,11 @@
     </div>
 
     <div class="presales-reference" id="layer2-presales-content">
-      <div class="presales-reference-note"><strong>Original presales baseline:</strong> these inputs and scores remain visible as reference. In retrospective mode they stay frozen unless you explicitly unlock them and refresh the snapshot.</div>
-    <span class="section-label">Engagement Risk Scoring</span>
+      <div class="presales-reference-note">
+        <span class="section-label">Original Presales Baseline</span>
+        <div class="presales-reference-copy">The Layer 2 scores and commercial inputs below remain visible as reference. In retrospective mode they stay frozen unless you explicitly unlock them and refresh the snapshot.</div>
+      </div>
+      <span class="section-label">Engagement Risk Scoring</span>
     <table class="score-table" id="layer2-table" data-layer="layer2">
       <thead>
         <tr>
@@ -2656,6 +2709,7 @@
     });
 
     const rescoredScores = meta.map(({ factor }) => retrospectiveState.layer2Rescore[factor] || snapshot.state.layer2[factor]);
+    const originalScore = Object.values(snapshot.state.layer2).reduce((total, value) => total + value, 0);
     const rescoredSum = rescoredScores.reduce((total, value) => total + value, 0);
     const rescoredBeta = Calc.engagementBetaFromScore(rescoredSum);
     const l1Factor = parseFloat(snapshot.inputs.l1Input);
@@ -2665,7 +2719,7 @@
     const rescoredRequired = Calc.requiredReturn(rf, rm, rescoredBlended);
 
     if (!changed.length) {
-      summary.innerHTML = 'No Layer 2 factors are rescored yet. This review is still using the frozen original hurdle of <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong>.';
+      summary.innerHTML = 'No Layer 2 factors are rescored yet. Original and re-scored totals are both <strong>' + originalScore + '/35</strong>, so this review is still using the frozen original hurdle of <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong>.';
       const actual = getActualDealMetrics();
       const assessment = actual ? Calc.retrospectiveAssessment(snapshot.outputs.requiredMargin, snapshot.outputs.proposedMargin, Calc.round(actual.actualMargin, 1)) : '';
       if (takeaway) takeaway.textContent = getRetrospectiveRecommendation(snapshot, actual, assessment, [], snapshot.outputs.requiredMargin);
@@ -2675,6 +2729,7 @@
     const delta = Calc.gap(rescoredRequired, snapshot.outputs.requiredMargin);
     summary.innerHTML =
       '<strong>Re-scored view:</strong> ' + changed.length + ' factor' + (changed.length === 1 ? '' : 's') + ' changed. ' +
+      'Original total <strong>' + originalScore + '/35</strong> versus re-scored total <strong>' + rescoredSum + '/35</strong>. ' +
       'The hurdle would have been <strong>' + rescoredRequired.toFixed(1) + '%</strong> instead of <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong> ' +
       '(' + (delta >= 0 ? '+' : '') + delta.toFixed(1) + ' pts). ' +
       'Changed first: <strong>' + changed.map((item) => item.name).join(', ') + '</strong>.';
@@ -2725,8 +2780,8 @@
     }
     if (unlockBtn) {
       unlockBtn.textContent = retrospectiveState.presalesUnlocked
-        ? 'Lock original presales inputs'
-        : 'Unlock original presales inputs';
+        ? 'Lock inputs'
+        : 'Unlock inputs';
       unlockBtn.classList.toggle('active', retrospectiveState.presalesUnlocked);
       unlockBtn.setAttribute('aria-pressed', retrospectiveState.presalesUnlocked ? 'true' : 'false');
     }
