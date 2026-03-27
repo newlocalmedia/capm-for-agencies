@@ -1,10 +1,12 @@
-## Why discovery sometimes has to come first
+## Why discovery comes first
 
-Agencies underprice work when they move too quickly into the weeds of isolated technical tasks and implementation details. The problem is not just technical uncertainty. It is that the real work often sits inside a larger system of content, workflows, stakeholder alignment, trust, product decisions, and organizational constraints.
+Agencies underprice work when they move too quickly into the weeds of isolated technical tasks and implementation details.
+
+Every serious web project benefits from discovery. The difference is not whether discovery is needed, but how much: how much time it takes, how many stakeholders need to be involved, how much uncertainty needs to be reduced, and how much of the real problem still has to be defined before implementation can be priced responsibly.
 
 That matters for pricing as much as it matters for delivery. If you frame a migration, caching strategy, or rebuild as a narrow implementation exercise, you will usually underestimate the work, undersell the risk, and miss the deeper business problem the client is actually paying you to solve.
 
-This companion essay sits next to the [Decision Cards](../index.html). It is not another explanation of CAPM. It is the deeper rationale behind one of the model’s most important practical conclusions: sometimes the next thing to sell is not implementation. It is a discovery phase.
+This companion essay sits next to the [Decision Cards](../index.html). It is not another explanation of CAPM. It is the deeper rationale behind one of the model’s most important practical conclusions: discovery is not optional background thinking. It is real project work, and any extended discovery should be paid for by the client rather than smuggled into implementation pricing.
 
 ## How this connects to the Decision Cards
 
