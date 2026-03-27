@@ -6,16 +6,6 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 
 ## P1 — Current
 
-### [P1] Replace GitHub Markdown API dependency with a local renderer
-
-**Outcome:** Static page builds become deterministic and CI no longer depends on external network access or GitHub API limits.
-
-**Tasks:**
-- replace the build-time GitHub Markdown API call with a local Markdown renderer
-- preserve heading normalization, token replacement, and generated-page output expectations
-- confirm generated pages remain stable in CI without network access
-- remove any no-longer-needed auth assumptions from the build
-
 ### [P1] Add stronger calculator integration tests
 
 **Outcome:** App wiring and DOM behavior are covered, not just pure math.
@@ -87,8 +77,8 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 
 **Tasks:**
 - continue work from `codex/two-mode`
-- preserve the original presales snapshot separately from retrospective inputs
-- add explicit edit/re-score behavior instead of silent state sharing
+- treat the mode switch as a snapshot/lock transition, not a casual tab change
+- include deal metadata, export, and side-by-side re-score in the first useful version
 
 ## Archived / completed
 
@@ -103,6 +93,7 @@ These items are no longer active backlog work:
 - B-Corp midpoint constants clarified in code and docs
 - initial caution-band review completed; fixed `3`-point band retained for now
 - initial CI setup and authenticated build fix
+- local Markdown renderer and expanded generated-page verification
 - social sharing / sitemap / robots / structured data
 - initial accessibility pass and keyboard semantics improvements
 - major copy cleanup across app, overview, theory, and companion essay

@@ -4,125 +4,177 @@
 
 Retrospective mode is the next credibility feature for the Decision Cards.
 
-The current tool helps teams make a pricing decision before committing to work. Retrospective mode should let agencies score completed projects after the fact, compare predicted vs. actual economics, and use that history to refine defaults and build trust in the model.
+The current tool helps teams make a pricing decision before committing to work. Retrospective mode should let agencies compare the original presales logic to the actual commercial outcome, then capture what they would score differently next time.
+
+This is how the model stops being only a governance thought experiment and starts becoming a calibration loop.
 
 ## Why It Matters
 
-This feature addresses three of the biggest adoption barriers at once:
+This feature addresses several adoption barriers at once:
 
 - the cold-start calibration problem
 - the lack of empirical validation
-- the need for a postmortem calibration loop rather than a static model
+- the need for a postmortem learning loop rather than a static model
+- the need to make pricing conversations portable into team review and operations
 
-It should make the framework more trustworthy by showing how the scoring logic lined up with what actually happened.
+## Core Design Principle
 
-## Core User Story
+**The mode toggle is not just a view switch. It is a workflow transition.**
 
-An agency lead wants to score a completed project, compare the model’s predicted hurdle to the project’s actual margin outcome, and decide whether the model’s assumptions were too soft, too hard, or directionally right.
+Presales mode is a live draft. Retrospective mode should be entered by freezing that draft into an original presales snapshot.
 
-## Mode Definition
+That means:
 
-Retrospective mode is not a separate theory. It is a second workflow for the same model.
+- a user can start in presales, score a deal, and later convert that exact deal into a retrospective
+- the original presales record is preserved as the baseline for comparison
+- retrospective fields are layered on top of that frozen snapshot
+- editing the original presales inputs later requires an explicit unlock action, not a casual mode switch
 
-Two modes should exist:
+This avoids the main ambiguity in the current two-mode prototype: changing a score in retrospective mode should not silently rewrite history.
 
-- **Presales mode**
-  Score the current deal and decide whether to proceed, reprice, or sell discovery first.
-- **Retrospective mode**
-  Score a completed deal and compare predicted vs. actual results for calibration and learning.
+## UX Direction
 
-## Scope for the First Version
+Retrospective mode should not feel like Layer 2 with a few extra fields. It answers a different question.
 
-The first retrospective version should stay lightweight.
+### Presales mode asks:
 
-### Inputs
+`Should we take this deal at this price?`
 
-- agency baseline values:
-  - `R_f`
-  - `R_m`
-  - Layer 1 factor or full Layer 1 scores
-- Layer 2 engagement scores
+### Retrospective mode asks:
+
+`How did the original pricing logic compare with what actually happened?`
+
+So in retrospective mode:
+
+- the **comparison view becomes primary**
+- the original scoring cards become secondary or collapsible
+- the frozen presales snapshot stays visible as reference data
+- the learning and re-score controls are part of the main flow, not buried as notes
+
+## First-Version Scope
+
+The first useful retrospective version should include all of the following.
+
+### 1. Frozen presales snapshot
+
+When a user enters retrospective mode, preserve:
+
+- `R_f`
+- `R_m`
+- Layer 1 factor or scores
+- Layer 2 scores
 - quoted deal price
-- original estimated delivery cost
+- estimated delivery cost
+- original hurdle and verdict at time of sale
+
+### 2. Deal metadata
+
+Add these fields now, even before multi-project history exists:
+
+- deal name or identifier
+- presales decision date
+- retrospective entry date
+
+Without them, later project history becomes a migration problem.
+
+### 3. Actual outcome fields
+
+- actual recognized revenue
 - actual final delivery cost
-- actual recognized revenue if it differs from quoted price
-- optional notes:
-  - what changed
-  - where scope drift came from
-  - whether discovery should have been sold first
 
-### Outputs
+### 4. Primary comparison view
 
-- predicted required margin `E(R)`
-- predicted verdict at time of sale
-- proposed margin at time of sale
+Show, as the main retrospective output:
+
+- predicted hurdle `E(R)`
+- predicted proposed margin at time of sale
 - actual realized margin
 - variance between predicted and actual margin
-- a simple interpretation:
+- simple interpretation:
   - priced correctly
   - too optimistic
   - too conservative
 
-## Not in the First Version
+### 5. Per-factor re-score path
 
-- automated recalibration of coefficients
-- portfolio dashboards
-- multi-project analytics
-- CRM integration
-- statistical claims about model accuracy
+This should be part of the first version, not deferred.
 
-Those belong later, after teams have enough project history to justify them.
+For each Layer 2 factor, show:
 
-## Workflow
+- original score
+- optional retrospective score
+- a simple flag or note indicating whether it was underestimated, overstated, or unchanged
 
-### Step 1
+This is the concrete calibration loop. Without it, retrospective mode becomes a note field instead of a learning tool.
 
-Load or enter the original pricing context:
+### 6. Export from day one
 
-- baseline margins
-- Layer 1 factor or score
-- Layer 2 scores
-- proposed deal price
+Export is essential in the first version because the main consumer of retrospective output is a team review conversation.
+
+The first version should export a self-contained HTML summary that includes:
+
+- deal metadata
+- frozen presales snapshot
+- actual outcome
+- predicted vs. actual comparison
+- re-score deltas
+- learning notes
+
+## Revised Workflow
+
+### Step 1 — Start in presales or load a completed deal
+
+A user can:
+
+- work in Presales mode first, then convert that session into a retrospective
+- or manually enter a historical deal if they are backfilling older work
+
+### Step 2 — Freeze the presales snapshot
+
+Entering Retrospective mode should create a frozen baseline record.
+
+That snapshot preserves:
+
+- original scores
+- baselines
+- quoted price
 - estimated cost
+- original predicted outputs
 
-### Step 2
+### Step 3 — Enter actual outcome and metadata
 
-Enter the actual outcome:
+The user enters:
 
+- deal name / identifier
+- presales date
+- retrospective date
+- actual revenue
 - actual cost
-- actual price or recognized revenue
-- optional delivery or stakeholder notes
 
-### Step 3
+### Step 4 — Review the comparison as the primary view
 
-Show the comparison:
+Retrospective mode should promote this to the top:
 
-- original hurdle
-- original proposed margin
-- actual realized margin
-- whether the deal outperformed or underperformed the pricing assumption
+- predicted hurdle
+- predicted margin
+- actual margin
+- variance
+- simple verdict
 
-### Step 4
+### Step 5 — Re-score what was learned
 
-Prompt for learning:
+The user can then answer the useful questions concretely:
 
 - Was the original score too low?
 - Which factors were underestimated?
 - Would discovery have been the better sale?
 - Should the default baselines be revisited?
 
-## UI Direction
+The most important one is factor re-scoring. That is what turns the retrospective into a calibration exercise instead of a loose postmortem.
 
-The first release should probably reuse the current card structure rather than invent a whole new application shell.
+### Step 6 — Export the review
 
-Suggested UI:
-
-- a top-level mode toggle:
-  - `Presales`
-  - `Retrospective`
-- a compact retrospective results panel under Layer 2
-- a final `Postmortem Notes` field
-- export support that includes predicted vs. actual comparison
+The final result should be easy to bring into a team meeting or async review.
 
 ## Data Shape
 
@@ -131,56 +183,88 @@ Suggested persisted object shape:
 ```json
 {
   "mode": "retrospective",
-  "inputs": {
+  "deal": {
+    "id": "acme-cms-rebuild-2026-01",
+    "name": "Acme CMS rebuild",
+    "presalesDate": "2026-01-15",
+    "retrospectiveDate": "2026-04-22"
+  },
+  "presalesSnapshot": {
     "rf": 10,
     "rm": 22,
     "layer1Factor": 1.00,
     "dealPrice": 120000,
     "estimatedCost": 92000,
+    "scores": {
+      "layer1": {},
+      "layer2": {},
+      "bcorp_l1": {},
+      "bcorp_l2": {}
+    },
+    "outputs": {
+      "requiredMargin": 21.4,
+      "proposedMargin": 23.3,
+      "verdict": "Go"
+    },
+    "locked": true
+  },
+  "retrospective": {
     "actualRevenue": 120000,
-    "actualCost": 101500
-  },
-  "scores": {
-    "layer1": {},
-    "layer2": {},
-    "bcorp_l1": {},
-    "bcorp_l2": {}
-  },
-  "notes": {
-    "what_changed": "",
-    "discovery_call": "",
-    "calibration_takeaway": ""
+    "actualCost": 101500,
+    "rescoredFactors": {
+      "layer2": {
+        "scope": { "original": 2, "retrospective": 4 },
+        "timeline": { "original": 2, "retrospective": 3 }
+      }
+    },
+    "notes": {
+      "whatChanged": "",
+      "discoveryCall": "",
+      "calibrationTakeaway": ""
+    }
   }
 }
 ```
+
+## Explicit Non-Goals for the First Version
+
+- automated recalibration of coefficients
+- multi-project dashboards
+- statistical claims about model accuracy
+- CRM integration
+- portfolio-level reporting
 
 ## Acceptance Criteria
 
 ### BDD-style first slice
 
-Given a completed project with known original price and actual cost  
-When a user enters the original scores and actual delivery outcome  
-Then the interface shows the original predicted hurdle, the original proposed margin, the actual realized margin, and a simple comparison result
+Given a presales session with scores, price, and estimated cost  
+When the user enters Retrospective mode  
+Then the original presales state is frozen as a snapshot rather than silently shared as a live editable draft
 
-Given a project whose actual margin fell below the original hurdle  
-When the user enters the actual result  
-Then the interface makes the miss visible and invites a short calibration note
+Given a completed project with actual revenue and actual cost  
+When the user enters the outcome data  
+Then the interface shows the original predicted hurdle, original predicted margin, actual realized margin, variance, and a simple interpretation
 
-Given a project that clearly outperformed the original hurdle  
-When the user enters the actual result  
-Then the interface shows the positive variance without implying the model is statistically validated from one case
+Given a project whose original score understated the real delivery risk  
+When the user reviews the deal in Retrospective mode  
+Then the interface lets them re-score individual factors side by side with the original values
+
+Given a retrospective review that has been completed  
+When the user exports it  
+Then the exported result includes the frozen presales snapshot, actual outcome, comparison outputs, re-score deltas, and notes in a shareable HTML report
 
 ## Release Order
 
-The most practical sequence is:
+The most practical build sequence is:
 
-1. add the retrospective mode design and data shape
-2. add a lightweight UI toggle and actual-cost fields
-3. add comparison outputs and export support
-4. only later consider trend analysis or default recalibration
+1. freeze presales state as a snapshot and add deal metadata
+2. add actual outcome fields, comparison outputs, and export support
+3. add side-by-side per-factor re-score and learning prompts
+4. only later add multi-project history, dashboards, or automated recalibration
 
 ## Success Metric
 
-The first version succeeds if a small agency can use it to answer:
+The first version succeeds if a small agency can answer:
 
-`Did this project perform better or worse than the pricing logic suggested, and what should we score differently next time?`
+`Did this project perform better or worse than the original pricing logic suggested, and what would we score differently next time?`
