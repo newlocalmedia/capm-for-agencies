@@ -323,6 +323,10 @@ PAGE_STYLE = """
     margin-top: 0;
   }
 
+  .summary-strip-topalign {
+    margin-top: 0;
+  }
+
   .actions {
     display: flex;
     flex-wrap: wrap;
@@ -854,7 +858,7 @@ PAGES = [
       <div class="walkthrough-fact"><span class="walkthrough-fact-label">Core idea</span><span class="walkthrough-fact-value">Price before planning.</span><span class="walkthrough-fact-note">Name risk before imagining delivery.</span></div>
       <div class="walkthrough-fact"><span class="walkthrough-fact-label">Decision outputs</span><span class="walkthrough-fact-value">Go, reprice, or sell discovery.</span><span class="walkthrough-fact-note">Decline the work you shouldn't take.</span></div>
     </div>
-    <div class="summary-strip">
+    <div class="summary-strip summary-strip-topalign">
       <div class="summary-step">
         <p class="summary-step-title"><strong>The problem</strong></p>
         <p class="summary-step-copy">Agencies often price risk backwards.</p>
