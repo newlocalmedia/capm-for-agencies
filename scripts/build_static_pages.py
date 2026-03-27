@@ -319,6 +319,10 @@ PAGE_STYLE = """
     margin-top: 2px;
   }
 
+  .comparison-grid-stack {
+    grid-template-columns: 1fr;
+  }
+
   .summary-strip-lower {
     margin-top: 0;
   }
@@ -1043,7 +1047,7 @@ PAGES = [
       </div>
       <p class="walkthrough-chart-note">Midpoints are intentional: neutral engagement risk maps to market-like beta, and neutral impact maps to no adjustment.</p>
     </div>
-    <div class="comparison-grid">
+    <div class="comparison-grid comparison-grid-stack">
       <div class="comparison-card">
         <p class="comparison-card-title"><strong>What changed</strong></p>
         <ul>
