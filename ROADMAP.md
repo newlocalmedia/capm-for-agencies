@@ -10,7 +10,7 @@ CAPM for Agencies is now a usable public beta with:
 - export, accessibility improvements, and core calculator tests
 - clearer reading-order guidance across the app and reader pages
 - more specific Layer 2 / Layer 3 commercial-input guidance
-- CI that now authenticates static-page Markdown rendering with `GITHUB_TOKEN`
+- CI that now installs a local Markdown renderer for static page generation
 
 The next phase is no longer basic usability. It is **hardening, maintainability, and evidence-building**.
 
@@ -31,6 +31,7 @@ These are complete enough to move out of the active roadmap:
 - first retrospective-mode exploration and branch split (`codex/two-mode`)
 - initial caution-band review and fixed-band decision
 - app dependency cues, chart help, and precision framing
+- local Markdown renderer for static page generation
 
 ## Delivery method
 
@@ -44,17 +45,17 @@ Continue to use:
 
 ### Phase 1 — Build and architecture hardening
 
-**Goal:** Make the repo easier to maintain and less dependent on fragile infrastructure.
+**Goal:** Make the repo easier to maintain now that the most fragile build dependency is gone.
 
-**Problems to solve:**
-- static page generation still depends on GitHub’s Markdown API at build time
-- `index.html` remains a very large single-file app
-- current tests are strong on calculator math but still light on UI integration behavior
+**Current status:**
+- static page generation now uses a local Markdown renderer instead of GitHub’s API
+- generated-page verification now covers the walkthrough and discovery essay pages too
+- `index.html` is still a very large single-file app
 
-**Scope:**
-- replace the GitHub Markdown API dependency with a local renderer
+**Remaining scope:**
 - evaluate safe extraction of inline app logic into smaller modules
 - add DOM-level or browser-level integration coverage for critical app flows
+- keep generated-page output stable as the local renderer evolves
 
 ### Phase 2 — Precision, presentation, and trust
 
@@ -93,15 +94,15 @@ Continue to use:
 - `main` intentionally keeps the simpler presales-first workflow
 
 **Scope:**
-- preserve original presales state as a baseline record
-- keep retrospective data separate
-- support explicit re-score / calibration reflection later
+- freeze presales state into an explicit baseline snapshot before retrospective entry
+- promote retrospective comparison to the primary view, with original cards secondary
+- include deal metadata, export, and side-by-side re-score in the first meaningful version
 
 ## Definition of done for the next meaningful release
 
 A next release should ideally include:
 
-- a local Markdown renderer or a clearly staged implementation plan to replace the external dependency
 - stronger DOM-level or browser-level coverage for key calculator flows
 - a cleaner decision on long-term precision presentation in the live UI
+- a clearer staged plan for safely shrinking the main app architecture
 - updated roadmap/backlog notes that continue to match the shipped state
