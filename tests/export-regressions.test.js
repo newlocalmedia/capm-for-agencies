@@ -52,6 +52,9 @@ test('layer 2 calculator clamps baseline inputs and explains when price floor ex
   assert.match(html, /id="rm"[^>]*min="0"[^>]*max="60"/);
   assert.match(html, /id="l1-input"[^>]*min="0\.5"[^>]*max="2\.0"/);
   assert.match(html, /function sanitizeLayer2Inputs\(\)/);
+  assert.match(html, /rf = Calc\.round\(clampNumber\(rf, 0, 40\), 1\);/);
+  assert.match(html, /rm = Calc\.round\(clampNumber\(rm, 0, 60\), 1\);/);
+  assert.match(html, /l1f = Calc\.round\(clampNumber\(l1f, 0\.5, 2\.0\), 2\);/);
   assert.match(html, /if \(rm < rf\) rm = rf;/);
   assert.match(html, /above current quote by/);
 });
@@ -59,5 +62,5 @@ test('layer 2 calculator clamps baseline inputs and explains when price floor ex
 test('b corp manual override is bounded to a sane range', () => {
   assert.match(html, /id="bc-manual-adj"[^>]*min="-15"[^>]*max="15"/);
   assert.match(html, /function sanitizeManualImpactAdjustment\(\)/);
-  assert.match(html, /value = clampNumber\(value, -15, 15\);/);
+  assert.match(html, /value = Calc\.round\(clampNumber\(value, -15, 15\), 1\);/);
 });
