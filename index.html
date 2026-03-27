@@ -3207,7 +3207,7 @@
     const rf = sanitized.rf;
     const rm = sanitized.rm;
     const l1f = sanitized.l1f;
-    const premium = rm - rf;
+    const premium = Calc.round(rm - rf, 1);
     const deal = getDealMetrics();
     let chartData = { ready: false };
 
@@ -3361,7 +3361,7 @@
     const blended = parseFloat(blendedText);
     const rf = parseFloat(document.getElementById('rf').value) || 0;
     const rm = parseFloat(document.getElementById('rm').value) || 0;
-    const premium = rm - rf;
+    const premium = Calc.round(rm - rf, 1);
     const deal = getDealMetrics();
     let bcChartData = { ready: false };
 
