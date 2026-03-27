@@ -109,6 +109,18 @@ The intent is lightweight behavioral clarity, not a formal BDD framework.
 
 ## Next
 
+### [P2] Replace GitHub Markdown API dependency with a local renderer
+
+**Outcome:** Static page builds become deterministic and CI no longer depends on external network access or GitHub API limits.
+
+**Tasks:**
+- replace the build-time GitHub Markdown API call with a local Markdown renderer
+- preserve current heading normalization, token replacement, and generated-page output expectations
+- confirm generated pages remain stable in CI without network access
+- remove any no-longer-needed API auth assumptions from the build
+
+**Why later:** The authenticated API fix should stabilize CI quickly, but local rendering is the more reliable long-term architecture.
+
 ### [P2] Review the caution band
 
 **Outcome:** The `Caution` threshold is explicitly defended as either absolute or relative.

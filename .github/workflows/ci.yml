@@ -25,4 +25,6 @@ jobs:
           python-version: '3.11'
 
       - name: Run application checks
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run ci
