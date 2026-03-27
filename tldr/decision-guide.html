@@ -121,6 +121,32 @@
     color: var(--muted);
   }
 
+  .meta-reading {
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(248, 242, 232, 0.78);
+  }
+
+  .meta-reading-title {
+    margin: 0;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-reading-copy {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: #3c352f;
+  }
+
   .masthead-extra {
     margin-top: 18px;
   }
@@ -156,6 +182,10 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+  }
+
+  .walkthrough-facts-fourup {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .walkthrough-fact {
@@ -803,6 +833,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .walkthrough-facts-fourup {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .masthead-grid,
     .layout {
       grid-template-columns: 1fr;
@@ -821,6 +855,10 @@
 
   @media (max-width: 640px) {
     .walkthrough-facts {
+      grid-template-columns: 1fr;
+    }
+
+    .walkthrough-facts-fourup {
       grid-template-columns: 1fr;
     }
 
@@ -882,6 +920,7 @@
         </div>
         <div class="meta">
           <div class="meta-copy">Use this when you want the procedure rather than the theory. It tracks the current decision logic in the decision cards.</div>
+          <div class="meta-reading"><p class="meta-reading-title">Reading order</p><p class="meta-reading-copy">Best after the Walkthrough. Then open the Decision Cards. Use Calibration Notes if you want to inspect the current math and thresholds.</p></div>
           <div class="actions">
             <a class="button primary" href="../index.html">Open the Decision Cards</a>
 <a class="button secondary" href="../overview/index.html">Overview</a>

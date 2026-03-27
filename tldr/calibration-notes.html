@@ -121,6 +121,32 @@
     color: var(--muted);
   }
 
+  .meta-reading {
+    display: grid;
+    gap: 6px;
+    padding: 12px 14px;
+    border-radius: 16px;
+    border: 1px solid rgba(32, 29, 26, 0.08);
+    background: rgba(248, 242, 232, 0.78);
+  }
+
+  .meta-reading-title {
+    margin: 0;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-reading-copy {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    color: #3c352f;
+  }
+
   .masthead-extra {
     margin-top: 18px;
   }
@@ -156,6 +182,10 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
+  }
+
+  .walkthrough-facts-fourup {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .walkthrough-fact {
@@ -803,6 +833,10 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .walkthrough-facts-fourup {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     .masthead-grid,
     .layout {
       grid-template-columns: 1fr;
@@ -821,6 +855,10 @@
 
   @media (max-width: 640px) {
     .walkthrough-facts {
+      grid-template-columns: 1fr;
+    }
+
+    .walkthrough-facts-fourup {
       grid-template-columns: 1fr;
     }
 
@@ -891,6 +929,7 @@
         </div>
         <div class="meta">
           <div class="meta-copy">Use this when you want to inspect the current decision-card math and calibration choices rather than just use the workflow.</div>
+          <div class="meta-reading"><p class="meta-reading-title">Reading order</p><p class="meta-reading-copy">Best after the Decision Guide or the cards themselves. This is implementation detail, not the first read.</p></div>
           <div class="actions">
             <a class="button primary" href="../index.html">Open the Decision Cards</a>
 <a class="button secondary" href="../overview/index.html">Overview</a>
@@ -914,6 +953,7 @@
 <a class="level-2" href="#current-formula-choices">Current Formula Choices</a>
 <a class="level-3" href="#layer-1">Layer 1</a>
 <a class="level-3" href="#layer-2">Layer 2</a>
+<a class="level-3" href="#caution-band-review">Caution Band Review</a>
 <a class="level-3" href="#b-corp-overlay">B Corp Overlay</a>
 <a class="level-2" href="#sanity-test-scenarios">Sanity-Test Scenarios</a>
 <a class="level-3" href="#scenario-1--calm-small-agency-straightforward-project">Scenario 1 — Calm Small Agency, Straightforward Project</a>
@@ -1006,6 +1046,56 @@ The systematic adjustment factor now maps:</p>
 <li>
 <strong>Stop</strong>: proposed margin is more than <code>3</code> points below <em>E</em>(<em>R</em>)</li>
 </ul>
+<h3 id="caution-band-review">Caution Band Review</h3>
+<p>Using the current defaults (<code>R_f = 10%</code>, <code>R_m = 22%</code>), a low-risk deal at blended <code>β = 0.50</code> clears at <code>16.0%</code>, while a high-risk deal at blended <code>β = 1.50</code> clears at <code>28.0%</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th align="right">Hurdle E(R)</th>
+<th>Fixed 3-point band</th>
+<th>10% proportional band</th>
+<th>12% proportional band</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Low risk (<code>β = 0.50</code>)</td>
+<td align="right"><code>16.0%</code></td>
+<td>caution from <code>13.0%</code> to <code>15.9%</code>
+</td>
+<td>caution from <code>14.4%</code> to <code>15.9%</code>
+</td>
+<td>caution from <code>14.1%</code> to <code>15.9%</code>
+</td>
+</tr>
+<tr>
+<td>High risk (<code>β = 1.50</code>)</td>
+<td align="right"><code>28.0%</code></td>
+<td>caution from <code>25.0%</code> to <code>27.9%</code>
+</td>
+<td>caution from <code>25.2%</code> to <code>27.9%</code>
+</td>
+<td>caution from <code>24.6%</code> to <code>27.9%</code>
+</td>
+</tr>
+</tbody>
+</table>
+<p>What this shows:</p>
+<ul>
+<li>the current fixed <code>3</code>-point band is about <code>18.8%</code> of the low-risk hurdle and <code>10.7%</code> of the high-risk hurdle</li>
+<li>so the current rule is actually <strong>more forgiving on safer work and stricter on riskier work</strong>
+</li>
+<li>a <code>10%</code> proportional band tightens low-risk deals sharply and only slightly tightens high-risk deals</li>
+<li>a <code>12%</code> proportional band is closer to the current rule, but it starts widening caution on higher-risk work</li>
+</ul>
+<p>Side by side, that means:</p>
+<ul>
+<li>at <code>-2.5</code> points below the hurdle, a low-risk deal stays <strong>Caution</strong> under the fixed rule but becomes <strong>Stop</strong> under both proportional alternatives tested here</li>
+<li>at the same <code>-2.5</code> points, a high-risk deal stays <strong>Caution</strong> under the fixed rule and under both proportional alternatives</li>
+<li>at <code>-3.0</code> points below the hurdle, a high-risk deal stays <strong>Caution</strong> under the fixed rule, becomes <strong>Stop</strong> under a <code>10%</code> band, and stays <strong>Caution</strong> under a <code>12%</code> band</li>
+</ul>
+<p><strong>Decision for now:</strong> keep the fixed <code>3</code>-point caution band. It is simpler to explain, and it already applies a tighter leash to high-risk work than the proportional alternatives tested here. This should still be revisited once retrospective data exists.</p>
 <h3 id="b-corp-overlay">B Corp Overlay</h3>
 <p>The current B Corp implementation uses:</p>
 <ul>

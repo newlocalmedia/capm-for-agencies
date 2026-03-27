@@ -59,6 +59,14 @@ test('layer 2 calculator clamps baseline inputs and explains when price floor ex
   assert.match(html, /above current quote by/);
 });
 
+test('missing commercial inputs are called out specifically in Layer 2 and Layer 3', () => {
+  assert.match(html, /function getDealInputStatus\(\)/);
+  assert.match(html, /function getMissingDealFieldText\(\)/);
+  assert.match(html, /function getMissingDealFieldLinks\(\)/);
+  assert.match(html, /Enter '\s*\+ escapeHtml\(getMissingDealFieldText\(\)\) \+ ' to evaluate the proposal\./);
+  assert.match(html, /Enter '\s*\+ getMissingDealFieldLinks\(\) \+ ' in Layer 2 to evaluate <em>E<\/em>\(<em>R<\/em>\*\)\./);
+});
+
 test('b corp manual override is bounded to a sane range', () => {
   assert.match(html, /id="bc-manual-adj"[^>]*min="-15"[^>]*max="15"/);
   assert.match(html, /function sanitizeManualImpactAdjustment\(\)/);

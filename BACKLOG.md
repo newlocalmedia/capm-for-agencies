@@ -16,70 +16,42 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 - confirm generated pages remain stable in CI without network access
 - remove any no-longer-needed auth assumptions from the build
 
-### [P1] Rewrite doc navigation around a clear reading order
+### [P1] Keep doc navigation coherent as the page set grows
 
-**Outcome:** The docs feel like one intentional reading ladder rather than a loose set of pages.
-
-**Tasks:**
-- define the recommended order across Overview, Walkthrough, Decision Guide, Theory, Calibration Notes, and Discovery essay
-- ensure the app and overview link to all major pages that matter
-- make the lesser-known pages easier to discover without adding clutter
-
-### [P1] Integrate the discovery essay more directly with the core thesis
-
-**Outcome:** `Why Discovery Comes First` reads as part of `price before you plan`, not a side essay.
+**Outcome:** The docs continue to feel like one reading ladder rather than drifting back into a loose set of pages.
 
 **Tasks:**
-- tighten cross-links to the app and theory where needed
-- reinforce that discovery is pricing/governance-relevant, not separate from it
-- keep the page focused on when implementation pricing is premature
+- keep the recommended order visible as new pages or examples are added
+- ensure the app and overview continue to link to all major pages that matter
+- keep companion material tied to the core pricing thesis
 
 ## P2 — Next
 
-### [P2] Add card dependency cues in the app
+### [P3] Revisit the caution band after retrospective data exists
 
-**Outcome:** Users can see at a glance how Layer 1, Layer 2, and Layer 3 relate.
+**Outcome:** The current fixed `3`-point band can be confirmed or revised with real outcome data rather than thought experiments alone.
 
-**Tasks:**
-- visually indicate that Layer 1 feeds Layer 2
-- clarify that Layer 3 is an overlay after the financial hurdle
-- reinforce entry-point guidance inside or near the cards, not just in the primer
-
-### [P2] Explain the chart inline in plain language
-
-**Outcome:** Users who skip the theory still understand what the chart is showing.
+**Current status:**
+- a review against `10%` and `12%` proportional alternatives was completed
+- the current fixed `3`-point band was kept because it is simpler and already stricter on higher-risk work
 
 **Tasks:**
-- add a compact explanation of what the line means
-- explain what it means for a point to clear or miss the hurdle
-- avoid assuming familiarity with the security market line
-
-### [P2] Review the caution band
-
-**Outcome:** The `Caution` threshold is either defended as-is or replaced with a better rule.
-
-**Tasks:**
-- compare the current fixed `3`-point band against proportional alternatives
-- test behavior on low-risk and high-risk deals
-- update docs and tests once the rule is settled
+- compare actual presales calls against realized outcomes once retrospective data exists
+- check whether the caution band should vary by risk level in practice, not just in theory
+- update docs and tests if a new rule proves better
 
 ### [P2] Reduce false precision in the main UI
 
 **Outcome:** The UI presentation better matches the heuristic nature of the model.
 
+**Current status:**
+- the app keeps one-decimal outputs so small changes remain visible
+- the current UI now labels those outputs as directional guidance rather than exact science
+
 **Tasks:**
 - review whether the main app should display whole-number percentages instead of one-decimal outputs
 - keep internal calculations precise enough for stable comparisons
 - document any rounding choices explicitly
-
-### [P2] Document B-Corp midpoint assumptions more clearly
-
-**Outcome:** Contributors can understand the B-Corp constants without reverse-engineering the math.
-
-**Tasks:**
-- make midpoint and span constants explicit in code
-- mention the B-Corp engagement midpoint clearly in the theory/calibration docs
-- keep B-Corp terminology aligned across app, theory, and tests
 
 ### [P2] Add stronger calculator integration tests
 
@@ -123,6 +95,9 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 These items are no longer active backlog work:
 
 - persistence and reset
+- card dependency cues and chart explanation
+- B-Corp midpoint constants clarified in code and docs
+- initial caution-band review completed; fixed `3`-point band retained for now
 - first-use defaults
 - walkthrough page
 - decision guide and calibration notes
