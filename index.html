@@ -972,6 +972,15 @@
     color: var(--gray400);
     line-height: 1.5;
   }
+  .retrospective-section-title {
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gray500);
+  }
   .snapshot-card {
     margin-bottom: 14px;
     padding: 14px 16px;
@@ -1083,12 +1092,33 @@
     color: var(--accent-dark);
   }
   .retro-rescore-summary {
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(196,93,62,0.12);
+    font-size: 12px;
+    color: var(--gray500);
+    line-height: 1.55;
+  }
+  .retro-takeaway {
     margin-top: 12px;
     padding: 12px 14px;
     border-radius: 10px;
-    background: rgba(255,255,255,0.62);
-    border: 1px solid var(--gray200);
-    font-size: 12px;
+    border: 1px solid rgba(196,93,62,0.18);
+    background: rgba(255,255,255,0.72);
+  }
+  .retro-takeaway-title {
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+  }
+  .retro-takeaway-copy {
+    font-size: 12.5px;
     color: var(--gray500);
     line-height: 1.55;
   }
@@ -1667,7 +1697,7 @@
               <button type="button" class="action-btn mode-btn" id="retro-refreeze-btn" onclick="refreshRetrospectiveSnapshot()">Refresh frozen snapshot</button>
             </div>
             <div class="snapshot-card">
-              <div class="snapshot-card-title">Frozen presales snapshot</div>
+              <div class="snapshot-card-title">1. Original presales call</div>
               <div class="result-box compact-result-box">
                 <div class="result-item">
                   <span class="result-label">Quoted Price</span>
@@ -1693,6 +1723,7 @@
             </div>
           </div>
           <div class="retrospective-main">
+            <div class="retrospective-section-title">2. Actual outcome</div>
             <div class="calc-row">
               <div class="calc-field">
                 <label for="actual-revenue">Actual Revenue
@@ -1750,11 +1781,15 @@
         </div>
         <div class="retrospective-rescore">
           <div class="retrospective-rescore-head">
-            <div class="retrospective-rescore-title">Layer 2 re-score</div>
+            <div class="retrospective-rescore-title">3. What changed</div>
             <div class="retrospective-rescore-copy">If you would score any Layer 2 factor differently now, re-score it here without changing the frozen presales record.</div>
           </div>
           <div class="retrospective-rescore-list" id="retro-rescore-list"></div>
           <div class="retrospective-rescore-summary" id="retro-rescore-summary">Freeze a presales snapshot to compare original and retrospective scoring.</div>
+          <div class="retro-takeaway" id="retro-takeaway">
+            <div class="retro-takeaway-title">4. Recommended takeaway</div>
+            <div class="retro-takeaway-copy" id="retro-takeaway-copy">Freeze a presales snapshot and enter actual revenue and cost to generate a recommendation.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -2517,15 +2552,72 @@
     }));
   }
 
+  function getRetrospectiveChangedFactors(snapshot) {
+    if (!snapshot?.state?.layer2) return [];
+    return getLayer2FactorMeta().map(({ factor, name, labels }) => {
+      const original = snapshot.state.layer2[factor];
+      const rescored = retrospectiveState.layer2Rescore[factor] || original;
+      if (rescored === original) return null;
+      return { factor, name, labels, original, rescored };
+    }).filter(Boolean);
+  }
+
+  function getRetrospectiveRecommendation(snapshot, actual, assessment, changedFactors, rescoredRequired = null) {
+    if (!snapshot) {
+      return 'Freeze a complete presales snapshot first.';
+    }
+    if (!actual) {
+      return 'Enter actual revenue and delivery cost to generate a postmortem recommendation.';
+    }
+
+    const criticalUpscore = changedFactors.some(({ factor, original, rescored }) =>
+      rescored > original && ['scope', 'tech', 'timeline', 'political', 'contract'].includes(factor)
+    );
+
+    if (assessment.startsWith('Too optimistic')) {
+      if (criticalUpscore) {
+        return 'Discovery, narrower scope, or a higher-margin quote likely should have come before implementation pricing.';
+      }
+      return 'Reprice this kind of deal earlier, or decline thinner-margin versions before delivery planning begins.';
+    }
+    if (assessment.startsWith('Too conservative')) {
+      if (changedFactors.length) {
+        return 'The quote had more cushion than needed; soften the highlighted scores before pricing similar work.';
+      }
+      return 'The original quote was likely more conservative than necessary; review whether similar work can be priced more competitively.';
+    }
+    if (changedFactors.length && rescoredRequired !== null && !isNaN(rescoredRequired)) {
+      return 'The original call was directionally right, but update the changed factors before pricing similar deals again.';
+    }
+    return 'The original call was directionally right. Keep the baseline and use this review as a calibration check.';
+  }
+
+  function hasRetrospectiveSnapshotDrift() {
+    const snapshot = retrospectiveState.snapshot;
+    if (!snapshot) return false;
+
+    const currentInputs = getInputSnapshot();
+    const frozenInputs = snapshot.inputs || {};
+    const inputKeys = ['rf', 'rm', 'l1Input', 'price', 'cost'];
+    const inputDrift = inputKeys.some((key) => String(currentInputs[key] ?? '') !== String(frozenInputs[key] ?? ''));
+    if (inputDrift) return true;
+
+    const frozenLayer1 = snapshot.state?.layer1 || {};
+    const frozenLayer2 = snapshot.state?.layer2 || {};
+    return JSON.stringify(state.layer1) !== JSON.stringify(frozenLayer1) || JSON.stringify(state.layer2) !== JSON.stringify(frozenLayer2);
+  }
+
   function renderRetrospectiveRescore() {
     const list = document.getElementById('retro-rescore-list');
     const summary = document.getElementById('retro-rescore-summary');
+    const takeaway = document.getElementById('retro-takeaway-copy');
     if (!list || !summary) return;
 
     const snapshot = retrospectiveState.snapshot;
     if (!snapshot || !snapshot.state?.layer2) {
       list.innerHTML = '';
       summary.textContent = 'Freeze a presales snapshot to compare original and retrospective scoring.';
+      if (takeaway) takeaway.textContent = 'Freeze a presales snapshot and enter actual revenue and cost to generate a recommendation.';
       return;
     }
 
@@ -2573,7 +2665,10 @@
     const rescoredRequired = Calc.requiredReturn(rf, rm, rescoredBlended);
 
     if (!changed.length) {
-      summary.innerHTML = 'No factors are rescored yet. The frozen original hurdle remains <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong>.';
+      summary.innerHTML = 'No Layer 2 factors are rescored yet. This review is still using the frozen original hurdle of <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong>.';
+      const actual = getActualDealMetrics();
+      const assessment = actual ? Calc.retrospectiveAssessment(snapshot.outputs.requiredMargin, snapshot.outputs.proposedMargin, Calc.round(actual.actualMargin, 1)) : '';
+      if (takeaway) takeaway.textContent = getRetrospectiveRecommendation(snapshot, actual, assessment, [], snapshot.outputs.requiredMargin);
       return;
     }
 
@@ -2583,6 +2678,10 @@
       'The hurdle would have been <strong>' + rescoredRequired.toFixed(1) + '%</strong> instead of <strong>' + snapshot.outputs.requiredMargin.toFixed(1) + '%</strong> ' +
       '(' + (delta >= 0 ? '+' : '') + delta.toFixed(1) + ' pts). ' +
       'Changed first: <strong>' + changed.map((item) => item.name).join(', ') + '</strong>.';
+
+    const actual = getActualDealMetrics();
+    const assessment = actual ? Calc.retrospectiveAssessment(snapshot.outputs.requiredMargin, snapshot.outputs.proposedMargin, Calc.round(actual.actualMargin, 1)) : '';
+    if (takeaway) takeaway.textContent = getRetrospectiveRecommendation(snapshot, actual, assessment, changed, rescoredRequired);
   }
 
   function applyRetrospectiveRescore(factor, value) {
@@ -2636,9 +2735,12 @@
       refreezeBtn.setAttribute('aria-disabled', retrospectiveState.presalesUnlocked ? 'false' : 'true');
     }
     if (lockNote) {
+      const drifted = !presalesLocked && hasRetrospectiveSnapshotDrift();
       lockNote.textContent = presalesLocked
         ? 'Presales inputs are frozen while retrospective mode is active.'
-        : 'Presales inputs are unlocked. Refresh the frozen snapshot when you want retrospective mode to use the new baseline.';
+        : (drifted
+          ? 'Original presales inputs changed. Refresh the frozen snapshot to use the new baseline in this review.'
+          : 'Presales inputs are unlocked. Edits here do not affect this review until you refresh the frozen snapshot.');
     }
     updateRetrospectiveSnapshotUi();
     renderRetrospectiveRescore();
@@ -3068,6 +3170,7 @@
       exportState.dirty = currentExportSignature() !== exportState.lastExportSignature;
     }
     persistState();
+    if (currentWorkflowMode === 'retrospective') updateWorkflowModeUi();
     updateExportControls();
   }
 
@@ -3582,14 +3685,7 @@
     const actualMarginText = retrospective ? formatPercentValue(actualMarginNumber) : '—';
     const retrospectiveVarianceText = retrospectiveVariance === null ? '—' : ((retrospectiveVariance >= 0 ? '+' : '') + retrospectiveVariance.toFixed(1) + '%');
     const retrospectiveHurdleGapText = retrospectiveHurdleGap === null ? '—' : ((retrospectiveHurdleGap >= 0 ? '+' : '') + retrospectiveHurdleGap.toFixed(1) + '%');
-    const rescoredFactors = frozenSnapshot?.state?.layer2
-      ? getLayer2FactorMeta().map(({ factor, name, labels }) => {
-          const original = frozenSnapshot.state.layer2[factor];
-          const rescored = retrospectiveState.layer2Rescore[factor] || original;
-          if (rescored === original) return null;
-          return name + ': ' + original + '/5 (' + labels[original - 1] + ') → ' + rescored + '/5 (' + labels[rescored - 1] + ')';
-        }).filter(Boolean)
-      : [];
+    const rescoredFactors = frozenSnapshot ? getRetrospectiveChangedFactors(frozenSnapshot) : [];
     const rescoredReview = (() => {
       if (!frozenSnapshot?.state?.layer2 || !rescoredFactors.length) return null;
       const rescoredScores = Object.keys(frozenSnapshot.state.layer2).map((factor) => retrospectiveState.layer2Rescore[factor] || frozenSnapshot.state.layer2[factor]);
@@ -3602,6 +3698,9 @@
         lines: rescoredFactors
       };
     })();
+    const retrospectiveRecommendation = currentWorkflowMode === 'retrospective'
+      ? getRetrospectiveRecommendation(frozenSnapshot, retrospective, retrospectiveReading || '', rescoredFactors, rescoredReview?.required ?? null)
+      : '';
 
     const reportHtml = '<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CAPM Decision Summary</title><style>' +
       'body{margin:0;padding:32px;background:#f0ede8;color:#1a1a2e;font-family:Georgia,serif;line-height:1.6;}' +
@@ -3625,7 +3724,7 @@
       '@media print{body{padding:0;background:#fff;}.wrap{max-width:none;}.toolbar{display:none;}.hero,.report-card{box-shadow:none;border:1px solid #d6d1c8;break-inside:avoid;}}' +
       '</style></head><body><div class="wrap">' +
       '<div class="toolbar"><button type="button" class="toolbar-btn" onclick="window.print()">Print / Save as PDF</button></div>' +
-      '<section class="hero"><div class="kicker">CAPM for Agencies</div><h1>Decision Summary</h1><p>Generated from the interactive decision cards on ' + escapeHtml(now.toLocaleString()) + '.</p>' +
+      '<section class="hero"><div class="kicker">CAPM for Agencies</div><h1>' + escapeHtml(currentWorkflowMode === 'retrospective' ? 'Retrospective Pricing Review' : 'Decision Summary') + '</h1><p>Generated from the interactive decision cards on ' + escapeHtml(now.toLocaleString()) + '.</p>' +
       '<div class="metrics">' +
         '<div class="metric"><span class="metric-label">Workflow</span><span class="metric-value" style="font-size:1rem;">' + escapeHtml(currentWorkflowMode === 'retrospective' ? 'Retrospective' : 'Presales') + '</span><span class="metric-sub">Current Decision Cards mode</span></div>' +
         '<div class="metric"><span class="metric-label">Agency ' + exportMath.rf + '</span><span class="metric-value">' + escapeHtml(formatPercentValue(rf)) + '</span><span class="metric-sub">Base margin from lowest-risk work</span></div>' +
@@ -3646,14 +3745,14 @@
         ? '<div class="report-grid full">' +
             '<section class="report-card"><h2>Retrospective Comparison</h2><p>This section freezes the original presales call, compares it with the completed outcome, and records what the team would score differently now.</p>' +
             '<div class="comparison-grid">' +
-              '<div class="comparison-card"><span class="comparison-kicker">Original call</span><ul class="comparison-list">' +
+              '<div class="comparison-card"><span class="comparison-kicker">1. Original presales call</span><ul class="comparison-list">' +
                 '<li><strong>Deal:</strong> ' + escapeHtml(retrospectiveData.dealName || '—') + '</li>' +
                 '<li><strong>Snapshot date:</strong> ' + escapeHtml(retrospectiveData.presalesDate || '—') + '</li>' +
                 '<li><strong>Quoted price / cost:</strong> ' + escapeHtml(frozenPriceText) + ' / ' + escapeHtml(frozenCostText) + '</li>' +
                 '<li><strong>Quoted margin / hurdle:</strong> ' + escapeHtml(frozenProposedText) + ' / ' + escapeHtml(frozenRequiredText) + '</li>' +
                 '<li><strong>Predicted verdict:</strong> ' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</li>' +
               '</ul></div>' +
-              '<div class="comparison-card"><span class="comparison-kicker">Actual outcome</span><ul class="comparison-list">' +
+              '<div class="comparison-card"><span class="comparison-kicker">2. Actual outcome</span><ul class="comparison-list">' +
                 '<li><strong>Retrospective date:</strong> ' + escapeHtml(retrospectiveData.retrospectiveDate || '—') + '</li>' +
                 '<li><strong>Actual revenue / cost:</strong> ' + escapeHtml(actualRevenueText) + ' / ' + escapeHtml(actualCostText) + '</li>' +
                 '<li><strong>Actual margin:</strong> ' + escapeHtml(actualMarginText) + '</li>' +
@@ -3661,14 +3760,18 @@
                 '<li><strong>Actual vs hurdle:</strong> ' + escapeHtml(retrospectiveHurdleGapText) + '</li>' +
                 '<li><strong>Reading:</strong> ' + escapeHtml(retrospectiveReading || 'Enter actual revenue and cost to compare the completed project with the original hurdle.') + '</li>' +
               '</ul></div>' +
-              '<div class="comparison-card"><span class="comparison-kicker">Calibration takeaway</span><ul class="comparison-list">' +
+              '<div class="comparison-card"><span class="comparison-kicker">3. What changed</span><ul class="comparison-list">' +
                 '<li><strong>Re-scored hurdle:</strong> ' + escapeHtml(rescoredReview ? formatPercentValue(rescoredReview.required) : 'Not re-scored yet') + '</li>' +
                 '<li><strong>Changed factors:</strong> ' + escapeHtml(rescoredReview ? String(rescoredReview.lines.length) : '0') + '</li>' +
-                '<li><strong>Postmortem note:</strong> ' + escapeHtml(retrospectiveNotes ? 'Included below' : 'Not entered yet') + '</li>' +
               '</ul>' +
               (rescoredReview
-                ? '<ul class="takeaway-list">' + rescoredReview.lines.map((line) => '<li>' + escapeHtml(line) + '</li>').join('') + '</ul>'
+                ? '<ul class="takeaway-list">' + rescoredReview.lines.map((item) => '<li><strong>' + escapeHtml(item.name) + ':</strong> ' + escapeHtml(String(item.original)) + ' → ' + escapeHtml(String(item.rescored)) + '</li>').join('') + '</ul>'
                 : '<p class="footer-note">No Layer 2 factors are re-scored yet.</p>') +
+              '</div>' +
+              '<div class="comparison-card"><span class="comparison-kicker">4. Recommended takeaway</span><ul class="comparison-list">' +
+                '<li><strong>Recommendation:</strong> ' + escapeHtml(retrospectiveRecommendation || 'Enter actual revenue and cost to generate a recommendation.') + '</li>' +
+                '<li><strong>Postmortem note:</strong> ' + escapeHtml(retrospectiveNotes ? 'Included below' : 'Not entered yet') + '</li>' +
+              '</ul>' +
               '</div>' +
             '</div>' +
             (retrospectiveNotes ? '<p><strong>Postmortem notes:</strong><br>' + escapeHtml(retrospectiveNotes).replace(/\n/g, '<br>') + '</p>' : '') +
@@ -3874,6 +3977,7 @@
     const verdictNode = document.getElementById('retro-verdict');
     const hintNode = document.getElementById('retro-hint');
     const formulaNode = document.getElementById('retro-formula');
+    const takeawayNode = document.getElementById('retro-takeaway-copy');
 
     if (!predictedVerdictNode) return;
 
@@ -3892,6 +3996,7 @@
     hurdleGapSubNode.textContent = 'actual - required';
     verdictNode.innerHTML = '';
     formulaNode.innerHTML = '<strong>Retrospective:</strong> compare the frozen quoted margin with the actual realized margin, then check both against the frozen hurdle <em>E</em>(<em>R</em>).';
+    if (takeawayNode) takeawayNode.textContent = 'Enter actual revenue and delivery cost to generate a postmortem recommendation.';
     hintNode.textContent = currentWorkflowMode === 'retrospective'
       ? 'Use this mode after delivery to compare the frozen presales decision with the actual result and capture one calibration note for next time.'
       : 'Switch to retrospective mode to freeze the presales decision and compare it with the actual result once the project is complete.';
@@ -3900,10 +4005,14 @@
       hintNode.textContent = currentWorkflowMode === 'retrospective'
         ? 'Complete Layer 2 scoring and the commercial inputs before freezing a retrospective snapshot.'
         : hintNode.textContent;
+      if (takeawayNode) takeawayNode.textContent = 'Freeze a complete presales snapshot first.';
       return;
     }
 
-    if (!actual) return;
+    if (!actual) {
+      renderRetrospectiveRescore();
+      return;
+    }
 
     const actualMargin = Calc.round(actual.actualMargin, 1);
     actualMarginNode.textContent = actualMargin.toFixed(1) + '%';
@@ -3935,6 +4044,9 @@
       verdictNode.innerHTML = '<span class="verdict go">' + assessment + '</span>';
       hintNode.textContent = 'The actual result stayed broadly in line with the original hurdle. Note any specific scoring adjustments you would still make next time.';
     }
+    const changedFactors = getRetrospectiveChangedFactors(snapshot);
+    if (takeawayNode) takeawayNode.textContent = getRetrospectiveRecommendation(snapshot, actual, assessment, changedFactors);
+    renderRetrospectiveRescore();
   }
 
   function renderLayer2Chart(data) {
