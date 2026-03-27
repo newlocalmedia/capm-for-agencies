@@ -764,6 +764,7 @@
   .result-item {
     display: flex;
     flex-direction: column;
+    min-width: 0;
   }
   .precision-note {
     margin-top: 10px;
@@ -811,6 +812,13 @@
     font-size: 12px;
     color: var(--gray400);
     margin-top: 2px;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+  #l2-proposed-sub,
+  #l2-gap-sub,
+  #l2-min-price-sub {
+    max-width: 19ch;
   }
 
   .formula-bar {
@@ -2617,9 +2625,9 @@
     if (isNaN(rm)) rm = 0;
     if (isNaN(l1f)) l1f = 1.00;
 
-    rf = clampNumber(rf, 0, 40);
-    rm = clampNumber(rm, 0, 60);
-    l1f = clampNumber(l1f, 0.5, 2.0);
+    rf = Calc.round(clampNumber(rf, 0, 40), 1);
+    rm = Calc.round(clampNumber(rm, 0, 60), 1);
+    l1f = Calc.round(clampNumber(l1f, 0.5, 2.0), 2);
 
     if (rm < rf) rm = rf;
 
@@ -2640,7 +2648,7 @@
     let value = parseFloat(raw);
     if (isNaN(value)) return NaN;
 
-    value = clampNumber(value, -15, 15);
+    value = Calc.round(clampNumber(value, -15, 15), 1);
     field.value = value.toFixed(1).replace(/\.0$/, '');
     return value;
   }
