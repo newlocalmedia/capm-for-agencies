@@ -15,12 +15,16 @@ body {
   font-family: Inter, system-ui, sans-serif;
   background: var(--bg);
   color: var(--ink);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  padding: 32px 20px 80px;
 }
 
 .site-nav-band {
+  position: relative;
+  z-index: 2;
   max-width: 1280px;
   margin: 0 auto 18px;
-  padding: 0 20px;
 }
 
 .app-shell {
@@ -35,6 +39,7 @@ body {
   justify-content: center;
   gap: 12px;
   width: 100%;
+  margin-bottom: 14px;
 }
 
 .header-link {
