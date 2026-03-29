@@ -956,7 +956,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this version when you want the full argument, not just the calculator. The hybrid layer is presented here as pricing governance rather than a literal asset-pricing engine.",
-        "reading_path": 'This Theory page is best after the <a href="../tldr/price-the-work-before-you-plan-it.html">TL;DR</a> or <a href="../tldr/walkthrough.html">Walkthrough</a>. Next read the <a href="../tldr/decision-guide.html">Decision Guide</a> → <a href="../index.html">Decision Cards</a>. The <a href="../tldr/calibration-notes.html">Calibration Notes</a> document is a deeper dive into the current implementation. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a>.',
+        "reading_path": 'This Theory page is best after the <a href="../tldr/price-the-work-before-you-plan-it.html">TL;DR</a> or <a href="../tldr/walkthrough.html">Walkthrough</a>. Next read the <a href="../tldr/decision-guide.html">Decision Guide</a> → <a href="../index.html">Decision Cards</a>. The <a href="../tldr/calibration-notes.html">Calibration Notes</a> document is a deeper dive into the current implementation. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency Version</a>.',
         "reading_path_html": True,
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
@@ -995,7 +995,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Start here if you want the thesis without the theory. This is the best first read for most people.",
-        "reading_path": 'This TL;DR is the best first read for most people. Next read the <a href="../tldr/walkthrough.html">Walkthrough</a> → <a href="../tldr/decision-guide.html">Decision Guide</a> → <a href="../index.html">Decision Cards</a>. The <a href="../tldr/calibration-notes.html">Calibration Notes</a> and <a href="../theory/index.html">Theory</a> documents are deeper dives into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a>.',
+        "reading_path": 'This TL;DR is the best first read for most people. Next read the <a href="../tldr/walkthrough.html">Walkthrough</a> → <a href="../tldr/decision-guide.html">Decision Guide</a> → <a href="../index.html">Decision Cards</a>. The <a href="../tldr/calibration-notes.html">Calibration Notes</a> and <a href="../theory/index.html">Theory</a> documents are deeper dives into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency Version</a>.',
         "reading_path_html": True,
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
@@ -1047,7 +1047,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this when you want one realistic agency example before running the cards yourself.",
-        "reading_path": 'This Walkthrough is best after the <a href="./price-the-work-before-you-plan-it.html">TL;DR</a>. Next read the <a href="./decision-guide.html">Decision Guide</a> → <a href="../index.html">Decision Cards</a>. The <a href="./calibration-notes.html">Calibration Notes</a> and <a href="../theory/index.html">Theory</a> documents are deeper dives into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a>.',
+        "reading_path": 'This Walkthrough is best after the <a href="./price-the-work-before-you-plan-it.html">TL;DR</a>. Next read the <a href="./decision-guide.html">Decision Guide</a> → <a href="../index.html">Decision Cards</a>. The <a href="./calibration-notes.html">Calibration Notes</a> and <a href="../theory/index.html">Theory</a> documents are deeper dives into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency Version</a>.',
         "reading_path_html": True,
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
@@ -1101,7 +1101,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this when you want the procedure rather than the theory. It tracks the current decision logic in the decision cards.",
-        "reading_path": 'This Decision Guide is best after the <a href="./walkthrough.html">Walkthrough</a>. Next open the <a href="../index.html">Decision Cards</a>. The <a href="./calibration-notes.html">Calibration Notes</a> and <a href="../theory/index.html">Theory</a> documents are deeper dives into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a>.',
+        "reading_path": 'This Decision Guide is best after the <a href="./walkthrough.html">Walkthrough</a>. Next open the <a href="../index.html">Decision Cards</a>. The <a href="./calibration-notes.html">Calibration Notes</a> and <a href="../theory/index.html">Theory</a> documents are deeper dives into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency Version</a>.',
         "reading_path_html": True,
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
@@ -1164,7 +1164,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this when you want to inspect the current decision-card math and calibration choices rather than just use the workflow.",
-        "reading_path": 'These Calibration Notes are best after the <a href="./decision-guide.html">Decision Guide</a> or the <a href="../index.html">Decision Cards</a>. The <a href="./walkthrough.html">Walkthrough</a> is the better earlier read, and the <a href="../theory/index.html">Theory</a> document is the deeper long-form argument. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a>.',
+        "reading_path": 'These Calibration Notes are best after the <a href="./decision-guide.html">Decision Guide</a> or the <a href="../index.html">Decision Cards</a>. The <a href="./walkthrough.html">Walkthrough</a> is the better earlier read, and the <a href="../theory/index.html">Theory</a> document is the deeper long-form argument. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency Version</a>.',
         "reading_path_html": True,
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
@@ -1202,7 +1202,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this when you want the upstream discovery argument behind better pricing, scoping, and delivery decisions — especially when the next thing to sell may be a larger paid discovery phase before implementation.",
-        "reading_path": 'This discovery essay is best after the <a href="../overview/index.html">Overview</a> or <a href="../tldr/walkthrough.html">Walkthrough</a>. Next read the <a href="../tldr/decision-guide.html">Decision Guide</a> and then try the <a href="../index.html">Decision Cards</a>. The <a href="../theory/index.html">Theory</a> document is the deeper dive into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a>.',
+        "reading_path": 'This discovery essay is best after the <a href="../overview/index.html">Overview</a> or <a href="../tldr/walkthrough.html">Walkthrough</a>. Next read the <a href="../tldr/decision-guide.html">Decision Guide</a> and then try the <a href="../index.html">Decision Cards</a>. The <a href="../theory/index.html">Theory</a> document is the deeper dive into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency Version</a>.',
         "reading_path_html": True,
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
@@ -1303,7 +1303,7 @@ NAV_ITEMS = [
     ("Why Discovery Comes First", "essays/systems-thinking-for-web-development-agencies.html"),
     ("Theory", "theory/index.html"),
     ("Decision Cards", "index.html"),
-    ("Small Agency/Solopreneur Version", "project-risk-check/index.html"),
+    ("Small Agency Version", "project-risk-check/index.html"),
 ]
 
 
