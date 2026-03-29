@@ -63,6 +63,7 @@ PAGE_STYLE = """
   .site-nav {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 10px;
     margin-bottom: 18px;
   }
