@@ -1,10 +1,31 @@
-# CAPM for Agencies — Decision Cards
+# CAPM for Agencies
 
-Interactive two-layer risk assessment tools for agency project pricing, based on the Capital Asset Pricing Model (CAPM) adapted from financial economics.
+Risk-based pricing tools for agencies, built around the Capital Asset Pricing Model (CAPM) adapted from financial economics.
 
 **Try it here:** https://newlocalmedia.github.io/capm-for-agencies/
 
 ## What is this?
+
+This repo now contains **two related apps**:
+
+### 1. Decision Cards
+The main CAPM for Agencies app in [`index.html`](./index.html). This is the fuller, more theory-aware version with:
+
+- Layer 1 portfolio/systematic risk calibration
+- Layer 2 engagement risk scoring
+- the B Corp impact overlay
+- retrospective review mode
+- deeper documentation and calibration notes
+
+### 2. Project Risk Check
+A simpler guided app for smaller agencies in [`project-risk-check/`](./project-risk-check/). This version:
+
+- walks through the pricing questions one step at a time
+- uses active default baseline margins
+- explains the results in plainer language
+- ends with a chart, recommendation, and live tweak panel
+
+Use the main Decision Cards when you want the full model and supporting theory. Use Project Risk Check when you want a faster, simpler, SMB-oriented entry point.
 
 Most agencies price risk through gut-feel contingency percentages or hourly padding. The CAPM framework gives you a principled, portfolio-aware approach by separating **systematic risk** (forces that hit your whole book of work) from **idiosyncratic risk** (project-specific variables that wash out across engagements).
 
@@ -26,7 +47,10 @@ An additional impact-governance pass for mission-driven agencies. It extends the
 ## Usage
 
 ### Interactive (browser)
-Visit the hosted version and click to score each factor. The calculators update in real time. The interactive decision cards live in `index.html`.
+Visit the hosted version and click to score each factor. The full interactive Decision Cards live in `index.html`.
+
+### Guided SMB app
+The simpler guided app lives in `project-risk-check/index.html`.
 
 ### Printable (PDF)
 Download reference cards from the `pdf/` directory:
@@ -101,13 +125,29 @@ This repo is configured for GitHub Pages. Enable Pages in your repo settings wit
 
 ## Development
 
-The repo now includes a small test and verification layer:
+### Main app
+
+The root app and docs include a small test and verification layer:
 
 - `npm test` runs calculator regression tests
 - `npm run check:app` parses the inline app script and checks that the shared calculation module is wired in
 - `npm run build:static` regenerates the theory and TL;DR HTML pages
 - `npm run check:generated` fails if the generated pages are out of sync with the committed outputs
 - `npm run ci` runs the full local verification sequence used in GitHub Actions
+
+### Project Risk Check
+
+The simpler guided app has its own local package and tests in `project-risk-check/`:
+
+- `cd project-risk-check`
+- `npm test`
+
+That test layer currently covers:
+
+- hurdle / margin calculations
+- recommendation logic
+- baseline and commercial validation
+- state defaults and route helpers
 
 ### Claude Playwright handoff
 

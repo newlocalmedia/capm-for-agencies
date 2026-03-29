@@ -6,6 +6,19 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 
 ## P1 — Current
 
+### [P1] Decide how the new guided app should be surfaced
+
+**Outcome:** The repo clearly explains when to use the full Decision Cards app versus `project-risk-check/`.
+
+**Current status:**
+- the simpler guided app now lives in `project-risk-check/`
+- it is tested, but not yet integrated into the main site navigation or hosting story
+
+**Tasks:**
+- decide whether to link it from the main homepage, overview, or docs only
+- explain its relationship to the full CAPM for Agencies app in a way that feels complementary, not duplicative
+- decide whether it should get its own public path or remain a repo-contained companion app
+
 ### [P1] Decide whether a browser-smoke layer is still needed
 
 **Outcome:** The test pyramid matches the actual remaining risk after the new jsdom integration coverage.
@@ -19,6 +32,7 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 - decide whether one or two browser-level smoke tests would still catch risks jsdom cannot
 - add only the smallest useful browser layer if it materially improves confidence
 - keep the test setup light enough for a static-site repo
+- make the same decision explicitly for `project-risk-check/`, which currently has unit-style tests but no DOM/browser flow coverage
 
 ### [P1] Refine retrospective workflow from real use
 
@@ -57,6 +71,7 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 - keep the recommended order visible as new pages or examples are added
 - ensure the app and overview continue to link to all major pages that matter
 - keep companion material tied to the core pricing thesis
+- explain where `project-risk-check/` sits in the reading ladder, if at all
 
 ## P3 — Later
 
@@ -109,3 +124,4 @@ These items are no longer active backlog work:
 - social sharing / sitemap / robots / structured data
 - initial accessibility pass and keyboard semantics improvements
 - major copy cleanup across app, overview, theory, and companion essay
+- initial guided `project-risk-check/` app scaffold with chart, tweak panel, recommendation logic, and lightweight tests

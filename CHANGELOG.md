@@ -20,9 +20,11 @@ and this project uses a lightweight, date-free changelog for now.
   - Layer 2 retrospective re-scoring
   - retrospective export/report output
 - Draft-PR and CI coverage for the retrospective branch, including Node dependency installation in GitHub Actions.
+- A second in-repo app path at `project-risk-check/` for smaller agencies that want a simpler guided risk-and-pricing workflow.
 
 ### Changed
 - Expanded top navigation from the app to surface the TL;DR, Decision Guide, and Calibration Notes directly.
+- Updated the main README, roadmap, backlog, overview page, main app navigation, and generated reader pages to treat `project-risk-check/` as a first-class companion app option.
 - Improved Layer 2 and Layer 3 missing-input messages so they now refer to the specific missing commercial field(s), with Layer 3 linking back to the Layer 2 inputs.
 - Tightened calculator display rounding so sanitized baseline inputs and manual B Corp overrides no longer leak floating-point noise into visible UI strings.
 - Switched static page generation from GitHub’s Markdown API to a local renderer and expanded generated-file verification to cover the walkthrough and discovery essay pages.

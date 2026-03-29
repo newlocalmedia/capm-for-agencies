@@ -1,0 +1,11 @@
+{
+  "name": "agency-deal-risk-check",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Simplified guided project pricing risk check for small agencies.",
+  "scripts": {
+    "start": "python3 -m http.server 8140",
+    "test": "node --test"
+  }
+}

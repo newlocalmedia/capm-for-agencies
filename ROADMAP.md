@@ -5,6 +5,7 @@
 CAPM for Agencies is now a usable public beta with:
 
 - Decision Cards on the main app page
+- a second guided app for smaller agencies in `project-risk-check/`
 - persistence and reset behavior
 - practical walkthrough, decision guide, theory, calibration notes, and discovery essay pages
 - export, accessibility improvements, and core calculator tests
@@ -14,7 +15,7 @@ CAPM for Agencies is now a usable public beta with:
 - DOM integration tests for key Layer 2, warning, reset, and persistence flows
 - a snapshot-first retrospective workflow with frozen presales baselines, actual-outcome comparison, Layer 2 re-score, and retrospective export
 
-The next phase is no longer basic usability. It is **hardening, maintainability, and evidence-building**.
+The next phase is no longer basic usability. It is **hardening, maintainability, evidence-building, and keeping the two app paths coherent**.
 
 ## Archived / completed foundation work
 
@@ -36,6 +37,7 @@ These are complete enough to move out of the active roadmap:
 - local Markdown renderer for static page generation
 - first jsdom-based DOM integration test layer
 - snapshot-first retrospective workflow on `main`
+- first standalone guided-app path moved into `project-risk-check/`
 
 ## Delivery method
 
@@ -49,18 +51,20 @@ Continue to use:
 
 ### Phase 1 — Build and architecture hardening
 
-**Goal:** Make the repo easier to maintain now that the most fragile build dependency is gone.
+**Goal:** Make the repo easier to maintain now that it contains both the full Decision Cards app and the simpler guided app.
 
 **Current status:**
 - static page generation now uses a local Markdown renderer instead of GitHub’s API
 - generated-page verification now covers the walkthrough and discovery essay pages too
 - key calculator flows now have DOM-level integration coverage in jsdom
 - `index.html` is still a very large single-file app
+- `project-risk-check/` is now a second app path with its own lightweight tests
 
 **Remaining scope:**
 - evaluate safe extraction of inline app logic into smaller modules
 - add a smaller browser-smoke layer if jsdom leaves important behavior unverified
 - keep generated-page output stable as the local renderer evolves
+- decide how much calculation logic should remain shared in practice across the two app paths
 
 ### Phase 2 — Precision, presentation, and trust
 
@@ -89,6 +93,25 @@ Continue to use:
 - keep the reading ladder coherent as new pages or examples are added
 - avoid letting companion material drift back into side-essay territory
 - add more retrospective or case-based evidence now that the workflow exists on `main`
+- explain the relationship between the full Decision Cards app and the simpler guided `project-risk-check/` app without making the repo feel split-brain
+
+### Phase 5 — Guided app productization
+
+**Goal:** Turn `project-risk-check/` from a staged companion app into a stable second entry point for the repo.
+
+**Current status:**
+- `project-risk-check/` now exists inside the main repo
+- it already has:
+  - a guided one-question-at-a-time flow
+  - a simpler results screen with chart and tweak panel
+  - recommendation logic
+  - lightweight tests for calculations, recommendation rules, state, and routes
+
+**Scope:**
+- decide how and where the guided app should be linked from the main site
+- add a small DOM smoke layer for the guided flow if it continues to evolve
+- keep the language and recommendation logic aligned with the main app where alignment matters
+- decide whether it should eventually share more code with the main calculator core or intentionally diverge
 
 ### Phase 4 — Retrospective evidence and refinement
 
@@ -118,4 +141,5 @@ A next release should ideally include:
 - a cleaner decision on long-term precision presentation in the live UI
 - a clearer staged plan for safely shrinking the main app architecture
 - retrospective workflow polish informed by real review/export use
+- clearer positioning and navigation for the new `project-risk-check/` path
 - updated roadmap/backlog notes that continue to match the shipped state
