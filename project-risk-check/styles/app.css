@@ -6,6 +6,7 @@
   --line: #dfd7ca;
   --accent: #2b4c7e;
   --accent-soft: #e7eef7;
+  --blue-dark: #1a3050;
 }
 
 * { box-sizing: border-box; }
@@ -18,8 +19,8 @@ body {
 
 .site-nav-band {
   max-width: 1280px;
-  margin: 32px auto 18px;
-  padding: 0 18px;
+  margin: 0 auto 18px;
+  padding: 0 20px;
 }
 
 .app-shell {
@@ -29,8 +30,9 @@ body {
 }
 
 .header-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 12px;
   width: 100%;
 }
@@ -39,30 +41,35 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 38px;
-  padding: 8px 12px;
-  border-radius: 999px;
-  text-decoration: none;
-  font: 700 11px/1.2 "JetBrains Mono", monospace;
+  width: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
   letter-spacing: 0.4px;
   text-transform: uppercase;
-  color: #1a3050;
+  color: var(--blue-dark);
   background: rgba(43,76,126,0.08);
   border: 1px solid rgba(43,76,126,0.16);
+  border-radius: 999px;
+  padding: 8px 12px;
+  text-decoration: none;
 }
 
-.header-link:hover,
-.header-link:focus-visible {
+.header-link:hover {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
-  outline: none;
 }
 
 .header-link.active {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
+}
+
+.header-link:focus-visible {
+  outline: 2px solid rgba(43,76,126,0.45);
+  outline-offset: 2px;
 }
 
 .app-header {
