@@ -523,6 +523,7 @@ function bind() {
         if (message) {
           event.preventDefault();
           alert(message);
+          return;
         }
       }
       if (path.startsWith('risk/') && target === nextPath(path)) {
@@ -530,6 +531,7 @@ function bind() {
         if (!state.risk[route.id]) {
           event.preventDefault();
           alert('Choose one answer before continuing.');
+          return;
         }
       }
       if (path === 'commercial' && target === 'results') {

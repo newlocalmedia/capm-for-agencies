@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import html
 import json
+import os
 import re
 from pathlib import Path
 
@@ -57,6 +58,43 @@ PAGE_STYLE = """
     max-width: 1380px;
     margin: 0 auto;
     padding: 28px 20px 72px;
+  }
+
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .site-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(32, 29, 26, 0.1);
+  }
+
+  .site-link:hover,
+  .site-link:focus-visible {
+    background: rgba(35, 72, 106, 0.1);
+    border-color: rgba(35, 72, 106, 0.2);
+    outline: none;
+  }
+
+  .site-link.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
   }
 
   .masthead {
@@ -1256,6 +1294,30 @@ def build_toc(entries, level_min: int, level_max: int, skip_first_heading: bool 
     )
 
 
+NAV_ITEMS = [
+    ("Overview", "overview/index.html"),
+    ("TL;DR", "tldr/price-the-work-before-you-plan-it.html"),
+    ("Walkthrough", "tldr/walkthrough.html"),
+    ("Decision Guide", "tldr/decision-guide.html"),
+    ("Calibration Notes", "tldr/calibration-notes.html"),
+    ("Why Discovery Comes First", "essays/systems-thinking-for-web-development-agencies.html"),
+    ("Theory", "theory/index.html"),
+    ("Decision Cards", "index.html"),
+    ("Small Agency/Solopreneur Version", "project-risk-check/index.html"),
+]
+
+
+def build_site_nav(output_path: Path) -> str:
+    current = output_path.relative_to(ROOT).as_posix()
+    links = []
+    for label, target in NAV_ITEMS:
+        href = os.path.relpath(ROOT / target, output_path.parent).replace(os.sep, "/")
+        classes = "site-link active" if target == current else "site-link"
+        links.append(f'<a class="{classes}" href="{href}">{html.escape(label)}</a>')
+    return '<nav class="site-nav" aria-label="Site">' + ''.join(links) + '</nav>'
+
+
+
 def absolute_page_url(output_path: Path) -> str:
     relative = output_path.relative_to(ROOT).as_posix()
     return f"{SITE_URL}/{relative}"
@@ -1431,6 +1493,7 @@ def build_html(page: dict, article_html: str, toc_html: str) -> str:
 </head>
 <body>
   <div class="shell">
+    {build_site_nav(page["output"])}
     <header class="masthead">
       <div class="eyebrow">{html.escape(page["eyebrow"])}</div>
       <div class="masthead-grid">

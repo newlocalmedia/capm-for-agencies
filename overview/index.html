@@ -52,6 +52,43 @@
     margin: 0 auto;
   }
 
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .site-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(32, 29, 26, 0.1);
+  }
+
+  .site-link:hover,
+  .site-link:focus-visible {
+    background: rgba(35, 72, 106, 0.1);
+    border-color: rgba(35, 72, 106, 0.2);
+    outline: none;
+  }
+
+  .site-link.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+
   .hero,
   .section {
     background: linear-gradient(145deg, rgba(248, 242, 232, 0.92), rgba(239, 230, 216, 0.95));
@@ -221,6 +258,17 @@
 </head>
 <body>
   <div class="wrap">
+    <nav class="site-nav" aria-label="Site">
+      <a class="site-link active" href="./index.html">Overview</a>
+      <a class="site-link" href="../tldr/price-the-work-before-you-plan-it.html">TL;DR</a>
+      <a class="site-link" href="../tldr/walkthrough.html">Walkthrough</a>
+      <a class="site-link" href="../tldr/decision-guide.html">Decision Guide</a>
+      <a class="site-link" href="../tldr/calibration-notes.html">Calibration Notes</a>
+      <a class="site-link" href="../essays/systems-thinking-for-web-development-agencies.html">Why Discovery Comes First</a>
+      <a class="site-link" href="../theory/index.html">Theory</a>
+      <a class="site-link" href="../index.html">Decision Cards</a>
+      <a class="site-link" href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a>
+    </nav>
     <section class="hero">
       <div class="eyebrow">CAPM for Agencies</div>
       <h1>Price Before You Plan</h1>

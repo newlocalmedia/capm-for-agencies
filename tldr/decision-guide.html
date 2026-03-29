@@ -64,6 +64,43 @@
     padding: 28px 20px 72px;
   }
 
+  .site-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .site-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 0 14px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: rgba(255, 255, 255, 0.58);
+    border: 1px solid rgba(32, 29, 26, 0.1);
+  }
+
+  .site-link:hover,
+  .site-link:focus-visible {
+    background: rgba(35, 72, 106, 0.1);
+    border-color: rgba(35, 72, 106, 0.2);
+    outline: none;
+  }
+
+  .site-link.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: #fff;
+  }
+
   .masthead {
     display: grid;
     gap: 18px;
@@ -884,6 +921,7 @@
 </head>
 <body>
   <div class="shell">
+    <nav class="site-nav" aria-label="Site"><a class="site-link" href="../overview/index.html">Overview</a><a class="site-link" href="price-the-work-before-you-plan-it.html">TL;DR</a><a class="site-link" href="walkthrough.html">Walkthrough</a><a class="site-link active" href="decision-guide.html">Decision Guide</a><a class="site-link" href="calibration-notes.html">Calibration Notes</a><a class="site-link" href="../essays/systems-thinking-for-web-development-agencies.html">Why Discovery Comes First</a><a class="site-link" href="../theory/index.html">Theory</a><a class="site-link" href="../index.html">Decision Cards</a><a class="site-link" href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a></nav>
     <header class="masthead">
       <div class="eyebrow">Decision Guide</div>
       <div class="masthead-grid">
