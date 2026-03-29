@@ -67,12 +67,16 @@
     text-align: center;
   }
   .header-links {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 12px;
     width: 100%;
   }
   .header-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     font-weight: 700;
