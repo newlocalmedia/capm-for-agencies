@@ -6,7 +6,7 @@ Risk-based pricing tools for agencies, built around the Capital Asset Pricing Mo
 
 ## What is this?
 
-This repo now contains **two related apps**:
+This repo now contains **two related apps** with a shared calc core and a unified site navigation:
 
 ### 1. Decision Cards
 The main CAPM for Agencies app in [`index.html`](./index.html). This is the fuller, more theory-aware version with:
@@ -29,7 +29,7 @@ It keeps the same core hurdle logic as the hybrid model in the main app, but use
 
 The shared formula source of truth now lives in [`scripts/shared-calc-core.mjs`](./scripts/shared-calc-core.mjs). The main app still loads [`scripts/calc-core.js`](./scripts/calc-core.js), which is now a generated compatibility wrapper around that shared module.
 
-Use the main Decision Cards when you want the full model and supporting theory. Use Project Risk Check when you want a faster, simpler, SMB-oriented entry point.
+Use the main Decision Cards when you want the full model, retrospective review, and supporting theory. Use Project Risk Check when you want a faster, simpler, SMB-oriented entry point.
 
 Most agencies price risk through gut-feel contingency percentages or hourly padding. The CAPM framework gives you a principled, portfolio-aware approach by separating **systematic risk** (forces that hit your whole book of work) from **idiosyncratic risk** (project-specific variables that wash out across engagements).
 

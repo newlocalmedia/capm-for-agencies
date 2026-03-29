@@ -5,7 +5,7 @@
 CAPM for Agencies is now a usable public beta with:
 
 - Decision Cards on the main app page
-- a second guided app for smaller agencies in `project-risk-check/`
+- a second guided app for smaller agencies in `project-risk-check/`, now linked into the shared site navigation
 - persistence and reset behavior
 - practical walkthrough, decision guide, theory, calibration notes, and discovery essay pages
 - export, accessibility improvements, and core calculator tests
@@ -60,6 +60,7 @@ Continue to use:
 - `index.html` is still a very large single-file app
 - `project-risk-check/` is now a second app path with its own lightweight tests
 - both app paths now share one canonical calc core via `scripts/shared-calc-core.mjs`, with the main app consuming a generated compatibility wrapper
+- both app paths now use a common site-level navigation pattern
 
 **Remaining scope:**
 - evaluate safe extraction of inline app logic into smaller modules
@@ -96,7 +97,7 @@ Continue to use:
 - add more retrospective or case-based evidence now that the workflow exists on `main`
 - explain the relationship between the full Decision Cards app and the simpler guided `project-risk-check/` app without making the repo feel split-brain
 
-### Phase 5 — Guided app productization
+### Phase 5 — Guided app productization and feedback
 
 **Goal:** Turn `project-risk-check/` from a staged companion app into a stable second entry point for the repo.
 
@@ -109,7 +110,7 @@ Continue to use:
   - lightweight tests for calculations, recommendation rules, state, and routes
 
 **Scope:**
-- decide how and where the guided app should be linked from the main site
+- gather usage feedback on whether the current site navigation exposes the guided app clearly enough without over-promoting it
 - add a small DOM smoke layer for the guided flow if it continues to evolve
 - keep the language and recommendation logic aligned with the main app where alignment matters
 - decide whether it should eventually share more code with the main calculator core or intentionally diverge
@@ -144,3 +145,18 @@ A next release should ideally include:
 - retrospective workflow polish informed by real review/export use
 - clearer positioning and navigation for the new `project-risk-check/` path
 - updated roadmap/backlog notes that continue to match the shipped state
+
+### Phase 6 — Win-rate and outcome tracking
+
+**Goal:** Build enough outcome evidence to judge whether the model improves deal selection, pricing discipline, and discovery-first recommendations over time.
+
+**Current status:**
+- retrospective review now exists on `main`
+- the project can compare presales expectations to realized outcomes at the single-deal level
+- there is still no explicit win/loss tracking layer
+
+**Scope:**
+- define what outcome data should be captured after a presales decision
+- track whether work was won, lost, sold as discovery first, or declined
+- capture reason codes where possible so recommendations can be evaluated against real outcomes
+- use win/loss and retrospective data together to test whether thresholds, caution bands, and guidance are helping in practice

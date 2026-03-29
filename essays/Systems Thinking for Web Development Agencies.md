@@ -154,7 +154,7 @@ If this line of thinking makes sense to you, the next step is not another essay.
 - [Open the Decision Cards](../index.html)
 - [See the Walkthrough](../tldr/walkthrough.html)
 - [Open the Decision Guide](../tldr/decision-guide.html)
-- [Understand the Theory](../theory/index.html)
+- [Theory](../theory/index.html)
 
 ## Further reading on discovery and systems thinking
 

@@ -21,8 +21,6 @@ body {
 }
 
 .site-nav-band {
-  position: relative;
-  z-index: 2;
   max-width: 1280px;
   margin: 0 auto 18px;
 }
@@ -39,7 +37,6 @@ body {
   justify-content: center;
   gap: 12px;
   width: 100%;
-  margin-bottom: 14px;
 }
 
 .header-link {

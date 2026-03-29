@@ -8,6 +8,8 @@ and this project uses a lightweight, date-free changelog for now.
 ## [Unreleased]
 
 ### Added
+- A simpler guided app path at `project-risk-check/` for smaller agencies, with step-by-step risk questions, a chart, tweak panel, and recommendation flow.
+- A shared site navigation pattern across the Decision Cards app, reader pages, and the guided app.
 - Clearer reading-order guidance across the app, overview, and generated reader pages so the docs now behave more like a deliberate ladder than a loose set of links.
 - Page-level `Reading order` guidance in generated reader-page mastheads.
 - A documented caution-band review in the calibration notes comparing the fixed `3`-point rule against `10%` and `12%` proportional alternatives.
@@ -20,11 +22,10 @@ and this project uses a lightweight, date-free changelog for now.
   - Layer 2 retrospective re-scoring
   - retrospective export/report output
 - Draft-PR and CI coverage for the retrospective branch, including Node dependency installation in GitHub Actions.
-- A second in-repo app path at `project-risk-check/` for smaller agencies that want a simpler guided risk-and-pricing workflow.
 - A canonical shared ESM calc core at `scripts/shared-calc-core.mjs`, plus parity tests to keep the main app wrapper and the guided app aligned on shared formulas.
 
 ### Changed
-- Expanded top navigation from the app to surface the TL;DR, Decision Guide, and Calibration Notes directly.
+- Expanded the site navigation so the full app, guided app, and supporting reader pages now feel like one coherent product family.
 - Updated the main README, roadmap, backlog, overview page, main app navigation, and generated reader pages to treat `project-risk-check/` as a first-class companion app option.
 - Switched `project-risk-check/` to import the shared calc core directly while the main app continues to use a generated compatibility wrapper at `scripts/calc-core.js`.
 - Improved Layer 2 and Layer 3 missing-input messages so they now refer to the specific missing commercial field(s), with Layer 3 linking back to the Layer 2 inputs.
@@ -32,6 +33,7 @@ and this project uses a lightweight, date-free changelog for now.
 - Switched static page generation from GitHub’s Markdown API to a local renderer and expanded generated-file verification to cover the walkthrough and discovery essay pages.
 - Promoted retrospective comparison into the primary visual review area while keeping original presales inputs visible as a secondary reference.
 - Improved retrospective review language with clearer section labels, changed-factor hierarchy, recommendation copy, and a stronger refresh-frozen-snapshot hint.
+- Tightened the guided app UX with active defaults, clear-all behavior, stronger validation guards, and a nav/header treatment aligned with the main app.
 
 ### Fixed
 - Prevented long Layer 2 result subtext from forcing awkward wrapping in the proposed-margin area when large deal figures are displayed.

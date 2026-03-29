@@ -6,18 +6,19 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 
 ## P1 — Current
 
-### [P1] Decide how the new guided app should be surfaced
+### [P1] Validate the two-app navigation and positioning in real use
 
-**Outcome:** The repo clearly explains when to use the full Decision Cards app versus `project-risk-check/`.
+**Outcome:** The repo clearly explains when to use the full Decision Cards app versus `project-risk-check/` without making the site feel crowded.
 
 **Current status:**
 - the simpler guided app now lives in `project-risk-check/`
-- it is tested, but not yet integrated into the main site navigation or hosting story
+- it is linked from the shared site navigation and overview callout
+- both app paths are using the same shared calc core
 
 **Tasks:**
-- decide whether to link it from the main homepage, overview, or docs only
-- explain its relationship to the full CAPM for Agencies app in a way that feels complementary, not duplicative
-- decide whether it should get its own public path or remain a repo-contained companion app
+- gather usage feedback on whether the current nav and callout are clear enough
+- watch for confusion between the full app and the small-agency app
+- refine labels only if real users still hesitate about which path to choose
 
 ### [P1] Decide whether a browser-smoke layer is still needed
 
@@ -71,7 +72,19 @@ This backlog tracks work that is still meaningfully open. Completed adoption bas
 - keep the recommended order visible as new pages or examples are added
 - ensure the app and overview continue to link to all major pages that matter
 - keep companion material tied to the core pricing thesis
-- explain where `project-risk-check/` sits in the reading ladder, if at all
+- keep the reading ladder coherent without overloading it with duplicate entry points
+
+
+### [P2] Plan win-rate and outcome tracking
+
+**Outcome:** The project has a clear path from one-off retrospective reviews to broader evidence about whether the model improves pricing and selection.
+
+**Tasks:**
+- define what counts as an outcome worth tracking after presales
+- decide how to record won, lost, discovery-first, and declined outcomes
+- capture lightweight reason codes where possible
+- decide whether this belongs in the main app, export flow, or a later history/reporting layer
+- use the resulting data to revisit thresholds and guidance with real evidence
 
 ## P3 — Later
 

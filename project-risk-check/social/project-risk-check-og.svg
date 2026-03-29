@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Project Risk &amp; Pricing Check</title>
+  <desc id="desc">Social sharing image for the Small Agency Version of CAPM for Agencies.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f6efe4"/>
+      <stop offset="100%" stop-color="#ede2d0"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.1" cy="0.1" r="0.6">
+      <stop offset="0%" stop-color="#c45d3e" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#c45d3e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.9" cy="0.14" r="0.5">
+      <stop offset="0%" stop-color="#2b4c7e" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#2b4c7e" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glowA)"/>
+  <rect width="1200" height="630" fill="url(#glowB)"/>
+  <rect x="54" y="54" width="1092" height="522" rx="32" fill="#fbf8f2" stroke="#d8cdbd"/>
+  <text x="94" y="106" fill="#6a635b" font-family="JetBrains Mono, Menlo, monospace" font-size="22" font-weight="700" letter-spacing="3">SMALL AGENCY VERSION</text>
+  <text x="94" y="176" fill="#1a3050" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="800">Project Risk &amp; Pricing Check</text>
+  <text x="94" y="220" fill="#514c46" font-family="Inter, Arial, sans-serif" font-size="26">A guided risk-and-margin check for smaller agencies.</text>
+
+  <rect x="94" y="270" width="316" height="214" rx="22" fill="#fffdfa" stroke="#ddd4c7"/>
+  <text x="122" y="310" fill="#6a635b" font-family="JetBrains Mono, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2">WHAT YOU GET</text>
+  <text x="122" y="350" fill="#201d1a" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Score project risk.</text>
+  <text x="122" y="388" fill="#201d1a" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Check the hurdle.</text>
+  <text x="122" y="426" fill="#201d1a" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="700">Get a recommendation.</text>
+
+  <rect x="438" y="270" width="614" height="214" rx="22" fill="#fffdfa" stroke="#ddd4c7"/>
+  <text x="466" y="308" fill="#6a635b" font-family="JetBrains Mono, Menlo, monospace" font-size="16" font-weight="700" letter-spacing="2">THE LINE</text>
+  <line x1="508" y1="440" x2="996" y2="440" stroke="#8a8176" stroke-width="2"/>
+  <line x1="508" y1="320" x2="508" y2="440" stroke="#8a8176" stroke-width="2"/>
+  <text x="496" y="444" text-anchor="end" fill="#8a8176" font-family="Inter, Arial, sans-serif" font-size="13">0</text>
+  <text x="496" y="404" text-anchor="end" fill="#8a8176" font-family="Inter, Arial, sans-serif" font-size="13">10%</text>
+  <text x="496" y="364" text-anchor="end" fill="#8a8176" font-family="Inter, Arial, sans-serif" font-size="13">20%</text>
+  <text x="496" y="324" text-anchor="end" fill="#8a8176" font-family="Inter, Arial, sans-serif" font-size="13">30%</text>
+  <text x="564" y="468" text-anchor="middle" fill="#8a8176" font-family="Inter, Arial, sans-serif" font-size="13">7</text>
+  <text x="678" y="468" text-anchor="middle" fill="#8a8176" font-family="Inter, Arial, sans-serif" font-size="13">14</text>
+  <text x="792" y="468" text-anchor="middle" fill="#8a8176" font-family="Inter, Arial, sans-serif" font-size="13">21</text>
+  <text x="906" y="468" text-anchor="middle" fill="#8a8176" font-family="Inter, Arial, sans-serif" font-size="13">28</text>
+      <polyline points="564,404 678,376 792,344 906,312" fill="none" stroke="#2b4c7e" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="792" y1="344" x2="792" y2="320" stroke="#9b8578" stroke-width="2.5" stroke-dasharray="6 5"/>
+  <circle cx="792" cy="344" r="8" fill="#c45d3e" stroke="#fffdfa" stroke-width="3"/>
+  <circle cx="792" cy="320" r="8" fill="#2f6b4d" stroke="#fffdfa" stroke-width="3"/>
+  <rect x="826" y="302" width="150" height="30" rx="15" fill="#edf4fb" stroke="#c7d7ea"/>
+  <text x="901" y="322" text-anchor="middle" fill="#2b4c7e" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">Proposed 25%</text>
+  <rect x="826" y="340" width="150" height="30" rx="15" fill="#f8eee9" stroke="#e9c7bb"/>
+  <text x="901" y="360" text-anchor="middle" fill="#c45d3e" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="700">Required 22%</text>
+
+  <rect x="94" y="506" width="182" height="44" rx="18" fill="#f1f6fc" stroke="#d5e2f0"/>
+  <text x="118" y="534" fill="#1a3050" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Risk 21/35</text>
+  <rect x="294" y="506" width="218" height="44" rx="18" fill="#f9f4ea" stroke="#ead9ae"/>
+  <text x="318" y="534" fill="#7d5a14" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Required 22%</text>
+  <rect x="530" y="506" width="296" height="44" rx="18" fill="#eef7f1" stroke="#cfe4d6"/>
+  <text x="554" y="534" fill="#2f6b4d" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="700">Go / Reprice / Discovery</text>
+</svg>
