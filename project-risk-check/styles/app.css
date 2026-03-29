@@ -604,3 +604,21 @@ h1 {
     grid-template-columns: 1fr;
   }
 }
+
+.tweak-actions {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-clear {
+  color: #8a3f32;
+  border-color: rgba(160, 74, 58, 0.22);
+  background: #fff6f4;
+}
+
+.btn-clear:hover,
+.btn-clear:focus {
+  border-color: rgba(160, 74, 58, 0.34);
+  background: #fff0ec;
+}

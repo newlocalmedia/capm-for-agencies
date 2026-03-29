@@ -1,7 +1,7 @@
 import { baselineQuestions, commercialFields, riskQuestions } from './questions.js';
 import { getRecommendation } from './recommendations.js';
 import { gap, priceFloor, proposedMargin, requiredMargin } from '../../scripts/shared-calc-core.mjs';
-import { allRiskQuestionsAnswered, getStoredState, saveState, totalRiskScore, validateBaseline, validateCommercial } from './state.js';
+import { allRiskQuestionsAnswered, clearStoredState, cloneState, getStoredState, saveState, totalRiskScore, validateBaseline, validateCommercial } from './state.js';
 import { getCurrentPath, getProgress, getRoute, navigate } from './routes.js';
 
 const app = document.getElementById('app');
@@ -297,6 +297,9 @@ function renderTweakPanel() {
         </div>
       </div>
       <div class="tweak-help">Change these inputs to see how the hurdle, gap, and recommendation move.</div>
+      <div class="tweak-actions">
+        <button type="button" class="btn btn-clear" data-clear-all="true">Clear all data</button>
+      </div>
     </div>
   `;
 }
@@ -545,6 +548,16 @@ function bind() {
     input.addEventListener('change', () => {
       state.risk[input.name] = parseInt(input.value, 10);
       saveState(state);
+    });
+  });
+
+  app.querySelectorAll('[data-clear-all]').forEach((button) => {
+    button.addEventListener('click', () => {
+      if (typeof window.confirm === 'function' && !window.confirm('Clear all saved data and start over?')) return;
+      clearStoredState();
+      state = cloneState();
+      navigate('welcome');
+      render();
     });
   });
 

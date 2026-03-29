@@ -33,6 +33,14 @@ export function saveState(state) {
   }
 }
 
+export function clearStoredState() {
+  try {
+    localStorage.removeItem('agency-deal-risk-check');
+  } catch {
+    // ignore
+  }
+}
+
 export function validateBaseline(state) {
   const safe = parseFloat(state.baseline.safeMargin);
   const typical = parseFloat(state.baseline.typicalMargin);

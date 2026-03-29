@@ -33,8 +33,11 @@ async function bootApp({ hash = '#/welcome', storedState } = {}) {
   });
 
   const alerts = [];
+  const confirms = [];
   dom.window.alert = (message) => alerts.push(message);
+  dom.window.confirm = (message) => { confirms.push(message); return true; };
   global.alert = dom.window.alert;
+  global.confirm = dom.window.confirm;
 
   if (storedState) {
     dom.window.localStorage.setItem(storageKey, JSON.stringify(storedState));
@@ -43,7 +46,7 @@ async function bootApp({ hash = '#/welcome', storedState } = {}) {
   await import(`${appModuleUrl}?t=${Date.now()}-${Math.random()}`);
   await waitForTick();
 
-  return { dom, document: dom.window.document, window: dom.window, alerts };
+  return { dom, document: dom.window.document, window: dom.window, alerts, confirms };
 }
 
 async function clickAndWait(element) {
@@ -144,4 +147,37 @@ test('guided wizard blocks incomplete steps and uses specific commercial validat
   assert.match(secondRun.alerts.at(-1), /estimated delivery cost that is zero or higher/i);
 
   secondRun.dom.window.close();
+});
+
+
+test('clear all data resets the guided app to defaults and clears saved state', async () => {
+  const { dom, document, window, confirms } = await bootApp();
+
+  await clickAndWait(document.querySelector('[data-nav="baseline-safe"]'));
+  await clickAndWait(document.querySelector('[data-nav="baseline-typical"]'));
+  await clickAndWait(document.querySelector('[data-nav="risk-intro"]'));
+  await clickAndWait(document.querySelector('[data-nav="risk/client"]'));
+
+  for (let i = 0; i < 7; i += 1) {
+    await answerRiskQuestion(document, '3');
+    await clickAndWait(document.querySelector('.nav .btn-primary'));
+  }
+
+  await setInput(window, 'dealPrice', '12000');
+  await setInput(window, 'deliveryCost', '9000');
+  await clickAndWait(document.querySelector('.nav .btn-primary[data-nav="results"]'));
+
+  assert.equal(window.localStorage.getItem(storageKey) !== null, true);
+  await clickAndWait(document.querySelector('[data-clear-all="true"]'));
+
+  assert.match(confirms.at(-1), /clear all saved data and start over/i);
+  assert.equal(window.location.hash, '#/welcome');
+  assert.equal(window.localStorage.getItem(storageKey), null);
+
+  await clickAndWait(document.querySelector('[data-nav="baseline-safe"]'));
+  assert.equal(document.getElementById('safeMargin').value, '10');
+  await clickAndWait(document.querySelector('[data-nav="baseline-typical"]'));
+  assert.equal(document.getElementById('typicalMargin').value, '22');
+
+  dom.window.close();
 });
