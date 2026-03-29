@@ -180,7 +180,7 @@ PAGE_STYLE = """
   }
 
   .walkthrough-facts-fourup {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .walkthrough-fact {
@@ -1169,7 +1169,7 @@ PAGES = [
 """,
         "masthead_extra_html": True,
         "meta": "Use this when you want the upstream discovery argument behind better pricing, scoping, and delivery decisions — especially when the next thing to sell may be a larger paid discovery phase before implementation.",
-        "reading_path": 'This discovery essay is best after the <a href="../overview/index.html">Overview</a> or <a href="../tldr/walkthrough.html">Walkthrough</a>. Next read the <a href="../tldr/decision-guide.html">Decision Guide</a> → <a href="../index.html">Decision Cards</a>. The <a href="../theory/index.html">Theory</a> document is the deeper dive into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a>.',
+        "reading_path": 'This discovery essay is best after the <a href="../overview/index.html">Overview</a> or <a href="../tldr/walkthrough.html">Walkthrough</a>. Next read the <a href="../tldr/decision-guide.html">Decision Guide</a> and then try the <a href="../index.html">Decision Cards</a>. The <a href="../theory/index.html">Theory</a> document is the deeper dive into CAPM and how it\'s used here. If you want a simpler guided alternative, smaller agencies can use the <a href="../project-risk-check/index.html">Small Agency/Solopreneur Version</a>.',
         "reading_path_html": True,
         "actions": [
             ("Open the Decision Cards", "../index.html", "primary"),
