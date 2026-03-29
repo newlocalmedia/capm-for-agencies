@@ -448,7 +448,7 @@ That separation is also closer to how adjacent project-estimating disciplines ta
 ## Relationship to PMI Earned Value Metrics
 The financial CAPM and PMI’s earned value management (EVM) formulas address different phases of the project lifecycle.
 
-|  | Financial CAPM | PMI EVM |
+| Dimension | Financial CAPM | PMI EVM |
 | :---- | :---- | :---- |
 | **When Applied** | Before the project is committed (presales, scoping, go/no-go) | During the project (execution, monitoring, and controlling) |
 | **Key Question** | Should we take this project? | How is this project performing? |

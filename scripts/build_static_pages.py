@@ -1223,7 +1223,7 @@ TAG_RE = re.compile(r"<[^>]+>")
 
 TOKEN_REPLACEMENTS = {
     "[[APP_CARDS_ASIDE]]": """
-<aside class="reader-aside">
+<div class="reader-aside" role="note" aria-label="Open the live cards">
   <p class="reader-aside-title">Open the live cards</p>
   <p>If you want to move between the text and the tool, jump straight into the interactive decision cards:</p>
   <ul>
@@ -1231,12 +1231,12 @@ TOKEN_REPLACEMENTS = {
     <li><a href="../index.html#layer2-card">Layer 2 card</a></li>
     <li><a href="../index.html#bcorp-card">B-Corp card</a></li>
   </ul>
-</aside>
+</div>
 """.strip(),
     "[[PLANNING_NOTE_ASIDE]]": """
-<aside class="reader-note">
+<div class="reader-note" role="note" aria-label="Clarification">
   <p><strong>Clarification:</strong> Price before you plan is narrower than it sounds: price before delivery planning is committed, not before the solutions team has done enough technical assessment to judge complexity, client concerns, and whether implementation or discovery is the thing to sell.</p>
-</aside>
+</div>
 """.strip()
 }
 
