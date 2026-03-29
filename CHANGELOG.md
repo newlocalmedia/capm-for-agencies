@@ -21,10 +21,12 @@ and this project uses a lightweight, date-free changelog for now.
   - retrospective export/report output
 - Draft-PR and CI coverage for the retrospective branch, including Node dependency installation in GitHub Actions.
 - A second in-repo app path at `project-risk-check/` for smaller agencies that want a simpler guided risk-and-pricing workflow.
+- A canonical shared ESM calc core at `scripts/shared-calc-core.mjs`, plus parity tests to keep the main app wrapper and the guided app aligned on shared formulas.
 
 ### Changed
 - Expanded top navigation from the app to surface the TL;DR, Decision Guide, and Calibration Notes directly.
 - Updated the main README, roadmap, backlog, overview page, main app navigation, and generated reader pages to treat `project-risk-check/` as a first-class companion app option.
+- Switched `project-risk-check/` to import the shared calc core directly while the main app continues to use a generated compatibility wrapper at `scripts/calc-core.js`.
 - Improved Layer 2 and Layer 3 missing-input messages so they now refer to the specific missing commercial field(s), with Layer 3 linking back to the Layer 2 inputs.
 - Tightened calculator display rounding so sanitized baseline inputs and manual B Corp overrides no longer leak floating-point noise into visible UI strings.
 - Switched static page generation from GitHub’s Markdown API to a local renderer and expanded generated-file verification to cover the walkthrough and discovery essay pages.

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { engagementBetaFromScore, gap, priceFloor, proposedMargin, requiredMargin } from '../scripts/calc-core.js';
+import { engagementBetaFromScore, gap, priceFloor, proposedMargin, requiredMargin } from '../../scripts/shared-calc-core.mjs';
 
 test('engagement beta and required margin use the simplified hurdle logic', () => {
   assert.equal(engagementBetaFromScore(21), 1);

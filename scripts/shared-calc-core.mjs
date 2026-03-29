@@ -1,75 +1,66 @@
-(function (root, factory) {
-  if (typeof module === 'object' && module.exports) {
-    module.exports = factory();
-  } else {
-    root.CapmCalculations = factory();
-  }
-}(typeof self !== 'undefined' ? self : this, function () {
-  'use strict';
+export const LAYER1_SCORE_MIN = 6;
+export const LAYER1_SCORE_SPAN = 24;
+export const ENGAGEMENT_BETA_NEUTRAL_SCORE = 21;
+export const BCORP_PORTFOLIO_SCORE_MIN = 6;
+export const BCORP_PORTFOLIO_SCORE_SPAN = 24;
+export const BCORP_ENGAGEMENT_NEUTRAL_SCORE = 12;
 
-const LAYER1_SCORE_MIN = 6;
-const LAYER1_SCORE_SPAN = 24;
-const ENGAGEMENT_BETA_NEUTRAL_SCORE = 21;
-const BCORP_PORTFOLIO_SCORE_MIN = 6;
-const BCORP_PORTFOLIO_SCORE_SPAN = 24;
-const BCORP_ENGAGEMENT_NEUTRAL_SCORE = 12;
-
-function round(value, digits = 1) {
+export function round(value, digits = 1) {
   const factor = 10 ** digits;
   return Math.round(value * factor) / factor;
 }
 
-function layer1FactorFromScore(score) {
+export function layer1FactorFromScore(score) {
   return round(0.85 + (score - LAYER1_SCORE_MIN) * (0.30 / LAYER1_SCORE_SPAN), 2);
 }
 
-function layer1EnvironmentLabel(factor) {
+export function layer1EnvironmentLabel(factor) {
   if (factor <= 0.93) return 'Favorable environment';
   if (factor <= 1.03) return 'Normal environment';
   if (factor <= 1.11) return 'Elevated risk';
   return 'High systematic risk';
 }
 
-function engagementBetaFromScore(score) {
+export function engagementBetaFromScore(score) {
   return round(score / ENGAGEMENT_BETA_NEUTRAL_SCORE, 2);
 }
 
-function blendedBeta(engagementBeta, layer1Factor) {
+export function blendedBeta(engagementBeta, layer1Factor) {
   return round(engagementBeta * layer1Factor, 2);
 }
 
-function requiredReturn(rf, rm, beta) {
+export function requiredReturn(rf, rm, beta) {
   return round(rf + beta * (rm - rf), 1);
 }
 
-function requiredMargin(safeMargin, typicalMargin, projectScore) {
+export function requiredMargin(safeMargin, typicalMargin, projectScore) {
   return requiredReturn(safeMargin, typicalMargin, engagementBetaFromScore(projectScore));
 }
 
-function proposedMargin(price, cost) {
+export function proposedMargin(price, cost) {
   if (!Number.isFinite(price) || !Number.isFinite(cost) || price <= 0 || cost < 0) return null;
   return round(((price - cost) / price) * 100, 1);
 }
 
-function realizedMargin(revenue, cost) {
+export function realizedMargin(revenue, cost) {
   return proposedMargin(revenue, cost);
 }
 
-function minimumDealPrice(cost, requiredMarginValue) {
+export function minimumDealPrice(cost, requiredMarginValue) {
   if (!Number.isFinite(cost) || !Number.isFinite(requiredMarginValue) || requiredMarginValue >= 100) return null;
   return cost / (1 - (requiredMarginValue / 100));
 }
 
-function priceFloor(cost, requiredMarginValue) {
+export function priceFloor(cost, requiredMarginValue) {
   return minimumDealPrice(cost, requiredMarginValue);
 }
 
-function gap(proposed, required) {
+export function gap(proposed, required) {
   if (!Number.isFinite(proposed) || !Number.isFinite(required)) return null;
   return round(proposed - required, 1);
 }
 
-function layer2Verdict(gapValue) {
+export function layer2Verdict(gapValue) {
   if (gapValue >= 0) {
     return 'Go — proposed margin clears the hurdle rate';
   }
@@ -79,17 +70,17 @@ function layer2Verdict(gapValue) {
   return 'Stop — proposed margin does not cover the required return';
 }
 
-function bcorpPortfolioModifier(score) {
+export function bcorpPortfolioModifier(score) {
   return round(0.8 + (score - BCORP_PORTFOLIO_SCORE_MIN) * (0.4 / BCORP_PORTFOLIO_SCORE_SPAN), 2);
 }
 
-function bcorpImpactAdjustment(portfolioScore, engagementScore) {
+export function bcorpImpactAdjustment(portfolioScore, engagementScore) {
   const modifier = bcorpPortfolioModifier(portfolioScore);
   const deviation = engagementScore - BCORP_ENGAGEMENT_NEUTRAL_SCORE;
   return round(deviation * modifier, 1);
 }
 
-function bcorpVerdict(proposed, requiredWithImpact, impactAdjustment) {
+export function bcorpVerdict(proposed, requiredWithImpact, impactAdjustment) {
   const gapValue = gap(proposed, requiredWithImpact);
   if (gapValue >= 0 && impactAdjustment < -3) {
     return 'Mission-aligned — conscious discount justified and hurdle cleared';
@@ -106,7 +97,7 @@ function bcorpVerdict(proposed, requiredWithImpact, impactAdjustment) {
   return 'Stop — proposed margin does not clear the impact-adjusted hurdle';
 }
 
-function retrospectiveAssessment(requiredMarginValue, proposedMarginValue, actualMargin) {
+export function retrospectiveAssessment(requiredMarginValue, proposedMarginValue, actualMargin) {
   const hurdleGap = gap(actualMargin, requiredMarginValue);
   const quoteVariance = gap(actualMargin, proposedMarginValue);
 
@@ -119,29 +110,28 @@ function retrospectiveAssessment(requiredMarginValue, proposedMarginValue, actua
   return 'Priced correctly — actual margin was directionally in line with the original hurdle';
 }
 
-  return {
-    LAYER1_SCORE_MIN,
-    LAYER1_SCORE_SPAN,
-    ENGAGEMENT_BETA_NEUTRAL_SCORE,
-    BCORP_PORTFOLIO_SCORE_MIN,
-    BCORP_PORTFOLIO_SCORE_SPAN,
-    BCORP_ENGAGEMENT_NEUTRAL_SCORE,
-    round,
-    layer1FactorFromScore,
-    layer1EnvironmentLabel,
-    engagementBetaFromScore,
-    blendedBeta,
-    requiredReturn,
-    requiredMargin,
-    proposedMargin,
-    realizedMargin,
-    minimumDealPrice,
-    priceFloor,
-    gap,
-    layer2Verdict,
-    bcorpPortfolioModifier,
-    bcorpImpactAdjustment,
-    bcorpVerdict,
-    retrospectiveAssessment
-  };
-}));
+export default {
+  LAYER1_SCORE_MIN,
+  LAYER1_SCORE_SPAN,
+  ENGAGEMENT_BETA_NEUTRAL_SCORE,
+  BCORP_PORTFOLIO_SCORE_MIN,
+  BCORP_PORTFOLIO_SCORE_SPAN,
+  BCORP_ENGAGEMENT_NEUTRAL_SCORE,
+  round,
+  layer1FactorFromScore,
+  layer1EnvironmentLabel,
+  engagementBetaFromScore,
+  blendedBeta,
+  requiredReturn,
+  requiredMargin,
+  proposedMargin,
+  realizedMargin,
+  minimumDealPrice,
+  priceFloor,
+  gap,
+  layer2Verdict,
+  bcorpPortfolioModifier,
+  bcorpImpactAdjustment,
+  bcorpVerdict,
+  retrospectiveAssessment
+};

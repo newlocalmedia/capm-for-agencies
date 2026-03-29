@@ -59,12 +59,13 @@ Continue to use:
 - key calculator flows now have DOM-level integration coverage in jsdom
 - `index.html` is still a very large single-file app
 - `project-risk-check/` is now a second app path with its own lightweight tests
+- both app paths now share one canonical calc core via `scripts/shared-calc-core.mjs`, with the main app consuming a generated compatibility wrapper
 
 **Remaining scope:**
 - evaluate safe extraction of inline app logic into smaller modules
 - add a smaller browser-smoke layer if jsdom leaves important behavior unverified
 - keep generated-page output stable as the local renderer evolves
-- extract one canonical shared calculation core for the formulas both apps already have in common, while keeping app-specific recommendation logic separate
+- keep app-specific recommendation logic separate while the shared formula core stays aligned
 
 ### Phase 2 — Precision, presentation, and trust
 

@@ -40,7 +40,7 @@ So the formula logic should stay aligned, while the UX and recommendation framin
 - `scripts/recommendations.js` — first-pass recommendation rules
 - `scripts/state.js` — app state shape and validation helpers
 - `scripts/routes.js` — route map and step metadata
-- `scripts/calc-core.js` — simplified shared calculation helpers
+- `../scripts/shared-calc-core.mjs` — canonical shared calculation helpers used by both apps
 - `styles/app.css` — starter UI styles
 - `tests/` — lightweight calculation, recommendation, state/route, and DOM smoke tests
 
@@ -59,35 +59,16 @@ Current coverage includes:
 - validation and route helpers
 - basic DOM wizard / results / tweak-panel flows
 
-## Shared calc core plan
+## Shared calc core
 
-The cleanest way to share the math with the main app is:
+The formula logic now uses one canonical shared module:
 
-1. **Define one canonical pure module**
-   - move the shared math into a format-neutral ESM file, for example:
-     - `scripts/shared/calc-core.js`
+- `../scripts/shared-calc-core.mjs`
 
-2. **Let each app consume that canonical file**
-   - `project-risk-check/` imports it directly
-   - the main app either:
-     - imports it via a small module wrapper, or
-     - keeps a thin compatibility wrapper for the current UMD/global pattern
+`project-risk-check/` imports that module directly. The main app still uses `scripts/calc-core.js`, but that file is now a thin generated compatibility wrapper around the same shared source.
 
-3. **Keep app-specific logic separate**
-   - the main app keeps:
-     - Layer 1 helpers
-     - B Corp helpers
-     - retrospective helpers
-   - this app keeps:
-     - guided recommendation copy
-     - simpler discovery-first / walk-away rules
+This keeps:
 
-4. **Prove parity with tests**
-   - add a small cross-app parity test for:
-     - engagement beta
-     - required margin at neutral Layer 1
-     - proposed margin
-     - gap
-     - price floor
-
-That approach keeps the formula aligned without forcing the two UIs to converge.
+- one source of truth for the formulas
+- app-specific recommendation logic separate
+- parity testable across both app paths

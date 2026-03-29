@@ -27,6 +27,8 @@ A simpler guided app for smaller agencies in [`project-risk-check/`](./project-r
 
 It keeps the same core hurdle logic as the hybrid model in the main app, but uses a simpler and more opinionated recommendation layer for smaller agencies.
 
+The shared formula source of truth now lives in [`scripts/shared-calc-core.mjs`](./scripts/shared-calc-core.mjs). The main app still loads [`scripts/calc-core.js`](./scripts/calc-core.js), which is now a generated compatibility wrapper around that shared module.
+
 Use the main Decision Cards when you want the full model and supporting theory. Use Project Risk Check when you want a faster, simpler, SMB-oriented entry point.
 
 Most agencies price risk through gut-feel contingency percentages or hourly padding. The CAPM framework gives you a principled, portfolio-aware approach by separating **systematic risk** (forces that hit your whole book of work) from **idiosyncratic risk** (project-specific variables that wash out across engagements).

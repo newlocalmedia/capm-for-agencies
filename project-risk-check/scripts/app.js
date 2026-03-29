@@ -1,6 +1,6 @@
 import { baselineQuestions, commercialFields, riskQuestions } from './questions.js';
 import { getRecommendation } from './recommendations.js';
-import { gap, priceFloor, proposedMargin, requiredMargin } from './calc-core.js';
+import { gap, priceFloor, proposedMargin, requiredMargin } from '../../scripts/shared-calc-core.mjs';
 import { allRiskQuestionsAnswered, getStoredState, saveState, totalRiskScore, validateBaseline, validateCommercial } from './state.js';
 import { getCurrentPath, getProgress, getRoute, navigate } from './routes.js';
 

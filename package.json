@@ -4,6 +4,7 @@
   "version": "0.1.1",
   "description": "Static decision cards and theory pages for CAPM for Agencies.",
   "scripts": {
+    "build:calc-wrapper": "node scripts/generate-calc-wrapper.mjs",
     "build:static": "python3 scripts/build_static_pages.py",
     "check:app": "node scripts/check-app.js",
     "check:generated": "node scripts/verify-generated.js",
