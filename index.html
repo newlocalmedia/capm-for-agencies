@@ -57,17 +57,20 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  .site-nav-band {
+    max-width: 1280px;
+    margin: 0 auto 18px;
+  }
   .header {
     max-width: 900px;
     margin: 0 auto 40px;
     text-align: center;
   }
   .header-links {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 12px;
-    flex-wrap: wrap;
-    margin-bottom: 14px;
+    width: 100%;
   }
   .header-link {
     font-family: 'JetBrains Mono', monospace;
@@ -1497,7 +1500,7 @@
 </head>
 <body>
 <main id="main-content">
-<div class="header">
+<div class="site-nav-band">
   <div class="header-links">
     <a class="header-link" href="overview/index.html">Overview</a>
     <a class="header-link" href="tldr/price-the-work-before-you-plan-it.html">TL;DR</a>
@@ -1509,6 +1512,8 @@
     <a class="header-link active" href="index.html">Decision Cards</a>
     <a class="header-link" href="project-risk-check/index.html">Small Agency Version</a>
   </div>
+</div>
+<div class="header">
   <h1>CAPM for Agencies — Decision Cards</h1>
   <p>Two-layer risk assessment with scoring and calculators, plus a B Corp impact overlay.</p>
 </div>
