@@ -1069,7 +1069,7 @@ PAGES = [
         "description": "A practical presales guide for scoring risk, setting baselines, comparing proposed margin to the hurdle, and deciding whether to proceed, reprice, or sell discovery first.",
         "social_image": "/theory/figures/layer2-blended-beta.png",
         "eyebrow": "Decision Guide",
-        "heading": "CAPM for Agencies — Decision Guide",
+        "heading": "Agency Decision Guide",
         "toc_skip_first_heading": True,
         "deck": "A practical presales guide for running the CAPM model: set baselines, score the current environment and the deal, compare proposed margin to the hurdle, then decide whether to proceed, reprice, or sell discovery first.",
         "masthead_extra": """
