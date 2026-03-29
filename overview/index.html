@@ -52,43 +52,6 @@
     margin: 0 auto;
   }
 
-  .site-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-bottom: 18px;
-  }
-
-  .site-link {
-    display: inline-flex;
-    align-items: center;
-    min-height: 38px;
-    padding: 0 14px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--blue);
-    background: rgba(255, 255, 255, 0.58);
-    border: 1px solid rgba(32, 29, 26, 0.1);
-  }
-
-  .site-link:hover,
-  .site-link:focus-visible {
-    background: rgba(35, 72, 106, 0.1);
-    border-color: rgba(35, 72, 106, 0.2);
-    outline: none;
-  }
-
-  .site-link.active {
-    background: var(--blue);
-    border-color: var(--blue);
-    color: #fff;
-  }
-
   .hero,
   .section {
     background: linear-gradient(145deg, rgba(248, 242, 232, 0.92), rgba(239, 230, 216, 0.95));
@@ -129,6 +92,19 @@
     margin: 0 0 14px;
     font-size: 1.08rem;
     color: #38322d;
+  }
+
+  .callout {
+    margin-top: 16px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.52);
+    border: 1px solid rgba(32, 29, 26, 0.08);
+  }
+
+  .callout p {
+    margin: 0;
+    font-size: 1rem;
   }
 
   .actions {
@@ -258,24 +234,13 @@
 </head>
 <body>
   <div class="wrap">
-    <nav class="site-nav" aria-label="Site">
-      <a class="site-link active" href="./index.html">Overview</a>
-      <a class="site-link" href="../tldr/price-the-work-before-you-plan-it.html">TL;DR</a>
-      <a class="site-link" href="../tldr/walkthrough.html">Walkthrough</a>
-      <a class="site-link" href="../tldr/decision-guide.html">Decision Guide</a>
-      <a class="site-link" href="../tldr/calibration-notes.html">Calibration Notes</a>
-      <a class="site-link" href="../essays/systems-thinking-for-web-development-agencies.html">Discovery First</a>
-      <a class="site-link" href="../theory/index.html">Theory</a>
-      <a class="site-link" href="../index.html">Decision Cards</a>
-      <a class="site-link" href="../project-risk-check/index.html">Small Agency Version</a>
-    </nav>
     <section class="hero">
       <div class="eyebrow">CAPM for Agencies</div>
       <h1>Price Before You Plan</h1>
       <p>This project adapts the <strong>Capital Asset Pricing Model (CAPM)</strong> into a shared decision framework for agency pricing. <a href="../index.html">Our interactive decision cards</a> present the model as a working tool, but it is most useful when it helps sales, solutions, delivery, project managers, and leadership measure risk on a common scale before a deal is accepted.</p>
       <p>The intended meaning of "Price before you plan" is narrower than it sounds. <em>Price before delivery planning is committed</em>, not before you've done enough technical assessment to judge complexity, client concerns, and whether implementation or discovery is the thing to sell.</p>
       <p>The hybrid layer should be read as heuristic pricing governance, not as a statistically correct asset-pricing engine. Its practical utility is internal alignment, presales discipline, and postmortem calibration.</p>
-      <p><strong>Smaller agency?</strong> If you want a simpler guided version before using the full Decision Cards, start with the <a href="../project-risk-check/index.html">Small Agency Version</a>.</p>
+      <div class="callout"><p><strong>Smaller agency?</strong> If you want a simpler guided version before using the full Decision Cards, start with the <a href="../project-risk-check/index.html">Small Agency Version</a>.</p></div>
       <div class="actions">
         <a class="button secondary" href="../tldr/price-the-work-before-you-plan-it.html">Read the TL;DR</a>
         <a class="button secondary" href="../tldr/walkthrough.html">See a Walkthrough</a>
