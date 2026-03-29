@@ -64,7 +64,7 @@ Continue to use:
 - evaluate safe extraction of inline app logic into smaller modules
 - add a smaller browser-smoke layer if jsdom leaves important behavior unverified
 - keep generated-page output stable as the local renderer evolves
-- decide how much calculation logic should remain shared in practice across the two app paths
+- extract one canonical shared calculation core for the formulas both apps already have in common, while keeping app-specific recommendation logic separate
 
 ### Phase 2 — Precision, presentation, and trust
 

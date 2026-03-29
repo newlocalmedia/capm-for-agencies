@@ -512,8 +512,31 @@ function render() {
 
 function bind() {
   app.querySelectorAll('[data-nav]').forEach((button) => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (event) => {
       const target = button.getAttribute('data-nav');
+      const path = getCurrentPath();
+      if (path === 'baseline-typical' && target === 'risk-intro') {
+        const message = validateBaseline(state);
+        if (message) {
+          event.preventDefault();
+          alert(message);
+        }
+      }
+      if (path.startsWith('risk/') && target === nextPath(path)) {
+        const route = getRoute(path);
+        if (!state.risk[route.id]) {
+          event.preventDefault();
+          alert('Choose one answer before continuing.');
+        }
+      }
+      if (path === 'commercial' && target === 'results') {
+        const message = validateCommercial(state);
+        if (message || !allRiskQuestionsAnswered(state)) {
+          event.preventDefault();
+          alert(message || 'Finish all risk questions first.');
+          return;
+        }
+      }
       navigate(target);
     });
   });
@@ -556,34 +579,6 @@ function bind() {
       if (input.dataset.tweak === 'deliveryCost') state.commercial.deliveryCost = input.value;
       saveState(state);
       if (getCurrentPath() === 'results' && input.dataset.tweak) render();
-    });
-  });
-
-  app.querySelectorAll('[data-nav]').forEach((button) => {
-    button.addEventListener('click', (event) => {
-      const target = button.getAttribute('data-nav');
-      const path = getCurrentPath();
-      if (path === 'baseline-typical' && target === 'risk-intro') {
-        const message = validateBaseline(state);
-        if (message) {
-          event.preventDefault();
-          alert(message);
-        }
-      }
-      if (path.startsWith('risk/') && target === nextPath(path)) {
-        const route = getRoute(path);
-        if (!state.risk[route.id]) {
-          event.preventDefault();
-          alert('Choose one answer before continuing.');
-        }
-      }
-      if (path === 'commercial' && target === 'results') {
-        const message = validateCommercial(state);
-        if (message || !allRiskQuestionsAnswered(state)) {
-          event.preventDefault();
-          alert(message || 'Finish all risk questions first.');
-        }
-      }
     });
   });
 }
