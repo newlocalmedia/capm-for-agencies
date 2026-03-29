@@ -1,6 +1,6 @@
 # Project Risk Check
 
-A simpler, SMB-focused guided version of CAPM for Agencies that lives inside the main repo as a second app path.
+A simpler guided pricing-and-risk app for smaller agencies that lives inside the main CAPM for Agencies repo as a second app path.
 
 ## Goal
 
@@ -15,8 +15,8 @@ Help small agencies answer:
 
 - one-question-at-a-time wizard
 - plain-language explanations
-- small-agency framing
-- results page with chart, hurdle, recommendation, and tweakable inputs
+- smaller-agency framing
+- results page with chart, hurdle, recommendation, commercial snapshot, and tweakable inputs
 
 ## Alignment with the main app
 

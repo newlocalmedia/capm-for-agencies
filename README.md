@@ -2,87 +2,81 @@
 
 Risk-based pricing tools for agencies, built around the Capital Asset Pricing Model (CAPM) adapted from financial economics.
 
-**Try it here:** https://newlocalmedia.github.io/capm-for-agencies/
+**Live site:** [https://newlocalmedia.github.io/capm-for-agencies/](https://newlocalmedia.github.io/capm-for-agencies/)
 
-## What is this?
+## What this repo now contains
 
-This repo now contains **two related apps** with a shared calc core and a unified site navigation:
+This repository now ships **two related apps** plus the supporting docs around them.
 
 ### 1. Decision Cards
-The main CAPM for Agencies app in [`index.html`](./index.html). This is the fuller, more theory-aware version with:
+The main app in [`index.html`](./index.html).
 
+Use this when you want the full model:
 - Layer 1 portfolio/systematic risk calibration
 - Layer 2 engagement risk scoring
 - the B Corp impact overlay
 - retrospective review mode
-- deeper documentation and calibration notes
+- fuller theory, calibration, and supporting docs
 
 ### 2. Project Risk Check
-A simpler guided app for smaller agencies in [`project-risk-check/`](./project-risk-check/). This version:
+The simpler guided app in [`project-risk-check/index.html`](./project-risk-check/index.html).
 
-- walks through the pricing questions one step at a time
-- uses active default baseline margins
-- explains the results in plainer language
-- ends with a chart, recommendation, and live tweak panel
+Use this when you want a smaller-agency path:
+- one question at a time
+- active default baseline margins
+- plain-language explanations
+- a simpler chart, recommendation, and tweak panel
+- clear reset and validation behavior
 
-It keeps the same core hurdle logic as the hybrid model in the main app, but uses a simpler and more opinionated recommendation layer for smaller agencies.
+It keeps the same shared hurdle math as the main hybrid model, but uses a simpler and more opinionated recommendation layer.
 
-The shared formula source of truth now lives in [`scripts/shared-calc-core.mjs`](./scripts/shared-calc-core.mjs). The main app still loads [`scripts/calc-core.js`](./scripts/calc-core.js), which is now a generated compatibility wrapper around that shared module.
+## Choose your path
 
-Use the main Decision Cards when you want the full model, retrospective review, and supporting theory. Use Project Risk Check when you want a faster, simpler, SMB-oriented entry point.
+- **Start with the Decision Cards** if you want the full framework, retrospective review, or the B Corp layer.
+- **Start with Project Risk Check** if you run a smaller agency and want the pricing questions one at a time before moving into the fuller tool.
+- **Start with the docs** if you want the argument first: Overview → TL;DR → Walkthrough → Decision Guide → Decision Cards.
 
-Most agencies price risk through gut-feel contingency percentages or hourly padding. The CAPM framework gives you a principled, portfolio-aware approach by separating **systematic risk** (forces that hit your whole book of work) from **idiosyncratic risk** (project-specific variables that wash out across engagements).
+## What the model is doing
 
-These decision cards implement a two-layer risk assessment. In the pure portfolio-level use, the framework stays closer to CAPM as a hurdle-rate model. In the hybrid engagement-level use, it should be treated as heuristic pricing governance rather than a literal asset-pricing engine.
+Most agencies price risk through gut-feel contingency, hourly padding, or founder instinct. CAPM for Agencies adapts hurdle-rate logic into a framework that helps teams name risk before a deal is committed.
 
-As a rough fit:
-- enterprise and international agencies will usually find the pure approach easier to justify
-- small and mid-sized agencies will usually get more immediate value from the hybrid approach
+The main distinction is between:
+- **systematic risk** — conditions affecting the whole portfolio or book of work
+- **engagement risk** — deal-specific uncertainty that changes how much margin a project should clear
+
+That yields a required margin, which can then be compared against the quoted or proposed margin.
+
+## Main layers in the full app
 
 ### Layer 1: Systematic Risk Calibration
-A periodic strategic review (quarterly or on market shift) that scores portfolio-level risk factors: platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure. Produces a systematic adjustment factor that sets the environment for all engagement pricing. Use the [Layer 1 card](./index.html#layer1-card).
+A periodic review of portfolio-wide conditions: platform stability, talent market, economic conditions, regulatory exposure, revenue concentration, and rate pressure.
+
+Use the Layer 1 card:
+- [Layer 1 card](./index.html#layer1-card)
 
 ### Layer 2: Engagement Risk Scoring
-A per-engagement assessment during presales that scores project-specific factors: client track record, scope clarity, technical complexity, internal capacity, contract type, political complexity, and timeline pressure. Combined with the Layer 1 factor, it produces a minimum acceptable margin via the CAPM formula, which then needs to be compared against the proposed deal margin. Use the [Layer 2 card](./index.html#layer2-card).
+A per-deal assessment of client track record, scope clarity, technical complexity, internal capacity, contract type, political complexity, and timeline pressure.
+
+Use the Layer 2 card:
+- [Layer 2 card](./index.html#layer2-card)
 
 ### B Corp Impact Overlay
-An additional impact-governance pass for mission-driven agencies. It extends the base model with B Lab-aligned portfolio and engagement factors, then shows how the impact adjustment shifts the standard hurdle from `E(R)` to `E(R*)`. Use the [B Corp card](./index.html#bcorp-card).
+A mission-governance extension that adjusts the hurdle for work that is especially aligned, neutral, or harmful.
 
-## Usage
+Use the B Corp card:
+- [B Corp card](./index.html#bcorp-card)
 
-### Interactive (browser)
-Visit the hosted version and click to score each factor. The full interactive Decision Cards live in `index.html`.
+## The shared formula core
 
-### Guided SMB app
-The simpler guided app lives in `project-risk-check/index.html`.
+The canonical formula source now lives in:
+- [`scripts/shared-calc-core.mjs`](./scripts/shared-calc-core.mjs)
 
-### Printable (PDF)
-Download reference cards from the `pdf/` directory:
-- `capm-decision-cards.pdf` — All cards
-- `capm-layer1-systematic-risk.pdf` — Systematic risk card only.
-- `capm-layer2-engagement-risk.pdf` — Engagement risk card only.
-- `capm-b-corp-engagement-risk.pdf` — B Corp impact-adjusted risk card only.
+The main app still loads:
+- [`scripts/calc-core.js`](./scripts/calc-core.js)
 
-### Text Overview
-A text-first landing page lives in `overview/index.html`.
+That file is a compatibility wrapper around the shared module so both apps stay aligned on the core hurdle, margin, floor-price, and beta logic.
 
-### Walkthrough
-A short practical walkthrough of one realistic agency deal lives in `tldr/walkthrough.html`.
-
-### Companion Essay
-A companion essay on why some work should begin with discovery rather than premature implementation lives in `essays/systems-thinking-for-web-development-agencies.html`.
-
-### Theory and Background
-The long-form theory text and commentary live in `theory/capm-for-agencies.md`.
-
-### Calibration Notes
-A deeper implementation note for the current scoring ranges, scenario tests, and calibration choices lives in `tldr/calibration-notes.html`.
-
-### Retrospective Mode Design
-The current design note for postmortem scoring and calibration lives in [RETROSPECTIVE-MODE.md](./RETROSPECTIVE-MODE.md).
-
-
-## The Formula
+## The formula
 
 **E(R) = Rf + β × (Rm − Rf)**
 
@@ -91,78 +85,63 @@ In agency terms:
 **Minimum Margin = Base Margin + (Engagement β × Layer 1 factor) × Risk Premium**
 
 Where:
-
 - `Engagement β = Engagement Score / 21`
 - `Blended β = Engagement β × Layer 1 factor`
 
-This midpoint-anchored mapping is a deliberate design choice. A neutral Layer 2 engagement score maps to market-like `β = 1.0`, rather than forcing the low end to `β = 0`. That prevents zero-risk pricing while preserving more headroom for difficult deals.
+This is a midpoint-anchored design. A neutral engagement score maps to market-like `β = 1.0`, rather than forcing the low end to `β = 0`.
 
-In the current decision-card calibration, the Layer 1 adjustment factor is centered on `1.00` at the midpoint score, and the B Corp overlay uses a neutral midpoint plus moderate widening or narrowing of the impact adjustment rather than an aggressive default amplification. Neutral operational engagement risk maps to market-like beta, and neutral B Corp impact maps to no mission discount or harm premium. See the [calibration notes](./tldr/calibration-notes.html).
+## Supporting docs
+
+### Overview
+- [`overview/index.html`](./overview/index.html)
+
+### TL;DR
+- [`tldr/price-the-work-before-you-plan-it.html`](./tldr/price-the-work-before-you-plan-it.html)
+
+### Walkthrough
+- [`tldr/walkthrough.html`](./tldr/walkthrough.html)
+
+### Decision Guide
+- [`tldr/decision-guide.html`](./tldr/decision-guide.html)
+
+### Calibration Notes
+- [`tldr/calibration-notes.html`](./tldr/calibration-notes.html)
+
+### Discovery First
+- [`essays/systems-thinking-for-web-development-agencies.html`](./essays/systems-thinking-for-web-development-agencies.html)
+
+### Theory
+- [`theory/index.html`](./theory/index.html)
 
 ## What this is good for
 
-- Internal alignment across sales, solutions, delivery, and leadership.
-- Presales discipline before committing to risky work.
-- Postmortem calibration by comparing required margin, proposed margin, and realized outcomes.
+- aligning sales, solutions, delivery, and leadership
+- pricing risk before delivery planning is overcommitted
+- comparing quoted margin to a shared hurdle
+- postmortem calibration through retrospective review
+- giving smaller agencies a lighter guided entry point
 
-This repo is most useful as a shared language for risk naming and deal governance. It is not a quantitatively correct pricing engine on its own.
-
-## Adoption Notes
-
-The strongest adoption barriers right now are practical, not theoretical:
-
-- many agencies still rely on relationship judgment and founder instinct, so the framework only works if leadership agrees to use it
-- new users may not have enough historical margin data to calibrate `R_f`, `R_m`, and Layer 1 confidently
-- a standalone static tool is harder to adopt than something that fits into existing CRM, spreadsheet, or presales workflows
-- the CAPM framing signals rigor to some readers and “not for me” to others
-
-The strongest adoption accelerators are:
-
-- a simple first-use path with explicit defaults
-- retrospective scoring and backtesting against completed projects
-- lightweight integrations or exports into tools teams already use
-- real case studies showing agencies using the framework successfully
-
-## Hosting
-
-This repo is configured for GitHub Pages. Enable Pages in your repo settings with source set to the root (`/`) of the `main` branch.
+This is pricing governance, not precise forecasting.
 
 ## Development
 
-### Main app
-
-The root app and docs include a small test and verification layer:
-
-- `npm test` runs calculator regression tests
-- `npm run check:app` parses the inline app script and checks that the shared calculation module is wired in
-- `npm run build:static` regenerates the theory and TL;DR HTML pages
-- `npm run check:generated` fails if the generated pages are out of sync with the committed outputs
-- `npm run ci` runs the full local verification sequence used in GitHub Actions
-
-### Project Risk Check
-
-The simpler guided app has its own local package and tests in `project-risk-check/`:
-
-- `cd project-risk-check`
+### Root app and docs
 - `npm test`
+- `npm run check:app`
+- `npm run build:static`
+- `npm run check:generated`
+- `npm run ci`
 
-That test layer currently covers:
+### Guided app
+From [`project-risk-check/`](./project-risk-check/):
 
-- hurdle / margin calculations
-- recommendation logic
-- baseline and commercial validation
-- state defaults and route helpers
+```bash
+npm test
+```
 
-### Claude Playwright handoff
+## Hosting
 
-If Claude needs browser automation, Playwright testing, screenshots, or browser-only inspection for this repo, start a fresh browser-capable session with:
-
-- `/Users/danknauss/bin/claude-playwright`
-- `/Users/danknauss/bin/claude-browser-handoff`
-
-Playwright/browser mode should be explicitly user-initiated from a new session, not enabled mid-session.
-
-See [CHANGELOG.md](./CHANGELOG.md) for notable changes.
+GitHub Pages is configured from the root of `main`.
 
 ## License
 
@@ -171,5 +150,3 @@ This repository is licensed under the [Creative Commons Attribution-ShareAlike 4
 ## Credits
 
 Dan Knauss • March 2026
-
-Based on *CAPM for Agencies: The Capital Asset Pricing Model Applied to Agency Project Pricing and Risk Assessment*.
