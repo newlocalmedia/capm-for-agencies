@@ -2542,6 +2542,13 @@
     return new Date().toISOString().slice(0, 10);
   }
 
+  function formatShortDate(value) {
+    if (!value) return '—';
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return value;
+    return parsed.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+
   function defaultInputValues() {
     return {
       rf: '10',
@@ -3806,7 +3813,7 @@
       '@media print{body{padding:0;background:#fff;}.wrap{max-width:none;}.toolbar{display:none;}.hero,.report-card{box-shadow:none;border:1px solid #d6d1c8;break-inside:avoid;}}' +
       '</style></head><body><div class="wrap">' +
       '<div class="toolbar"><button type="button" class="toolbar-btn" onclick="window.print()">Print / Save as PDF</button></div>' +
-      '<section class="hero"><div class="kicker">CAPM for Agencies</div><h1>' + escapeHtml(currentWorkflowMode === 'retrospective' ? 'Retrospective Pricing Review' : 'Decision Summary') + '</h1><p>Generated from the interactive decision cards on ' + escapeHtml(now.toLocaleString()) + '.</p>' +
+      '<section class="hero"><div class="kicker">CAPM for Agencies</div><h1>' + escapeHtml(currentWorkflowMode === 'retrospective' ? 'Retrospective Pricing Review' : 'Decision Summary') + '</h1><p>Generated from the interactive decision cards on ' + escapeHtml(formatShortDate(now)) + '.</p>' +
       '<div class="metrics">' +
         '<div class="metric"><span class="metric-label">Workflow</span><span class="metric-value" style="font-size:1rem;">' + escapeHtml(currentWorkflowMode === 'retrospective' ? 'Retrospective' : 'Presales') + '</span><span class="metric-sub">Current Decision Cards mode</span></div>' +
         '<div class="metric"><span class="metric-label">Agency ' + exportMath.rf + '</span><span class="metric-value">' + escapeHtml(formatPercentValue(rf)) + '</span><span class="metric-sub">Base margin from lowest-risk work</span></div>' +
@@ -3829,13 +3836,13 @@
             '<div class="comparison-grid">' +
               '<div class="comparison-card"><span class="comparison-kicker">1. Original presales call</span><ul class="comparison-list">' +
                 '<li><strong>Deal:</strong> ' + escapeHtml(retrospectiveData.dealName || '—') + '</li>' +
-                '<li><strong>Snapshot date:</strong> ' + escapeHtml(retrospectiveData.presalesDate || '—') + '</li>' +
+                '<li><strong>Snapshot date:</strong> ' + escapeHtml(formatShortDate(retrospectiveData.presalesDate)) + '</li>' +
                 '<li><strong>Quoted price / cost:</strong> ' + escapeHtml(frozenPriceText) + ' / ' + escapeHtml(frozenCostText) + '</li>' +
                 '<li><strong>Quoted margin / hurdle:</strong> ' + escapeHtml(frozenProposedText) + ' / ' + escapeHtml(frozenRequiredText) + '</li>' +
                 '<li><strong>Predicted verdict:</strong> ' + escapeHtml(l2Verdict || 'Not evaluated yet') + '</li>' +
               '</ul></div>' +
               '<div class="comparison-card"><span class="comparison-kicker">2. Actual outcome</span><ul class="comparison-list">' +
-                '<li><strong>Retrospective date:</strong> ' + escapeHtml(retrospectiveData.retrospectiveDate || '—') + '</li>' +
+                '<li><strong>Retrospective date:</strong> ' + escapeHtml(formatShortDate(retrospectiveData.retrospectiveDate)) + '</li>' +
                 '<li><strong>Actual revenue / cost:</strong> ' + escapeHtml(actualRevenueText) + ' / ' + escapeHtml(actualCostText) + '</li>' +
                 '<li><strong>Actual margin:</strong> ' + escapeHtml(actualMarginText) + '</li>' +
                 '<li><strong>Variance vs quote:</strong> ' + escapeHtml(retrospectiveVarianceText) + '</li>' +
