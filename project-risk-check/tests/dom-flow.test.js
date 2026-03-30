@@ -2,10 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { JSDOM } from 'jsdom';
 
-const projectRoot = '/Users/danknauss/Developer/GitHub/capm-for-agencies/project-risk-check';
+const testDir = path.dirname(fileURLToPath(import.meta.url));
+const projectRoot = path.resolve(testDir, '..');
 const htmlSource = fs.readFileSync(path.join(projectRoot, 'index.html'), 'utf8');
 const htmlWithoutScripts = htmlSource.replace(/<script[\s\S]*?<\/script>/g, '');
 const appModuleUrl = pathToFileURL(path.join(projectRoot, 'scripts', 'app.js')).href;
