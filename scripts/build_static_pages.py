@@ -39,6 +39,21 @@ SOCIAL_IMAGE_META = {
         "height": 630,
         "alt": "Preview image for Project Risk Check with recommendation boxes and a risk line chart.",
     },
+    "/social/overview-og.png": {
+        "width": 1200,
+        "height": 630,
+        "alt": "Overview image for CAPM for Agencies showing docs, decision cards, and the small agency version.",
+    },
+    "/social/walkthrough-og.png": {
+        "width": 1200,
+        "height": 630,
+        "alt": "Walkthrough image showing one agency deal, a hurdle line, and a recommendation flow.",
+    },
+    "/social/decision-guide-og.png": {
+        "width": 1200,
+        "height": 630,
+        "alt": "Decision guide image showing presales baselines, hurdle rate, and decision guidance.",
+    },
 }
 
 
@@ -1002,9 +1017,9 @@ PAGES = [
     {
         "source": ROOT / "tldr" / "CAPM for Agencies_ Price the Work Before You Plan It.md",
         "output": ROOT / "tldr" / "price-the-work-before-you-plan-it.html",
-        "title": "CAPM for Agencies — Short Overview",
-        "description": "A short explanation of CAPM for Agencies: why most agencies price risk backwards, how the hybrid model works as pricing governance, and how deals clear or fail the hurdle.",
-        "social_image": "/theory/figures/layer2-blended-beta.png",
+        "title": "Agency Pricing Risk Overview | CAPM for Agencies",
+        "description": "A short agency pricing risk overview: why most agencies price risk backwards, how the hybrid model works, and how deals clear or fail the hurdle.",
+        "social_image": "/social/walkthrough-og.png",
         "eyebrow": "Short Overview",
         "heading": "Price the Work Before You Plan It",
         "article_kicker": "CAPM for Agencies",
@@ -1041,9 +1056,9 @@ PAGES = [
     {
         "source": ROOT / "tldr" / "CAPM for Agencies — Walkthrough.md",
         "output": ROOT / "tldr" / "walkthrough.html",
-        "title": "CAPM for Agencies — Walkthrough",
-        "description": "A concrete example of how to use the Decision Cards: start with the defaults, score one realistic agency deal, compare the proposed margin to the hurdle, and make the call.",
-        "social_image": "/theory/figures/layer2-blended-beta.png",
+        "title": "Agency Pricing Walkthrough | CAPM for Agencies",
+        "description": "A practical agency pricing walkthrough: score one realistic deal, compare the proposed margin to the hurdle, and make the call.",
+        "social_image": "/social/walkthrough-og.png",
         "eyebrow": "Walkthrough",
         "heading": "One Deal, Start to Finish",
         "article_kicker": "CAPM for Agencies",
@@ -1093,9 +1108,9 @@ PAGES = [
     {
         "source": ROOT / "tldr" / "CAPM for Agencies — Decision Guide.md",
         "output": ROOT / "tldr" / "decision-guide.html",
-        "title": "CAPM for Agencies — Decision Guide",
-        "description": "A practical presales guide for scoring risk, setting baselines, comparing proposed margin to the hurdle, and deciding whether to proceed, reprice, or sell discovery first.",
-        "social_image": "/theory/figures/layer2-blended-beta.png",
+        "title": "Agency Decision Guide | CAPM for Agencies",
+        "description": "A practical agency decision guide for scoring project risk, setting margin baselines, and deciding whether to proceed, reprice, or sell discovery first.",
+        "social_image": "/social/decision-guide-og.png",
         "eyebrow": "Decision Guide",
         "heading": "Agency Decision Guide",
         "toc_skip_first_heading": True,

@@ -309,7 +309,7 @@ function renderWelcome() {
     <section class="card">
       ${renderProgress('welcome')}
       <h2 class="step-title">How should we price this project?</h2>
-      <p class="step-copy">This tool helps small agencies check how risky a project is, what margin it should clear, and whether the current quote fits that risk. You will answer a few questions, then get a required margin, a recommendation, and a simple result view.</p>
+      <p class="step-copy">This tool works like a guided agency project risk calculator. It helps small agencies check how risky a project is, what margin it should clear, and whether the current quote fits that risk. You will answer a few questions, then get a required margin, a recommendation, and a simple result view.</p>
       ${renderNav({ back: 'how-it-works', next: 'baseline-safe', nextLabel: 'Start', backLabel: 'How it works' })}
     </section>
   `;
