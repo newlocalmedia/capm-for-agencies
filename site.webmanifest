@@ -1,0 +1,21 @@
+{
+  "name": "CAPM for Agencies",
+  "short_name": "CAPM Agencies",
+  "start_url": "https://newlocalmedia.github.io/capm-for-agencies/index.html",
+  "scope": "https://newlocalmedia.github.io/capm-for-agencies/",
+  "display": "standalone",
+  "background_color": "#f7f5f0",
+  "theme_color": "#2b4c7e",
+  "icons": [
+    {
+      "src": "https://newlocalmedia.github.io/capm-for-agencies/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://newlocalmedia.github.io/capm-for-agencies/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

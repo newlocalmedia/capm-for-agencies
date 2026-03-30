@@ -6,6 +6,7 @@ import html
 import json
 import os
 import re
+import subprocess
 from pathlib import Path
 
 import markdown
@@ -13,6 +14,32 @@ import markdown
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE_URL = "https://newlocalmedia.github.io/capm-for-agencies"
+
+ICON_URL = SITE_URL + "/favicon.svg"
+APPLE_ICON_URL = SITE_URL + "/apple-touch-icon.png"
+MANIFEST_URL = SITE_URL + "/site.webmanifest"
+SOCIAL_IMAGE_META = {
+    "/theory/figures/capm-comparison.png": {
+        "width": 1600,
+        "height": 980,
+        "alt": "Comparison diagram for the CAPM for Agencies model and its decision layers.",
+    },
+    "/theory/figures/layer2-blended-beta.png": {
+        "width": 1600,
+        "height": 980,
+        "alt": "Chart showing required margin rising as blended beta and engagement risk increase.",
+    },
+    "/theory/figures/bcorp-impact-adjusted-return.png": {
+        "width": 1600,
+        "height": 980,
+        "alt": "Chart showing how the B Corp impact adjustment shifts the required margin.",
+    },
+    "/project-risk-check/social/project-risk-check-og.png": {
+        "width": 1200,
+        "height": 630,
+        "alt": "Preview image for Project Risk Check with recommendation boxes and a risk line chart.",
+    },
+}
 
 
 PAGE_STYLE = """
@@ -1319,6 +1346,29 @@ def build_site_nav(output_path: Path) -> str:
 
 
 
+
+def git_dates_for_path(path: Path) -> tuple[str, str]:
+    try:
+        published_lines = subprocess.check_output(
+            ["git", "log", "--follow", "--diff-filter=A", "--format=%cI", "--", str(path)],
+            cwd=ROOT,
+            text=True,
+        ).strip().splitlines()
+        modified = subprocess.check_output(
+            ["git", "log", "-1", "--format=%cI", "--", str(path)],
+            cwd=ROOT,
+            text=True,
+        ).strip()
+        published = published_lines[-1] if published_lines else modified
+        return published, modified
+    except Exception:
+        return "", ""
+
+
+def social_image_meta(asset_path: str) -> dict:
+    return SOCIAL_IMAGE_META.get(asset_path, {"width": 1200, "height": 630, "alt": "CAPM for Agencies preview image."})
+
+
 def absolute_page_url(output_path: Path) -> str:
     relative = output_path.relative_to(ROOT).as_posix()
     return f"{SITE_URL}/{relative}"
@@ -1331,13 +1381,21 @@ def absolute_asset_url(asset_path: str) -> str:
 def build_social_meta(page: dict) -> str:
     description = page.get("description") or strip_tags(page.get("deck", ""))
     page_url = absolute_page_url(page["output"])
-    image_url = absolute_asset_url(page.get("social_image", "/theory/figures/capm-comparison.png"))
+    asset_path = page.get("social_image", "/theory/figures/capm-comparison.png")
+    image_url = absolute_asset_url(asset_path)
+    image_meta = social_image_meta(asset_path)
     title = page["title"]
     og_type = page.get("og_type", "article")
+    published, modified = git_dates_for_path(page["source"])
 
-    return "\n".join([
+    tags = [
         f'<meta name="description" content="{html.escape(description)}">',
+        '<meta name="robots" content="index,follow,max-image-preview:large">',
         f'<link rel="canonical" href="{html.escape(page_url)}">',
+        f'<link rel="icon" href="{html.escape(ICON_URL)}" type="image/svg+xml">',
+        f'<link rel="apple-touch-icon" href="{html.escape(APPLE_ICON_URL)}">',
+        f'<link rel="manifest" href="{html.escape(MANIFEST_URL)}">',
+        '<meta name="theme-color" content="#2b4c7e">',
         f'<meta property="og:site_name" content="CAPM for Agencies">',
         f'<meta property="og:type" content="{html.escape(og_type)}">',
         f'<meta property="og:title" content="{html.escape(title)}">',
@@ -1345,17 +1403,28 @@ def build_social_meta(page: dict) -> str:
         f'<meta property="og:url" content="{html.escape(page_url)}">',
         f'<meta property="og:image" content="{html.escape(image_url)}">',
         '<meta property="og:image:type" content="image/png">',
+        f'<meta property="og:image:width" content="{image_meta["width"]}">',
+        f'<meta property="og:image:height" content="{image_meta["height"]}">',
+        f'<meta property="og:image:alt" content="{html.escape(image_meta["alt"])}">',
         '<meta name="twitter:card" content="summary_large_image">',
         f'<meta name="twitter:title" content="{html.escape(title)}">',
         f'<meta name="twitter:description" content="{html.escape(description)}">',
         f'<meta name="twitter:image" content="{html.escape(image_url)}">',
-    ])
+        f'<meta name="twitter:image:alt" content="{html.escape(image_meta["alt"])}">',
+    ]
+    if og_type == "article":
+        if published:
+            tags.append(f'<meta property="article:published_time" content="{html.escape(published)}">')
+        if modified:
+            tags.append(f'<meta property="article:modified_time" content="{html.escape(modified)}">')
+    return "\n".join(tags)
 
 
 def build_structured_data(page: dict) -> str:
     description = page.get("description") or strip_tags(page.get("deck", ""))
     page_url = absolute_page_url(page["output"])
     image_url = absolute_asset_url(page.get("social_image", "/theory/figures/capm-comparison.png"))
+    published, modified = git_dates_for_path(page["source"])
     data = {
         "@context": "https://schema.org",
         "@type": page.get("schema_type", "Article"),
@@ -1379,6 +1448,10 @@ def build_structured_data(page: dict) -> str:
             "url": SITE_URL + "/",
         },
     }
+    if published:
+        data["datePublished"] = published
+    if modified:
+        data["dateModified"] = modified
     return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + '</script>'
 
 

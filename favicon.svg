@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="CAPM for Agencies icon">
+  <rect width="512" height="512" rx="96" fill="#f7f5f0"/>
+  <rect x="44" y="44" width="424" height="424" rx="76" fill="#2b4c7e"/>
+  <path d="M132 320c24-82 72-140 134-140 44 0 80 26 102 70l-42 20c-14-28-34-44-60-44-38 0-74 40-94 108z" fill="#f0d4cb"/>
+  <circle cx="358" cy="176" r="28" fill="#c45d3e"/>
+</svg>
