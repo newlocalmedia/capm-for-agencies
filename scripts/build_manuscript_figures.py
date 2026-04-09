@@ -36,6 +36,7 @@ COLORS = {
 GEORGIA = Path("/System/Library/Fonts/Supplemental/Georgia.ttf")
 GEORGIA_BOLD = Path("/System/Library/Fonts/Supplemental/Georgia Bold.ttf")
 GEORGIA_ITALIC = Path("/System/Library/Fonts/Supplemental/Georgia Italic.ttf")
+GEORGIA_BOLD_ITALIC = Path("/System/Library/Fonts/Supplemental/Georgia Bold Italic.ttf")
 MENLO = Path("/System/Library/Fonts/Menlo.ttc")
 
 
@@ -47,7 +48,7 @@ def load_font(path: Path, size: int) -> ImageFont.FreeTypeFont | ImageFont.Image
 
 
 TITLE_FONT = load_font(GEORGIA_BOLD, 58)
-SUBTITLE_FONT = load_font(GEORGIA_ITALIC, 28)
+SUBTITLE_FONT = load_font(GEORGIA_BOLD_ITALIC, 26)
 LABEL_FONT = load_font(GEORGIA_BOLD, 24)
 BODY_FONT = load_font(GEORGIA, 24)
 SMALL_FONT = load_font(GEORGIA, 20)
@@ -105,8 +106,8 @@ def multiline_text(draw: ImageDraw.ImageDraw, xy: tuple[int, int], value: str, f
 
 
 def draw_title(draw: ImageDraw.ImageDraw, title: str, subtitle: str):
-    text(draw, (WIDTH // 2, 102), title, TITLE_FONT, anchor="ma")
-    text(draw, (WIDTH // 2, 170), subtitle, SUBTITLE_FONT, fill=COLORS["muted"], anchor="ma")
+    text(draw, (WIDTH // 2, 142), title, TITLE_FONT, anchor="ma")
+    text(draw, (WIDTH // 2, 232), subtitle, SUBTITLE_FONT, fill=COLORS["muted"], anchor="ma")
 
 
 def draw_axes(draw: ImageDraw.ImageDraw, area: PlotArea, x_ticks: Iterable[float], y_ticks: Iterable[float], x_label: str, y_label: str):
@@ -139,7 +140,7 @@ def circle(draw: ImageDraw.ImageDraw, center: tuple[int, int], radius: int, fill
     draw.ellipse((x - radius, y - radius, x + radius, y + radius), fill=fill, outline=outline, width=width)
 
 
-def dashed_line(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[int, int], fill: str, width: int = 2, dash: int = 12, gap: int = 10):
+def dashed_line(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[int, int], fill: str, width: int = 2, dash: int = 12, gap: int = 10, inset_start: int = 0, inset_end: int = 0):
     x0, y0 = start
     x1, y1 = end
     dx = x1 - x0
@@ -149,10 +150,12 @@ def dashed_line(draw: ImageDraw.ImageDraw, start: tuple[int, int], end: tuple[in
         return
     ux = dx / length
     uy = dy / length
-    dist = 0
-    while dist < length:
+    usable_start = min(inset_start, length)
+    usable_end = max(usable_start, length - inset_end)
+    dist = usable_start
+    while dist < usable_end:
         seg_start = dist
-        seg_end = min(dist + dash, length)
+        seg_end = min(dist + dash, usable_end)
         sx = x0 + ux * seg_start
         sy = y0 + uy * seg_start
         ex = x0 + ux * seg_end
@@ -389,7 +392,7 @@ def build_bcorp_adjustment():
     harm_real = area.map(harm_beta, harm_adj)
 
     for start, end, color in [(mission_ghost, mission_real, COLORS["green"]), (harm_ghost, harm_real, COLORS["red"])]:
-        dashed_line(draw, start, end, fill=color, width=3)
+        dashed_line(draw, start, end, fill=color, width=3, dash=10, gap=4, inset_start=10, inset_end=12)
         circle(draw, start, 8, COLORS["paper_deep"], outline=COLORS["muted"], width=2)
         circle(draw, end, 11, color)
 
@@ -414,7 +417,7 @@ def build_comparison():
 
     panel_w = 402
     gutter = 36
-    top = 262
+    top = 324
     total_width = panel_w * 3 + gutter * 2
     left = (WIDTH - total_width) // 2
     boxes = []
@@ -446,8 +449,8 @@ def build_comparison():
         pt = areas[0].map(x, y)
         circle(draw, pt, 9, color)
         text_box(draw, (pt[0] + 14, pt[1] - 28), label, SMALL_FONT, fill=color)
-    question_y = 736
-    multiline_text(draw, (areas[0].x0 + 12, question_y), "Does return justify risk?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
+    question_y = 738
+    multiline_text(draw, (areas[0].x0 + 22, question_y), "Does return justify risk?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
 
     # Layered panel
     draw_line(draw, areas[1], [(0, rf), (2.0, 22)], COLORS["green"], width=4)
@@ -455,7 +458,7 @@ def build_comparison():
     beta = 1.3
     req = areas[1].map(beta, rf + (27 - rf) / 2.0 * beta)
     deal = areas[1].map(beta, 22.5)
-    dashed_line(draw, req, deal, fill=COLORS["gold"], width=3)
+    dashed_line(draw, req, deal, fill=COLORS["gold"], width=3, dash=10, gap=4, inset_start=10, inset_end=12)
     circle(draw, req, 8, COLORS["blue"])
     circle(draw, deal, 10, COLORS["gold"])
     text_box(draw, (deal[0] + 12, deal[1] - 22), "Actual Deal", SMALL_FONT, fill=COLORS["gold"])
@@ -468,11 +471,11 @@ def build_comparison():
     harm_ghost = areas[2].map(1.6, 23.2)
     harm_real = areas[2].map(1.6, 27.0)
     for start, end, color in [(mission_ghost, mission_real, COLORS["green"]), (harm_ghost, harm_real, COLORS["red"])]:
-        dashed_line(draw, start, end, fill=color, width=3)
+        dashed_line(draw, start, end, fill=color, width=3, dash=10, gap=4, inset_start=10, inset_end=12)
         circle(draw, start, 8, COLORS["paper_deep"], outline=COLORS["muted"], width=2)
         circle(draw, end, 10, color)
     text_box(draw, (mission_real[0] + 14, mission_real[1] - 34), "Mission-Aligned\nImpact Discount", SMALL_FONT, fill=COLORS["green"])
-    text_box(draw, (harm_real[0] - 128, harm_real[1] - 38), "Harm Premium", SMALL_FONT, fill=COLORS["red"])
+    text_box(draw, (harm_real[0] - 176, harm_real[1] - 18), "Harm Premium", SMALL_FONT, fill=COLORS["red"])
     multiline_text(draw, (areas[2].x0 - 22, question_y), "What risk and impact should clear?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
 
     save_outputs(img, "capm-comparison")
