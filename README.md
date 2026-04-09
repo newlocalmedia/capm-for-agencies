@@ -1,5 +1,7 @@
 # CAPM for Agencies
 
+![CAPM for Agencies banner](./social/capm-for-agencies-banner.png)
+
 Risk-based pricing tools for agencies, built around the Capital Asset Pricing Model (CAPM) adapted from financial economics.
 
 **Live site:** [https://newlocalmedia.github.io/capm-for-agencies/](https://newlocalmedia.github.io/capm-for-agencies/)
