@@ -46,8 +46,8 @@ def load_font(path: Path, size: int) -> ImageFont.FreeTypeFont | ImageFont.Image
         return ImageFont.load_default()
 
 
-TITLE_FONT = load_font(GEORGIA_BOLD, 52)
-SUBTITLE_FONT = load_font(GEORGIA_ITALIC, 24)
+TITLE_FONT = load_font(GEORGIA_BOLD, 58)
+SUBTITLE_FONT = load_font(GEORGIA_ITALIC, 28)
 LABEL_FONT = load_font(GEORGIA_BOLD, 24)
 BODY_FONT = load_font(GEORGIA, 24)
 SMALL_FONT = load_font(GEORGIA, 20)
@@ -105,8 +105,8 @@ def multiline_text(draw: ImageDraw.ImageDraw, xy: tuple[int, int], value: str, f
 
 
 def draw_title(draw: ImageDraw.ImageDraw, title: str, subtitle: str):
-    text(draw, (WIDTH // 2, 82), title, TITLE_FONT, anchor="ma")
-    text(draw, (WIDTH // 2, 146), subtitle, SUBTITLE_FONT, fill=COLORS["muted"], anchor="ma")
+    text(draw, (WIDTH // 2, 102), title, TITLE_FONT, anchor="ma")
+    text(draw, (WIDTH // 2, 170), subtitle, SUBTITLE_FONT, fill=COLORS["muted"], anchor="ma")
 
 
 def draw_axes(draw: ImageDraw.ImageDraw, area: PlotArea, x_ticks: Iterable[float], y_ticks: Iterable[float], x_label: str, y_label: str):
@@ -414,7 +414,7 @@ def build_comparison():
 
     panel_w = 402
     gutter = 36
-    top = 240
+    top = 262
     total_width = panel_w * 3 + gutter * 2
     left = (WIDTH - total_width) // 2
     boxes = []
@@ -446,8 +446,8 @@ def build_comparison():
         pt = areas[0].map(x, y)
         circle(draw, pt, 9, color)
         text_box(draw, (pt[0] + 14, pt[1] - 28), label, SMALL_FONT, fill=color)
-    question_y = 744
-    multiline_text(draw, (areas[0].x0, question_y), "Does return justify risk?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
+    question_y = 766
+    multiline_text(draw, (areas[0].x0 + 12, question_y), "Does return justify risk?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
 
     # Layered panel
     draw_line(draw, areas[1], [(0, rf), (2.0, 22)], COLORS["green"], width=4)
@@ -473,7 +473,7 @@ def build_comparison():
         circle(draw, end, 10, color)
     text_box(draw, (mission_real[0] + 14, mission_real[1] - 34), "Mission-aligned\nimpact discount", SMALL_FONT, fill=COLORS["green"])
     text_box(draw, (harm_real[0] - 18, harm_real[1] - 64), "Harm premium", SMALL_FONT, fill=COLORS["red"])
-    multiline_text(draw, (areas[2].x0 - 10, question_y), "What risk and impact should clear?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
+    multiline_text(draw, (areas[2].x0 - 22, question_y), "What risk and impact should clear?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
 
     save_outputs(img, "capm-comparison")
 
