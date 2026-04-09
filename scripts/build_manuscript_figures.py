@@ -446,7 +446,7 @@ def build_comparison():
         pt = areas[0].map(x, y)
         circle(draw, pt, 9, color)
         text_box(draw, (pt[0] + 14, pt[1] - 28), label, SMALL_FONT, fill=color)
-    question_y = 766
+    question_y = 736
     multiline_text(draw, (areas[0].x0 + 12, question_y), "Does return justify risk?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
 
     # Layered panel
@@ -458,7 +458,7 @@ def build_comparison():
     dashed_line(draw, req, deal, fill=COLORS["gold"], width=3)
     circle(draw, req, 8, COLORS["blue"])
     circle(draw, deal, 10, COLORS["gold"])
-    text_box(draw, (deal[0] + 12, deal[1] - 22), "Actual deal", SMALL_FONT, fill=COLORS["gold"])
+    text_box(draw, (deal[0] + 12, deal[1] - 22), "Actual Deal", SMALL_FONT, fill=COLORS["gold"])
     multiline_text(draw, (areas[1].x0, question_y), "Does the deal clear the hurdle?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
 
     # B-Corp panel
@@ -471,8 +471,8 @@ def build_comparison():
         dashed_line(draw, start, end, fill=color, width=3)
         circle(draw, start, 8, COLORS["paper_deep"], outline=COLORS["muted"], width=2)
         circle(draw, end, 10, color)
-    text_box(draw, (mission_real[0] + 14, mission_real[1] - 34), "Mission-aligned\nimpact discount", SMALL_FONT, fill=COLORS["green"])
-    text_box(draw, (harm_real[0] - 18, harm_real[1] - 64), "Harm premium", SMALL_FONT, fill=COLORS["red"])
+    text_box(draw, (mission_real[0] + 14, mission_real[1] - 34), "Mission-Aligned\nImpact Discount", SMALL_FONT, fill=COLORS["green"])
+    text_box(draw, (harm_real[0] - 128, harm_real[1] - 38), "Harm Premium", SMALL_FONT, fill=COLORS["red"])
     multiline_text(draw, (areas[2].x0 - 22, question_y), "What risk and impact should clear?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
 
     save_outputs(img, "capm-comparison")
