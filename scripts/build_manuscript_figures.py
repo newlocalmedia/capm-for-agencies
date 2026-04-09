@@ -105,8 +105,8 @@ def multiline_text(draw: ImageDraw.ImageDraw, xy: tuple[int, int], value: str, f
 
 
 def draw_title(draw: ImageDraw.ImageDraw, title: str, subtitle: str):
-    text(draw, (PADDING_X, 82), title, TITLE_FONT)
-    text(draw, (PADDING_X, 146), subtitle, SUBTITLE_FONT, fill=COLORS["muted"])
+    text(draw, (WIDTH // 2, 82), title, TITLE_FONT, anchor="ma")
+    text(draw, (WIDTH // 2, 146), subtitle, SUBTITLE_FONT, fill=COLORS["muted"], anchor="ma")
 
 
 def draw_axes(draw: ImageDraw.ImageDraw, area: PlotArea, x_ticks: Iterable[float], y_ticks: Iterable[float], x_label: str, y_label: str):
@@ -415,7 +415,8 @@ def build_comparison():
     panel_w = 402
     gutter = 36
     top = 240
-    left = 96
+    total_width = panel_w * 3 + gutter * 2
+    left = (WIDTH - total_width) // 2
     boxes = []
     for i in range(3):
         x0 = left + i * (panel_w + gutter)
@@ -431,7 +432,7 @@ def build_comparison():
         draw_panel_box(draw, box, meta[0], meta[1])
 
     areas = [
-        PlotArea(box[0] + 42, box[1] + 122, box[2] - 34, box[3] - 116, 2.1, 30, 0, 0)
+        PlotArea(box[0] + 42, box[1] + 122, box[2] - 34, box[3] - 80, 2.1, 30, 0, 0)
         for box in boxes
     ]
 
@@ -445,7 +446,7 @@ def build_comparison():
         pt = areas[0].map(x, y)
         circle(draw, pt, 9, color)
         text_box(draw, (pt[0] + 14, pt[1] - 28), label, SMALL_FONT, fill=color)
-    question_y = 780
+    question_y = 744
     multiline_text(draw, (areas[0].x0, question_y), "Does return justify risk?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
 
     # Layered panel
@@ -472,7 +473,7 @@ def build_comparison():
         circle(draw, end, 10, color)
     text_box(draw, (mission_real[0] + 14, mission_real[1] - 34), "Mission-aligned\nimpact discount", SMALL_FONT, fill=COLORS["green"])
     text_box(draw, (harm_real[0] - 18, harm_real[1] - 64), "Harm premium", SMALL_FONT, fill=COLORS["red"])
-    multiline_text(draw, (areas[2].x0, question_y), "What risk and impact should clear?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
+    multiline_text(draw, (areas[2].x0 - 10, question_y), "What risk and impact should clear?", SMALL_BOLD_FONT, fill=COLORS["muted"], spacing=5)
 
     save_outputs(img, "capm-comparison")
 
