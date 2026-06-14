@@ -1,4 +1,6 @@
 # CAPM for Agencies
+[![License](https://img.shields.io/github/license/newlocalmedia/capm-for-agencies)](LICENSE) [![CI](https://github.com/newlocalmedia/capm-for-agencies/actions/workflows/ci.yml/badge.svg)](https://github.com/newlocalmedia/capm-for-agencies/actions/workflows/ci.yml) [![Latest Tag](https://img.shields.io/github/v/tag/newlocalmedia/capm-for-agencies)](https://github.com/newlocalmedia/capm-for-agencies/tags)
+
 
 ![CAPM for Agencies banner](./social/capm-for-agencies-banner.png)
 
